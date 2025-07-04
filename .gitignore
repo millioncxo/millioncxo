@@ -65,4 +65,7 @@ pids
 .npm
 
 # Optional eslint cache
-.eslintcache 
+.eslintcache
+
+# Cursor IDE
+.cursor/ 
