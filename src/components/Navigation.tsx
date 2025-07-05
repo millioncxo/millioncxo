@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState, useRef, useEffect } from 'react'
+import LogoComponent from './LogoComponent'
 
 export default function Navigation() {
   const pathname = usePathname()
@@ -19,7 +20,7 @@ export default function Navigation() {
         description: "Your gateway to B2B outreach excellence",
         sections: [
           {
-            title: "🏠 Overview",
+            title: "Overview",
             items: [
               { href: '/', label: 'Home', desc: 'Discover our B2B outreach solutions' },
               { href: '/#services', label: 'Services Preview', desc: 'Quick look at our offerings' },
@@ -27,7 +28,7 @@ export default function Navigation() {
             ]
           },
           {
-            title: "🚀 Get Started",
+            title: "Get Started",
             items: [
               { href: '/contact', label: 'Request Demo', desc: 'See our platform in action' },
               { href: '/contact', label: 'Free Consultation', desc: 'Discuss your outreach needs' }
@@ -44,7 +45,7 @@ export default function Navigation() {
         description: "13+ years of B2B outreach excellence",
         sections: [
           {
-            title: "🏢 Our Story",
+            title: "Our Story",
             items: [
               { href: '/about', label: 'Company Overview', desc: 'Journey since 2012' },
               { href: '/about#mission', label: 'Mission & Vision', desc: 'Connecting businesses' },
@@ -52,17 +53,10 @@ export default function Navigation() {
             ]
           },
           {
-            title: "📊 Track Record",
+            title: "Track Record",
             items: [
               { href: '/about#stats', label: 'Company Stats', desc: '600+ clients served' },
               { href: '/about#experience', label: 'Experience', desc: '13+ years in B2B' }
-            ]
-          },
-          {
-            title: "📞 Connect",
-            items: [
-              { href: '/contact', label: 'Contact Us', desc: 'Get in touch' },
-              { href: 'mailto:info@millioncxo.com', label: 'Email Direct', desc: 'info@millioncxo.com' }
             ]
           }
         ]
@@ -76,26 +70,18 @@ export default function Navigation() {
         description: "Scalable, reliable, human-driven outreach",
         sections: [
           {
-            title: "🎯 Outreach Services",
+            title: "Outreach Services",
             items: [
               { href: '/services#starter', label: 'Starter Package', desc: '$99/meeting - Perfect for pilots' },
-              { href: '/services#sdr', label: 'SDR as a Service', desc: '$1,999-$2,250/month - Full SDR team' },
+              { href: '/services#professional', label: 'Professional Package', desc: '$1,999/month - Full SDR team' },
               { href: '/services#enterprise', label: 'Enterprise Solutions', desc: 'Custom outbound engines' }
             ]
           },
           {
-            title: "💡 Consultation",
+            title: "Consultation",
             items: [
               { href: '/services#strategy', label: 'Strategy Design', desc: 'Complete lead generation strategy' },
-              { href: '/services#training', label: 'Team Training', desc: 'Outbound best practices' },
-              { href: '/services#infrastructure', label: 'Infrastructure Setup', desc: 'Sales engine optimization' }
-            ]
-          },
-          {
-            title: "🏆 Results",
-            items: [
-              { href: '/services#process', label: 'Our Process', desc: '4-step proven methodology' },
-              { href: '/services#success', label: 'Success Stories', desc: 'Client testimonials & case studies' }
+              { href: '/services#training', label: 'Team Training', desc: 'Outbound best practices' }
             ]
           }
         ]
@@ -106,22 +92,13 @@ export default function Navigation() {
       label: 'Contact',
       dropdown: {
         title: "Get In Touch",
-        description: "Ready to transform your outreach?",
         sections: [
           {
-            title: "🚀 Start Your Journey",
+            title: "Start Your Journey",
             items: [
               { href: '/contact#demo', label: 'Request Demo', desc: 'See our platform in action' },
               { href: '/contact#consultation', label: 'Free Consultation', desc: 'Discuss your specific needs' },
               { href: '/contact#quote', label: 'Get Custom Quote', desc: 'Tailored pricing for your business' }
-            ]
-          },
-          {
-            title: "📞 Direct Contact",
-            items: [
-              { href: 'mailto:info@millioncxo.com', label: 'Email Us', desc: 'info@millioncxo.com' },
-              { href: '/contact#form', label: 'Contact Form', desc: 'Detailed inquiry form' },
-              { href: '/contact#support', label: 'Support', desc: 'Technical and sales support' }
             ]
           }
         ]
@@ -139,7 +116,7 @@ export default function Navigation() {
   const handleDropdownLeave = () => {
     hoverTimeoutRef.current = setTimeout(() => {
       setActiveDropdown(null)
-    }, 200) // 200ms delay before closing
+    }, 200)
   }
 
   const handleDropdownStay = () => {
@@ -157,12 +134,12 @@ export default function Navigation() {
   }, [])
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-luxury-pure-white/95 backdrop-blur-md border-b border-luxury-gold/10 shadow-subtle">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-imperial-emerald backdrop-blur-md border-b border-golden-opal/20 shadow-lg">
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" className="text-xl font-luxury font-bold text-luxury-deep-black hover:text-luxury-gold transition-all duration-300">
-            million<span className="text-luxury-gradient">CXO</span>
+          <Link href="/" className="transition-all duration-300">
+            <LogoComponent width={80} height={44} hoverGradient={true} />
           </Link>
 
           {/* Desktop Navigation */}
@@ -176,10 +153,10 @@ export default function Navigation() {
               >
                 <Link
                   href={item.href}
-                  className={`font-luxury-sans font-medium text-sm transition-all duration-300 hover:text-luxury-gold relative flex items-center ${
+                  className={`nav-link font-medium text-sm transition-all duration-300 flex items-center ${
                     pathname === item.href
-                      ? 'text-luxury-gold' 
-                      : 'text-luxury-deep-black hover:text-luxury-gold'
+                      ? 'text-golden-opal' 
+                      : 'text-ivory-silk hover:text-golden-opal'
                   }`}
                 >
                   {item.label}
@@ -192,66 +169,43 @@ export default function Navigation() {
                 {/* Enhanced Mega Menu Dropdown */}
                 {activeDropdown === item.label && (
                   <div 
-                    className="absolute top-full left-1/2 transform -translate-x-1/2 mt-3 w-[800px] bg-luxury-pure-white rounded-2xl shadow-2xl border border-luxury-gold/20 overflow-hidden animate-slide-down"
+                    className="absolute top-full left-1/2 transform -translate-x-1/2 mt-3 w-[700px] bg-ivory-silk rounded-2xl shadow-2xl border border-golden-opal/20 overflow-hidden animate-slide-down"
                     onMouseEnter={handleDropdownStay}
                     onMouseLeave={handleDropdownLeave}
                   >
-                    {/* Animated Background Gradient */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-luxury-cream/50 to-luxury-pure-white opacity-0 animate-fade-in"></div>
-                    
-                    {/* Header with Enhanced Design */}
-                    <div className="relative bg-gradient-to-r from-luxury-cream to-luxury-pure-white p-6 border-b border-luxury-gold/10">
-                      <div className="text-center">
-                        <h3 className="text-xl font-luxury font-bold text-luxury-deep-black mb-2 animate-slide-up">
-                          {item.dropdown.title}
-                        </h3>
-                        <p className="text-sm text-luxury-charcoal font-luxury-sans animate-slide-up">
-                          {item.dropdown.description}
-                        </p>
-                      </div>
+                    {/* Header */}
+                    <div className="bg-gradient-to-r from-imperial-emerald to-petrol-smoke p-6">
+                      <h3 className="text-xl font-bold text-ivory-silk mb-2">{item.dropdown.title}</h3>
+                      <p className="text-muted-jade text-sm">{item.dropdown.description}</p>
                     </div>
-
-                    {/* Content Grid - Horizontal Layout */}
-                    <div className="relative p-6">
-                      <div className="grid grid-cols-3 gap-8">
+                    
+                    {/* Content */}
+                    <div className="p-6">
+                      <div className="grid md:grid-cols-2 gap-6">
                         {item.dropdown.sections.map((section, sectionIndex) => (
-                          <div key={sectionIndex} className="animate-scale-in" style={{ animationDelay: `${sectionIndex * 100}ms` }}>
-                            <div className="mb-4 p-3 bg-gradient-to-r from-luxury-gold/10 to-transparent rounded-lg">
-                              <h4 className="text-sm font-luxury font-bold text-luxury-gold">
-                                {section.title}
-                              </h4>
-                            </div>
-                            <div className="space-y-3">
-                              {section.items.map((subItem, itemIndex) => (
-                                <Link
-                                  key={itemIndex}
-                                  href={subItem.href}
-                                  className="block p-3 rounded-xl hover:bg-luxury-cream/50 transition-all duration-300 group hover:shadow-md transform hover:-translate-y-1"
-                                >
-                                  <div className="text-sm font-semibold text-luxury-deep-black group-hover:text-luxury-gold transition-colors duration-300">
-                                    {subItem.label}
-                                  </div>
-                                  <div className="text-xs text-luxury-charcoal mt-1 group-hover:text-luxury-deep-black transition-colors duration-300">
-                                    {subItem.desc}
-                                  </div>
-                                </Link>
+                          <div key={sectionIndex} className="space-y-3">
+                            <h4 className="text-sm font-semibold text-golden-opal border-b border-golden-opal/20 pb-2">
+                              {section.title}
+                            </h4>
+                            <ul className="space-y-2">
+                              {section.items.map((subItem, subIndex) => (
+                                <li key={subIndex}>
+                                  <Link 
+                                    href={subItem.href}
+                                    className="block p-3 rounded-lg hover:bg-golden-opal/10 transition-all duration-300 group"
+                                  >
+                                    <div className="text-sm font-medium text-onyx-black group-hover:text-golden-opal">
+                                      {subItem.label}
+                                    </div>
+                                    <div className="text-xs text-muted-jade mt-1">
+                                      {subItem.desc}
+                                    </div>
+                                  </Link>
+                                </li>
                               ))}
-                            </div>
+                            </ul>
                           </div>
                         ))}
-                      </div>
-                      
-                      {/* Bottom CTA */}
-                      <div className="mt-6 pt-4 border-t border-luxury-gold/10 text-center animate-fade-in">
-                        <Link
-                          href="/contact"
-                          className="inline-flex items-center px-6 py-2 bg-luxury-gold text-luxury-deep-black font-semibold rounded-lg hover:bg-luxury-light-gold transition-all duration-300 transform hover:scale-105"
-                        >
-                          <span>Get Started</span>
-                          <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                          </svg>
-                        </Link>
                       </div>
                     </div>
                   </div>
@@ -262,83 +216,57 @@ export default function Navigation() {
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <Link
-              href="/contact"
-              className="btn-luxury px-6 py-2 text-sm font-semibold rounded-lg hover-glow transition-all duration-300 transform hover:scale-105 font-display"
-            >
-              Request Demo
+            <Link href="/contact" className="btn-primary px-6 py-2 text-sm">
+              Get Started
             </Link>
           </div>
 
-          {/* Mobile Menu Toggle */}
+          {/* Mobile Menu Button */}
           <button
-            className="md:hidden flex flex-col items-center justify-center w-6 h-6 space-y-1"
+            className="md:hidden p-2 rounded-lg hover:bg-golden-opal/10 transition-colors"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="Toggle menu"
           >
-            <div className={`w-5 h-0.5 bg-luxury-deep-black transition-all duration-300 ${isMenuOpen ? 'rotate-45 translate-y-1.5' : ''}`}></div>
-            <div className={`w-5 h-0.5 bg-luxury-deep-black transition-all duration-300 ${isMenuOpen ? 'opacity-0' : ''}`}></div>
-            <div className={`w-5 h-0.5 bg-luxury-deep-black transition-all duration-300 ${isMenuOpen ? '-rotate-45 -translate-y-1.5' : ''}`}></div>
+            <svg className="w-6 h-6 text-ivory-silk" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              {isMenuOpen ? (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              ) : (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              )}
+            </svg>
           </button>
         </div>
       </div>
 
       {/* Mobile Menu */}
-      <div className={`md:hidden bg-luxury-pure-white/98 backdrop-blur-lg border-t border-luxury-gold/10 transition-all duration-300 ${
-        isMenuOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0 overflow-hidden'
-      }`}>
-        <div className="container mx-auto px-6 py-4 max-h-96 overflow-y-auto">
-          <div className="space-y-6">
-            {navItems.map((item) => (
-              <div key={item.href}>
+      {isMenuOpen && (
+        <div className="md:hidden bg-imperial-emerald border-t border-golden-opal/20">
+          <div className="container mx-auto px-6 py-4">
+            <div className="space-y-4">
+              {navItems.map((item) => (
                 <Link
+                  key={item.href}
                   href={item.href}
-                  className={`font-luxury-sans font-medium text-base transition-all duration-300 hover:text-luxury-gold block ${
-                    pathname === item.href 
-                      ? 'text-luxury-gold' 
-                      : 'text-luxury-deep-black hover:text-luxury-gold'
+                  className={`block py-2 text-sm font-medium transition-colors ${
+                    pathname === item.href
+                      ? 'text-golden-opal'
+                      : 'text-ivory-silk hover:text-golden-opal'
                   }`}
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.label}
                 </Link>
-                
-                {/* Mobile Dropdown Content */}
-                <div className="mt-3 ml-4 grid grid-cols-1 gap-4">
-                  {item.dropdown.sections.map((section, sectionIndex) => (
-                    <div key={sectionIndex} className="bg-luxury-cream/30 p-3 rounded-lg">
-                      <h4 className="text-sm font-luxury font-semibold text-luxury-gold mb-2">
-                        {section.title}
-                      </h4>
-                      <div className="space-y-2">
-                        {section.items.map((subItem, itemIndex) => (
-                          <Link
-                            key={itemIndex}
-                            href={subItem.href}
-                            className="block text-sm text-luxury-charcoal hover:text-luxury-gold transition-all duration-200 p-2 rounded hover:bg-luxury-cream/50"
-                            onClick={() => setIsMenuOpen(false)}
-                          >
-                            <div className="font-medium">{subItem.label}</div>
-                            <div className="text-xs text-luxury-charcoal">{subItem.desc}</div>
-                          </Link>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
-            
-            <Link
-              href="/contact"
-              className="btn-luxury px-6 py-3 text-sm font-semibold rounded-lg hover-glow transition-all duration-300 transform hover:scale-105 font-display inline-block text-center mt-6"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Request Demo
-            </Link>
+              ))}
+              <Link 
+                href="/contact" 
+                className="btn-primary inline-block px-6 py-2 text-sm mt-4"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Get Started
+              </Link>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </nav>
   )
 } 

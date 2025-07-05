@@ -1,424 +1,407 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import CounterAnimation from '@/components/CounterAnimation'
+import FlippingText from '@/components/FlippingText'
+import Navigation from '@/components/Navigation'
+import ScrollAnimation from '@/components/ScrollAnimation'
+import WorldMapImage from '@/components/World Map.png'
+import LogoComponent from '@/components/LogoComponent'
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-luxury-pure-white pt-16">
-      {/* Hero Section - True Full Width */}
-      <section className="relative py-20 lg:py-32 bg-luxury-pure-white overflow-hidden min-h-screen flex items-center">
-        <div className="absolute inset-0 bg-luxury-pattern opacity-5"></div>
+    <div className="min-h-screen bg-ivory-silk">
+      <Navigation />
+      
+      {/* Hero Section - Modern & Conversion Focused */}
+      <section className="relative bg-gradient-to-br from-ivory-silk to-muted-jade/10 overflow-hidden">
+        <div className="absolute inset-0 bg-luxury-pattern opacity-30"></div>
         
-        <div className="relative w-full">
-          <div className="text-center px-4">
-            <div className="animate-fade-in">
-              <h1 className="text-4xl lg:text-6xl font-luxury font-bold text-luxury-deep-black mb-8 leading-tight">
-                Scalable. Reliable. 
-                <span className="text-luxury-gradient block mt-4">
-                  Human-driven outreach for B2B growth.
-                </span>
-              </h1>
+        <div className="relative container mx-auto px-6 py-20 lg:py-32">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            {/* Left Column - Hero Content */}
+            <div className="space-y-8">
+              <div className="animate-fade-in">
+                <div className="inline-flex items-center bg-golden-opal/10 rounded-full px-4 py-2 mb-6">
+                  <span className="text-golden-opal font-semibold text-sm">1.9M+ Discovery Calls Delivered</span>
+                </div>
+                
+                <h1 className="text-4xl lg:text-6xl font-bold text-onyx-black leading-tight">
+                  Get 
+                  <span className="block text-gradient">
+                    <FlippingText 
+                      words={['10+ Meetings', 'Qualified Leads', 'CXO Calls', 'Sales Opportunities']}
+                      className="text-gradient"
+                    />
+                  </span>
+                  Every Month
+                </h1>
+              </div>
+              
+              <div className="animate-fade-in-delay">
+                <p className="text-xl text-muted-jade leading-relaxed max-w-2xl">
+                  We connect you with decision-makers who need your solution. No cold emails, no automated sequences—just strategic, human-driven outreach that works.
+                </p>
+              </div>
+              
+              {/* CTA Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-delay">
+                <Link href="/contact" className="btn-primary inline-flex items-center justify-center">
+                  <span>Get Your First 5 Meetings</span>
+                  <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </Link>
+                <Link href="/services" className="btn-secondary">
+                  See Our Process
+                </Link>
+              </div>
+              
+              {/* Social Proof */}
+              <div className="flex items-center gap-8 pt-8 animate-fade-in-delay">
+                <div className="flex items-center">
+                  <div className="flex -space-x-2">
+                    {[1,2,3,4,5].map((i) => (
+                      <div key={i} className="w-8 h-8 rounded-full bg-golden-opal flex items-center justify-center text-onyx-black font-semibold text-sm">
+                        {i}
+                      </div>
+                    ))}
+                  </div>
+                  <span className="ml-3 text-muted-jade font-medium">600+ Happy Clients</span>
+                </div>
+                <div className="flex items-center">
+                  <div className="text-golden-opal text-xl">★★★★★</div>
+                  <span className="ml-2 text-muted-jade font-medium">4.9/5 Rating</span>
+                </div>
+              </div>
             </div>
             
-            <div className="animate-fade-in-delay">
-              <p className="text-lg lg:text-xl text-luxury-charcoal mb-12 mx-auto font-luxury-sans leading-relaxed max-w-4xl">
-                We offer a comprehensive suite of solutions for B2B outreach and lead generation. 
-                This includes customized outreach strategies, dedicated SDR services, and high-impact 
-                discovery calls to connect you with decision-makers.
-              </p>
-            </div>
-            
-            <div className="animate-fade-in-delay flex flex-col sm:flex-row gap-6 justify-center mt-12">
-              <Link 
-                href="/contact" 
-                className="btn-luxury px-10 py-3 text-lg font-semibold rounded-lg hover-glow transition-all duration-300"
-              >
-                Request Demo
-              </Link>
-              <Link 
-                href="/contact" 
-                className="btn-outline-luxury px-10 py-3 text-lg font-semibold rounded-lg hover-glow transition-all duration-300"
-              >
-                Contact Us
-              </Link>
+            {/* Right Column - World Map Image */}
+            <div className="relative">
+              <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-6 shadow-2xl border border-golden-opal/20">
+                <div className="relative w-full h-[350px] lg:h-[400px] rounded-2xl overflow-hidden bg-gradient-to-br from-ivory-silk to-muted-jade/20">
+                  <Image
+                    src={WorldMapImage}
+                    alt="Global reach - Active in 50+ countries"
+                    fill
+                    className="object-cover object-center"
+                    priority
+                  />
+                  
+                  {/* Gradient overlay for better text readability */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-onyx-black/20 via-transparent to-transparent"></div>
+                  
+                  {/* Floating stats cards */}
+                  <div className="absolute top-4 left-4 bg-ivory-silk/95 backdrop-blur-sm rounded-xl p-3 shadow-lg border border-golden-opal/20">
+                    <div className="text-onyx-black font-bold text-lg">
+                      <CounterAnimation end={50} suffix="+" />
+                    </div>
+                    <div className="text-muted-jade text-sm font-medium">Countries</div>
+                  </div>
+                  
+                  <div className="absolute top-4 right-4 bg-ivory-silk/95 backdrop-blur-sm rounded-xl p-3 shadow-lg border border-golden-opal/20">
+                    <div className="text-onyx-black font-bold text-lg">
+                      <CounterAnimation end={600} suffix="+" />
+                    </div>
+                    <div className="text-muted-jade text-sm font-medium">Clients</div>
+                  </div>
+                  
+                  <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-golden-opal/95 backdrop-blur-sm rounded-xl px-4 py-2 shadow-lg">
+                    <div className="text-onyx-black font-semibold text-sm text-center">
+                      Global Presence
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="mt-6 text-center">
+                  <p className="text-muted-jade font-medium">Connecting businesses worldwide</p>
+                  <div className="flex items-center justify-center gap-2 mt-2">
+                    <div className="w-2 h-2 bg-golden-opal rounded-full animate-pulse"></div>
+                    <span className="text-golden-opal text-sm font-semibold">Live worldwide operations</span>
+                    <div className="w-2 h-2 bg-golden-opal rounded-full animate-pulse"></div>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Floating decorative elements */}
+              <div className="absolute -top-4 -right-4 w-20 h-20 bg-golden-opal/20 rounded-full blur-xl"></div>
+              <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-muted-jade/20 rounded-full blur-xl"></div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Stats Section - True Full Width */}
-      <section className="py-20 bg-luxury-cream min-h-[40vh] flex items-center">
-        <div className="w-full">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 px-8">
-            {[
-              { number: 20, label: "Qualified Experts", suffix: "+" },
-              { number: 12, label: "Clients Per Month", suffix: "+" },
-              { number: 5, label: "Global Partners", suffix: "+" },
-              { number: 10, label: "Years Experience", suffix: "+" }
-            ].map((stat, index) => (
-              <div key={index} className="text-center animate-on-scroll">
-                <CounterAnimation
-                  end={stat.number}
-                  duration={1200}
-                  className="text-4xl lg:text-5xl font-display font-black text-luxury-gradient block mb-4"
-                  suffix={stat.suffix}
-                />
-                <div className="text-luxury-charcoal font-luxury-sans text-base font-medium">
-                  {stat.label}
-                </div>
+      {/* Stats Section */}
+      <section className="py-20 bg-imperial-emerald">
+        <div className="container mx-auto px-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="text-center">
+              <div className="text-4xl lg:text-5xl font-bold text-golden-opal mb-2">
+                <CounterAnimation end={1900} suffix="K+" />
               </div>
+              <div className="text-ivory-silk font-medium">Discovery Calls</div>
+            </div>
+            <div className="text-center">
+              <div className="text-4xl lg:text-5xl font-bold text-golden-opal mb-2">
+                <CounterAnimation end={97} suffix="%" />
+              </div>
+              <div className="text-ivory-silk font-medium">Success Rate</div>
+            </div>
+            <div className="text-center">
+              <div className="text-4xl lg:text-5xl font-bold text-golden-opal mb-2">
+                <CounterAnimation end={600} suffix="+" />
+              </div>
+              <div className="text-ivory-silk font-medium">Clients</div>
+            </div>
+            <div className="text-center">
+              <div className="text-4xl lg:text-5xl font-bold text-golden-opal mb-2">
+                <CounterAnimation end={13} suffix="+" />
+              </div>
+              <div className="text-ivory-silk font-medium">Years Experience</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Services Section */}
+      <section className="py-20 bg-ivory-silk">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl font-bold text-onyx-black mb-6">
+              How We <span className="text-gradient">Generate Leads</span>
+            </h2>
+            <p className="text-xl text-muted-jade max-w-3xl mx-auto">
+              Our proven 6-step process turns cold prospects into warm conversations
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                title: "Market Research",
+                description: "Deep dive into your ideal customer profile and industry dynamics",
+                step: "01"
+              },
+              {
+                title: "Prospect Identification",
+                description: "Find decision-makers with budget, authority, and need",
+                step: "02"
+              },
+              {
+                title: "Strategic Outreach",
+                description: "Personalized, human-crafted messages that get responses",
+                step: "03"
+              },
+              {
+                title: "Meeting Coordination",
+                description: "Schedule qualified discovery calls with interested prospects",
+                step: "04"
+              },
+              {
+                title: "Performance Tracking",
+                description: "Real-time analytics and optimization for maximum ROI",
+                step: "05"
+              },
+              {
+                title: "Scale & Optimize",
+                description: "Expand successful campaigns across multiple channels",
+                step: "06"
+              }
+            ].map((service, index) => (
+              <ScrollAnimation key={index} delay={index * 100}>
+                <div className="card-modern group relative overflow-hidden">
+                  <div className="absolute top-4 right-4 text-golden-opal/20 font-bold text-2xl">
+                    {service.step}
+                  </div>
+                  
+                  <h3 className="text-xl font-bold text-onyx-black mb-3 group-hover:text-golden-opal transition-colors">
+                    {service.title}
+                  </h3>
+                  <p className="text-muted-jade leading-relaxed">
+                    {service.description}
+                  </p>
+                </div>
+              </ScrollAnimation>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Our Services Section - True Full Width */}
-      <section className="py-24 bg-luxury-pure-white min-h-screen flex items-center">
-        <div className="w-full px-6">
-          <div className="text-center mb-20">
-            <h2 className="text-3xl lg:text-4xl font-luxury font-bold text-luxury-deep-black mb-8">
-              Our Services
+      {/* Pricing Section */}
+      <section className="py-20 bg-petrol-smoke">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl font-bold text-ivory-silk mb-6">
+              Simple, Transparent <span className="text-golden-opal">Pricing</span>
             </h2>
-            <p className="text-lg lg:text-xl text-luxury-charcoal mx-auto font-luxury-sans leading-relaxed max-w-4xl">
-              Helping businesses and professionals connect with C-level executives. 
-              Empowering organizations with scalable outbound solutions.
+            <p className="text-xl text-muted-jade max-w-3xl mx-auto">
+              No hidden fees. No long-term contracts. Just results.
             </p>
           </div>
-
-          <div className="grid lg:grid-cols-2 gap-16 max-w-7xl mx-auto">
-            {/* Outreach Services */}
-            <div className="animate-on-scroll flex flex-col">
-              <div className="mb-12">
-                <h3 className="text-xl lg:text-2xl font-luxury font-bold text-luxury-deep-black mb-6">
-                  Outreach Services
-                </h3>
-                <p className="text-luxury-charcoal font-luxury-sans mb-8 text-base lg:text-lg">
-                  We provide outbound programs that connect you with high-value prospects.
-                </p>
-              </div>
-
-              <div className="space-y-8 flex-1">
-                <div className="bg-luxury-pure-white p-8 rounded-lg hover-lift shadow-2xl shadow-black/25 hover:shadow-[0_25px_50px_rgba(212,175,55,0.6)] hover:scale-110 hover:-translate-y-6 transition-all duration-500 border-2 border-luxury-gold/30 hover:border-luxury-gold/80 relative overflow-hidden group">
-                  {/* Card Shimmer Effect */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-luxury-gold/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-                  
-                  <div className="relative z-10">
-                    <h4 className="text-lg lg:text-xl font-luxury font-semibold text-luxury-deep-black mb-4 group-hover:text-luxury-gold transition-colors duration-300">
-                      Starter Package
-                    </h4>
-                    <ul className="text-luxury-charcoal font-luxury-sans text-base space-y-3 mb-6">
-                      <li>• 12 Qualified CXO meetings over 3 months</li>
-                      <li>• $99 per meeting</li>
-                      <li>• Perfect for pilot programs</li>
-                    </ul>
-                    <p className="text-sm text-luxury-charcoal font-luxury-sans">
-                      Offered to: Startups, SMEs, Growth Companies
-                    </p>
-                  </div>
-                </div>
-
-                <div className="bg-luxury-pure-white p-8 rounded-lg hover-lift shadow-2xl shadow-black/25 hover:shadow-[0_30px_60px_rgba(212,175,55,0.7)] hover:scale-[1.12] hover:-translate-y-8 transition-all duration-500 border-2 border-luxury-gold/30 hover:border-luxury-gold relative overflow-hidden group">
-                  {/* Card Shimmer Effect */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-luxury-gold/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-                  
-                  <div className="relative z-10">
-                    <div className="flex items-center justify-between mb-4">
-                      <h4 className="text-lg lg:text-xl font-luxury font-semibold text-luxury-deep-black group-hover:text-luxury-gold transition-colors duration-300">
-                        SDR as a Service
-                      </h4>
-                      <span className="text-sm bg-luxury-gold text-luxury-deep-black px-4 py-2 rounded-full font-semibold">
+          
+          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto items-stretch">
+            {[
+              {
+                name: "Starter",
+                price: "$99",
+                unit: "per meeting",
+                description: "Perfect for testing our service",
+                features: [
+                  "5 qualified meetings",
+                  "Basic targeting",
+                  "Email outreach",
+                  "Weekly reporting",
+                  "CRM integration",
+                  "Email support"
+                ],
+                popular: false
+              },
+              {
+                name: "Professional",
+                price: "$1,999",
+                unit: "per month",
+                description: "Our most popular package",
+                features: [
+                  "15-25 qualified meetings",
+                  "Advanced targeting",
+                  "Multi-channel outreach",
+                  "Dedicated SDR",
+                  "Real-time dashboard",
+                  "Monthly strategy calls"
+                ],
+                popular: true
+              },
+              {
+                name: "Enterprise",
+                price: "Custom",
+                unit: "pricing",
+                description: "For scaling organizations",
+                features: [
+                  "50+ qualified meetings",
+                  "Multiple SDRs",
+                  "Custom integrations",
+                  "Priority support",
+                  "Custom reporting",
+                  "Dedicated success manager"
+                ],
+                popular: false
+              }
+            ].map((plan, index) => (
+              <ScrollAnimation key={index} delay={index * 100}>
+                <div className={`card-glass relative h-full flex flex-col ${plan.popular ? 'ring-2 ring-golden-opal' : ''}`}>
+                  {plan.popular && (
+                    <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                      <span className="bg-golden-opal text-onyx-black px-4 py-1 rounded-full text-sm font-semibold">
                         Most Popular
                       </span>
                     </div>
-                    <ul className="text-luxury-charcoal font-luxury-sans text-base space-y-3 mb-6">
-                      <li>• Dedicated full-time SDR</li>
-                      <li>• $1,999-$2,250 per month</li>
-                      <li>• Complete outbound engine</li>
-                    </ul>
-                    <p className="text-sm text-luxury-charcoal font-luxury-sans">
-                      Offered to: Scale-ups, Enterprise Companies
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Consultation Services */}
-            <div className="animate-on-scroll flex flex-col">
-              <div className="mb-12">
-                <h3 className="text-xl lg:text-2xl font-luxury font-bold text-luxury-deep-black mb-6">
-                  Consultation Services
-                </h3>
-                <p className="text-luxury-charcoal font-luxury-sans mb-8 text-base lg:text-lg">
-                  Access our expertise through custom consultation and strategy design.
-                </p>
-              </div>
-
-              <div className="space-y-8 flex-1">
-                <div className="bg-luxury-pure-white p-8 rounded-lg hover-lift shadow-2xl shadow-black/25 hover:shadow-[0_25px_50px_rgba(212,175,55,0.6)] hover:scale-110 hover:-translate-y-6 transition-all duration-500 border-2 border-luxury-gold/30 hover:border-luxury-gold/80 relative overflow-hidden group">
-                  {/* Card Shimmer Effect */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-luxury-gold/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                  )}
                   
-                  <div className="relative z-10">
-                    <h4 className="text-lg lg:text-xl font-luxury font-semibold text-luxury-deep-black mb-4 group-hover:text-luxury-gold transition-colors duration-300">
-                      Strategy Design
-                    </h4>
-                    <ul className="text-luxury-charcoal font-luxury-sans text-base space-y-3 mb-6">
-                      <li>• Complete lead generation strategy</li>
-                      <li>• Sales infrastructure design</li>
-                      <li>• Custom outreach playbooks</li>
-                    </ul>
-                    <p className="text-sm text-luxury-charcoal font-luxury-sans">
-                      Offered to: Enterprise, Fortune 500 Companies
-                    </p>
+                  <div className="text-center mb-6">
+                    <h3 className="text-2xl font-bold text-ivory-silk mb-2">{plan.name}</h3>
+                    <div className="mb-2">
+                      <span className="text-4xl font-bold text-golden-opal">{plan.price}</span>
+                      <span className="text-muted-jade ml-2">{plan.unit}</span>
+                    </div>
+                    <p className="text-muted-jade">{plan.description}</p>
                   </div>
-                </div>
-
-                <div className="bg-luxury-pure-white p-8 rounded-lg hover-lift shadow-2xl shadow-black/25 hover:shadow-[0_25px_50px_rgba(212,175,55,0.6)] hover:scale-110 hover:-translate-y-6 transition-all duration-500 border-2 border-luxury-gold/30 hover:border-luxury-gold/80 relative overflow-hidden group">
-                  {/* Card Shimmer Effect */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-luxury-gold/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
                   
-                  <div className="relative z-10">
-                    <h4 className="text-lg lg:text-xl font-luxury font-semibold text-luxury-deep-black mb-4 group-hover:text-luxury-gold transition-colors duration-300">
-                      Team Training
-                    </h4>
-                    <ul className="text-luxury-charcoal font-luxury-sans text-base space-y-3 mb-6">
-                      <li>• SDR team training programs</li>
-                      <li>• Outbound best practices</li>
-                      <li>• Performance optimization</li>
-                    </ul>
-                    <p className="text-sm text-luxury-charcoal font-luxury-sans">
-                      Offered to: Sales Teams, Growing Companies
-                    </p>
+                  <ul className="space-y-3 mb-8 flex-grow">
+                    {plan.features.map((feature, featureIndex) => (
+                      <li key={featureIndex} className="flex items-center text-ivory-silk">
+                        <svg className="w-5 h-5 text-golden-opal mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                  
+                  <div className="mt-auto">
+                    <Link href="/contact" className={plan.popular ? 'btn-primary w-full' : 'btn-outline w-full'}>
+                      Get Started
+                    </Link>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Solutions for Every Stage - True Full Width */}
-      <section className="py-24 bg-luxury-cream min-h-screen flex items-center">
-        <div className="w-full px-6">
-          <div className="text-center mb-20">
-            <h2 className="text-3xl lg:text-4xl font-luxury font-bold text-luxury-deep-black mb-8">
-              Solutions for Every Stage of Growth
-            </h2>
-            <p className="text-lg lg:text-xl text-luxury-charcoal mx-auto font-luxury-sans leading-relaxed max-w-4xl">
-              We work with startups, scale-ups, and enterprises to identify prospects, 
-              connect with decision-makers, and accelerate business growth.
-            </p>
-          </div>
-
-          <div className="grid lg:grid-cols-3 gap-12 max-w-7xl mx-auto">
-            {[
-              {
-                title: "Startups & SMEs",
-                description: "Pilot programs and discovery call packages to validate your market and connect with early customers.",
-                icon: (
-                  <svg className="w-10 h-10 text-luxury-deep-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
-                )
-              },
-              {
-                title: "Scale-ups & Growth Companies",
-                description: "Dedicated SDR services and full outbound engines to systematically grow your pipeline.",
-                icon: (
-                  <svg className="w-10 h-10 text-luxury-deep-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
-                  </svg>
-                )
-              },
-              {
-                title: "Enterprise & Fortune 500",
-                description: "Custom consultation and team training to optimize your existing sales infrastructure.",
-                icon: (
-                  <svg className="w-10 h-10 text-luxury-deep-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                  </svg>
-                )
-              }
-            ].map((solution, index) => (
-              <div key={index} className="text-center animate-on-scroll bg-luxury-pure-white p-10 rounded-lg hover-lift shadow-2xl shadow-black/25 hover:shadow-[0_25px_50px_rgba(212,175,55,0.6)] hover:scale-[1.12] hover:-translate-y-6  transition-all duration-500 border-2 border-luxury-gold/30 hover:border-luxury-gold/80 relative overflow-hidden group">
-                {/* Card Shimmer Effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-luxury-gold/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-                
-                <div className="relative z-10">
-                  <div className="mb-8 w-20 h-20 bg-luxury-gold rounded-full flex items-center justify-center mx-auto group-hover:scale-125 group-hover:shadow-[0_15px_30px_rgba(212,175,55,0.5)] transition-all duration-500">
-                    {solution.icon}
-                  </div>
-                  <h3 className="text-lg lg:text-xl font-luxury font-semibold text-luxury-deep-black mb-6 group-hover:text-luxury-gold transition-colors duration-300">
-                    {solution.title}
-                  </h3>
-                  <p className="text-luxury-charcoal font-luxury-sans leading-relaxed text-base group-hover:text-luxury-charcoal transition-colors duration-300">
-                    {solution.description}
-                  </p>
-                </div>
-              </div>
+              </ScrollAnimation>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Proven Results - True Full Width */}
-      <section className="py-24 bg-luxury-pure-white min-h-[80vh] flex items-center">
-        <div className="w-full px-6">
-          <div className="text-center mb-20">
-            <h2 className="text-3xl lg:text-4xl font-luxury font-bold text-luxury-deep-black mb-8">
-              Proven Results That Matter
+      {/* Testimonials Section */}
+      <section className="py-20 bg-ivory-silk">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl font-bold text-onyx-black mb-6">
+              What Our <span className="text-gradient">Clients Say</span>
             </h2>
-            <p className="text-lg lg:text-xl text-luxury-charcoal mx-auto font-luxury-sans leading-relaxed max-w-4xl">
-              We&apos;ve connected businesses with decision-makers through trusted outreach and human-driven strategies.
-            </p>
           </div>
-
-          <div className="grid lg:grid-cols-2 gap-16 max-w-6xl mx-auto">
-            <div className="animate-on-scroll">
-              <div className="grid grid-cols-2 gap-8">
-                <div className="text-center">
-                  <CounterAnimation
-                    end={1.9}
-                    duration={1000}
-                    className="text-3xl lg:text-4xl font-display font-black text-luxury-gradient block mb-3"
-                    suffix="M+"
-                    decimals={1}
-                  />
-                  <div className="text-luxury-charcoal font-luxury-sans text-base">
-                    Discovery Calls Delivered
-                  </div>
-                </div>
-                <div className="text-center">
-                  <CounterAnimation
-                    end={600}
-                    duration={1000}
-                    className="text-3xl lg:text-4xl font-display font-black text-luxury-gradient block mb-3"
-                    suffix="+"
-                  />
-                  <div className="text-luxury-charcoal font-luxury-sans text-base">
-                    Clients Served
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div className="animate-on-scroll">
-              <div className="grid grid-cols-2 gap-8">
-                <div className="text-center">
-                  <CounterAnimation
-                    end={13}
-                    duration={1000}
-                    className="text-3xl lg:text-4xl font-display font-black text-luxury-gradient block mb-3"
-                    suffix="+"
-                  />
-                  <div className="text-luxury-charcoal font-luxury-sans text-base">
-                    Years of Excellence
-                  </div>
-                </div>
-                <div className="text-center">
-                  <CounterAnimation
-                    end={70}
-                    duration={1000}
-                    className="text-3xl lg:text-4xl font-display font-black text-luxury-gradient block mb-3"
-                    suffix="+"
-                  />
-                  <div className="text-luxury-charcoal font-luxury-sans text-base">
-                    Expert Team Members
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Success Stories - True Full Width */}
-      <section className="py-24 bg-luxury-cream min-h-screen flex items-center">
-        <div className="w-full px-6">
-          <div className="text-center mb-20">
-            <h2 className="text-3xl lg:text-4xl font-luxury font-bold text-luxury-deep-black mb-8">
-              You&apos;re in Good Company
-            </h2>
-            <p className="text-lg lg:text-xl text-luxury-charcoal mx-auto font-luxury-sans leading-relaxed max-w-4xl">
-                              Trusted by businesses across sectors. Here&apos;s what they have to say.
-            </p>
-          </div>
-
-          <div className="grid lg:grid-cols-3 gap-12 max-w-7xl mx-auto">
+          
+          <div className="grid md:grid-cols-3 gap-8">
             {[
               {
-                quote: "millionCXO helped us triple our discovery calls in just two months. Every meeting was with a relevant decision-maker.",
-                author: "Jenifer Cohen",
-                role: "CEO"
+                quote: "MillionCXO booked 23 qualified meetings in our first month. The quality was incredible.",
+                author: "Sarah Chen",
+                role: "VP of Sales",
+                company: "TechFlow Inc"
               },
               {
-                quote: `We've tried multiple outbound solutions, but millionCXO is the first that delivered exactly what they promised.`,
-                author: "Maria Goncavales",
-                role: "VP Sales"
+                quote: "Finally, a service that delivers on its promises. 10x ROI in 90 days.",
+                author: "Michael Rodriguez",
+                role: "Founder",
+                company: "DataVault Solutions"
               },
               {
-                quote: "Their 1:1 outreach model gave us a steady flow of qualified CXO meetings with real-time performance tracking.",
-                author: "Michael Soveign",
-                role: "Director"
+                quote: "The best investment we made for our sales pipeline. Highly recommend!",
+                author: "Jennifer Park",
+                role: "Chief Revenue Officer",
+                company: "CloudSync"
               }
             ].map((testimonial, index) => (
-              <div key={index} className="animate-on-scroll bg-luxury-pure-white p-8 rounded-lg hover-lift shadow-2xl shadow-black/25 hover:shadow-[0_25px_50px_rgba(212,175,55,0.6)] hover:scale-[1.08] hover:-translate-y-4 transition-all duration-500 border-2 border-luxury-gold/30 hover:border-luxury-gold/80 relative overflow-hidden group">
-                {/* Card Shimmer Effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-luxury-gold/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-                
-                <div className="relative z-10">
-                  <div className="text-4xl text-luxury-gold mb-6 group-hover:scale-110 transition-transform duration-300">&ldquo;</div>
-                  <blockquote className="text-luxury-charcoal font-luxury-sans leading-relaxed mb-8 text-base group-hover:text-luxury-charcoal transition-colors duration-300">
+              <ScrollAnimation key={index} delay={index * 100}>
+                <div className="card-modern text-center">
+                  <div className="text-golden-opal text-4xl mb-4">&quot;</div>
+                  <p className="text-muted-jade italic mb-6 text-lg">
                     {testimonial.quote}
-                  </blockquote>
-                  <div className="flex items-center">
-                    <div className="w-12 h-12 bg-luxury-gold rounded-full flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-500">
-                      <span className="text-luxury-deep-black font-semibold text-base">
-                        {testimonial.author.charAt(0)}
-                      </span>
-                    </div>
-                    <div>
-                      <div className="text-luxury-deep-black font-semibold text-base group-hover:text-luxury-gold transition-colors duration-300">
-                        {testimonial.author}
-                      </div>
-                      <div className="text-luxury-charcoal text-sm">
-                        {testimonial.role}
-                      </div>
-                    </div>
+                  </p>
+                  <div>
+                    <div className="font-semibold text-onyx-black">{testimonial.author}</div>
+                    <div className="text-muted-jade">{testimonial.role}</div>
+                    <div className="text-golden-opal font-medium">{testimonial.company}</div>
                   </div>
                 </div>
-              </div>
+              </ScrollAnimation>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section - True Full Width */}
-      <section className="py-24 bg-luxury-deep-black min-h-[60vh] flex items-center">
-        <div className="w-full px-6 text-center">
-          <h2 className="text-3xl lg:text-4xl font-luxury font-bold text-luxury-pure-white mb-8">
-            Ready to Transform Your Outreach?
-          </h2>
-          <p className="text-lg lg:text-xl text-luxury-cream mb-12 font-luxury-sans mx-auto max-w-4xl">
-            Take the next step with human-driven outreach that delivers results. 
-            Launch your journey with our proven B2B solutions.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <Link 
-              href="/contact" 
-              className="btn-luxury px-10 py-3 text-lg font-semibold rounded-lg hover-glow transition-all duration-300"
-            >
-              Get Started
-            </Link>
-            <a 
-              href="mailto:info@millioncxo.com"
-              className="btn-outline-luxury px-10 py-3 text-lg font-semibold rounded-lg hover-glow transition-all duration-300"
-            >
-              info@millioncxo.com
-            </a>
+      {/* CTA Section */}
+      <section className="py-20 bg-gradient-to-r from-imperial-emerald to-petrol-smoke">
+        <div className="container mx-auto px-6 text-center">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-4xl lg:text-5xl font-bold text-ivory-silk mb-6">
+              Ready to Fill Your Pipeline?
+            </h2>
+            <p className="text-xl text-muted-jade mb-8 max-w-2xl mx-auto">
+              Join 600+ companies who trust us to generate high-quality leads and book meetings with decision-makers.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/contact" className="btn-primary text-lg px-10 py-4">
+                Book Your Strategy Call
+              </Link>
+              <Link href="/services" className="btn-outline text-lg px-10 py-4">
+                See Case Studies
+              </Link>
+            </div>
+            
+            <div className="mt-8 text-muted-jade">
+              <p>No setup fees • No long-term contracts • Money-back guarantee</p>
+            </div>
           </div>
         </div>
       </section>
-    </main>
+    </div>
   )
 } 

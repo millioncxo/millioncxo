@@ -1,186 +1,290 @@
 import Link from 'next/link'
 import CounterAnimation from '@/components/CounterAnimation'
+import ScrollAnimation from '@/components/ScrollAnimation'
 
 export default function Services() {
   return (
-    <main className="min-h-screen bg-luxury-pure-white pt-16">
-      {/* Hero Section - True Full Width */}
-      <section className="relative py-20 lg:py-32 bg-luxury-pure-white overflow-hidden min-h-screen flex items-center">
-        <div className="absolute inset-0 bg-luxury-pattern opacity-5"></div>
+    <div className="min-h-screen bg-ivory-silk pt-16">
+      {/* Hero Section */}
+      <section className="relative py-20 lg:py-32 bg-gradient-to-br from-imperial-emerald to-petrol-smoke overflow-hidden">
+        <div className="absolute inset-0 bg-luxury-pattern opacity-30"></div>
         
-        <div className="relative w-full">
-          <div className="text-center px-4">
-            <div className="animate-fade-in">
-              <h1 className="text-4xl lg:text-6xl font-luxury font-bold text-luxury-deep-black mb-8 leading-tight">
-                Our Services
-              </h1>
+        <div className="relative container mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left Column - Content */}
+            <div className="text-left">
+              <div className="animate-fade-in">
+                <div className="inline-flex items-center bg-golden-opal/10 rounded-full px-4 py-2 mb-6">
+                  <span className="text-golden-opal font-semibold text-sm">Fully Managed Outbound Engine</span>
+                </div>
+                
+                <h1 className="text-5xl lg:text-7xl font-bold text-ivory-silk mb-8 leading-tight">
+                  Our <span className="text-golden-opal">Services</span>
+                </h1>
+              </div>
+              
+              <div className="animate-fade-in-delay">
+                <p className="text-xl text-muted-jade mb-8 leading-relaxed">
+                  We are a fully managed outbound engine that delivers high-value CXO meetings. 
+                  Choose the package that fits your growth stage and scale as needed.
+                </p>
+                
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <Link href="/contact" className="btn-primary text-lg px-8 py-4">
+                    Get Your Custom Quote
+                  </Link>
+                  <Link href="/about" className="btn-outline text-lg px-8 py-4">
+                    Learn More About Us
+                  </Link>
+                </div>
+              </div>
             </div>
-            
-            <div className="animate-fade-in-delay">
-              <p className="text-lg lg:text-xl text-luxury-charcoal mb-12 mx-auto font-luxury-sans leading-relaxed max-w-4xl">
-                We are a fully managed outbound engine that delivers high-value CXO meetings.
-              </p>
+
+            {/* Right Column - Visuals */}
+            <div className="relative">
+              <div className="animate-fade-in-delay">
+                {/* Main Visual Container */}
+                <div className="relative bg-ivory-silk/10 backdrop-blur-sm rounded-2xl p-8 border border-golden-opal/20">
+                  {/* Stats Grid */}
+                  <div className="grid grid-cols-2 gap-6 mb-8">
+                    <div className="text-center">
+                      <div className="text-3xl font-bold text-golden-opal mb-2">
+                        <CounterAnimation end={97} duration={1200} suffix="%" />
+                      </div>
+                      <div className="text-ivory-silk text-sm">Success Rate</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-3xl font-bold text-golden-opal mb-2">
+                        <CounterAnimation end={23} duration={1200} suffix="" />
+                      </div>
+                      <div className="text-ivory-silk text-sm">Avg Meetings/Month</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-3xl font-bold text-golden-opal mb-2">
+                        <CounterAnimation end={1900} duration={1200} suffix="K+" />
+                      </div>
+                      <div className="text-ivory-silk text-sm">Discovery Calls</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-3xl font-bold text-golden-opal mb-2">
+                        <CounterAnimation end={30} duration={1200} suffix="" />
+                      </div>
+                      <div className="text-ivory-silk text-sm">Days to 1st Meeting</div>
+                    </div>
+                  </div>
+
+                  {/* Service Process Visual */}
+                  <div className="space-y-4">
+                    <div className="flex items-center space-x-4">
+                      <div className="w-10 h-10 bg-golden-opal rounded-full flex items-center justify-center">
+                        <span className="text-onyx-black font-bold text-sm">1</span>
+                      </div>
+                      <div className="flex-1">
+                        <div className="h-2 bg-golden-opal/30 rounded-full">
+                          <div className="h-2 bg-golden-opal rounded-full w-full animate-pulse"></div>
+                        </div>
+                      </div>
+                      <span className="text-ivory-silk text-sm">Strategy</span>
+                    </div>
+                    
+                    <div className="flex items-center space-x-4">
+                      <div className="w-10 h-10 bg-golden-opal rounded-full flex items-center justify-center">
+                        <span className="text-onyx-black font-bold text-sm">2</span>
+                      </div>
+                      <div className="flex-1">
+                        <div className="h-2 bg-golden-opal/30 rounded-full">
+                          <div className="h-2 bg-golden-opal rounded-full w-4/5 animate-pulse"></div>
+                        </div>
+                      </div>
+                      <span className="text-ivory-silk text-sm">Research</span>
+                    </div>
+                    
+                    <div className="flex items-center space-x-4">
+                      <div className="w-10 h-10 bg-golden-opal rounded-full flex items-center justify-center">
+                        <span className="text-onyx-black font-bold text-sm">3</span>
+                      </div>
+                      <div className="flex-1">
+                        <div className="h-2 bg-golden-opal/30 rounded-full">
+                          <div className="h-2 bg-golden-opal rounded-full w-3/5 animate-pulse"></div>
+                        </div>
+                      </div>
+                      <span className="text-ivory-silk text-sm">Outreach</span>
+                    </div>
+                    
+                    <div className="flex items-center space-x-4">
+                      <div className="w-10 h-10 bg-golden-opal rounded-full flex items-center justify-center">
+                        <span className="text-onyx-black font-bold text-sm">4</span>
+                      </div>
+                      <div className="flex-1">
+                        <div className="h-2 bg-golden-opal/30 rounded-full">
+                          <div className="h-2 bg-golden-opal rounded-full w-2/5 animate-pulse"></div>
+                        </div>
+                      </div>
+                      <span className="text-ivory-silk text-sm">Meetings</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Floating Elements */}
+                <div className="absolute -top-4 -right-4 w-20 h-20 bg-golden-opal/20 rounded-full flex items-center justify-center backdrop-blur-sm">
+                  <svg className="w-10 h-10 text-golden-opal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                  </svg>
+                </div>
+                
+                <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-muted-jade/20 rounded-full flex items-center justify-center backdrop-blur-sm">
+                  <svg className="w-8 h-8 text-muted-jade" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Service Packages Section - True Full Width */}
-      <section className="py-24 bg-luxury-cream min-h-screen flex items-center">
-        <div className="w-full px-6">
-          <div className="text-center mb-20">
-            <h2 className="text-3xl lg:text-4xl font-luxury font-bold text-luxury-deep-black mb-8">
-              Choose Your Growth Package
+      {/* Service Packages Section */}
+      <section className="py-20 bg-ivory-silk">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-4xl font-bold text-onyx-black mb-6">
+              Choose Your <span className="text-gradient">Growth Package</span>
             </h2>
-            <p className="text-lg lg:text-xl text-luxury-charcoal mx-auto font-luxury-sans leading-relaxed max-w-4xl">
+            <p className="text-xl text-muted-jade max-w-3xl mx-auto">
               Transparent pricing designed to scale with your business needs
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-12 max-w-7xl mx-auto items-stretch">
+          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {/* Starter Package */}
-            <div className="bg-luxury-pure-white p-8 rounded-2xl hover-lift animate-on-scroll hover:border-luxury-gold border-2 border-luxury-gold/30 transition-all duration-500 flex flex-col shadow-2xl shadow-black/25 hover:shadow-[0_30px_60px_rgba(212,175,55,0.7)] hover:scale-110 hover:-translate-y-8 relative overflow-hidden group h-full">
-              {/* Card Shimmer Effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-luxury-gold/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-              
-              <div className="relative z-10">
+            <ScrollAnimation>
+              <div className="card-modern relative h-full flex flex-col">
                 <div className="text-center mb-6">
-                  <h3 className="text-xl lg:text-2xl font-luxury font-semibold text-luxury-deep-black mb-2">
+                  <h3 className="text-xl lg:text-2xl font-bold text-onyx-black mb-2">
                     Starter Package
                   </h3>
-                  <p className="text-luxury-gold font-medium font-luxury-sans">(Pilot)</p>
+                  <p className="text-golden-opal font-medium">(Pilot)</p>
                 </div>
                 
                 <div className="mb-8 flex-grow">
                   <div className="text-center mb-6">
-                    <div className="text-4xl font-bold text-luxury-gold mb-2">$99</div>
-                    <div className="text-luxury-charcoal font-luxury-sans">per meeting</div>
-                    <div className="text-sm text-luxury-charcoal mt-2 font-luxury-sans">($1,188 over 3 months)</div>
+                    <div className="text-4xl font-bold text-golden-opal mb-2">$99</div>
+                    <div className="text-muted-jade">per meeting</div>
+                    <div className="text-sm text-muted-jade mt-2">($1,188 over 3 months)</div>
                   </div>
                   
-                  <div className="border-t border-luxury-gold/20 pt-6">
-                    <h4 className="font-semibold text-luxury-deep-black mb-3 font-luxury">Deliverable:</h4>
-                    <p className="text-luxury-charcoal mb-4 font-luxury-sans">
+                  <div className="border-t border-golden-opal/20 pt-6">
+                    <h4 className="font-semibold text-onyx-black mb-3">Deliverable:</h4>
+                    <p className="text-muted-jade mb-4">
                       12 Qualified CXO meetings
                     </p>
-                    <p className="text-luxury-charcoal font-luxury-sans">
+                    <p className="text-muted-jade">
                       Perfect for pilot programs
                     </p>
                   </div>
                 </div>
                 
-                <Link
-                  href="/contact"
-                  className="w-full btn-luxury text-center py-3 rounded-lg font-semibold block hover-glow transition-all duration-300"
-                >
+                <Link href="/contact" className="btn-outline w-full">
                   Get Started
                 </Link>
               </div>
-            </div>
+            </ScrollAnimation>
 
-            {/* SDR as a Service */}
-            <div className="bg-luxury-pure-white p-8 rounded-2xl hover-lift animate-on-scroll relative border-2 border-luxury-gold/30 hover:border-luxury-gold flex flex-col shadow-2xl shadow-black/25 hover:shadow-[0_35px_70px_rgba(212,175,55,0.8)] hover:scale-[1.15] hover:-translate-y-10 transition-all duration-500 overflow-hidden group h-full">
-              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-luxury-gold text-luxury-deep-black px-4 py-1 rounded-full text-sm font-semibold z-20">
-                Most Popular
-              </div>
-              
-              {/* Card Shimmer Effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-luxury-gold/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-              
-              <div className="relative z-10">
+            {/* Professional Package */}
+            <ScrollAnimation delay={200}>
+              <div className="card-modern relative h-full flex flex-col ring-2 ring-golden-opal">
+                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                  <span className="bg-golden-opal text-onyx-black px-4 py-1 rounded-full text-sm font-semibold">
+                    Most Popular
+                  </span>
+                </div>
+                
                 <div className="text-center mb-6">
-                  <h3 className="text-xl lg:text-2xl font-luxury font-semibold text-luxury-deep-black mb-2">
-                    SDR as a Service
+                  <h3 className="text-xl lg:text-2xl font-bold text-onyx-black mb-2">
+                    Professional Package
                   </h3>
+                  <p className="text-golden-opal font-medium">(SDR as a Service)</p>
                 </div>
                 
                 <div className="mb-8 flex-grow">
                   <div className="text-center mb-6">
-                    <div className="text-4xl font-bold text-luxury-gold mb-2">$1,999</div>
-                    <div className="text-luxury-charcoal font-luxury-sans">per month</div>
-                    <div className="text-sm text-luxury-charcoal mt-2 font-luxury-sans">(quarterly contract)</div>
+                    <div className="text-4xl font-bold text-golden-opal mb-2">$1,999</div>
+                    <div className="text-muted-jade">per month</div>
+                    <div className="text-sm text-muted-jade mt-2">(quarterly contract)</div>
                   </div>
                   
-                  <div className="border-t border-luxury-gold/20 pt-6">
-                    <h4 className="font-semibold text-luxury-deep-black mb-3 font-luxury">Deliverable:</h4>
-                    <p className="text-luxury-charcoal mb-4 font-luxury-sans">
+                  <div className="border-t border-golden-opal/20 pt-6">
+                    <h4 className="font-semibold text-onyx-black mb-3">Deliverable:</h4>
+                    <p className="text-muted-jade mb-4">
                       Dedicated full-time SDR
                     </p>
-                    <p className="text-luxury-charcoal font-luxury-sans">
+                    <p className="text-muted-jade">
                       Complete outbound engine
                     </p>
                   </div>
                 </div>
                 
-                <Link
-                  href="/contact"
-                  className="w-full btn-luxury text-center py-3 rounded-lg font-semibold block hover-glow transition-all duration-300"
-                >
+                <Link href="/contact" className="btn-primary w-full">
                   Get Started
                 </Link>
               </div>
-            </div>
+            </ScrollAnimation>
 
-            {/* Consultation & Infrastructure */}
-            <div className="bg-luxury-pure-white p-8 rounded-2xl hover-lift animate-on-scroll hover:border-luxury-gold border-2 border-luxury-gold/30 transition-all duration-500 flex flex-col shadow-2xl shadow-black/25 hover:shadow-[0_30px_60px_rgba(212,175,55,0.7)] hover:scale-110 hover:-translate-y-8 relative overflow-hidden group h-full">
-              {/* Card Shimmer Effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-luxury-gold/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-              
-              <div className="relative z-10">
+            {/* Enterprise Package */}
+            <ScrollAnimation delay={400}>
+              <div className="card-modern relative h-full flex flex-col">
                 <div className="text-center mb-6">
-                  <h3 className="text-xl lg:text-2xl font-luxury font-semibold text-luxury-deep-black mb-2">
-                    Consultation & Infrastructure Setup
+                  <h3 className="text-xl lg:text-2xl font-bold text-onyx-black mb-2">
+                    Enterprise Solutions
                   </h3>
+                  <p className="text-golden-opal font-medium">(Custom Infrastructure)</p>
                 </div>
                 
                 <div className="mb-8 flex-grow">
                   <div className="text-center mb-6">
-                    <div className="text-4xl font-bold text-luxury-gold mb-2">Custom</div>
-                    <div className="text-luxury-charcoal font-luxury-sans">pricing</div>
+                    <div className="text-4xl font-bold text-golden-opal mb-2">Custom</div>
+                    <div className="text-muted-jade">pricing</div>
                   </div>
                   
-                  <div className="border-t border-luxury-gold/20 pt-6">
-                    <h4 className="font-semibold text-luxury-deep-black mb-3 font-luxury">Deliverable:</h4>
-                    <p className="text-luxury-charcoal mb-4 font-luxury-sans">
+                  <div className="border-t border-golden-opal/20 pt-6">
+                    <h4 className="font-semibold text-onyx-black mb-3">Deliverable:</h4>
+                    <p className="text-muted-jade mb-4">
                       Complete sales infrastructure
                     </p>
-                    <p className="text-luxury-charcoal font-luxury-sans">
+                    <p className="text-muted-jade">
                       Custom strategy design
                     </p>
                   </div>
                 </div>
                 
-                <Link
-                  href="/contact"
-                  className="w-full btn-luxury text-center py-3 rounded-lg font-semibold block hover-glow transition-all duration-300"
-                >
+                <Link href="/contact" className="btn-outline w-full">
                   Get Started
                 </Link>
               </div>
-            </div>
+            </ScrollAnimation>
           </div>
         </div>
       </section>
 
-      {/* What We Deliver Section - True Full Width */}
-      <section className="py-24 bg-luxury-pure-white min-h-screen flex items-center">
-        <div className="w-full px-6">
-          <div className="text-center mb-20">
-            <h2 className="text-3xl lg:text-4xl font-luxury font-bold text-luxury-deep-black mb-8">
-              What We Deliver
+      {/* What We Deliver Section */}
+      <section className="py-20 bg-petrol-smoke">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-4xl font-bold text-ivory-silk mb-6">
+              What We <span className="text-golden-opal">Deliver</span>
             </h2>
-            <p className="text-lg lg:text-xl text-luxury-charcoal mx-auto font-luxury-sans leading-relaxed max-w-4xl">
+            <p className="text-xl text-muted-jade max-w-3xl mx-auto">
               Complete B2B lead generation solutions designed to maximize your ROI
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12 max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
                 title: "B2B Appointment Setting",
                 description: "Our experienced B2B Appointment Setting experts comprehend the triggers that produce quality leads and meetings that your sales team will acknowledge and close.",
                 icon: (
-                  <svg className="w-10 h-10 text-luxury-deep-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-8 h-8 text-golden-opal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
                 )
@@ -189,7 +293,7 @@ export default function Services() {
                 title: "Lead Nurturing",
                 description: "In B2B Lead Generation, we understand that quantity and quality are essential. However, quality is always the priority. Less time is taken to nurture unproductive leads, ensuring a higher conversion rate.",
                 icon: (
-                  <svg className="w-10 h-10 text-luxury-deep-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-8 h-8 text-golden-opal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
                 )
@@ -198,178 +302,213 @@ export default function Services() {
                 title: "Sales as a Service",
                 description: "millionCXO helps you create lead lists, launch campaigns to attract potential clients, set appointments, close deals, and facilitate the onboarding process for new clients.",
                 icon: (
-                  <svg className="w-10 h-10 text-luxury-deep-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0H8m8 0v2a2 2 0 01-2 2H10a2 2 0 01-2-2V6m8 0V4a2 2 0 00-2-2H10a2 2 0 00-2 2v2m0 12V10a2 2 0 012-2h4a2 2 0 012 2v8a2 2 0 01-2 2h-4a2 2 0 01-2-2z" />
-                  </svg>
-                )
-              },
-              {
-                title: "Digital Marketing",
-                description: "As a top digital marketing firm, millionCXO gives your B2B company a competitive edge by helping you gain new leads, strengthen your online presence, and drive ROI.",
-                icon: (
-                  <svg className="w-10 h-10 text-luxury-deep-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                  </svg>
-                )
-              },
-              {
-                title: "Research as a Service",
-                description: "We provide a blend of B2B lead generation, consultative meetings with research analysts, leveraging internal and external data sources, and a pay-for-use model.",
-                icon: (
-                  <svg className="w-10 h-10 text-luxury-deep-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-8 h-8 text-golden-opal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                   </svg>
                 )
               },
               {
-                title: "Account Based Marketing",
-                description: "Targeted marketing approach that focuses on specific high-value accounts to drive engagement and conversion rates through personalized campaigns.",
+                title: "Market Research",
+                description: "Deep market analysis and competitor research to identify the best opportunities and positioning strategies for your outreach campaigns.",
                 icon: (
-                  <svg className="w-10 h-10 text-luxury-deep-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <svg className="w-8 h-8 text-golden-opal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                  </svg>
+                )
+              },
+              {
+                title: "Campaign Optimization",
+                description: "Continuous monitoring and optimization of your outreach campaigns based on real-time performance data and market feedback.",
+                icon: (
+                  <svg className="w-8 h-8 text-golden-opal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+                  </svg>
+                )
+              },
+              {
+                title: "CRM Integration",
+                description: "Seamless integration with your existing CRM and sales tools to ensure smooth lead handoff and complete tracking visibility.",
+                icon: (
+                  <svg className="w-8 h-8 text-golden-opal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4" />
                   </svg>
                 )
               }
             ].map((service, index) => (
-              <div key={index} className="text-center animate-on-scroll bg-luxury-pure-white p-8 rounded-xl hover-lift shadow-2xl shadow-black/25 hover:shadow-[0_25px_50px_rgba(212,175,55,0.6)] hover:scale-[1.12] hover:-translate-y-6 transition-all duration-500 relative overflow-hidden group border-2 border-luxury-gold/30 hover:border-luxury-gold/80">
-                {/* Card Shimmer Effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-luxury-gold/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-                
-                <div className="relative z-10">
-                  <div className="mb-8 w-20 h-20 bg-luxury-gold rounded-full flex items-center justify-center mx-auto group-hover:scale-125 group-hover:shadow-[0_15px_30px_rgba(212,175,55,0.5)] transition-all duration-500">
+              <ScrollAnimation key={index} delay={index * 100}>
+                <div className="card-glass group">
+                  <div className="w-16 h-16 bg-golden-opal/20 rounded-full flex items-center justify-center mb-6 group-hover:bg-golden-opal/30 transition-colors">
                     {service.icon}
                   </div>
-                  <h3 className="text-lg lg:text-xl font-luxury font-semibold text-luxury-deep-black mb-6 group-hover:text-luxury-gold transition-colors duration-300">
+                  <h3 className="text-xl font-bold text-ivory-silk mb-4 group-hover:text-golden-opal transition-colors">
                     {service.title}
                   </h3>
-                  <p className="text-luxury-charcoal font-luxury-sans leading-relaxed text-base group-hover:text-luxury-charcoal transition-colors duration-300">
+                  <p className="text-muted-jade leading-relaxed">
                     {service.description}
                   </p>
                 </div>
-              </div>
+              </ScrollAnimation>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Our Process Section - True Full Width */}
-      <section className="py-24 bg-luxury-cream min-h-screen flex items-center">
-        <div className="w-full px-6">
-          <div className="text-center mb-20">
-            <h2 className="text-3xl lg:text-4xl font-luxury font-bold text-luxury-deep-black mb-8">
-              Simple Steps, Powerful Outcomes
+      {/* Process Section */}
+      <section className="py-20 bg-imperial-emerald">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-4xl font-bold text-ivory-silk mb-6">
+              Our Proven <span className="text-golden-opal">Process</span>
             </h2>
-            <p className="text-lg lg:text-xl text-luxury-charcoal mx-auto font-luxury-sans leading-relaxed max-w-4xl">
-              From understanding your unique needs to delivering certified outcomes - our 4-step process ensures every meeting counts and every campaign delivers real impact.
+            <p className="text-xl text-muted-jade max-w-3xl mx-auto">
+              A systematic approach that consistently delivers results
             </p>
           </div>
 
-          {/* Premium Milestone Timeline */}
-          <div className="max-w-7xl mx-auto relative">
-            {/* Premium Timeline Base */}
-            <div className="hidden lg:block absolute top-20 left-0 w-full h-2 bg-gradient-to-r from-luxury-gold/20 via-luxury-gold/40 to-luxury-gold/20 rounded-full">
-              <div className="h-full bg-gradient-to-r from-luxury-gold via-luxury-gold to-luxury-gold/80 rounded-full animate-timeline-progress shadow-lg"></div>
-            </div>
-            
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 relative z-10">
-              {[
-                {
-                  step: "01",
-                  title: "Discovery & Strategy",
-                  description: "We analyze your business, target market, and goals to create a customized outreach strategy.",
-                  icon: "🎯"
-                },
-                {
-                  step: "02", 
-                  title: "Research & Planning",
-                  description: "Our team conducts deep research to identify and qualify the right decision-makers for your business.",
-                  icon: "🔍"
-                },
-                {
-                  step: "03",
-                  title: "Outreach Execution",
-                  description: "We execute personalized, human-driven outreach campaigns to connect with your ideal prospects.",
-                  icon: "🚀"
-                },
-                {
-                  step: "04",
-                  title: "Meeting Delivery",
-                  description: "We schedule and deliver qualified meetings with decision-makers ready to engage with your solutions.",
-                  icon: "🎉"
-                }
-              ].map((process, index) => (
-                <div key={index} className="text-center animate-on-scroll group relative">
-                  {/* Premium Milestone Marker */}
-                  <div className="mb-8 relative">
-                    {/* Outer Ring */}
-                    <div className="w-20 h-20 bg-gradient-to-br from-luxury-gold to-luxury-gold/80 rounded-full flex items-center justify-center mx-auto shadow-2xl group-hover:shadow-[0_20px_40px_rgba(212,175,55,0.6)] transition-all duration-500 animate-milestone-glow group-hover:scale-125">
-                      {/* Inner Circle */}
-                      <div className="w-16 h-16 bg-luxury-deep-black rounded-full flex items-center justify-center relative overflow-hidden">
-                        {/* Shimmer Effect */}
-                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-luxury-gold/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-                        
-                        {/* Step Number */}
-                        <span className="text-xl font-bold text-luxury-gold font-luxury relative z-10">
-                          {process.step}
-                        </span>
-                      </div>
-                    </div>
-                    
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              {
+                step: "01",
+                title: "Discovery & Strategy",
+                description: "We analyze your business, ideal customer profile, and market positioning to create a tailored outreach strategy."
+              },
+              {
+                step: "02",
+                title: "Prospect Research",
+                description: "Our team identifies and researches high-value prospects who match your ideal customer criteria."
+              },
+              {
+                step: "03",
+                title: "Personalized Outreach",
+                description: "We craft and execute personalized campaigns across multiple channels to engage your prospects."
+              },
+              {
+                step: "04",
+                title: "Meeting Coordination",
+                description: "We qualify interested prospects and coordinate meetings directly with your sales team."
+              }
+            ].map((process, index) => (
+              <ScrollAnimation key={index} delay={index * 150}>
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-golden-opal rounded-full flex items-center justify-center mx-auto mb-6">
+                    <span className="text-onyx-black font-bold text-lg">{process.step}</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-ivory-silk mb-4">{process.title}</h3>
+                  <p className="text-muted-jade leading-relaxed">{process.description}</p>
+                </div>
+              </ScrollAnimation>
+            ))}
+          </div>
+        </div>
+      </section>
 
+      {/* Success Metrics */}
+      <section className="py-20 bg-ivory-silk">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-4xl font-bold text-onyx-black mb-6">
+              Success <span className="text-gradient">Metrics</span>
+            </h2>
+            <p className="text-xl text-muted-jade max-w-3xl mx-auto">
+              Real results that drive business growth
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {[
+              { number: 97, label: "Success Rate", suffix: "%" },
+              { number: 23, label: "Avg Meetings/Month", suffix: "" },
+              { number: 1900, label: "Discovery Calls Delivered", suffix: "K+" },
+              { number: 30, label: "Days to First Meeting", suffix: "" }
+            ].map((metric, index) => (
+              <ScrollAnimation key={index} delay={index * 100}>
+                <div className="text-center">
+                  <div className="text-4xl lg:text-5xl font-bold text-golden-opal mb-2">
+                    <CounterAnimation
+                      end={metric.number}
+                      duration={1200}
+                      suffix={metric.suffix}
+                    />
                   </div>
-                  
-                  {/* Premium Content Card */}
-                  <div className="bg-luxury-pure-white rounded-xl p-6 shadow-2xl shadow-black/25 group-hover:shadow-[0_25px_50px_rgba(212,175,55,0.6)] transition-all duration-500 border-2 border-luxury-gold/30 group-hover:border-luxury-gold/80 group-hover:scale-[1.08] group-hover:-translate-y-4 relative overflow-hidden">
-                    {/* Card Shimmer Effect */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-luxury-gold/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-                    
-                    <div className="relative z-10">
-                      <h3 className="text-lg lg:text-xl font-luxury font-semibold text-luxury-deep-black mb-3 group-hover:text-luxury-gold transition-colors duration-300">
-                        {process.title}
-                      </h3>
-                      <p className="text-luxury-charcoal/80 font-luxury-sans leading-relaxed text-sm lg:text-base group-hover:text-luxury-charcoal transition-colors duration-300">
-                        {process.description}
-                      </p>
-                    </div>
-                  </div>
-                  
-                  {/* Premium Step Label */}
-                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-luxury-gold to-luxury-gold/80 text-luxury-deep-black px-3 py-1 rounded-full text-xs font-bold font-luxury shadow-lg">
-                    STEP {process.step}
+                  <div className="text-muted-jade font-medium">
+                    {metric.label}
                   </div>
                 </div>
-              ))}
-            </div>
+              </ScrollAnimation>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section - True Full Width */}
-      <section className="py-24 bg-luxury-deep-black min-h-[60vh] flex items-center">
-        <div className="w-full px-6 text-center">
-          <h2 className="text-3xl lg:text-4xl font-luxury font-bold text-luxury-pure-white mb-8">
-            Ready to Transform Your Outreach?
-          </h2>
-          <p className="text-lg lg:text-xl text-luxury-cream mb-12 font-luxury-sans mx-auto max-w-4xl">
-            Choose the perfect package for your business needs and start connecting with decision-makers today.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <Link 
-              href="/contact" 
-              className="btn-luxury px-10 py-3 text-lg font-semibold rounded-lg hover-glow transition-all duration-300"
-            >
-              Get Started Today
-            </Link>
-            <Link 
-              href="/contact" 
-              className="btn-outline-luxury px-10 py-3 text-lg font-semibold rounded-lg hover-glow transition-all duration-300"
-            >
-              Schedule Consultation
-            </Link>
+      {/* FAQ Section */}
+      <section className="py-20 bg-petrol-smoke">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-4xl font-bold text-ivory-silk mb-6">
+              Frequently Asked <span className="text-golden-opal">Questions</span>
+            </h2>
+          </div>
+          
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {[
+              {
+                question: "Which package is right for my business?",
+                answer: "The Starter Package is perfect for testing our service. Most growing businesses choose Professional for dedicated support, while enterprises opt for custom solutions."
+              },
+              {
+                question: "How do you ensure meeting quality?",
+                answer: "We use a rigorous qualification process, focusing on decision-makers with budget, authority, need, and timeline (BANT) before scheduling any meetings."
+              },
+              {
+                question: "What industries do you serve?",
+                answer: "We work across all B2B industries including SaaS, consulting, manufacturing, financial services, healthcare, and technology."
+              },
+              {
+                question: "Can I upgrade or downgrade my package?",
+                answer: "Yes, you can adjust your package at any time based on your business needs and growth stage."
+              },
+              {
+                question: "What's included in the setup process?",
+                answer: "We handle everything: strategy development, prospect research, messaging creation, campaign setup, and CRM integration."
+              },
+              {
+                question: "How do you measure success?",
+                answer: "Success is measured by qualified meetings booked, meeting attendance rates, and ultimately the sales opportunities generated from our efforts."
+              }
+            ].map((faq, index) => (
+              <ScrollAnimation key={index} delay={index * 100}>
+                <div className="card-glass">
+                  <h3 className="text-lg font-semibold text-ivory-silk mb-3">{faq.question}</h3>
+                  <p className="text-muted-jade">{faq.answer}</p>
+                </div>
+              </ScrollAnimation>
+            ))}
           </div>
         </div>
       </section>
-    </main>
+
+      {/* CTA Section */}
+      <section className="py-20 bg-gradient-to-r from-imperial-emerald to-petrol-smoke">
+        <div className="container mx-auto px-6 text-center">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl lg:text-4xl font-bold text-ivory-silk mb-6">
+              Ready to Start Generating Qualified Meetings?
+            </h2>
+            <p className="text-xl text-muted-jade mb-8 max-w-2xl mx-auto">
+              Choose your package and start connecting with decision-makers who need your solution.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/contact" className="btn-primary text-lg px-10 py-4">
+                Get Your Custom Quote
+              </Link>
+              <Link href="/about" className="btn-outline text-lg px-10 py-4">
+                Learn More About Us
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
   )
 } 
