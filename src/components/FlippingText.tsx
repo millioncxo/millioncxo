@@ -25,15 +25,20 @@ export default function FlippingText({ words, className = '', interval = 2000 }:
     <span 
       className={`inline-block ${className}`}
       style={{ 
-        width: '380px', // Fixed width to prevent overlapping
-        textAlign: 'left'
+        minWidth: '320px',
+        textAlign: 'left',
+        display: 'inline-block',
+        height: 'auto'
       }}
     >
       <span
-        className="block flipping-text-glow"
+        className={`block flipping-text-glow ${className}`}
         key={currentIndex}
         style={{
-          animation: 'fadeInUp 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+          animation: 'fadeInUp 0.5s ease-out',
+          opacity: 1,
+          transform: 'translateY(0)',
+          display: 'block'
         }}
       >
         {words[currentIndex]}

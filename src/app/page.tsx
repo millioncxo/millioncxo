@@ -13,10 +13,10 @@ export default function Home() {
       <Navigation />
       
       {/* Hero Section - Modern & Conversion Focused */}
-      <section className="relative bg-gradient-to-br from-ivory-silk to-muted-jade/10 overflow-hidden">
+      <section className="relative bg-gradient-to-br from-ivory-silk to-muted-jade/10 overflow-hidden min-h-screen">
         <div className="absolute inset-0 bg-luxury-pattern opacity-30"></div>
         
-        <div className="relative container mx-auto px-6 py-20 lg:py-32">
+        <div className="relative container mx-auto px-6 py-12 lg:py-20 min-h-screen flex items-center">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             {/* Left Column - Hero Content */}
             <div className="space-y-8">
@@ -60,9 +60,19 @@ export default function Home() {
               <div className="flex items-center gap-8 pt-8 animate-fade-in-delay">
                 <div className="flex items-center">
                   <div className="flex -space-x-2">
-                    {[1,2,3,4,5].map((i) => (
-                      <div key={i} className="w-8 h-8 rounded-full bg-golden-opal flex items-center justify-center text-onyx-black font-semibold text-sm">
-                        {i}
+                    {[
+                      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face&auto=format&q=80",
+                      "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=150&h=150&fit=crop&crop=face&auto=format&q=80",
+                      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face&auto=format&q=80",
+                      "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop&crop=face&auto=format&q=80",
+                      "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&crop=face&auto=format&q=80"
+                    ].map((avatar, i) => (
+                      <div key={i} className="w-10 h-10 rounded-full border-2 border-ivory-silk overflow-hidden shadow-lg hover:scale-110 transition-transform duration-300">
+                        <img 
+                          src={avatar} 
+                          alt={`Client ${i + 1}`}
+                          className="w-full h-full object-cover"
+                        />
                       </div>
                     ))}
                   </div>
@@ -342,20 +352,17 @@ export default function Home() {
               {
                 quote: "MillionCXO booked 23 qualified meetings in our first month. The quality was incredible.",
                 author: "Sarah Chen",
-                role: "VP of Sales",
-                company: "TechFlow Inc"
+                role: "VP of Sales"
               },
               {
                 quote: "Finally, a service that delivers on its promises. 10x ROI in 90 days.",
                 author: "Michael Rodriguez",
-                role: "Founder",
-                company: "DataVault Solutions"
+                role: "Founder"
               },
               {
                 quote: "The best investment we made for our sales pipeline. Highly recommend!",
                 author: "Jennifer Park",
-                role: "Chief Revenue Officer",
-                company: "CloudSync"
+                role: "Chief Revenue Officer"
               }
             ].map((testimonial, index) => (
               <ScrollAnimation key={index} delay={index * 100}>
@@ -367,7 +374,6 @@ export default function Home() {
                   <div>
                     <div className="font-semibold text-onyx-black">{testimonial.author}</div>
                     <div className="text-muted-jade">{testimonial.role}</div>
-                    <div className="text-golden-opal font-medium">{testimonial.company}</div>
                   </div>
                 </div>
               </ScrollAnimation>

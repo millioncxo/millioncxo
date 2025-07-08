@@ -6,7 +6,7 @@ export default function Services() {
   return (
     <div className="min-h-screen bg-ivory-silk pt-16">
       {/* Hero Section */}
-      <section className="relative py-20 lg:py-32 bg-gradient-to-br from-imperial-emerald to-petrol-smoke overflow-hidden">
+      <section className="relative min-h-screen flex items-center py-20 lg:py-32 bg-gradient-to-br from-imperial-emerald to-petrol-smoke overflow-hidden">
         <div className="absolute inset-0 bg-luxury-pattern opacity-30"></div>
         
         <div className="relative container mx-auto px-6">

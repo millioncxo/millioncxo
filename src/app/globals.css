@@ -772,6 +772,9 @@ a {
 .flipping-text-glow {
   text-shadow: 0 0 20px rgba(196, 183, 91, 0.3);
   transition: text-shadow 0.3s ease;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
 }
 
 .flipping-text-glow:hover {
@@ -1002,9 +1005,18 @@ a {
 
 /* Text Gradient */
 .text-gradient {
+  color: var(--golden-opal); /* Fallback color */
   background: linear-gradient(135deg, var(--golden-opal) 0%, var(--muted-jade) 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+/* Ensure flipping text is visible */
+.flipping-text-glow.text-gradient {
+  -webkit-text-fill-color: transparent;
+  background: linear-gradient(135deg, var(--golden-opal) 0%, var(--muted-jade) 100%);
+  -webkit-background-clip: text;
   background-clip: text;
 }
 

@@ -6,10 +6,10 @@ export default function About() {
   return (
     <div className="min-h-screen bg-ivory-silk pt-16">
       {/* Hero Section */}
-      <section className="relative py-20 lg:py-32 bg-gradient-to-br from-imperial-emerald to-petrol-smoke overflow-hidden">
+      <section className="relative py-12 lg:py-20 bg-gradient-to-br from-imperial-emerald to-petrol-smoke overflow-hidden min-h-screen">
         <div className="absolute inset-0 bg-luxury-pattern opacity-30"></div>
         
-        <div className="relative container mx-auto px-6">
+        <div className="relative container mx-auto px-6 min-h-screen flex items-center">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left Column - Story Content */}
             <div className="text-left">

@@ -137,9 +137,17 @@ export default function Navigation() {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-imperial-emerald backdrop-blur-md border-b border-golden-opal/20 shadow-lg">
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <Link href="/" className="transition-all duration-300">
+          {/* Logo + Name */}
+          <Link href="/" className="flex items-center space-x-3 group transition-all duration-300 hover:scale-105">
             <LogoComponent width={80} height={44} hoverGradient={true} />
+            <div className="flex flex-col">
+              <span className="text-2xl font-bold text-ivory-silk group-hover:text-golden-opal transition-all duration-300">
+                millionCXO
+              </span>
+              <span className="text-xs text-muted-jade group-hover:text-golden-opal/80 transition-all duration-300 -mt-1">
+                B2B Outreach Excellence
+              </span>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}
