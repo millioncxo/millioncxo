@@ -37,8 +37,8 @@ export default function About() {
                   </div>
                   <div className="flex items-start space-x-3">
                     <div className="w-2 h-2 bg-golden-opal rounded-full mt-3"></div>
-                    <p className="text-lg text-muted-jade">
-                                             <span className="font-semibold text-ivory-silk">Today:</span> We&apos;re the trusted partner for 600+ companies worldwide
+                                        <p className="text-lg text-muted-jade">
+                      <span className="font-semibold text-ivory-silk">Today:</span> We&apos;re the trusted partner for 28+ companies worldwide
                     </p>
                   </div>
                   <div className="flex items-start space-x-3">
@@ -78,11 +78,11 @@ export default function About() {
                         <svg className="w-20 h-20 transform -rotate-90" viewBox="0 0 36 36">
                           <circle cx="18" cy="18" r="16" fill="none" stroke="#668b77" strokeWidth="2" opacity="0.3"/>
                           <circle cx="18" cy="18" r="16" fill="none" stroke="#c4b75b" strokeWidth="2" 
-                                  strokeDasharray="97, 3" strokeLinecap="round"
+                                  strokeDasharray="93, 7" strokeLinecap="round"
                                   className="animate-pulse"/>
                         </svg>
                         <div className="absolute inset-0 flex items-center justify-center">
-                          <span className="text-golden-opal font-bold text-sm">97%</span>
+                          <span className="text-golden-opal font-bold text-sm">93%</span>
                         </div>
                       </div>
                       <div className="text-ivory-silk text-xs font-medium">Client Satisfaction</div>
@@ -110,11 +110,11 @@ export default function About() {
                         <svg className="w-20 h-20 transform -rotate-90" viewBox="0 0 36 36">
                           <circle cx="18" cy="18" r="16" fill="none" stroke="#668b77" strokeWidth="2" opacity="0.3"/>
                           <circle cx="18" cy="18" r="16" fill="none" stroke="#c4b75b" strokeWidth="2" 
-                                  strokeDasharray="50, 50" strokeLinecap="round"
+                                  strokeDasharray="13, 87" strokeLinecap="round"
                                   className="animate-pulse" style={{animationDelay: '1s'}}/>
                         </svg>
                         <div className="absolute inset-0 flex items-center justify-center">
-                          <span className="text-golden-opal font-bold text-xs">50+</span>
+                          <span className="text-golden-opal font-bold text-xs">13+</span>
                         </div>
                       </div>
                       <div className="text-ivory-silk text-xs font-medium">Countries</div>
@@ -141,13 +141,13 @@ export default function About() {
                   <div className="grid grid-cols-2 gap-4">
                     <div className="text-center bg-golden-opal/10 rounded-lg p-4">
                       <div className="text-2xl font-bold text-golden-opal mb-1">
-                        <CounterAnimation end={1900} duration={1200} suffix="K+" />
+                        <CounterAnimation end={118} duration={1200} suffix="K+" />
                       </div>
                       <div className="text-ivory-silk text-xs">Conversations Started</div>
                     </div>
                     <div className="text-center bg-golden-opal/10 rounded-lg p-4">
                       <div className="text-2xl font-bold text-golden-opal mb-1">
-                        <CounterAnimation end={13} duration={1200} suffix="+" />
+                        <CounterAnimation end={12} duration={1200} suffix="+" />
                       </div>
                       <div className="text-ivory-silk text-xs">Years Excellence</div>
                     </div>
@@ -157,7 +157,7 @@ export default function About() {
                 {/* Floating Achievements */}
                 <div className="absolute -top-4 -right-4 w-20 h-20 bg-gradient-to-br from-golden-opal/30 to-muted-jade/30 rounded-full flex items-center justify-center backdrop-blur-sm">
                   <div className="text-center">
-                    <div className="text-golden-opal font-bold text-sm">600+</div>
+                    <div className="text-golden-opal font-bold text-sm">28+</div>
                     <div className="text-ivory-silk text-xs">Clients</div>
                   </div>
                 </div>
@@ -288,9 +288,9 @@ export default function About() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
               { number: 70, label: "Expert Professionals", suffix: "+" },
-              { number: 600, label: "Clients Served", suffix: "+" },
-              { number: 50, label: "Countries Reached", suffix: "+" },
-              { number: 13, label: "Years of Experience", suffix: "+" }
+              { number: 28, label: "Clients Served", suffix: "+" },
+              { number: 13, label: "Countries Reached", suffix: "+" },
+              { number: 12, label: "Years of Experience", suffix: "+" }
             ].map((stat, index) => (
               <ScrollAnimation key={index} delay={index * 100}>
                 <div className="text-center">

@@ -42,7 +42,7 @@ export default function Navigation() {
       label: 'Company',
       dropdown: {
         title: "About millionCXO",
-        description: "13+ years of B2B outreach excellence",
+        description: "12+ years of B2B outreach excellence",
         sections: [
           {
             title: "Our Story",
@@ -55,8 +55,8 @@ export default function Navigation() {
           {
             title: "Track Record",
             items: [
-              { href: '/about#stats', label: 'Company Stats', desc: '600+ clients served' },
-              { href: '/about#experience', label: 'Experience', desc: '13+ years in B2B' }
+              { href: '/about#stats', label: 'Company Stats', desc: '28+ clients served' },
+              { href: '/about#experience', label: 'Experience', desc: '12+ years in B2B' }
             ]
           }
         ]

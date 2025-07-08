@@ -192,11 +192,11 @@ export default function WorldMap() {
         </div>
         <div className="grid grid-cols-2 gap-4 text-xs">
           <div className="text-center">
-            <div className="text-luxury-gold font-bold">50+</div>
+            <div className="text-luxury-gold font-bold">13+</div>
             <div className="text-luxury-charcoal">Countries</div>
           </div>
           <div className="text-center">
-            <div className="text-luxury-gold font-bold">600+</div>
+            <div className="text-luxury-gold font-bold">28+</div>
             <div className="text-luxury-charcoal">Clients</div>
           </div>
         </div>

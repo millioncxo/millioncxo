@@ -49,7 +49,7 @@ export default function Services() {
                   <div className="grid grid-cols-2 gap-6 mb-8">
                     <div className="text-center">
                       <div className="text-3xl font-bold text-golden-opal mb-2">
-                        <CounterAnimation end={97} duration={1200} suffix="%" />
+                        <CounterAnimation end={93} duration={1200} suffix="%" />
                       </div>
                       <div className="text-ivory-silk text-sm">Success Rate</div>
                     </div>
@@ -61,7 +61,7 @@ export default function Services() {
                     </div>
                     <div className="text-center">
                       <div className="text-3xl font-bold text-golden-opal mb-2">
-                        <CounterAnimation end={1900} duration={1200} suffix="K+" />
+                        <CounterAnimation end={118} duration={1200} suffix="K+" />
                       </div>
                       <div className="text-ivory-silk text-sm">Discovery Calls</div>
                     </div>
@@ -416,9 +416,9 @@ export default function Services() {
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
-              { number: 97, label: "Success Rate", suffix: "%" },
+              { number: 93, label: "Success Rate", suffix: "%" },
               { number: 23, label: "Avg Meetings/Month", suffix: "" },
-              { number: 1900, label: "Discovery Calls Delivered", suffix: "K+" },
+              { number: 118, label: "Discovery Calls Delivered", suffix: "K+" },
               { number: 30, label: "Days to First Meeting", suffix: "" }
             ].map((metric, index) => (
               <ScrollAnimation key={index} delay={index * 100}>

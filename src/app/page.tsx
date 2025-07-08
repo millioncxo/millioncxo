@@ -22,7 +22,7 @@ export default function Home() {
             <div className="space-y-8">
               <div className="animate-fade-in">
                 <div className="inline-flex items-center bg-golden-opal/10 rounded-full px-4 py-2 mb-6">
-                  <span className="text-golden-opal font-semibold text-sm">1.9M+ Discovery Calls Delivered</span>
+                  <span className="text-golden-opal font-semibold text-sm">118K+ Discovery Calls Delivered</span>
                 </div>
                 
                 <h1 className="text-4xl lg:text-6xl font-bold text-onyx-black leading-tight">
@@ -66,7 +66,7 @@ export default function Home() {
                       </div>
                     ))}
                   </div>
-                  <span className="ml-3 text-muted-jade font-medium">600+ Happy Clients</span>
+                  <span className="ml-3 text-muted-jade font-medium">28+ Happy Clients</span>
                 </div>
                 <div className="flex items-center">
                   <div className="text-golden-opal text-xl">★★★★★</div>
@@ -93,14 +93,14 @@ export default function Home() {
                   {/* Floating stats cards */}
                   <div className="absolute top-4 left-4 bg-ivory-silk/95 backdrop-blur-sm rounded-xl p-3 shadow-lg border border-golden-opal/20">
                     <div className="text-onyx-black font-bold text-lg">
-                      <CounterAnimation end={50} suffix="+" />
+                      <CounterAnimation end={13} suffix="+" />
                     </div>
                     <div className="text-muted-jade text-sm font-medium">Countries</div>
                   </div>
                   
                   <div className="absolute top-4 right-4 bg-ivory-silk/95 backdrop-blur-sm rounded-xl p-3 shadow-lg border border-golden-opal/20">
                     <div className="text-onyx-black font-bold text-lg">
-                      <CounterAnimation end={600} suffix="+" />
+                      <CounterAnimation end={28} suffix="+" />
                     </div>
                     <div className="text-muted-jade text-sm font-medium">Clients</div>
                   </div>
@@ -136,25 +136,25 @@ export default function Home() {
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="text-center">
               <div className="text-4xl lg:text-5xl font-bold text-golden-opal mb-2">
-                <CounterAnimation end={1900} suffix="K+" />
+                <CounterAnimation end={118} suffix="K+" />
               </div>
               <div className="text-ivory-silk font-medium">Discovery Calls</div>
             </div>
             <div className="text-center">
               <div className="text-4xl lg:text-5xl font-bold text-golden-opal mb-2">
-                <CounterAnimation end={97} suffix="%" />
+                <CounterAnimation end={93} suffix="%" />
               </div>
               <div className="text-ivory-silk font-medium">Success Rate</div>
             </div>
             <div className="text-center">
               <div className="text-4xl lg:text-5xl font-bold text-golden-opal mb-2">
-                <CounterAnimation end={600} suffix="+" />
+                <CounterAnimation end={28} suffix="+" />
               </div>
               <div className="text-ivory-silk font-medium">Clients</div>
             </div>
             <div className="text-center">
               <div className="text-4xl lg:text-5xl font-bold text-golden-opal mb-2">
-                <CounterAnimation end={13} suffix="+" />
+                <CounterAnimation end={12} suffix="+" />
               </div>
               <div className="text-ivory-silk font-medium">Years Experience</div>
             </div>
@@ -384,7 +384,7 @@ export default function Home() {
               Ready to Fill Your Pipeline?
             </h2>
             <p className="text-xl text-muted-jade mb-8 max-w-2xl mx-auto">
-              Join 600+ companies who trust us to generate high-quality leads and book meetings with decision-makers.
+              Join 28+ companies who trust us to generate high-quality leads and book meetings with decision-makers.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
