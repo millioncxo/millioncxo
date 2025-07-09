@@ -9,11 +9,6 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'MillionCXO - B2B Lead Generation & Appointment Setting',
   description: 'Transform your sales pipeline with our human-driven B2B appointment setting services. Generate high-quality leads and increase conversion rates.',
-  icons: {
-    icon: '/favicon.svg',
-    shortcut: '/favicon.svg',
-    apple: '/favicon.svg',
-  },
 }
 
 export default function RootLayout({
