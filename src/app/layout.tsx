@@ -17,14 +17,11 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="no-js">
+    <html lang="en">
       <head>
         <script
           dangerouslySetInnerHTML={{
             __html: `
-              // Remove no-js class when JavaScript is available
-              document.documentElement.classList.remove('no-js');
-              
               // Fallback animation trigger
               document.addEventListener('DOMContentLoaded', function() {
                 setTimeout(function() {

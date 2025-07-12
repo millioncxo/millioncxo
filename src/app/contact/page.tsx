@@ -19,6 +19,7 @@ export default function Contact() {
 
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
+  const [errorMessage, setErrorMessage] = useState('')
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target
@@ -26,20 +27,39 @@ export default function Contact() {
       ...prev,
       [name]: value
     }))
+    
+    // Clear error state when user starts typing
+    if (submitStatus === 'error') {
+      setSubmitStatus('idle')
+      setErrorMessage('')
+    }
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
+    setSubmitStatus('idle')
     
     try {
-      // TODO: Implement MongoDB integration
-      console.log('Form submitted:', formData)
-      
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000))
-      
+      // Call API endpoint to save form data
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      const result = await response.json()
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Something went wrong')
+      }
+
+      // Show success message briefly
       setSubmitStatus('success')
+      
+      // Clear form
       setFormData({
         name: '',
         email: '',
@@ -50,9 +70,22 @@ export default function Contact() {
         message: '',
         timeline: ''
       })
-    } catch (error) {
+
+      // Redirect to booking link after a short delay
+      setTimeout(() => {
+        window.location.href = 'https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled'
+      }, 2000)
+
+    } catch (error: any) {
       console.error('Form submission error:', error)
       setSubmitStatus('error')
+      
+      // Set specific error message
+      if (error.message) {
+        setErrorMessage(error.message)
+      } else {
+        setErrorMessage('Something went wrong. Please try again or contact us directly at info@millioncxo.com')
+      }
     } finally {
       setIsSubmitting(false)
     }
@@ -186,18 +219,21 @@ export default function Contact() {
                       <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
-                      <span className="text-green-800 font-semibold">Success! We&apos;ll be in touch within 24 hours.</span>
+                      <span className="text-green-800 font-semibold">Success! Redirecting you to book your discovery call...</span>
                     </div>
                   </div>
                 )}
 
                 {submitStatus === 'error' && (
                   <div className="mb-6 p-4 bg-red-100 border border-red-200 rounded-lg">
-                    <div className="flex items-center space-x-2">
-                      <svg className="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="flex items-start space-x-2">
+                      <svg className="w-5 h-5 text-red-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                       </svg>
-                      <span className="text-red-800 font-semibold">Something went wrong. Please try again.</span>
+                      <div className="flex-1">
+                        <span className="text-red-800 font-semibold block">{errorMessage || 'Something went wrong. Please try again.'}</span>
+                        <p className="text-red-700 text-sm mt-1">If the problem persists, please email us directly at info@millioncxo.com</p>
+                      </div>
                     </div>
                   </div>
                 )}
@@ -342,8 +378,22 @@ export default function Contact() {
                   disabled={isSubmitting}
                   className={`w-full btn-primary text-lg py-4 ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
                 >
-                  {isSubmitting ? 'Submitting...' : 'Get Your Custom Strategy'}
+                  {isSubmitting ? 'Submitting...' : 'Submit & Book Your Discovery Call'}
                 </button>
+                
+                {submitStatus === 'error' && (
+                  <div className="mt-4 text-center">
+                    <p className="text-muted-jade text-sm mb-3">Having trouble? You can also book directly:</p>
+                    <a 
+                      href="https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-outline text-sm px-6 py-2 inline-block"
+                    >
+                      Book Discovery Call Directly
+                    </a>
+                  </div>
+                )}
               </form>
             </ScrollAnimation>
           </div>

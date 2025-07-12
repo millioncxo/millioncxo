@@ -270,11 +270,7 @@ a {
   transform: translateY(0);
 }
 
-/* Ensure content is always visible for users without JavaScript */
-.no-js .animate-on-scroll {
-  opacity: 1 !important;
-  transform: none !important;
-}
+/* Content is always visible - animations are optional enhancements */
 
 /* Animation delay classes - but content still visible */
 .animate-fade-in-delay {
