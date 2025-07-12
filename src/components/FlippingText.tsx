@@ -25,10 +25,12 @@ export default function FlippingText({ words, className = '', interval = 2000 }:
     <span 
       className={`inline-block ${className}`}
       style={{ 
-        minWidth: '320px',
+        minWidth: 'fit-content',
+        maxWidth: '100%',
         textAlign: 'left',
         display: 'inline-block',
-        height: 'auto'
+        height: 'auto',
+        wordBreak: 'break-word'
       }}
     >
       <span
@@ -38,7 +40,10 @@ export default function FlippingText({ words, className = '', interval = 2000 }:
           animation: 'fadeInUp 0.5s ease-out',
           opacity: 1,
           transform: 'translateY(0)',
-          display: 'block'
+          display: 'block',
+          willChange: 'transform',
+          backfaceVisibility: 'hidden',
+          transformStyle: 'preserve-3d'
         }}
       >
         {words[currentIndex]}

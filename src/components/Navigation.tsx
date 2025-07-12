@@ -72,9 +72,9 @@ export default function Navigation() {
           {
             title: "Outreach Services",
             items: [
-              { href: '/services#starter', label: 'Starter Package', desc: '$99/meeting - Perfect for pilots' },
-              { href: '/services#professional', label: 'Professional Package', desc: '$1,999/month - Full SDR team' },
-              { href: '/services#enterprise', label: 'Enterprise Solutions', desc: 'Custom outbound engines' }
+              { href: '/services#pilot', label: 'Pilot Program', desc: '$99/meeting - 12 qualified CXO meetings' },
+              { href: '/services#sdr', label: 'SDR as a Service', desc: '$1,999/month - Dedicated full-time SDR' },
+              { href: '/services#consultation', label: 'Consultation & Infrastructure', desc: 'Complete CRM & outreach setup' }
             ]
           },
           {
@@ -138,13 +138,13 @@ export default function Navigation() {
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo + Name */}
-          <Link href="/" className="flex items-center space-x-3 group transition-all duration-300 hover:scale-105">
-            <LogoComponent width={80} height={44} hoverGradient={true} />
+          <Link href="/" className="flex items-center space-x-2 sm:space-x-3 group transition-all duration-300 hover:scale-105">
+            <LogoComponent width={60} height={36} hoverGradient={true} className="sm:w-[80px] sm:h-[44px]" />
             <div className="flex flex-col">
-              <span className="text-2xl font-bold text-ivory-silk group-hover:text-golden-opal transition-all duration-300">
+              <span className="text-lg sm:text-2xl font-bold text-ivory-silk group-hover:text-golden-opal transition-all duration-300">
                 millionCXO
               </span>
-              <span className="text-xs text-muted-jade group-hover:text-golden-opal/80 transition-all duration-300 -mt-1">
+              <span className="text-xs text-muted-jade group-hover:text-golden-opal/80 transition-all duration-300 -mt-1 hidden sm:block">
                 B2B Outreach Excellence
               </span>
             </div>
@@ -177,7 +177,7 @@ export default function Navigation() {
                 {/* Enhanced Mega Menu Dropdown */}
                 {activeDropdown === item.label && (
                   <div 
-                    className="absolute top-full left-1/2 transform -translate-x-1/2 mt-3 w-[700px] bg-ivory-silk rounded-2xl shadow-2xl border border-golden-opal/20 overflow-hidden animate-slide-down"
+                    className="absolute top-full left-1/2 transform -translate-x-1/2 mt-3 w-[90vw] max-w-[700px] bg-ivory-silk rounded-2xl shadow-2xl border border-golden-opal/20 overflow-hidden animate-slide-down"
                     onMouseEnter={handleDropdownStay}
                     onMouseLeave={handleDropdownLeave}
                   >

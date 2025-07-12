@@ -156,43 +156,48 @@ export default function Services() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {/* Starter Package */}
+            {/* Pilot Program */}
             <ScrollAnimation>
-              <div className="card-modern relative h-full flex flex-col">
+              <div className="card-modern relative h-full flex flex-col" id="pilot">
                 <div className="text-center mb-6">
                   <h3 className="text-xl lg:text-2xl font-bold text-onyx-black mb-2">
-                    Starter Package
+                    Pilot Program
                   </h3>
-                  <p className="text-golden-opal font-medium">(Pilot)</p>
+                  <p className="text-golden-opal font-medium">Test Our Capabilities</p>
                 </div>
                 
                 <div className="mb-8 flex-grow">
                   <div className="text-center mb-6">
                     <div className="text-4xl font-bold text-golden-opal mb-2">$99</div>
                     <div className="text-muted-jade">per meeting</div>
-                    <div className="text-sm text-muted-jade mt-2">($1,188 over 3 months)</div>
+                    <div className="text-sm text-muted-jade mt-2">Total: $1,188 upfront</div>
                   </div>
                   
                   <div className="border-t border-golden-opal/20 pt-6">
                     <h4 className="font-semibold text-onyx-black mb-3">Deliverable:</h4>
                     <p className="text-muted-jade mb-4">
-                      12 Qualified CXO meetings
+                      12 Qualified CXO Meetings over 3 months (4 meetings/month)
                     </p>
-                    <p className="text-muted-jade">
-                      Perfect for pilot programs
-                    </p>
+                    
+                    <h4 className="font-semibold text-onyx-black mb-3 mt-4">Client Responsibilities:</h4>
+                    <ul className="text-muted-jade text-sm space-y-2">
+                      <li>• Business email address</li>
+                      <li>• LinkedIn Sales Navigator access</li>
+                      <li>• Caller ID/virtual dialler</li>
+                      <li>• CRM access or use ours</li>
+                    </ul>
                   </div>
                 </div>
                 
                 <Link href="/contact" className="btn-outline w-full">
-                  Get Started
+                  Start Pilot Program
                 </Link>
               </div>
             </ScrollAnimation>
 
-            {/* Professional Package */}
+            {/* SDR as a Service */}
             <ScrollAnimation delay={200}>
-              <div className="card-modern relative h-full flex flex-col ring-2 ring-golden-opal">
+              <div className="card-modern relative h-full flex flex-col ring-2 ring-golden-opal" id="sdr">
                 <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
                   <span className="bg-golden-opal text-onyx-black px-4 py-1 rounded-full text-sm font-semibold">
                     Most Popular
@@ -201,25 +206,31 @@ export default function Services() {
                 
                 <div className="text-center mb-6">
                   <h3 className="text-xl lg:text-2xl font-bold text-onyx-black mb-2">
-                    Professional Package
+                    SDR as a Service
                   </h3>
-                  <p className="text-golden-opal font-medium">(SDR as a Service)</p>
+                  <p className="text-golden-opal font-medium">Dedicated Full-Time SDR</p>
                 </div>
                 
                 <div className="mb-8 flex-grow">
                   <div className="text-center mb-6">
                     <div className="text-4xl font-bold text-golden-opal mb-2">$1,999</div>
                     <div className="text-muted-jade">per month</div>
-                    <div className="text-sm text-muted-jade mt-2">(quarterly contract)</div>
+                    <div className="text-sm text-muted-jade mt-2">Quarterly contract</div>
+                    <div className="text-xs text-muted-jade mt-1">($2,250/month for monthly)</div>
                   </div>
                   
                   <div className="border-t border-golden-opal/20 pt-6">
-                    <h4 className="font-semibold text-onyx-black mb-3">Deliverable:</h4>
-                    <p className="text-muted-jade mb-4">
-                      Dedicated full-time SDR
-                    </p>
-                    <p className="text-muted-jade">
-                      Complete outbound engine
+                    <h4 className="font-semibold text-onyx-black mb-3">Daily Activities:</h4>
+                    <ul className="text-muted-jade text-sm space-y-2 mb-4">
+                      <li>• 300 Emails</li>
+                      <li>• 150 Cold Calls</li>
+                      <li>• 70 LinkedIn InMails</li>
+                      <li>• 80 Account Profiles</li>
+                    </ul>
+                    
+                    <h4 className="font-semibold text-onyx-black mb-2">Meeting KPI:</h4>
+                    <p className="text-muted-jade text-sm">
+                      5 Qualified CXO Meetings per month
                     </p>
                   </div>
                 </div>
@@ -230,14 +241,14 @@ export default function Services() {
               </div>
             </ScrollAnimation>
 
-            {/* Enterprise Package */}
+            {/* Consultation & Infrastructure */}
             <ScrollAnimation delay={400}>
-              <div className="card-modern relative h-full flex flex-col">
+              <div className="card-modern relative h-full flex flex-col" id="consultation">
                 <div className="text-center mb-6">
                   <h3 className="text-xl lg:text-2xl font-bold text-onyx-black mb-2">
-                    Enterprise Solutions
+                    Consultation & Infrastructure
                   </h3>
-                  <p className="text-golden-opal font-medium">(Custom Infrastructure)</p>
+                  <p className="text-golden-opal font-medium">Complete Setup</p>
                 </div>
                 
                 <div className="mb-8 flex-grow">
@@ -247,18 +258,22 @@ export default function Services() {
                   </div>
                   
                   <div className="border-t border-golden-opal/20 pt-6">
-                    <h4 className="font-semibold text-onyx-black mb-3">Deliverable:</h4>
-                    <p className="text-muted-jade mb-4">
-                      Complete sales infrastructure
-                    </p>
-                    <p className="text-muted-jade">
-                      Custom strategy design
-                    </p>
+                    <h4 className="font-semibold text-onyx-black mb-3">Includes:</h4>
+                    <ul className="text-muted-jade text-sm space-y-2">
+                      <li>• CRM Setup & Customization</li>
+                      <li>• Email Domain Warm-Up</li>
+                      <li>• Outreach Automation</li>
+                      <li>• Sales Scripts Creation</li>
+                      <li>• Lead Scoring Model</li>
+                      <li>• Weekly Dashboards</li>
+                      <li>• LinkedIn Optimization</li>
+                      <li>• Team Training</li>
+                    </ul>
                   </div>
                 </div>
                 
                 <Link href="/contact" className="btn-outline w-full">
-                  Get Started
+                  Get Custom Quote
                 </Link>
               </div>
             </ScrollAnimation>
@@ -453,7 +468,7 @@ export default function Services() {
             {[
               {
                 question: "Which package is right for my business?",
-                answer: "The Starter Package is perfect for testing our service. Most growing businesses choose Professional for dedicated support, while enterprises opt for custom solutions."
+                answer: "The Pilot Program is perfect for testing our service. Most growing businesses choose SDR as a Service for dedicated support, while enterprises opt for custom consultation and infrastructure setup."
               },
               {
                 question: "How do you ensure meeting quality?",

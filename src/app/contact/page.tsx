@@ -278,10 +278,10 @@ export default function Contact() {
                       className="input-modern"
                     >
                       <option value="">Select a service</option>
-                      <option value="starter">Starter Package ($99/meeting)</option>
-                      <option value="professional">Professional Package ($1,999/month)</option>
-                      <option value="enterprise">Enterprise Solutions (Custom)</option>
-                      <option value="consultation">Free Consultation</option>
+                      <option value="pilot">Pilot Program ($99/meeting)</option>
+                      <option value="sdr">SDR as a Service ($1,999/month)</option>
+                      <option value="consultation">Consultation & Infrastructure Setup</option>
+                      <option value="free-consultation">Free Consultation</option>
                     </select>
                   </div>
                   
