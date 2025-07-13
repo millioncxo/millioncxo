@@ -24,14 +24,14 @@ export default function Navigation() {
             items: [
               { href: '/', label: 'Home', desc: 'Discover our B2B outreach solutions' },
               { href: '/#services', label: 'Services Preview', desc: 'Quick look at our offerings' },
-              { href: '/#results', label: 'Proven Results', desc: '1.9M+ discovery calls delivered' }
+              { href: '/#results', label: 'Proven Results', desc: '118k+ discovery calls delivered' }
             ]
           },
           {
             title: "Get Started",
             items: [
-              { href: '/contact', label: 'Request Demo', desc: 'See our platform in action' },
-              { href: '/contact', label: 'Free Consultation', desc: 'Discuss your outreach needs' }
+              { href: 'https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled', label: 'Request Demo', desc: 'See our platform in action' },
+              { href: 'https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled', label: 'Free Consultation', desc: 'Discuss your outreach needs' }
             ]
           }
         ]
@@ -224,7 +224,7 @@ export default function Navigation() {
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <Link href="/contact" className="btn-primary px-6 py-2 text-sm">
+            <Link href="https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled" className="btn-primary px-6 py-2 text-sm">
               Get Started
             </Link>
           </div>
@@ -249,12 +249,12 @@ export default function Navigation() {
       {isMenuOpen && (
         <div className="md:hidden bg-imperial-emerald border-t border-golden-opal/20">
           <div className="container mx-auto px-6 py-4">
-            <div className="space-y-4">
+            <nav className="flex flex-col space-y-4">
               {navItems.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`block py-2 text-sm font-medium transition-colors ${
+                  className={`text-lg font-medium transition-colors ${
                     pathname === item.href
                       ? 'text-golden-opal'
                       : 'text-ivory-silk hover:text-golden-opal'
@@ -264,14 +264,10 @@ export default function Navigation() {
                   {item.label}
                 </Link>
               ))}
-              <Link 
-                href="/contact" 
-                className="btn-primary inline-block px-6 py-2 text-sm mt-4"
-                onClick={() => setIsMenuOpen(false)}
-              >
+              <Link href="https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled" className="btn-primary mt-4">
                 Get Started
               </Link>
-            </div>
+            </nav>
           </div>
         </div>
       )}

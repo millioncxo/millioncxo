@@ -235,7 +235,7 @@ export default function Services() {
                   </div>
                 </div>
                 
-                <Link href="/contact" className="btn-primary w-full">
+                <Link href="https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled" className="btn-primary w-full">
                   Get Started
                 </Link>
               </div>

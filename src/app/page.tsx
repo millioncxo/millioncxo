@@ -17,9 +17,9 @@ export default function Home() {
         <div className="absolute inset-0 bg-luxury-pattern opacity-30"></div>
         
         <div className="relative container mx-auto px-6 py-12 lg:py-20 min-h-screen flex items-center">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
             {/* Left Column - Hero Content */}
-            <div className="space-y-8">
+            <div className="space-y-6 lg:space-y-8">
               <div className="animate-fade-in">
                 <div className="inline-flex items-center bg-golden-opal/10 rounded-full px-4 py-2 mb-6">
                   <svg className="w-4 h-4 text-golden-opal mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -28,12 +28,12 @@ export default function Home() {
                   <span className="text-golden-opal font-semibold text-sm">118K+ Discovery Calls Delivered</span>
                 </div>
                 
-                <h1 className="text-4xl lg:text-6xl font-bold text-onyx-black leading-tight">
+                <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-onyx-black leading-tight">
                   Get 
-                  <span className="block text-gradient">
+                  <span className="block text-golden-opal">
                     <FlippingText 
                       words={['10+ Meetings', 'Qualified Leads', 'CXO Calls', 'Sales Opportunities']}
-                      className="text-gradient"
+                      className="text-golden-opal"
                     />
                   </span>
                   Every Month
@@ -48,8 +48,8 @@ export default function Home() {
               
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-delay">
-                <Link href="/contact" className="btn-primary inline-flex items-center justify-center">
-                  <span>Get Your First 5 Meetings</span>
+                <Link href="https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled" className="btn-primary inline-flex items-center justify-center">
+                  <span>Book a free call !</span>
                   <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
@@ -79,7 +79,7 @@ export default function Home() {
                       </div>
                     ))}
                   </div>
-                  <span className="ml-3 text-muted-jade font-medium">28+ Happy Clients</span>
+                  <span className="ml-3 text-muted-jade font-medium">27+ Happy Clients</span>
                 </div>
                 <div className="flex items-center">
                   <div className="text-golden-opal text-xl">★★★★★</div>
@@ -146,13 +146,13 @@ export default function Home() {
       {/* Stats Section */}
       <section className="py-20 bg-imperial-emerald">
         <div className="container mx-auto px-6">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
             <div className="text-center">
               <div className="mb-3">
                 
               </div>
               <div className="text-4xl lg:text-5xl font-bold text-golden-opal mb-2">
-                <CounterAnimation end={118} suffix="K+" />
+                <CounterAnimation end={119} suffix="K+" />
               </div>
               <div className="text-ivory-silk font-medium">Discovery Calls</div>
             </div>
@@ -377,7 +377,7 @@ export default function Home() {
                   </ul>
                   
                   <div className="mt-auto">
-                    <Link href="/contact" className={plan.popular ? 'btn-primary w-full' : 'btn-outline w-full'}>
+                    <Link href="https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled" className={plan.popular ? 'btn-primary w-full' : 'btn-outline w-full'}>
                       Get Started
                     </Link>
                   </div>
@@ -448,7 +448,7 @@ export default function Home() {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact" className="btn-primary text-lg px-10 py-4">
+              <Link href="https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled" className="btn-primary text-lg px-10 py-4">
                 Book Your Strategy Call
               </Link>
               <Link href="/services" className="btn-outline text-lg px-10 py-4">

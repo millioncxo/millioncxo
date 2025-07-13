@@ -1,5 +1,6 @@
 import mongoose from 'mongoose'
 
+
 export interface IContact extends mongoose.Document {
   name: string
   email: string
