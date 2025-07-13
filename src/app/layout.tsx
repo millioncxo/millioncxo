@@ -44,6 +44,7 @@ export default function RootLayout({
         {children}
         <ChatWidget />
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   )
