@@ -55,7 +55,7 @@ export default function Navigation() {
           {
             title: "Track Record",
             items: [
-              { href: '/about#stats', label: 'Company Stats', desc: '28+ clients served' },
+              { href: '/about#stats', label: 'Company Stats', desc: '27+ clients served' },
               { href: '/about#experience', label: 'Experience', desc: '12+ years in B2B' }
             ]
           }

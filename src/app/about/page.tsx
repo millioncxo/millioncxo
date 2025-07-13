@@ -157,7 +157,7 @@ export default function About() {
                 {/* Floating Achievements */}
                 <div className="absolute -top-4 -right-4 w-20 h-20 bg-gradient-to-br from-golden-opal/30 to-muted-jade/30 rounded-full flex items-center justify-center backdrop-blur-sm">
                   <div className="text-center">
-                    <div className="text-golden-opal font-bold text-sm">28+</div>
+                    <div className="text-golden-opal font-bold text-sm">27+</div>
                     <div className="text-ivory-silk text-xs">Clients</div>
                   </div>
                 </div>
