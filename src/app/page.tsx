@@ -444,7 +444,7 @@ export default function Home() {
               Ready to Fill Your Pipeline?
             </h2>
             <p className="text-xl text-muted-jade mb-8 max-w-2xl mx-auto">
-              Join 28+ companies who trust us to generate high-quality leads and book meetings with decision-makers.
+              Join 27+ companies who trust us to generate high-quality leads and book meetings with decision-makers.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
