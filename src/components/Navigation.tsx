@@ -134,17 +134,17 @@ export default function Navigation() {
   }, [])
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-imperial-emerald backdrop-blur-md border-b border-golden-opal/20 shadow-lg">
-      <div className="container mx-auto px-6">
-        <div className="flex items-center justify-between h-16">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-imperial-emerald h-8 sm:h-10 md:h-12">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-8 sm:h-10 md:h-12">
           {/* Logo + Name */}
-          <Link href="/" className="flex items-center space-x-2 sm:space-x-3 group transition-all duration-300 hover:scale-105">
-            <LogoComponent width={60} height={36} hoverGradient={true} className="sm:w-[80px] sm:h-[44px]" />
-            <div className="flex flex-col">
-              <span className="text-lg sm:text-2xl font-bold text-ivory-silk group-hover:text-golden-opal transition-all duration-300">
+          <Link href="/" className="flex items-center space-x-2 group transition-all duration-300 hover:scale-105">
+            <LogoComponent width={32} height={20} hoverGradient={true} className="sm:w-[40px] sm:h-[24px] md:w-[48px] md:h-[32px]" />
+            <div className="flex flex-col justify-center">
+              <span className="text-xs sm:text-sm md:text-lg font-bold text-ivory-silk group-hover:text-golden-opal transition-all duration-300">
                 millionCXO
               </span>
-              <span className="text-xs text-muted-jade group-hover:text-golden-opal/80 transition-all duration-300 -mt-1 hidden sm:block">
+              <span className="text-[8px] sm:text-[10px] text-muted-jade group-hover:text-golden-opal/80 transition-all duration-300 -mt-0.5 hidden sm:block">
                 B2B Outreach Excellence
               </span>
             </div>
@@ -248,7 +248,7 @@ export default function Navigation() {
       {/* Mobile Menu */}
       {isMenuOpen && (
         <div className="md:hidden bg-imperial-emerald border-t border-golden-opal/20">
-          <div className="container mx-auto px-6 py-4">
+          <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
             <nav className="flex flex-col space-y-4">
               {navItems.map((item) => (
                 <Link

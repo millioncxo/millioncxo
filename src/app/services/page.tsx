@@ -4,12 +4,12 @@ import ScrollAnimation from '@/components/ScrollAnimation'
 
 export default function Services() {
   return (
-    <div className="min-h-screen bg-ivory-silk pt-4">
+    <div className="bg-ivory-silk">
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center py-20 lg:py-32 bg-gradient-to-br from-imperial-emerald to-petrol-smoke overflow-hidden">
+      <section className="relative min-h-screen flex items-center pb-20 lg:pb-32 bg-gradient-to-br from-imperial-emerald to-petrol-smoke overflow-hidden">
         <div className="absolute inset-0 bg-luxury-pattern opacity-30"></div>
         
-        <div className="relative container mx-auto px-6">
+        <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 md:py-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left Column - Content */}
             <div className="text-left">

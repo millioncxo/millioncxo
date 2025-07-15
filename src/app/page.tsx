@@ -2,21 +2,18 @@ import Link from 'next/link'
 import Image from 'next/image'
 import CounterAnimation from '@/components/CounterAnimation'
 import FlippingText from '@/components/FlippingText'
-import Navigation from '@/components/Navigation'
 import ScrollAnimation from '@/components/ScrollAnimation'
 import WorldMapImage from '@/components/World Map.png'
-import LogoComponent from '@/components/LogoComponent'
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-ivory-silk">
-      <Navigation />
+    <div className="bg-ivory-silk">
       
       {/* Hero Section - Modern & Conversion Focused */}
-      <section className="relative bg-gradient-to-br from-ivory-silk to-muted-jade/10 overflow-hidden min-h-screen">
+      <section className="relative bg-gradient-to-br from-ivory-silk to-muted-jade/10 overflow-hidden">
         <div className="absolute inset-0 bg-luxury-pattern opacity-30"></div>
         
-        <div className="relative container mx-auto px-6 pt-4 pb-8 min-h-screen flex items-center">
+        <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 sm:py-4 md:py-8 flex items-center">
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
             {/* Left Column - Hero Content */}
             <div className="space-y-6 lg:space-y-8">
@@ -60,7 +57,7 @@ export default function Home() {
               </div>
               
               {/* Social Proof */}
-              <div className="flex items-center gap-8 pt-8 animate-fade-in-delay">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-8 pt-8 animate-fade-in-delay">
                 <div className="flex items-center">
                   <div className="flex -space-x-2">
                     {[
@@ -79,11 +76,11 @@ export default function Home() {
                       </div>
                     ))}
                   </div>
-                  <span className="ml-3 text-muted-jade font-medium">27+ Happy Clients</span>
+                  <span className="ml-3 text-muted-jade font-medium text-sm sm:text-base">27+ Happy Clients</span>
                 </div>
                 <div className="flex items-center">
-                  <div className="text-golden-opal text-xl">★★★★★</div>
-                  <span className="ml-2 text-muted-jade font-medium">4.9/5 Rating</span>
+                  <div className="text-golden-opal text-lg sm:text-xl">★★★★★</div>
+                  <span className="ml-2 sm:ml-3 text-muted-jade font-medium text-sm sm:text-base">4.9/5 Rating</span>
                 </div>
               </div>
             </div>
@@ -145,7 +142,7 @@ export default function Home() {
 
       {/* Stats Section */}
       <section className="py-20 bg-imperial-emerald">
-        <div className="container mx-auto px-6">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
             <div className="text-center">
               <div className="mb-3">
@@ -189,7 +186,7 @@ export default function Home() {
 
       {/* Services Section */}
       <section className="py-20 bg-ivory-silk">
-        <div className="container mx-auto px-6">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl lg:text-5xl font-bold text-onyx-black mb-6">
               How We <span className="text-gradient">Generate Leads</span>
@@ -287,7 +284,7 @@ export default function Home() {
 
       {/* Pricing Section */}
       <section className="py-20 bg-petrol-smoke">
-        <div className="container mx-auto px-6">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl lg:text-5xl font-bold text-ivory-silk mb-6">
               Simple, Transparent <span className="text-golden-opal">Pricing</span>
@@ -390,7 +387,7 @@ export default function Home() {
 
       {/* Testimonials Section */}
       <section className="py-20 bg-ivory-silk">
-        <div className="container mx-auto px-6">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl lg:text-5xl font-bold text-onyx-black mb-6">
               What Our <span className="text-gradient">Clients Say</span>
@@ -438,7 +435,7 @@ export default function Home() {
 
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-r from-imperial-emerald to-petrol-smoke">
-        <div className="container mx-auto px-6 text-center">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-4xl lg:text-5xl font-bold text-ivory-silk mb-6">
               Ready to Fill Your Pipeline?

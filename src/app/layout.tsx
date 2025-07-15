@@ -41,7 +41,9 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <Navigation />
-        {children}
+        <main className="pt-6 sm:pt-8 md:pt-12">
+          {children}
+        </main>
         <ChatWidget />
         <Analytics />
         <SpeedInsights />

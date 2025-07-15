@@ -92,12 +92,12 @@ export default function Contact() {
   }
 
   return (
-    <div className="min-h-screen bg-ivory-silk pt-4">
+    <div className="bg-ivory-silk">
       {/* Hero Section */}
-      <section className="relative py-12 lg:py-20 bg-gradient-to-br from-imperial-emerald to-petrol-smoke overflow-hidden min-h-screen">
+      <section className="relative pb-12 lg:pb-20 bg-gradient-to-br from-imperial-emerald to-petrol-smoke overflow-hidden min-h-screen">
         <div className="absolute inset-0 bg-luxury-pattern opacity-30"></div>
         
-        <div className="relative container mx-auto px-6 min-h-screen flex items-center">
+        <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center py-4 sm:py-6 md:py-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left Column - Content */}
             <div className="text-left">
