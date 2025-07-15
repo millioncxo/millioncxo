@@ -4,7 +4,7 @@ import ScrollAnimation from '@/components/ScrollAnimation'
 
 export default function Services() {
   return (
-    <div className="min-h-screen bg-ivory-silk pt-16">
+    <div className="min-h-screen bg-ivory-silk pt-12">
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center py-20 lg:py-32 bg-gradient-to-br from-imperial-emerald to-petrol-smoke overflow-hidden">
         <div className="absolute inset-0 bg-luxury-pattern opacity-30"></div>
@@ -169,27 +169,39 @@ export default function Services() {
                 <div className="mb-8 flex-grow">
                   <div className="text-center mb-6">
                     <div className="text-4xl font-bold text-golden-opal mb-2">$99</div>
-                    <div className="text-muted-jade">per meeting</div>
+                    <div className="text-muted-jade">per qualified meeting</div>
                     <div className="text-sm text-muted-jade mt-2">Total: $396 upfront</div>
                   </div>
-                  
+              
                   <div className="border-t border-golden-opal/20 pt-6">
                     <h4 className="font-semibold text-onyx-black mb-3">Deliverable:</h4>
                     <p className="text-muted-jade mb-4">
-                      4 Qualified CXO Meetings over a month 
+                      4 Qualified CXO Meetings over 30 days.
+                    </p>
+
+                    <h4 className="font-semibold text-onyx-black mb-3 mt-4">Purpose:</h4>
+                    <p className="text-muted-jade mb-4">
+                      Allows clients to test our capabilities with minimum risk.
                     </p>
                     
                     <h4 className="font-semibold text-onyx-black mb-3 mt-4">Client Responsibilities:</h4>
                     <ul className="text-muted-jade text-sm space-y-2">
-                      <li>• Business email address</li>
-                      <li>• LinkedIn Sales Navigator access</li>
-                      <li>• Caller ID/virtual dialler</li>
-                      <li>• CRM access or use ours</li>
+                      <li>• Provide business email address (or cost of purchase)</li>
+                      <li>• Provide access to LinkedIn Sales Navigator (or subscription cost)</li>
+                      <li>• Provide caller ID/virtual dialler (or cover the cost)</li>
+                      <li>• Provide CRM or allow us to use our own CRM</li>
+                    </ul>
+
+                    <h4 className="font-semibold text-onyx-black mb-3 mt-6">Terms and Conditions:</h4>
+                    <ul className="text-muted-jade text-xs space-y-2">
+                        <li>• No charges for no-shows.</li>
+                        <li>• Refund for any un-booked meetings.</li>
+                        <li>• First 15 days for research & audience understanding.</li>
                     </ul>
                   </div>
                 </div>
                 
-                <Link href="https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled" className="btn-outline w-full">
+                <Link href="https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled" className="btn-outline w-full mt-auto">
                   Start Pilot Program
                 </Link>
               </div>
@@ -214,28 +226,27 @@ export default function Services() {
                 <div className="mb-8 flex-grow">
                   <div className="text-center mb-6">
                     <div className="text-4xl font-bold text-golden-opal mb-2">$1,999</div>
-                    <div className="text-muted-jade">per month</div>
-                    <div className="text-sm text-muted-jade mt-2">Quarterly contract</div>
-                    <div className="text-xs text-muted-jade mt-1">($2,250/month for monthly)</div>
+                    <div className="text-muted-jade">/month/SDR (quarterly)</div>
+                    <div className="text-sm text-muted-jade mt-2">$2,250/month/SDR (monthly)</div>
                   </div>
                   
                   <div className="border-t border-golden-opal/20 pt-6">
-                    <h4 className="font-semibold text-onyx-black mb-3">Daily Activities:</h4>
+                    <h4 className="font-semibold text-onyx-black mb-3">Daily Activity Targets/SDR/day:</h4>
                     <ul className="text-muted-jade text-sm space-y-2 mb-4">
                       <li>• 300 Emails</li>
                       <li>• 150 Cold Calls</li>
-                      <li>• 70 LinkedIn InMails</li>
-                      <li>• 80 Account Profiles</li>
+                      <li>• 70 In-Mails (via LinkedIn Sales Navigator)</li>
+                      <li>• 80 Account & Contact Profiling</li>
                     </ul>
                     
                     <h4 className="font-semibold text-onyx-black mb-2">Meeting KPI:</h4>
                     <p className="text-muted-jade text-sm">
-                      5 Qualified CXO Meetings per month
+                      5 Qualified, Conducted CXO Meetings per month
                     </p>
                   </div>
                 </div>
                 
-                <Link href="https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled" className="btn-primary w-full">
+                <Link href="https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled" className="btn-primary w-full mt-auto">
                   Get Started
                 </Link>
               </div>
@@ -260,19 +271,27 @@ export default function Services() {
                   <div className="border-t border-golden-opal/20 pt-6">
                     <h4 className="font-semibold text-onyx-black mb-3">Includes:</h4>
                     <ul className="text-muted-jade text-sm space-y-2">
-                      <li>• CRM Setup & Customization</li>
-                      <li>• Email Domain Warm-Up</li>
-                      <li>• Outreach Automation</li>
-                      <li>• Sales Scripts Creation</li>
-                      <li>• Lead Scoring Model</li>
-                      <li>• Weekly Dashboards</li>
-                      <li>• LinkedIn Optimization</li>
-                      <li>• Team Training</li>
+                      <li>• CRM Setup & Customization (HubSpot, Zoho, etc.)</li>
+                      <li>• Email Domain Warm-Up & Deliverability</li>
+                      <li>• Email + LinkedIn Outreach Automation</li>
+                      <li>• Sales Script Creation (Email, LinkedIn, Calling)</li>
+                      <li>• Inbox Management & Lead Routing</li>
+                      <li>• SDR SOPs, Cadence Design, Lead Scoring</li>
+                      <li>• Tech Stack Implementation (Apollo, Salesloft, etc.)</li>
+                      <li>• Weekly Reporting Dashboards & KPI Framework</li>
+                      <li>• ChatGPT-Integrated Personalization</li>
+                      <li>• ICP & TAM Research Framework</li>
+                      <li>• Calendar & Meeting Booking Automation</li>
+                      <li>• LinkedIn Profile & Company Page Branding</li>
+                      <li>• Data Sources Setup (Apollo, ZoomInfo, Clay, etc.)</li>
+                      <li>• Tools Training for Client’s Team</li>
+                      <li>• Hiring and Training of Sales Team</li>
+                      <li>• Sales SOPs and Policies</li>
                     </ul>
                   </div>
                 </div>
                 
-                <Link href="https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled" className="btn-outline w-full">
+                <Link href="https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled" className="btn-outline w-full mt-auto">
                   Get Custom Quote
                 </Link>
               </div>

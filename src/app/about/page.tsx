@@ -4,7 +4,7 @@ import ScrollAnimation from '@/components/ScrollAnimation'
 
 export default function About() {
   return (
-    <div className="min-h-screen bg-ivory-silk pt-16">
+    <div className="min-h-screen bg-ivory-silk pt-12">
       {/* Hero Section */}
       <section className="relative py-12 lg:py-20 bg-gradient-to-br from-imperial-emerald to-petrol-smoke overflow-hidden min-h-screen">
         <div className="absolute inset-0 bg-luxury-pattern opacity-30"></div>
@@ -232,7 +232,7 @@ export default function About() {
             {[
               {
                 title: "Market Insights",
-                description: "We leverage deep industry knowledge and market intelligence to identify the right prospects and craft compelling messaging that resonates.",
+                description: "We leverage deep industry knowledge and market intelligence to identify the right prospects and craft compelling messaging that resonates.Try us before you buy from us. Get your pilot plan to explore your actual potential in the market",
                 icon: (
                   <svg className="w-8 h-8 text-golden-opal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />

@@ -4,392 +4,237 @@ import { useState } from 'react'
 import ChatMessage from './ChatMessage'
 import ChatToggle from './ChatToggle'
 
-interface Message {
-  id: string
-  text: string
-  isBot: boolean
-  options?: string[]
-  timestamp: Date
+const STEPS = {
+  welcome: {
+    text: "Hi! 👋 I’m your millionCXO Assistant. What are you looking for today?",
+    options: [
+      "Book qualified CXO meetings",
+      "Hire a dedicated SDR",
+      "Set up sales infrastructure",
+      "Just have questions"
+    ]
+  },
+  book_cxo: {
+    text: `Our **Pilot Program** gets you 4 guaranteed, qualified CXO meetings in 30 days ($99/meeting, total $396, pay only for meetings delivered). Would you like to see the detailed terms or go straight to booking a discovery call?`,
+    options: [
+      "Show me the detailed terms",
+      "Book my discovery call"
+    ]
+  },
+  book_cxo_terms: {
+    text: `**Pilot Program Terms:**\n- 4 Qualified CXO Meetings in 30 days\n- $99 per meeting (total $396, upfront)\n- No charge for prospect no-shows\n- Refund for any unbooked meetings\n- 15 days for prospect research before delivery starts\n\nReady to book a discovery call and see if you qualify?`,
+    options: [
+      "Yes, book my call",
+      "Back to main menu"
+    ]
+  },
+  sdr_service: {
+    text: `Our **SDR as a Service** provides a dedicated full-time SDR, handling 300 emails, 150 calls, and 70 LinkedIn InMails every day.\n- $2,250/month (monthly), $1,999/month (quarterly)\n- 5 Qualified CXO Meetings/month as KPI\nWant to discuss your specific needs or book a call?`,
+    options: [
+      "Book my discovery call",
+      "Tell me more",
+      "Back to main menu"
+    ]
+  },
+  sdr_more: {
+    text: `You'll get a trained SDR on your campaigns, plus daily reporting and CRM integration. Want to see case studies or book a call?`,
+    options: [
+      "Show case studies",
+      "Book my discovery call",
+      "Back to main menu"
+    ]
+  },
+  setup_infra: {
+    text: `We set up CRM (HubSpot/Zoho), automate your email & LinkedIn outreach, write custom sales scripts, warm up domains, implement lead routing, and design reporting dashboards. Want to discuss your stack or book a call?`,
+    options: [
+      "Book my discovery call",
+      "Discuss tech stack",
+      "Back to main menu"
+    ]
+  },
+  infra_stack: {
+    text: `We work with all major tools: Apollo, Lemlist, Salesloft, Aircall, Clay, and more. Want a call to map your workflow?`,
+    options: [
+      "Book my discovery call",
+      "Back to main menu"
+    ]
+  },
+  questions: {
+    text: "Ask me anything about our Pilot, SDR, or Infrastructure services—or type your question below. For most questions, I’ll suggest a discovery call to make things easier.",
+    options: [
+      "What’s included in each service?",
+      "How do you ensure meeting quality?",
+      "Can you customize for my industry?",
+      "Book my discovery call",
+      "Back to main menu"
+    ]
+  },
+  included_services: {
+    text: `Each service is customized to your GTM goals. For full details and a custom proposal, would you like to book a discovery call?`,
+    options: [
+      "Book my discovery call",
+      "Back to main menu"
+    ]
+  },
+  quality: {
+    text: `We only charge for *qualified meetings* (your ICP, your criteria). If a prospect no-shows, you aren’t charged. SDRs are trained in your value prop before outreach. Want to talk process?`,
+    options: [
+      "Book my discovery call",
+      "Back to main menu"
+    ]
+  },
+  customize: {
+    text: `Absolutely! Every engagement is tailored—startup, SaaS, consulting, services. Book a call for a custom roadmap?`,
+    options: [
+      "Book my discovery call",
+      "Back to main menu"
+    ]
+  },
+  book_call: {
+    text: `Great! Opening our booking calendar in a new tab. See you soon!`,
+    options: []
+  }
 }
 
-interface ConversationState {
-  currentStep: string
-  userSelections: Record<string, string>
-  messages: Message[]
-  isTyping: boolean
-}
+const BOOKING_LINK = "https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled"
 
 export default function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false)
   const [inputText, setInputText] = useState('')
-  const [conversation, setConversation] = useState<ConversationState>({
-    currentStep: 'initial-prompt',
-    userSelections: {},
-    messages: [
-      {
-        id: '1',
-        text: "Hello! I'm here to help you find the perfect solution for your B2B sales needs. What brings you here today?",
-        isBot: true,
-        timestamp: new Date()
-      }
-    ],
-    isTyping: false
-  })
+  const [messages, setMessages] = useState([
+    { id: '1', text: STEPS.welcome.text, isBot: true, options: STEPS.welcome.options, timestamp: new Date() }
+  ])
+  const [currentStep, setCurrentStep] = useState('welcome')
+  const [isTyping, setIsTyping] = useState(false)
 
-  const handleToggle = () => {
-    setIsOpen(!isOpen)
-  }
+  const handleToggle = () => setIsOpen(!isOpen)
 
   const handleSendMessage = () => {
     if (!inputText.trim()) return
-    
     handleUserInput(inputText.trim())
     setInputText('')
   }
 
-  const handleOptionSelect = (option: string) => {
-    handleUserInput(option)
-  }
+  const handleOptionSelect = (option) => handleUserInput(option)
 
-  const handleUserInput = (userInput: string) => {
-    // Handle redirect for booking CXO meetings
-    if (conversation.currentStep === 'welcome' && (userInput.toLowerCase().includes("cxo") || userInput.toLowerCase().includes("meeting"))) {
-      const userMessage: Message = {
-        id: Date.now().toString(),
-        text: userInput,
-        isBot: false,
-        timestamp: new Date()
-      };
-
-      const botResponse: Message = {
-        id: `bot-${Date.now()}-redirect`,
-        text: "Great! Redirecting you to our booking page to schedule your call.",
-        isBot: true,
-        options: [],
-        timestamp: new Date()
-      };
-
-      setConversation(prev => ({
-        ...prev,
-        currentStep: 'redirected-to-booking',
-        messages: [...prev.messages, userMessage, botResponse],
-        isTyping: false
-      }));
-
-      setTimeout(() => {
-        window.open('https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled', '_blank');
-      }, 1000);
-
-      return;
-    }
-
-    // Handle contact form redirect
-    if (userInput.includes("contact form")) {
-      // Navigate to contact page
-      window.location.href = '/contact'
-      return
-    }
-
-    // Handle free discovery call booking
-    if (userInput.includes("Book a free discovery call") || userInput.includes("free discovery call") || userInput.includes("book a free call")) {
-      // Navigate to Microsoft Outlook booking site
-      window.open('https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled', '_blank')
-      return
-    }
-
+  function handleUserInput(userInput) {
     // Add user message
-    const userMessage: Message = {
-      id: Date.now().toString(),
-      text: userInput,
-      isBot: false,
-      timestamp: new Date()
-    }
-
-    setConversation(prev => ({
+    setMessages(prev => [
       ...prev,
-      messages: [...prev.messages, userMessage],
-      isTyping: true
-    }))
+      { id: Date.now().toString(), text: userInput, isBot: false, timestamp: new Date() }
+    ])
+    setIsTyping(true)
 
-    // Simulate bot response delay
     setTimeout(() => {
-      const botResponse = generateBotResponse(userInput, conversation.currentStep)
-      setConversation(prev => ({
+      let nextStep = currentStep
+
+      // Top-level routing
+      if (currentStep === "welcome") {
+        if (userInput.toLowerCase().includes("cxo") || userInput.toLowerCase().includes("meeting")) nextStep = "book_cxo"
+        else if (userInput.toLowerCase().includes("sdr")) nextStep = "sdr_service"
+        else if (userInput.toLowerCase().includes("infra") || userInput.toLowerCase().includes("crm") || userInput.toLowerCase().includes("setup")) nextStep = "setup_infra"
+        else if (userInput.toLowerCase().includes("question") || userInput.toLowerCase().includes("help") || userInput.toLowerCase().includes("info")) nextStep = "questions"
+        else nextStep = "welcome"
+      }
+      else if (currentStep === "book_cxo" && userInput.includes("term")) nextStep = "book_cxo_terms"
+      else if ((currentStep === "book_cxo" || currentStep === "book_cxo_terms" || currentStep === "sdr_service" || currentStep === "sdr_more" || currentStep === "setup_infra" || currentStep === "infra_stack" || currentStep === "included_services" || currentStep === "quality" || currentStep === "customize" || currentStep === "questions") && userInput.toLowerCase().includes("book")) nextStep = "book_call"
+      else if (currentStep === "sdr_service" && userInput.toLowerCase().includes("tell")) nextStep = "sdr_more"
+      else if (currentStep === "sdr_more" && userInput.toLowerCase().includes("case")) nextStep = "included_services"
+      else if (currentStep === "setup_infra" && userInput.toLowerCase().includes("stack")) nextStep = "infra_stack"
+      else if (currentStep === "questions" && userInput.toLowerCase().includes("included")) nextStep = "included_services"
+      else if (currentStep === "questions" && userInput.toLowerCase().includes("quality")) nextStep = "quality"
+      else if (currentStep === "questions" && userInput.toLowerCase().includes("customize")) nextStep = "customize"
+      else if (userInput.toLowerCase().includes("back")) nextStep = "welcome"
+
+      // Booking link step
+      if (nextStep === "book_call") {
+        setMessages(prev => [
+          ...prev,
+          { id: `bot-${Date.now()}`, text: STEPS.book_call.text, isBot: true, options: [], timestamp: new Date() }
+        ])
+        setIsTyping(false)
+        setCurrentStep("book_call")
+        window.open(BOOKING_LINK, '_blank')
+        return
+      }
+
+      // Normal flow
+      const step = STEPS[nextStep]
+      setMessages(prev => [
         ...prev,
-        messages: [...prev.messages, botResponse],
-        isTyping: false,
-        currentStep: botResponse.id.split('-').pop() || 'welcome' // Extract step from ID
-      }))
-    }, 1000)
-  }
-
-  const generateBotResponse = (userInput: string, currentStep: string): Message => {
-    let response = ""
-    let options: string[] = []
-    let nextStep = ""
-
-    // Convert input to lowercase for better matching
-    const input = userInput.toLowerCase()
-
-    // Handle initial user input
-    if (currentStep === "initial-prompt") {
-      response = "Thank you for your message! I can help you with our three main services. Which one interests you most?"
-      options = [
-        "I want to book qualified CXO meetings",
-        "I need a dedicated SDR team",
-        "I want to set up sales infrastructure",
-        "I have general questions"
-      ]
-      nextStep = "welcome"
-    }
-    // Handle welcome step - both options and free text
-    else if (currentStep === "welcome") {
-      if (input.includes("sdr") || input.includes("sales development") || input.includes("outreach") || input.includes("lead")) {
-        response = "Perfect! Our SDR as a Service provides a dedicated full-time SDR for $1,999/month. What's your current sales challenge?"
-        options = [
-          "We don't have time for outreach",
-          "We need more qualified leads",
-          "We want to scale our sales team"
-        ]
-        nextStep = "sdr-challenge"
-      } 
-      else if (input.includes("infrastructure") || input.includes("crm") || input.includes("automation") || input.includes("setup")) {
-        response = "Excellent! Our Consultation & Infrastructure Setup includes complete CRM customization and automation. What's your current setup?"
-        options = [
-          "We're starting from scratch",
-          "We have basic tools but need optimization", 
-          "We need advanced automation and training"
-        ]
-        nextStep = "infra-setup"
-      }
-      else if (input.includes("question") || input.includes("help") || input.includes("info") || input.includes("learn")) {
-        response = "I'd be happy to help! What would you like to know about our services?"
-        options = [
-          "What's included in each service?",
-          "How do you ensure meeting quality?",
-          "What's your typical ROI?",
-          "Can you customize for our industry?"
-        ]
-        nextStep = "general-info"
-      }
-      else {
-        // Default response for free text that doesn't match any category
-        response = "Thank you for your message! I can help you with our three main services. Which one interests you most?"
-        options = [
-          "I want to book qualified CXO meetings",
-          "I need a dedicated SDR team",
-          "I want to set up sales infrastructure",
-          "I have general questions"
-        ]
-        nextStep = "welcome"
-      }
-    }
-
-    // Company size follow-ups for Pilot Program
-    else if (currentStep === "pilot-company-size") {
-      // Skip this step if user already booked a call
-      if (input.includes("book a free discovery call") || input.includes("free discovery call")) {
-        return {
-          id: `bot-${Date.now()}-redirect`,
-          text: "Perfect! The booking page will open in a new tab. Thank you for your interest in our Pilot Program!",
-          isBot: true,
-          options: [],
-          timestamp: new Date()
-        }
-      }
-      
-      response = "Perfect! Now let's talk about your budget for qualified meetings. What's your monthly sales budget?"
-      options = [
-        "Under $5,000",
-        "$5,000 - $15,000", 
-        "$15,000 - $30,000",
-        "$30,000+"
-      ]
-      nextStep = "budget-qualification"
-    }
-
-    // Sales challenge follow-ups for SDR Service  
-    else if (currentStep === "sdr-challenge") {
-      response = "That's a common challenge. Our SDR service handles 300 emails, 150 calls, and 70 LinkedIn InMails daily. What's your budget range?"
-      options = [
-        "Under $5,000/month",
-        "$5,000 - $15,000/month",
-        "$15,000 - $30,000/month", 
-        "$30,000+/month"
-      ]
-      nextStep = "budget-qualification"
-    }
-
-    // Infrastructure setup follow-ups
-    else if (currentStep === "infra-setup") {
-      response = "Great! We'll customize everything for your needs. What's your budget for sales infrastructure setup?"
-      options = [
-        "Under $10,000",
-        "$10,000 - $25,000",
-        "$25,000 - $50,000",
-        "$50,000+"
-      ]
-      nextStep = "budget-qualification"
-    }
-
-    // Budget qualification to timeline
-    else if (currentStep === "budget-qualification") {
-      response = "Excellent! When would you like to get started?"
-      options = [
-        "Immediately (this week)",
-        "Within 1 month",
-        "Within 3 months", 
-        "Just exploring options"
-      ]
-      nextStep = "timeline-qualification"
-    }
-
-    // Timeline to final recommendation
-    else if (currentStep === "timeline-qualification") {
-      const service = conversation.userSelections.service || "our services"
-      response = `Based on your needs and timeline, I believe ${service} would be perfect for you. Let's get you connected with our team to discuss your specific requirements and create a customized proposal.`
-      options = [
-        "Yes, let's schedule a call",
-        "Send me more information first",
-        "I need to discuss with my team"
-      ]
-      nextStep = "final-action"
-    }
-
-    // Final action
-    else if (currentStep === "final-action") {
-      if (input.includes("schedule") || input.includes("call") || input.includes("yes")) {
-        response = "Perfect! I'll direct you to our contact form where you can provide your details, and we'll schedule your discovery call immediately."
-        options = ["Take me to the contact form"]
-        nextStep = "redirect-contact"
-      } else if (input.includes("information") || input.includes("details") || input.includes("more")) {
-        response = "I'll make sure our team sends you detailed information. Please fill out our contact form so we can send you a customized proposal."
-        options = ["Take me to the contact form"]  
-        nextStep = "redirect-contact"
-      } else {
-        response = "No problem! Take your time. When you're ready, we'll be here to help you get started. For now, let me direct you to our contact form."
-        options = ["Take me to the contact form"]
-        nextStep = "redirect-contact"
-      }
-    }
-
-    // General info responses
-    else if (currentStep === "general-info") {
-      if (input.includes("included") || input.includes("what")) {
-        response = "Great question! Each service includes different components. Which service interests you most so I can give you specific details?"
-        options = [
-          "Pilot Program details",
-          "SDR Service details", 
-          "Infrastructure Setup details"
-        ]
-        nextStep = "service-details"
-      } else {
-        response = "That's an excellent question! To give you the most relevant answer, which service are you most interested in?"
-        options = [
-          "Pilot Program",
-          "SDR as a Service",
-          "Infrastructure Setup"
-        ]
-        nextStep = "welcome" // Loop back to service selection
-      }
-    }
-
-    else {
-      // Default fallback
-      response = "Thank you for your interest! Let me help you find the right solution."
-      options = [
-        "I want to book qualified CXO meetings",
-        "I need a dedicated SDR team",
-        "I want to set up sales infrastructure"
-      ]
-      nextStep = "welcome"
-    }
-
-    // Store user selections for later use
-    setConversation(prev => ({
-      ...prev,
-      userSelections: {
-        ...prev.userSelections,
-        [currentStep]: userInput
-      }
-    }))
-
-    return {
-      id: `bot-${Date.now()}-${nextStep}`,
-      text: response,
-      isBot: true,
-      options,
-      timestamp: new Date()
-    }
+        { id: `bot-${Date.now()}`, text: step.text, isBot: true, options: step.options || [], timestamp: new Date() }
+      ])
+      setCurrentStep(nextStep)
+      setIsTyping(false)
+    }, 650)
   }
 
   return (
     <>
-      {/* Chat Toggle Button */}
-      <ChatToggle isOpen={isOpen} onClick={handleToggle} />
-
-      {/* Chat Widget */}
-      {isOpen && (
-        <div className="chat-widget-container chat-fade-in fixed bottom-20 right-4 w-96 h-[500px] rounded-2xl z-50 flex flex-col overflow-hidden">
-          {/* Header */}
-          <div className="chat-header p-4">
-            <div className="flex justify-between items-center">
-              <h3 className="text-onyx-black font-semibold text-sm">MillionCXO Assistant</h3>
-              <button
-                onClick={handleToggle}
-                className="text-onyx-black/60 hover:text-onyx-black transition-colors"
-              >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+      <div className={`fixed bottom-5 right-5 z-50 transition-all duration-300 ${isOpen ? 'w-[calc(100%-40px)] max-w-md' : 'w-auto h-auto'}`}>
+        {isOpen ? (
+          <div className="bg-white/95 backdrop-blur-lg rounded-2xl shadow-2xl border border-gray-200 overflow-hidden w-full h-full flex flex-col">
+            {/* Header */}
+            <div className="flex items-center justify-between p-4 border-b border-gray-200 bg-gradient-to-r from-green-500 to-blue-700">
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 rounded-full bg-green-400 flex items-center justify-center">
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                  </svg>
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-white">millionCXO Assistant</h3>
+                  <p className="text-xs text-green-100">Typically replies instantly</p>
+                </div>
+              </div>
+              <button onClick={handleToggle} className="p-2 rounded-full text-white hover:bg-green-500/20 transition-colors">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7"></path>
                 </svg>
               </button>
             </div>
-          </div>
 
-          {/* Messages */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4">
-            {conversation.messages.map((message) => (
-              <ChatMessage
-                key={message.id}
-                message={message}
-                onOptionSelect={handleOptionSelect}
-              />
-            ))}
-            
-            {conversation.isTyping && (
-              <div className="typing-indicator flex items-center space-x-2 text-onyx-black/60 message-slide-in">
-                <div className="flex space-x-1">
-                  <div className="w-2 h-2 bg-golden-opal rounded-full animate-bounce"></div>
-                  <div className="w-2 h-2 bg-golden-opal rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
-                  <div className="w-2 h-2 bg-golden-opal rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
+            {/* Chat Body */}
+            <div className="flex-1 overflow-y-auto p-4 space-y-4 min-h-[400px] max-h-[60vh]">
+              {messages.map(msg => (
+                <ChatMessage 
+                  key={msg.id} 
+                  message={msg} 
+                  onOptionSelect={handleOptionSelect} 
+                />
+              ))}
+              {isTyping && (
+                <div className="flex items-center space-x-2">
+                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" style={{animationDelay: '0.2s'}}></div>
+                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" style={{animationDelay: '0.4s'}}></div>
                 </div>
-                <span className="text-xs font-medium">Typing...</span>
-              </div>
-                          )}
+              )}
             </div>
 
-            {/* Input Area */}
-            <div className="border-t border-golden-opal/20 p-4">
-              <div className="flex space-x-2">
-                <input
+            {/* Input */}
+            <div className="p-4 border-t border-gray-200">
+              <div className="flex items-center space-x-2">
+                <input 
                   type="text"
                   value={inputText}
                   onChange={(e) => setInputText(e.target.value)}
-                  onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+                  onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
                   placeholder="Type your message..."
-                  className="chat-input flex-1 px-4 py-2 rounded-xl text-onyx-black placeholder-onyx-black/60 focus:outline-none text-sm font-medium"
+                  className="chat-input flex-1"
                 />
-                <button
-                  onClick={handleSendMessage}
-                  disabled={!inputText.trim()}
-                  className="chat-send-button px-4 py-2 text-onyx-black rounded-xl font-medium text-sm"
-                >
-                  Send
+                <button onClick={handleSendMessage} className="chat-send-button">
+                  <svg className="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                  </svg>
                 </button>
               </div>
             </div>
           </div>
+        ) : (
+          <ChatToggle isOpen={isOpen} onClick={handleToggle} />
         )}
-      </>
-    )
-  } 
+      </div>
+    </>
+  )
+}
