@@ -170,13 +170,13 @@ export default function Services() {
                   <div className="text-center mb-6">
                     <div className="text-4xl font-bold text-golden-opal mb-2">$99</div>
                     <div className="text-muted-jade">per meeting</div>
-                    <div className="text-sm text-muted-jade mt-2">Total: $1,188 upfront</div>
+                    <div className="text-sm text-muted-jade mt-2">Total: $396 upfront</div>
                   </div>
                   
                   <div className="border-t border-golden-opal/20 pt-6">
                     <h4 className="font-semibold text-onyx-black mb-3">Deliverable:</h4>
                     <p className="text-muted-jade mb-4">
-                      12 Qualified CXO Meetings over 3 months (4 meetings/month)
+                      4 Qualified CXO Meetings over 2 months 
                     </p>
                     
                     <h4 className="font-semibold text-onyx-black mb-3 mt-4">Client Responsibilities:</h4>
@@ -189,7 +189,7 @@ export default function Services() {
                   </div>
                 </div>
                 
-                <Link href="/contact" className="btn-outline w-full">
+                <Link href="https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled" className="btn-outline w-full">
                   Start Pilot Program
                 </Link>
               </div>
@@ -272,7 +272,7 @@ export default function Services() {
                   </div>
                 </div>
                 
-                <Link href="/contact" className="btn-outline w-full">
+                <Link href="https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled" className="btn-outline w-full">
                   Get Custom Quote
                 </Link>
               </div>
