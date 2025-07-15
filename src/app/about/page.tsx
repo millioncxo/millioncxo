@@ -4,7 +4,7 @@ import ScrollAnimation from '@/components/ScrollAnimation'
 
 export default function About() {
   return (
-    <div className="min-h-screen bg-ivory-silk pt-12">
+    <div className="min-h-screen bg-ivory-silk pt-4">
       {/* Hero Section */}
       <section className="relative py-12 lg:py-20 bg-gradient-to-br from-imperial-emerald to-petrol-smoke overflow-hidden min-h-screen">
         <div className="absolute inset-0 bg-luxury-pattern opacity-30"></div>

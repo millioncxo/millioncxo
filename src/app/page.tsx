@@ -16,7 +16,7 @@ export default function Home() {
       <section className="relative bg-gradient-to-br from-ivory-silk to-muted-jade/10 overflow-hidden min-h-screen">
         <div className="absolute inset-0 bg-luxury-pattern opacity-30"></div>
         
-        <div className="relative container mx-auto px-6 py-8 lg:py-20 min-h-screen flex items-center">
+        <div className="relative container mx-auto px-6 pt-4 pb-8 min-h-screen flex items-center">
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
             {/* Left Column - Hero Content */}
             <div className="space-y-6 lg:space-y-8">
