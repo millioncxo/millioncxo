@@ -98,13 +98,15 @@ const STEPS = {
 
 const BOOKING_LINK = "https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled"
 
+type StepKey = keyof typeof STEPS;
+
 export default function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false)
   const [inputText, setInputText] = useState('')
   const [messages, setMessages] = useState([
     { id: '1', text: STEPS.welcome.text, isBot: true, options: STEPS.welcome.options, timestamp: new Date() }
   ])
-  const [currentStep, setCurrentStep] = useState('welcome')
+  const [currentStep, setCurrentStep] = useState<StepKey>('welcome')
   const [isTyping, setIsTyping] = useState(false)
 
   const handleToggle = () => setIsOpen(!isOpen)
@@ -115,18 +117,17 @@ export default function ChatWidget() {
     setInputText('')
   }
 
-  const handleOptionSelect = (option) => handleUserInput(option)
+  const handleOptionSelect = (option: string) => handleUserInput(option)
 
-  function handleUserInput(userInput) {
-    // Add user message
+  function handleUserInput(userInput: string) {
     setMessages(prev => [
       ...prev,
-      { id: Date.now().toString(), text: userInput, isBot: false, timestamp: new Date() }
+      { id: Date.now().toString(), text: userInput, isBot: false, options: [], timestamp: new Date() }
     ])
     setIsTyping(true)
 
     setTimeout(() => {
-      let nextStep = currentStep
+      let nextStep: StepKey = currentStep
 
       // Top-level routing
       if (currentStep === "welcome") {
@@ -159,7 +160,7 @@ export default function ChatWidget() {
       }
 
       // Normal flow
-      const step = STEPS[nextStep]
+      const step = STEPS[nextStep as StepKey]
       setMessages(prev => [
         ...prev,
         { id: `bot-${Date.now()}`, text: step.text, isBot: true, options: step.options || [], timestamp: new Date() }
@@ -173,21 +174,21 @@ export default function ChatWidget() {
     <>
       <div className={`fixed bottom-5 right-5 z-50 transition-all duration-300 ${isOpen ? 'w-[calc(100%-40px)] max-w-md' : 'w-auto h-auto'}`}>
         {isOpen ? (
-          <div className="bg-white/95 backdrop-blur-lg rounded-2xl shadow-2xl border border-gray-200 overflow-hidden w-full h-full flex flex-col">
+          <div className="bg-ivory-silk/95 backdrop-blur-lg rounded-2xl shadow-2xl border border-golden-opal/20 overflow-hidden w-full h-full flex flex-col">
             {/* Header */}
-            <div className="flex items-center justify-between p-4 border-b border-gray-200 bg-gradient-to-r from-green-500 to-blue-700">
+            <div className="flex items-center justify-between p-4 border-b border-golden-opal/20 bg-gradient-to-r from-imperial-emerald to-petrol-smoke">
               <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 rounded-full bg-green-400 flex items-center justify-center">
-                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-10 h-10 rounded-full bg-golden-opal flex items-center justify-center">
+                  <svg className="w-6 h-6 text-onyx-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
                   </svg>
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-white">millionCXO Assistant</h3>
-                  <p className="text-xs text-green-100">Typically replies instantly</p>
+                  <h3 className="text-lg font-bold text-ivory-silk">millionCXO Assistant</h3>
+                  <p className="text-xs text-muted-jade">Typically replies instantly</p>
                 </div>
               </div>
-              <button onClick={handleToggle} className="p-2 rounded-full text-white hover:bg-green-500/20 transition-colors">
+              <button onClick={handleToggle} className="p-2 rounded-full text-ivory-silk hover:bg-golden-opal/20 transition-colors">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7"></path>
                 </svg>
@@ -205,15 +206,15 @@ export default function ChatWidget() {
               ))}
               {isTyping && (
                 <div className="flex items-center space-x-2">
-                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" style={{animationDelay: '0.2s'}}></div>
-                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" style={{animationDelay: '0.4s'}}></div>
+                  <div className="w-2 h-2 bg-golden-opal rounded-full animate-pulse"></div>
+                  <div className="w-2 h-2 bg-golden-opal rounded-full animate-pulse" style={{animationDelay: '0.2s'}}></div>
+                  <div className="w-2 h-2 bg-golden-opal rounded-full animate-pulse" style={{animationDelay: '0.4s'}}></div>
                 </div>
               )}
             </div>
 
             {/* Input */}
-            <div className="p-4 border-t border-gray-200">
+            <div className="p-4 border-t border-golden-opal/20">
               <div className="flex items-center space-x-2">
                 <input 
                   type="text"
@@ -224,7 +225,7 @@ export default function ChatWidget() {
                   className="chat-input flex-1"
                 />
                 <button onClick={handleSendMessage} className="chat-send-button">
-                  <svg className="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5 text-golden-opal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
                   </svg>
                 </button>
