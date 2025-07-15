@@ -176,7 +176,7 @@ export default function Services() {
                   <div className="border-t border-golden-opal/20 pt-6">
                     <h4 className="font-semibold text-onyx-black mb-3">Deliverable:</h4>
                     <p className="text-muted-jade mb-4">
-                      4 Qualified CXO Meetings over 2 months 
+                      4 Qualified CXO Meetings over a month 
                     </p>
                     
                     <h4 className="font-semibold text-onyx-black mb-3 mt-4">Client Responsibilities:</h4>
