@@ -72,7 +72,7 @@ export default function Navigation() {
           {
             title: "Outreach Services",
             items: [
-              { href: '/services#pilot', label: 'Pilot Program', desc: '$99/meeting - 12 qualified CXO meetings' },
+              { href: '/services#pilot', label: 'Pilot Program', desc: '$99/meeting - 4 qualified CXO meetings' },
               { href: '/services#sdr', label: 'SDR as a Service', desc: '$1,999/month - Dedicated full-time SDR' },
               { href: '/services#consultation', label: 'Consultation & Infrastructure', desc: 'Complete CRM & outreach setup' }
             ]
