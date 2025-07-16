@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import Navigation from '@/components/Navigation'
+import Footer from '@/components/Footer'
 import ChatWidget from '@/components/ChatWidget'
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from "@vercel/speed-insights/next"
@@ -44,6 +45,7 @@ export default function RootLayout({
         <main className="pt-6 sm:pt-8 md:pt-12">
           {children}
         </main>
+        <Footer />
         <ChatWidget />
         <Analytics />
         <SpeedInsights />

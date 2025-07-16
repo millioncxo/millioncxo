@@ -135,7 +135,7 @@ export default function Navigation() {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-imperial-emerald h-8 sm:h-10 md:h-12">
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-8 sm:h-10 md:h-12">
           {/* Logo + Name */}
           <Link href="/" className="flex items-center space-x-2 group transition-all duration-300 hover:scale-105">
@@ -200,6 +200,8 @@ export default function Navigation() {
                                 <li key={subIndex}>
                                   <Link 
                                     href={subItem.href}
+                                    target={subItem.href.startsWith('http') ? "_blank" : undefined}
+                                    rel={subItem.href.startsWith('http') ? "noopener noreferrer" : undefined}
                                     className="block p-3 rounded-lg hover:bg-golden-opal/10 transition-all duration-300 group"
                                   >
                                     <div className="text-sm font-medium text-onyx-black group-hover:text-golden-opal">
@@ -224,7 +226,7 @@ export default function Navigation() {
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <Link href="https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled" className="btn-primary px-6 py-2 text-sm">
+            <Link href="https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled" target="_blank" rel="noopener noreferrer" className="btn-primary px-6 py-2 text-sm">
               Get Started
             </Link>
           </div>
@@ -248,7 +250,7 @@ export default function Navigation() {
       {/* Mobile Menu */}
       {isMenuOpen && (
         <div className="md:hidden bg-imperial-emerald border-t border-golden-opal/20">
-          <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div className="w-full px-4 sm:px-6 lg:px-8 py-4">
             <nav className="flex flex-col space-y-4">
               {navItems.map((item) => (
                 <Link
@@ -264,7 +266,7 @@ export default function Navigation() {
                   {item.label}
                 </Link>
               ))}
-              <Link href="https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled" className="btn-primary mt-4">
+              <Link href="https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled" target="_blank" rel="noopener noreferrer" className="btn-primary mt-4">
                 Get Started
               </Link>
             </nav>

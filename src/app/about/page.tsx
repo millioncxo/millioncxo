@@ -259,14 +259,14 @@ export default function About() {
               }
             ].map((feature, index) => (
               <ScrollAnimation key={index} delay={index * 100}>
-                <div className="card-glass text-center group">
+                <div className="card-glass text-center group h-full flex flex-col">
                   <div className="w-16 h-16 bg-golden-opal/20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-golden-opal/30 transition-colors">
                     {feature.icon}
                   </div>
                   <h3 className="text-xl font-bold text-ivory-silk mb-4 group-hover:text-golden-opal transition-colors">
                     {feature.title}
                   </h3>
-                  <p className="text-muted-jade leading-relaxed">
+                  <p className="text-muted-jade leading-relaxed flex-grow">
                     {feature.description}
                   </p>
                 </div>

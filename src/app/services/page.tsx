@@ -166,7 +166,7 @@ export default function Services() {
                 <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> No charge for prospect no-shows</li>
                 <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> Fast onboarding, minimal risk</li>
               </ul>
-              <Link href="https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled" className="btn-outline w-full">Start Pilot</Link>
+                              <Link href="https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled" target="_blank" rel="noopener noreferrer" className="btn-outline w-full">Start Pilot</Link>
             </div>
             {/* SDR as a Service */}
             <div className="bg-ivory-silk/90 border-2 border-golden-opal rounded-2xl shadow-xl flex flex-col items-center text-center p-8 relative">
@@ -180,7 +180,7 @@ export default function Services() {
                 <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> Multi-channel outreach (email, calls, LinkedIn)</li>
                 <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> Monthly or quarterly contract</li>
               </ul>
-              <Link href="https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled" className="btn-primary w-full">Get Started</Link>
+                              <Link href="https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled" target="_blank" rel="noopener noreferrer" className="btn-primary w-full">Get Started</Link>
             </div>
             {/* Consultation & Infrastructure */}
             <div className="bg-ivory-silk/90 border border-golden-opal/20 rounded-2xl shadow-lg flex flex-col items-center text-center p-8">
@@ -193,7 +193,7 @@ export default function Services() {
                 <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> Tech stack integration (HubSpot, Apollo, etc.)</li>
                 <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> Team training included</li>
               </ul>
-              <Link href="https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled" className="btn-outline w-full">Get Custom Quote</Link>
+                              <Link href="https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled" target="_blank" rel="noopener noreferrer" className="btn-outline w-full">Get Custom Quote</Link>
             </div>
           </div>
         </div>
@@ -269,14 +269,14 @@ export default function Services() {
               }
             ].map((service, index) => (
               <ScrollAnimation key={index} delay={index * 100}>
-                <div className="card-glass group">
+                <div className="card-glass group h-full flex flex-col">
                   <div className="w-16 h-16 bg-golden-opal/20 rounded-full flex items-center justify-center mb-6 group-hover:bg-golden-opal/30 transition-colors">
                     {service.icon}
                   </div>
                   <h3 className="text-xl font-bold text-ivory-silk mb-4 group-hover:text-golden-opal transition-colors">
                     {service.title}
                   </h3>
-                  <p className="text-muted-jade leading-relaxed">
+                  <p className="text-muted-jade leading-relaxed flex-grow">
                     {service.description}
                   </p>
                 </div>
