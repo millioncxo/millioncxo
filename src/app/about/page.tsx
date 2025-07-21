@@ -38,7 +38,7 @@ export default function About() {
                   <div className="flex items-start space-x-3">
                     <div className="w-2 h-2 bg-golden-opal rounded-full mt-3"></div>
                     <p className="text-lg text-muted-jade">
-                      <span className="font-semibold text-ivory-silk">Today:</span> We&apos;re the trusted partner for 28+ companies worldwide
+                      <span className="font-semibold text-ivory-silk">Today:</span> We&apos;re the trusted partner for 27+ companies worldwide
                     </p>
                   </div>
                   <div className="flex items-start space-x-3">

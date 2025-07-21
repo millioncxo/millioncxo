@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import ScrollAnimation from '@/components/ScrollAnimation'
-import Footer from '@/components/Footer'
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -399,8 +398,6 @@ export default function Contact() {
           </div>
         </div>
       </section>
-      
-      <Footer />
     </div>
   )
 } 
