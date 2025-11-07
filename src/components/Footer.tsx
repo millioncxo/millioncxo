@@ -8,8 +8,11 @@ export default function Footer() {
           {/* Company Info */}
           <div className="space-y-4">
             <h3 className="text-2xl font-bold text-golden-opal">millionCXO</h3>
-            <p className="text-muted-jade text-sm">
-              Connecting B2B companies with decision-makers through strategic outreach and proven methodologies.
+            <p className="text-muted-jade text-sm mb-2">
+              Human‑led LinkedIn outreach that delivers real CXO conversations.
+            </p>
+            <p className="text-golden-opal text-xs font-semibold">
+              Human‑Driven • Human‑Driven Personalised Outreach
             </p>
           </div>
 

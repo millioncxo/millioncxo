@@ -1,8 +1,12 @@
+'use client'
+
 import Link from 'next/link'
 import Image from 'next/image'
+import { Target, FileSearch, TrendingUp, Wallet, Search, UserCheck, Filter, Mail, Calendar, MessageSquare, Phone, BarChart3, Shield, DollarSign, Check, Sparkles } from 'lucide-react'
 import CounterAnimation from '@/components/CounterAnimation'
 import FlippingText from '@/components/FlippingText'
 import ScrollAnimation from '@/components/ScrollAnimation'
+import ProcessStepper from '@/components/ProcessStepper'
 import WorldMapImage from '@/components/World Map.png'
 
 export default function Home() {
@@ -20,39 +24,52 @@ export default function Home() {
               <div className="animate-fade-in">
                 <div className="inline-flex items-center bg-golden-opal/10 rounded-full px-4 py-2 mb-6">
                   <svg className="w-4 h-4 text-golden-opal mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                   </svg>
-                  <span className="text-golden-opal font-semibold text-sm">118K+ Discovery Calls Delivered</span>
+                  <span className="text-golden-opal font-semibold text-sm">LinkedIn Outreach Excellence — 20X</span>
                 </div>
                 
                 <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-onyx-black leading-tight">
-                  Get 
-                  <span className="block text-golden-opal">
-                    <FlippingText 
-                      words={['10+ Meetings', 'Qualified Leads', 'CXO Calls', 'Sales Opportunities']}
-                      className="text-golden-opal"
-                    />
-                  </span>
-                  Every Month
+                  Human‑Led <FlippingText words={['LinkedIn Excellence', 'CXO Connections', 'Sales Growth', 'Pipeline Building']} className="text-golden-opal" />
                 </h1>
               </div>
               
               <div className="animate-fade-in-delay">
-                <p className="text-xl text-muted-jade leading-relaxed max-w-2xl">
-                  We connect you with decision-makers who need your solution. No cold emails, no automated sequences—just strategic, human-driven outreach that works.
+                <p className="text-xl text-muted-jade leading-relaxed max-w-2xl mb-4">
+                  Human‑driven personalised outreach. Every message is researched and written by trained SDRs. On LinkedIn we study each prospect's posts.
                 </p>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  <span className="inline-flex items-center text-sm text-muted-jade">
+                    <svg className="w-4 h-4 text-golden-opal mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    1000+ InMails  per license 
+                  </span>
+                  <span className="inline-flex items-center text-sm text-muted-jade">
+                    <svg className="w-4 h-4 text-golden-opal mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    Research‑based, not random spam
+                  </span>
+                  <span className="inline-flex items-center text-sm text-muted-jade">
+                    <svg className="w-4 h-4 text-golden-opal mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    Guaranteed responses per license
+                  </span>
+                </div>
               </div>
               
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-delay">
                 <Link href="https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled" target="_blank" rel="noopener noreferrer" className="btn-primary inline-flex items-center justify-center">
-                  <span>Book a free call !</span>
+                  <span>Book a discovery call</span>
                   <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </Link>
-                <Link href="/services" className="btn-secondary">
-                  See Our Process
+                <Link href="/#linkedin-20x" className="btn-secondary">
+                  See how 20X works
                 </Link>
               </div>
               
@@ -184,23 +201,23 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Services Section */}
+      {/* Why Human-Driven Section */}
       <section className="py-20 bg-ivory-silk">
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl lg:text-5xl font-bold text-onyx-black mb-6">
-              How We <span className="text-gradient">Generate Leads</span>
+              We at MillionCXO are <span className="text-gradient">Human‑Driven</span>
             </h2>
             <p className="text-xl text-muted-jade max-w-3xl mx-auto">
-              Our proven 6-step process turns cold prospects into warm conversations
+               Human‑driven personalised outreach.
             </p>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-8">
             {[
               {
-                title: "Market Research",
-                description: "Deep dive into your ideal customer profile and industry dynamics",
+                title: "Activity‑based research",
+                description: "We study each prospect's posts, comments, and intent before writing.",
                 step: "01",
                 icon: (
                   <svg className="w-8 h-8 text-golden-opal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -209,8 +226,8 @@ export default function Home() {
                 )
               },
               {
-                title: "Prospect Identification",
-                description: "Find decision-makers with budget, authority, and need",
+                title: "CXO‑first messaging",
+                description: "Conversation starters tailored to decision‑makers, not generic scripts.",
                 step: "02",
                 icon: (
                   <svg className="w-8 h-8 text-golden-opal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -219,48 +236,18 @@ export default function Home() {
                 )
               },
               {
-                title: "Strategic Outreach",
-                description: "Personalized, human-crafted messages that get responses",
+                title: "Account Security",
+                description: "Automated outreach risks LinkedIn restrictions. Our human-led methodology preserves account integrity.",
                 step: "03",
                 icon: (
                   <svg className="w-8 h-8 text-golden-opal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" />
-                  </svg>
-                )
-              },
-              {
-                title: "Meeting Coordination",
-                description: "Schedule qualified discovery calls with interested prospects",
-                step: "04",
-                icon: (
-                  <svg className="w-8 h-8 text-golden-opal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                  </svg>
-                )
-              },
-              {
-                title: "Performance Tracking",
-                description: "Real-time analytics and optimization for maximum ROI",
-                step: "05",
-                icon: (
-                  <svg className="w-8 h-8 text-golden-opal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                  </svg>
-                )
-              },
-              {
-                title: "Scale & Optimize",
-                description: "Expand successful campaigns across multiple channels",
-                step: "06",
-                icon: (
-                  <svg className="w-8 h-8 text-golden-opal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                   </svg>
                 )
               }
             ].map((service, index) => (
               <ScrollAnimation key={index} delay={index * 100}>
-                <div className="card-modern group relative overflow-hidden">
+                <div className="card-modern group relative overflow-hidden h-full flex flex-col">
                   <div className="absolute top-4 right-4 text-golden-opal/20 font-bold text-2xl">
                     {service.step}
                   </div>
@@ -272,7 +259,7 @@ export default function Home() {
                   <h3 className="text-xl font-bold text-onyx-black mb-3 group-hover:text-golden-opal transition-colors">
                     {service.title}
                   </h3>
-                  <p className="text-muted-jade leading-relaxed">
+                  <p className="text-muted-jade leading-relaxed flex-grow">
                     {service.description}
                   </p>
                 </div>
@@ -282,64 +269,330 @@ export default function Home() {
         </div>
       </section>
 
+      {/* LinkedIn Outreach Excellence 20X Section */}
+      <section id="linkedin-20x" className="py-20 bg-petrol-smoke">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Header */}
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center bg-golden-opal/10 rounded-full px-4 py-2 mb-6">
+              <span className="text-golden-opal font-semibold text-sm">20× LinkedIn Efficiency</span>
+            </div>
+            <h2 className="text-4xl lg:text-5xl font-bold text-ivory-silk mb-6">
+              LinkedIn Outreach <span className="text-golden-opal">Excellence — 20X</span>
+            </h2>
+            <p className="text-xl text-muted-jade max-w-3xl mx-auto">
+              Research-driven. Conversation-focused. Human-led — not automated.
+            </p>
+          </div>
+
+          {/* Key Metrics Grid */}
+          <div className="grid md:grid-cols-3 gap-8 mb-16">
+            {[
+              { 
+                value: "1,000+", 
+                label: "InMails / License / Month", 
+                desc: "Delivered by trained SDRs — every message researched.",
+                icon: (
+                  <svg className="w-8 h-8 text-golden-opal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  </svg>
+                )
+              },
+              { 
+                value: "≥4", 
+                label: "Guaranteed Positive Replies", 
+                desc: "Per license per month — or you get a pro-rated refund.",
+                icon: (
+                  <svg className="w-8 h-8 text-golden-opal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                )
+              },
+              { 
+                value: "10×", 
+                label: "Cost Efficiency", 
+                desc: "Compared to in-house SDR teams. No tool costs. No waste.",
+                icon: (
+                  <svg className="w-8 h-8 text-golden-opal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                  </svg>
+                )
+              }
+            ].map((item, idx) => (
+              <ScrollAnimation key={idx} delay={idx * 100}>
+                <div className="card-glass text-center group">
+                  <div className="w-16 h-16 bg-golden-opal/20 rounded-xl flex items-center justify-center mx-auto mb-6 group-hover:bg-golden-opal/30 transition-colors">
+                    {item.icon}
+                  </div>
+                  <h3 className="text-5xl font-bold text-golden-opal mb-3 group-hover:scale-105 transition-transform duration-300">
+                    {item.value}
+                  </h3>
+                  <p className="text-ivory-silk text-lg font-semibold mb-2">{item.label}</p>
+                  <p className="text-muted-jade text-sm leading-relaxed">{item.desc}</p>
+                </div>
+              </ScrollAnimation>
+            ))}
+          </div>
+
+          {/* Features List */}
+          <ScrollAnimation>
+            <div className="bg-gradient-to-br from-ivory-silk/15 to-ivory-silk/10 backdrop-blur-sm rounded-2xl p-8 lg:p-12 border border-golden-opal/30 shadow-xl mb-12">
+              <h3 className="text-2xl font-bold text-ivory-silk mb-8 text-center">What You Get</h3>
+              <div className="grid md:grid-cols-2 gap-6">
+                {[
+                  {
+                    title: "20× More InMails",
+                    text: "LinkedIn provides 50 InMails/month/license. We deliver 1,000/month/license.",
+                    icon: Mail
+                  },
+                  {
+                    title: "4 Interested Customers Guaranteed",
+                    text: "Per license per month. We guarantee qualified, interested prospects.",
+                    icon: TrendingUp
+                  },
+                  {
+                    title: "Research-Based Outreach",
+                    text: "We analyze each prospect's LinkedIn activity before crafting personalized messages.",
+                    icon: FileSearch
+                  },
+                  {
+                    title: "Account Safety Guarantee",
+                    text: "100% money-back guarantee if any LinkedIn account gets blocked. We protect your accounts.",
+                    icon: Target
+                  },
+                  {
+                    title: "Industry's Lowest Price",
+                    text: "Starting at $150/month per license. No hidden fees or extra tool costs.",
+                    icon: Wallet
+                  },
+                  {
+                    title: "Zero Tool Costs",
+                    text: "All tools included. No additional software or platform fees.",
+                    icon: Wallet
+                  }
+                ].map((feature, i) => {
+                  const IconComponent = feature.icon
+                  return (
+                    <div key={i} className="flex items-start gap-4 group">
+                      <div className="w-12 h-12 bg-golden-opal/20 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-golden-opal/30 transition-colors">
+                        <IconComponent className="w-6 h-6 text-golden-opal" />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="text-ivory-silk font-bold text-lg mb-1 group-hover:text-golden-opal transition-colors">
+                          {feature.title}
+                        </h4>
+                        <p className="text-muted-jade text-sm leading-relaxed">
+                          {feature.text}
+                        </p>
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+          </ScrollAnimation>
+
+          {/* CTA */}
+          <ScrollAnimation>
+            <div className="text-center">
+              <div className="bg-gradient-to-r from-golden-opal/10 via-golden-opal/5 to-golden-opal/10 border border-golden-opal/30 rounded-2xl p-10 backdrop-blur-sm">
+                <h3 className="text-3xl lg:text-4xl font-bold text-ivory-silk mb-4">
+                  Let&apos;s build conversations, not automation.
+                </h3>
+                <p className="text-muted-jade text-lg mb-8 max-w-2xl mx-auto">
+                  Every message crafted, every connection verified — human to human.
+                </p>
+                <Link
+                  href="https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-primary text-lg px-10 py-4 inline-flex items-center"
+                >
+                  Book a Discovery Call
+                  <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </Link>
+              </div>
+            </div>
+          </ScrollAnimation>
+        </div>
+      </section>
+
+      {/* Measurable Outcomes - Comparison Table */}
+      <section className="py-20 bg-ivory-silk">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl font-bold text-onyx-black mb-6">
+              Measurable <span className="text-gradient">Outcomes</span>
+            </h2>
+            <p className="text-xl text-muted-jade max-w-3xl mx-auto">
+              Real results that speak for themselves
+            </p>
+          </div>
+          
+          <div className="overflow-x-auto">
+            <table className="w-full bg-ivory-silk rounded-2xl overflow-hidden border border-golden-opal/20 shadow-lg">
+              <thead className="bg-imperial-emerald">
+                <tr>
+                  <th className="px-6 py-4 text-left text-ivory-silk font-semibold">Metric</th>
+                  <th className="px-6 py-4 text-center text-golden-opal font-semibold">MillionCXO</th>
+                  <th className="px-6 py-4 text-center text-muted-jade font-semibold">Generic Agency</th>
+                  <th className="px-6 py-4 text-center text-muted-jade font-semibold">In‑House Sales Team</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-golden-opal/10">
+                {[
+                  {
+                    metric: "Cost to generate 1 appointment",
+                    values: ["< $70", "> $500", "> $800"]
+                  },
+                  {
+                    metric: "Positive replies per license/month",
+                    values: ["≥ 4", "0–1", "0–1"]
+                  },
+                  {
+                    metric: "LinkedIn InMails per license/month",
+                    values: ["1000+", "< 50", "< 50"]
+                  },
+                  {
+                    metric: "CXO‑focused outreach",
+                    values: ["Yes", "No", "Partial"]
+                  },
+                  {
+                    metric: "Human research on every send",
+                    values: ["Yes", "No", "No"]
+                  }
+                ].map((row, index) => (
+                  <tr key={index} className="hover:bg-golden-opal/5 transition-colors">
+                    <td className="px-6 py-4 text-onyx-black font-medium">{row.metric}</td>
+                    <td className="px-6 py-4 text-center">
+                      <span className="inline-flex items-center px-3 py-1 bg-golden-opal/20 text-golden-opal rounded-full font-semibold">
+                        {row.values[0]}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4 text-center text-muted-jade">{row.values[1]}</td>
+                    <td className="px-6 py-4 text-center text-muted-jade">{row.values[2]}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          
+        </div>
+      </section>
+
+      {/* Process Section - Outbound the Human Way */}
+      <section id="process" className="py-24 bg-imperial-emerald relative overflow-hidden">
+        {/* Background decoration */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-golden-opal rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-muted-jade rounded-full blur-3xl"></div>
+        </div>
+
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl font-bold text-ivory-silk mb-6">
+              Outbound, the <span className="text-golden-opal">Human Way</span>
+            </h2>
+            <p className="text-xl text-muted-jade max-w-3xl mx-auto">
+              A systematic approach that consistently delivers results
+            </p>
+          </div>
+
+          <ProcessStepper
+            steps={[
+              {
+                step: "01",
+                title: "Data Mining",
+                description: "Sales Navigator and public signals to build clean lists.",
+                icon: Search
+              },
+              {
+                step: "02",
+                title: "Profiling",
+                description: "Industry, role, geo, tech stack, revenue fit.",
+                icon: UserCheck
+              },
+              {
+                step: "03",
+                title: "Cleaning",
+                description: "Activity‑based filters from posts, comments, and likes.",
+                icon: Filter
+              },
+              {
+                step: "04",
+                title: "InMail Outreach",
+                description: "1,000+ InMails per license per month, hand‑written.",
+                icon: Mail
+              },
+              {
+                step: "05",
+                title: "Response → Booking",
+                description: "Our team confirms, your team gets calendar holds.",
+                icon: Calendar
+              },
+              {
+                step: "06",
+                title: "Meeting Conducted",
+                description: "Real conversations. Real pipeline.",
+                icon: MessageSquare
+              }
+            ]}
+            autoCycleInterval={2500}
+          />
+        </div>
+      </section>
+
       {/* Pricing Section */}
-      <section className="py-20 bg-petrol-smoke">
+      <section id="pricing" className="py-20 bg-petrol-smoke">
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl lg:text-5xl font-bold text-ivory-silk mb-6">
               Simple, Transparent <span className="text-golden-opal">Pricing</span>
             </h2>
-            <p className="text-xl text-muted-jade max-w-3xl mx-auto">
+            <p className="text-xl text-muted-jade max-w-3xl mx-auto mb-8">
               No hidden fees. No long-term contracts. Just results.
             </p>
+            
           </div>
           
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto items-stretch">
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto items-stretch">
             {[
               {
-                name: "Pilot",
-                price: "$99",
-                unit: "per meeting",
-                description: "Perfect for testing our service",
-                features: [
-                  { text: "4 qualified CXO meetings", icon: (<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>) },
-                  { text: "30 days program", icon: (<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>) },
-                  { text: "Email outreach", icon: (<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>) },
-                  { text: "Basic reporting", icon: (<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>) },
-                  { text: "CRM integration", icon: (<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg>) },
-                  { text: "Email support", icon: (<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>) }
-                ],
-                popular: false
-              },
-              {
                 name: "SDR as a Service",
-                price: "$1,999",
-                unit: "per month",
+                price: "$2,000",
+                unit: "/ month",
+                promo: "First 3 months @ $1,199 / month",
                 description: "Dedicated full-time SDR",
                 features: [
-                  { text: "5 qualified meetings/month", icon: (<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>) },
-                  { text: "300 emails daily", icon: (<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>) },
-                  { text: "150 cold calls daily", icon: (<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>) },
-                  { text: "70 LinkedIn InMails daily", icon: (<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>) },
-                  { text: "80 account profiles daily", icon: (<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>) },
-                  { text: "Quarterly contract", icon: (<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" /></svg>) }
+                  { text: "200+ emails/day", icon: Mail },
+                  { text: "150+ cold calls/day", icon: Phone },
+                  { text: "80 ICP profiles researched/day", icon: BarChart3 },
+                  { text: "Target: 4 qualified CXO meetings/month", icon: Calendar }
                 ],
-                popular: true
+                footnote: "Minimum SDRs to be hired.",
+                popular: false
               },
               {
-                name: "Consultation & Infrastructure",
-                price: "Custom",
-                unit: "pricing",
-                description: "Complete setup & training",
+                name: "LinkedIn Outreach Excellence 20X",
+                price: "From $150",
+                unit: "/ month per license",
+                description: "License-based LinkedIn scaling",
                 features: [
-                  { text: "CRM setup & customization", icon: (<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4" /></svg>) },
-                  { text: "Email domain warm-up", icon: (<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>) },
-                  { text: "Outreach automation", icon: (<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>) },
-                  { text: "Sales scripts creation", icon: (<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>) },
-                  { text: "Weekly dashboards", icon: (<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>) },
-                  { text: "Team training included", icon: (<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>) }
+                  { text: "1,000 InMails per license per month ", icon: Mail },
+                  { text: "4 Guaranteed interested prospects per license per month", icon: Target },
+                  { text: "Research-based outreach using LinkedIn activity", icon: FileSearch },
+                  { text: "100% money-back if account gets blocked", icon: Shield },
+                  { text: "From $150/month per license", icon: DollarSign },
+                  { text: "Zero additional tool costs", icon: Check }
                 ],
-                popular: false
+                earlyBird: [
+                  "3–5 licenses @10% → $225 / month / license",
+                  "6–10 licenses @20% → $200 / month / license",
+                  "11–20 licenses @30% → $175 / month / license"
+                ],
+                popular: true
               }
             ].map((plan, index) => (
               <ScrollAnimation key={index} delay={index * 100}>
@@ -358,20 +611,47 @@ export default function Home() {
                       <span className="text-4xl font-bold text-golden-opal">{plan.price}</span>
                       <span className="text-muted-jade ml-2">{plan.unit}</span>
                     </div>
+                    {plan.promo && (
+                      <p className="text-golden-opal text-sm font-semibold mb-2">{plan.promo}</p>
+                    )}
                     <p className="text-muted-jade">{plan.description}</p>
                   </div>
                   
                   <ul className="space-y-3 mb-8 flex-grow">
-                    {plan.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-center text-ivory-silk">
-                        <svg className="w-5 h-5 text-golden-opal mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                        </svg>
-                        <span className="mr-2 text-golden-opal">{feature.icon}</span>
-                        {feature.text}
+                    {plan.features.map((feature, featureIndex) => {
+                      const IconComponent = feature.icon
+                      return (
+                        <li key={featureIndex} className="flex items-center text-ivory-silk">
+                          <svg className="w-5 h-5 text-golden-opal mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                          </svg>
+                          <IconComponent className="w-4 h-4 text-golden-opal mr-2 flex-shrink-0" />
+                          {feature.text}
+                        </li>
+                      )
+                    })}
+                    {/* {plan.earlyBird && (
+                      <li className="mt-6 pt-6 border-t-2 border-golden-opal/30">
+                        <div className="early-bird-shimmer bg-golden-opal/10 rounded-lg p-4 border border-golden-opal/30 relative overflow-hidden">
+                          <div className="flex items-center gap-2 mb-3 relative z-10">
+                            <Sparkles className="w-5 h-5 text-golden-opal animate-pulse" />
+                            <p className="text-golden-opal font-bold text-base">Early Bird Pricing</p>
+                          </div>
+                          <ul className="space-y-2 relative z-10">
+                            {plan.earlyBird.map((eb, ebIndex) => (
+                              <li key={ebIndex} className="flex items-start">
+                                <span className="text-golden-opal mr-2 font-semibold">•</span>
+                                <span className="text-ivory-silk text-sm font-medium">{eb}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
                       </li>
-                    ))}
+                    )} */}
                   </ul>
+                  {plan.footnote && (
+                    <p className="text-xs text-muted-jade text-center mb-4">{plan.footnote}</p>
+                  )}
                   
                   <div className="mt-auto">
                     <Link href="https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled" target="_blank" rel="noopener noreferrer" className={plan.popular ? 'btn-primary w-full' : 'btn-outline w-full'}>
@@ -438,18 +718,18 @@ export default function Home() {
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-4xl lg:text-5xl font-bold text-ivory-silk mb-6">
-              Ready to Fill Your Pipeline?
+              Ready to turn LinkedIn into real pipeline?
             </h2>
             <p className="text-xl text-muted-jade mb-8 max-w-2xl mx-auto">
-              Join 27+ companies who trust us to generate high-quality leads and book meetings with decision-makers.
+              Speak with a strategist. We'll map your ICP and messaging in the first call.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled" target="_blank" rel="noopener noreferrer" className="btn-primary text-lg px-10 py-4">
-                Book Your Strategy Call
+                Book a discovery call
               </Link>
-              <Link href="/services" className="btn-outline text-lg px-10 py-4">
-                See Case Studies
+              <Link href="/#linkedin-20x" className="btn-outline text-lg px-10 py-4">
+                Learn More About 20X
               </Link>
             </div>
             
