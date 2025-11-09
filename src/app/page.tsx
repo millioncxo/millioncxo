@@ -452,9 +452,9 @@ export default function Home() {
                   { text: "1,000 InMails per license per month ", icon: Mail },
                   { text: "4 Guaranteed interested prospects per license per month", icon: Target },
                   { text: "Research-based outreach using LinkedIn activity", icon: FileSearch },
-                  { text: "100% money-back if account gets blocked", icon: Shield },
+                  { text: "100% garanteed money-back if your account gets blocked", icon: Shield },
                   
-                  { text: "Zero additional tool costs", icon: Check }
+                  
                 ],
                 earlyBird: [
                   "3–5 licenses @10% → $225 / month / license",
@@ -613,16 +613,6 @@ export default function Home() {
 
       {/* Process Section - Outbound the Human Way */}
       <section id="process" className="py-24 bg-gradient-to-br from-petrol-smoke via-imperial-emerald to-petrol-smoke relative overflow-hidden">
-        {/* Enhanced background decoration */}
-        <div className="absolute inset-0">
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-golden-opal/20 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-muted-jade/20 rounded-full blur-3xl animate-pulse" style={{animationDelay: '1s'}}></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-golden-opal/5 rounded-full blur-3xl"></div>
-        </div>
-        
-        {/* Subtle pattern overlay */}
-        <div className="absolute inset-0 bg-luxury-pattern opacity-5"></div>
-
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-16">
             
