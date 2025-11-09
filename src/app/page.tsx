@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { Target, FileSearch, TrendingUp, Wallet, Search, UserCheck, Filter, Mail, Calendar, MessageSquare, Phone, BarChart3, Shield, DollarSign, Check, Sparkles } from 'lucide-react'
+import { Target, FileSearch, TrendingUp, Wallet, Search, UserCheck, Filter, Mail, Calendar, MessageSquare, Phone, BarChart3, Shield, DollarSign, Check, Sparkles, Users } from 'lucide-react'
 import CounterAnimation from '@/components/CounterAnimation'
 import FlippingText from '@/components/FlippingText'
 import ScrollAnimation from '@/components/ScrollAnimation'
@@ -26,17 +26,17 @@ export default function Home() {
                   <svg className="w-4 h-4 text-golden-opal mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                   </svg>
-                  <span className="text-golden-opal font-semibold text-sm">LinkedIn Outreach Excellence — 20X</span>
+                  <span className="text-golden-opal font-semibold text-sm">LinkedIn Outreach Excellence - 20X</span>
                 </div>
                 
                 <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-onyx-black leading-tight">
-                  Human‑Led <FlippingText words={['LinkedIn Excellence', 'CXO Connections', 'Sales Growth', 'Pipeline Building']} className="text-golden-opal" />
+                  Human‑Driven <FlippingText words={['LinkedIn Excellence', 'CXO Connections', 'Sales Growth', 'Pipeline Building']} className="text-golden-opal" />
                 </h1>
               </div>
               
               <div className="animate-fade-in-delay">
                 <p className="text-xl text-muted-jade leading-relaxed max-w-2xl mb-4">
-                  Human‑driven personalised outreach. Every message is researched and written by trained SDRs. On LinkedIn we study each prospect's posts.
+                  Human‑driven personalised outreach. Every message is researched and written by trained SDRs. On LinkedIn we study each prospect&apos;s posts.
                 </p>
                 <div className="flex flex-wrap gap-2 mb-4">
                   <span className="inline-flex items-center text-sm text-muted-jade">
@@ -63,7 +63,7 @@ export default function Home() {
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-delay">
                 <Link href="https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled" target="_blank" rel="noopener noreferrer" className="btn-primary inline-flex items-center justify-center">
-                  <span>Book a discovery call</span>
+                  <span>Book a Free Demo</span>
                   <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
@@ -84,11 +84,13 @@ export default function Home() {
                       "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop&crop=face&auto=format&q=80",
                       "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&crop=face&auto=format&q=80"
                     ].map((avatar, i) => (
-                      <div key={i} className="w-10 h-10 rounded-full border-2 border-ivory-silk overflow-hidden shadow-lg hover:scale-110 transition-transform duration-300">
-                        <img 
+                      <div key={i} className="w-10 h-10 rounded-full border-2 border-ivory-silk overflow-hidden shadow-lg hover:scale-110 transition-transform duration-300 relative">
+                        <Image 
                           src={avatar} 
                           alt={`Client ${i + 1}`}
-                          className="w-full h-full object-cover"
+                          fill
+                          className="object-cover"
+                          unoptimized
                         />
                       </div>
                     ))}
@@ -160,16 +162,7 @@ export default function Home() {
       {/* Stats Section */}
       <section className="py-20 bg-imperial-emerald">
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-            <div className="text-center">
-              <div className="mb-3">
-                
-              </div>
-              <div className="text-4xl lg:text-5xl font-bold text-golden-opal mb-2">
-                <CounterAnimation end={119} suffix="K+" />
-              </div>
-              <div className="text-ivory-silk font-medium">Discovery Calls</div>
-            </div>
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             <div className="text-center">
               <div className="mb-3">
                 
@@ -278,10 +271,10 @@ export default function Home() {
               <span className="text-golden-opal font-semibold text-sm">20× LinkedIn Efficiency</span>
             </div>
             <h2 className="text-4xl lg:text-5xl font-bold text-ivory-silk mb-6">
-              LinkedIn Outreach <span className="text-golden-opal">Excellence — 20X</span>
+              LinkedIn Outreach <span className="text-golden-opal">Excellence - 20X</span>
             </h2>
             <p className="text-xl text-muted-jade max-w-3xl mx-auto">
-              Research-driven. Conversation-focused. Human-led — not automated.
+              Research-driven. Conversation-focused. Human-led, not automated.
             </p>
           </div>
 
@@ -289,9 +282,9 @@ export default function Home() {
           <div className="grid md:grid-cols-3 gap-8 mb-16">
             {[
               { 
-                value: "1,000+", 
+                value: "1,000", 
                 label: "InMails / License / Month", 
-                desc: "Delivered by trained SDRs — every message researched.",
+                desc: "Delivered by trained SDRs - every message researched.",
                 icon: (
                   <svg className="w-8 h-8 text-golden-opal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
@@ -300,8 +293,8 @@ export default function Home() {
               },
               { 
                 value: "≥4", 
-                label: "Guaranteed Positive Replies", 
-                desc: "Per license per month — or you get a pro-rated refund.",
+                label: "Guaranteed Interested Customers", 
+                desc: "Per license per month - or you get a pro-rated refund.",
                 icon: (
                   <svg className="w-8 h-8 text-golden-opal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -311,7 +304,7 @@ export default function Home() {
               { 
                 value: "10×", 
                 label: "Cost Efficiency", 
-                desc: "Compared to in-house SDR teams. No tool costs. No waste.",
+                desc: "Compared to in-house SDR teams. No additional tool costs. No hidden charges.",
                 icon: (
                   <svg className="w-8 h-8 text-golden-opal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
@@ -341,13 +334,13 @@ export default function Home() {
               <div className="grid md:grid-cols-2 gap-6">
                 {[
                   {
-                    title: "20× More InMails",
-                    text: "LinkedIn provides 50 InMails/month/license. We deliver 1,000/month/license.",
+                    title: "1000 InMails per license per month",
+                    text: "We deliver 1,000 InMails per license per month.",
                     icon: Mail
                   },
                   {
                     title: "4 Interested Customers Guaranteed",
-                    text: "Per license per month. We guarantee qualified, interested prospects.",
+                    text: "Per license per month. Pro-rated refund on missed targets.",
                     icon: TrendingUp
                   },
                   {
@@ -362,7 +355,7 @@ export default function Home() {
                   },
                   {
                     title: "Industry's Lowest Price",
-                    text: "Starting at $150/month per license. No hidden fees or extra tool costs.",
+                    text: "Starting at $150/month per license. ",
                     icon: Wallet
                   },
                   {
@@ -400,7 +393,7 @@ export default function Home() {
                   Let&apos;s build conversations, not automation.
                 </h3>
                 <p className="text-muted-jade text-lg mb-8 max-w-2xl mx-auto">
-                  Every message crafted, every connection verified — human to human.
+                  Every message crafted, every connection verified - human to human.
                 </p>
                 <Link
                   href="https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled"
@@ -408,7 +401,7 @@ export default function Home() {
                   rel="noopener noreferrer"
                   className="btn-primary text-lg px-10 py-4 inline-flex items-center"
                 >
-                  Book a Discovery Call
+                  Book a Free Demo
                   <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
@@ -419,10 +412,144 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Measurable Outcomes - Comparison Table */}
-      <section className="py-20 bg-ivory-silk">
+      {/* Pricing Section */}
+      <section id="pricing" className="py-20 bg-ivory-silk">
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl font-bold text-onyx-black mb-6">
+              Simple, Transparent <span className="text-gradient">Pricing</span>
+            </h2>
+            <p className="text-xl text-muted-jade max-w-3xl mx-auto mb-8">
+              No hidden fees. No long-term contracts. Just results.
+            </p>
+            
+          </div>
+          
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto items-stretch">
+            {[
+              {
+                name: "LinkedIn Followers Boost",
+                price: "$499",
+                unit: "/month",
+                
+                tagline: "Build brand authority, one follower at a time.",
+                features: [
+                  { text: "10,000+ targeted followers per month", icon: Users },
+                  { text: "Organic growth strategy", icon: TrendingUp },
+                  { text: "Content optimization for your brand", icon: FileSearch },
+                  { text: "Engagement boost", icon: Target }
+                ],
+                promo: undefined,
+                footnote: undefined,
+                popular: false
+              },
+              {
+                name: "LinkedIn Outreach Excellence 20X",
+                price: "$250",
+                unit: "/ license/month",
+                description: "Discounts available!",
+                features: [
+                  { text: "1,000 InMails per license per month ", icon: Mail },
+                  { text: "4 Guaranteed interested prospects per license per month", icon: Target },
+                  { text: "Research-based outreach using LinkedIn activity", icon: FileSearch },
+                  { text: "100% money-back if account gets blocked", icon: Shield },
+                  
+                  { text: "Zero additional tool costs", icon: Check }
+                ],
+                earlyBird: [
+                  "3–5 licenses @10% → $225 / month / license",
+                  "6–10 licenses @20% → $200 / month / license",
+                  "11–20 licenses @30% → $175 / month / license"
+                ],
+                popular: true
+              }
+            ].map((plan, index) => (
+              <ScrollAnimation key={index} delay={index * 100}>
+                <div className={`card-glass relative h-full flex flex-col ${plan.popular ? 'ring-2 ring-golden-opal' : ''}`}>
+                  {plan.popular && (
+                    <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                      <span className="bg-golden-opal text-onyx-black px-4 py-1 rounded-full text-sm font-semibold">
+                        Most Popular
+                      </span>
+                    </div>
+                  )}
+                  
+                  <div className="text-center mb-6">
+                    <h3 className="text-2xl font-bold text-onyx-black mb-2">{plan.name}</h3>
+                    <div className="mb-2">
+                      <span className="text-4xl font-bold text-golden-opal">{plan.price}</span>
+                      <span className="text-muted-jade ml-2">{plan.unit}</span>
+                    </div>
+                    {plan.promo && (
+                      <p className="text-golden-opal text-sm font-semibold mb-2">{plan.promo}</p>
+                    )}
+                    {plan.description && (
+                      <p className="text-golden-opal text-sm mb-2">{plan.description}</p>
+                    )}
+                    {'tagline' in plan && plan.tagline && (
+                      <p className="text-golden-opal text-sm font-medium">{plan.tagline}</p>
+                    )}
+                  </div>
+                  
+                  <ul className="space-y-3 mb-8 flex-grow">
+                    {plan.features.map((feature, featureIndex) => {
+                      const IconComponent = feature.icon
+                      return (
+                        <li key={featureIndex} className="flex items-center text-onyx-black">
+                          <svg className="w-5 h-5 text-golden-opal mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                          </svg>
+                          <IconComponent className="w-4 h-4 text-golden-opal mr-2 flex-shrink-0" />
+                          {feature.text}
+                        </li>
+                      )
+                    })}
+                    {/* {plan.earlyBird && (
+                      <li className="mt-6 pt-6 border-t-2 border-golden-opal/30">
+                        <div className="early-bird-shimmer bg-golden-opal/10 rounded-lg p-4 border border-golden-opal/30 relative overflow-hidden">
+                          <div className="flex items-center gap-2 mb-3 relative z-10">
+                            <Sparkles className="w-5 h-5 text-golden-opal animate-pulse" />
+                            <p className="text-golden-opal font-bold text-base">Early Bird Pricing</p>
+                          </div>
+                          <ul className="space-y-2 relative z-10">
+                            {plan.earlyBird.map((eb, ebIndex) => (
+                              <li key={ebIndex} className="flex items-start">
+                                <span className="text-golden-opal mr-2 font-semibold">•</span>
+                                <span className="text-ivory-silk text-sm font-medium">{eb}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </li>
+                    )} */}
+                  </ul>
+                  {plan.footnote && (
+                    <p className="text-xs text-muted-jade text-center mb-4">{plan.footnote}</p>
+                  )}
+                  
+                  <div className="mt-auto">
+                    <Link href="https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled" target="_blank" rel="noopener noreferrer" className={plan.popular ? 'btn-primary w-full' : 'btn-outline w-full'}>
+                      Book a Free Demo
+                    </Link>
+                  </div>
+                </div>
+              </ScrollAnimation>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Measurable Outcomes - Comparison Table */}
+      <section className="py-20 bg-gradient-to-br from-ivory-silk via-ivory-silk/95 to-muted-jade/5 relative overflow-hidden">
+        {/* Decorative background elements */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute top-20 right-20 w-64 h-64 bg-golden-opal rounded-full blur-3xl"></div>
+          <div className="absolute bottom-20 left-20 w-48 h-48 bg-imperial-emerald rounded-full blur-3xl"></div>
+        </div>
+        
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-16">
+            
             <h2 className="text-4xl lg:text-5xl font-bold text-onyx-black mb-6">
               Measurable <span className="text-gradient">Outcomes</span>
             </h2>
@@ -432,66 +559,73 @@ export default function Home() {
           </div>
           
           <div className="overflow-x-auto">
-            <table className="w-full bg-ivory-silk rounded-2xl overflow-hidden border border-golden-opal/20 shadow-lg">
-              <thead className="bg-imperial-emerald">
-                <tr>
-                  <th className="px-6 py-4 text-left text-ivory-silk font-semibold">Metric</th>
-                  <th className="px-6 py-4 text-center text-golden-opal font-semibold">MillionCXO</th>
-                  <th className="px-6 py-4 text-center text-muted-jade font-semibold">Generic Agency</th>
-                  <th className="px-6 py-4 text-center text-muted-jade font-semibold">In‑House Sales Team</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-golden-opal/10">
-                {[
-                  {
-                    metric: "Cost to generate 1 appointment",
-                    values: ["< $70", "> $500", "> $800"]
-                  },
-                  {
-                    metric: "Positive replies per license/month",
-                    values: ["≥ 4", "0–1", "0–1"]
-                  },
-                  {
-                    metric: "LinkedIn InMails per license/month",
-                    values: ["1000+", "< 50", "< 50"]
-                  },
-                  {
-                    metric: "CXO‑focused outreach",
-                    values: ["Yes", "No", "Partial"]
-                  },
-                  {
-                    metric: "Human research on every send",
-                    values: ["Yes", "No", "No"]
-                  }
-                ].map((row, index) => (
-                  <tr key={index} className="hover:bg-golden-opal/5 transition-colors">
-                    <td className="px-6 py-4 text-onyx-black font-medium">{row.metric}</td>
-                    <td className="px-6 py-4 text-center">
-                      <span className="inline-flex items-center px-3 py-1 bg-golden-opal/20 text-golden-opal rounded-full font-semibold">
-                        {row.values[0]}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4 text-center text-muted-jade">{row.values[1]}</td>
-                    <td className="px-6 py-4 text-center text-muted-jade">{row.values[2]}</td>
+            <div className="bg-ivory-silk/80 backdrop-blur-sm rounded-3xl shadow-2xl border-2 border-golden-opal/30 p-1">
+              <table className="w-full rounded-2xl overflow-hidden">
+                <thead>
+                  <tr className="bg-gradient-to-r from-imperial-emerald via-petrol-smoke to-imperial-emerald">
+                    <th className="px-6 py-5 text-left text-ivory-silk font-bold text-base">Metric</th>
+                    <th className="px-6 py-5 text-center text-golden-opal font-bold text-base">MillionCXO</th>
+                    <th className="px-6 py-5 text-center text-muted-jade/80 font-semibold text-base">Generic Agency</th>
+                    <th className="px-6 py-5 text-center text-muted-jade/80 font-semibold text-base">In‑House Sales Team</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody className="bg-ivory-silk divide-y divide-golden-opal/20">
+                  {[
+                    {
+                      metric: "Cost to generate 1 appointment",
+                      values: ["< $70", "> $500", "> $800"]
+                    },
+                    {
+                      metric: "Positive replies per license/month",
+                      values: ["≥ 4", "0–1", "0–1"]
+                    },
+                    {
+                      metric: "LinkedIn InMails per license/month",
+                      values: ["1,000", "< 800", "< 50"]
+                    },
+                    {
+                      metric: "Pricing",
+                      values: ["$150", "$350", "$1500"]
+                    },
+                    {
+                      metric: "Account Safety Guarantee",
+                      values: ["Yes", "No", "No"]
+                    }
+                  ].map((row, index) => (
+                    <tr key={index} className="hover:bg-golden-opal/10 transition-all duration-300 group">
+                      <td className="px-6 py-5 text-onyx-black font-semibold group-hover:text-golden-opal transition-colors">{row.metric}</td>
+                      <td className="px-6 py-5 text-center">
+                        <span className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-golden-opal/20 to-golden-opal/30 text-golden-opal rounded-full font-bold text-sm shadow-md border border-golden-opal/40">
+                          {row.values[0]}
+                        </span>
+                      </td>
+                      <td className="px-6 py-5 text-center text-muted-jade font-medium">{row.values[1]}</td>
+                      <td className="px-6 py-5 text-center text-muted-jade font-medium">{row.values[2]}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
           
         </div>
       </section>
 
       {/* Process Section - Outbound the Human Way */}
-      <section id="process" className="py-24 bg-imperial-emerald relative overflow-hidden">
-        {/* Background decoration */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-golden-opal rounded-full blur-3xl"></div>
-          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-muted-jade rounded-full blur-3xl"></div>
+      <section id="process" className="py-24 bg-gradient-to-br from-petrol-smoke via-imperial-emerald to-petrol-smoke relative overflow-hidden">
+        {/* Enhanced background decoration */}
+        <div className="absolute inset-0">
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-golden-opal/20 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-muted-jade/20 rounded-full blur-3xl animate-pulse" style={{animationDelay: '1s'}}></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-golden-opal/5 rounded-full blur-3xl"></div>
         </div>
+        
+        {/* Subtle pattern overlay */}
+        <div className="absolute inset-0 bg-luxury-pattern opacity-5"></div>
 
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-16">
+            
             <h2 className="text-4xl lg:text-5xl font-bold text-ivory-silk mb-6">
               Outbound, the <span className="text-golden-opal">Human Way</span>
             </h2>
@@ -541,127 +675,6 @@ export default function Home() {
             ]}
             autoCycleInterval={2500}
           />
-        </div>
-      </section>
-
-      {/* Pricing Section */}
-      <section id="pricing" className="py-20 bg-petrol-smoke">
-        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-ivory-silk mb-6">
-              Simple, Transparent <span className="text-golden-opal">Pricing</span>
-            </h2>
-            <p className="text-xl text-muted-jade max-w-3xl mx-auto mb-8">
-              No hidden fees. No long-term contracts. Just results.
-            </p>
-            
-          </div>
-          
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto items-stretch">
-            {[
-              {
-                name: "SDR as a Service",
-                price: "$2,000",
-                unit: "/ month",
-                promo: "First 3 months @ $1,199 / month",
-                description: "Dedicated full-time SDR",
-                features: [
-                  { text: "200+ emails/day", icon: Mail },
-                  { text: "150+ cold calls/day", icon: Phone },
-                  { text: "80 ICP profiles researched/day", icon: BarChart3 },
-                  { text: "Target: 4 qualified CXO meetings/month", icon: Calendar }
-                ],
-                footnote: "Minimum SDRs to be hired.",
-                popular: false
-              },
-              {
-                name: "LinkedIn Outreach Excellence 20X",
-                price: "From $150",
-                unit: "/ month per license",
-                description: "License-based LinkedIn scaling",
-                features: [
-                  { text: "1,000 InMails per license per month ", icon: Mail },
-                  { text: "4 Guaranteed interested prospects per license per month", icon: Target },
-                  { text: "Research-based outreach using LinkedIn activity", icon: FileSearch },
-                  { text: "100% money-back if account gets blocked", icon: Shield },
-                  { text: "From $150/month per license", icon: DollarSign },
-                  { text: "Zero additional tool costs", icon: Check }
-                ],
-                earlyBird: [
-                  "3–5 licenses @10% → $225 / month / license",
-                  "6–10 licenses @20% → $200 / month / license",
-                  "11–20 licenses @30% → $175 / month / license"
-                ],
-                popular: true
-              }
-            ].map((plan, index) => (
-              <ScrollAnimation key={index} delay={index * 100}>
-                <div className={`card-glass relative h-full flex flex-col ${plan.popular ? 'ring-2 ring-golden-opal' : ''}`}>
-                  {plan.popular && (
-                    <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                      <span className="bg-golden-opal text-onyx-black px-4 py-1 rounded-full text-sm font-semibold">
-                        Most Popular
-                      </span>
-                    </div>
-                  )}
-                  
-                  <div className="text-center mb-6">
-                    <h3 className="text-2xl font-bold text-ivory-silk mb-2">{plan.name}</h3>
-                    <div className="mb-2">
-                      <span className="text-4xl font-bold text-golden-opal">{plan.price}</span>
-                      <span className="text-muted-jade ml-2">{plan.unit}</span>
-                    </div>
-                    {plan.promo && (
-                      <p className="text-golden-opal text-sm font-semibold mb-2">{plan.promo}</p>
-                    )}
-                    <p className="text-muted-jade">{plan.description}</p>
-                  </div>
-                  
-                  <ul className="space-y-3 mb-8 flex-grow">
-                    {plan.features.map((feature, featureIndex) => {
-                      const IconComponent = feature.icon
-                      return (
-                        <li key={featureIndex} className="flex items-center text-ivory-silk">
-                          <svg className="w-5 h-5 text-golden-opal mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                          </svg>
-                          <IconComponent className="w-4 h-4 text-golden-opal mr-2 flex-shrink-0" />
-                          {feature.text}
-                        </li>
-                      )
-                    })}
-                    {/* {plan.earlyBird && (
-                      <li className="mt-6 pt-6 border-t-2 border-golden-opal/30">
-                        <div className="early-bird-shimmer bg-golden-opal/10 rounded-lg p-4 border border-golden-opal/30 relative overflow-hidden">
-                          <div className="flex items-center gap-2 mb-3 relative z-10">
-                            <Sparkles className="w-5 h-5 text-golden-opal animate-pulse" />
-                            <p className="text-golden-opal font-bold text-base">Early Bird Pricing</p>
-                          </div>
-                          <ul className="space-y-2 relative z-10">
-                            {plan.earlyBird.map((eb, ebIndex) => (
-                              <li key={ebIndex} className="flex items-start">
-                                <span className="text-golden-opal mr-2 font-semibold">•</span>
-                                <span className="text-ivory-silk text-sm font-medium">{eb}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      </li>
-                    )} */}
-                  </ul>
-                  {plan.footnote && (
-                    <p className="text-xs text-muted-jade text-center mb-4">{plan.footnote}</p>
-                  )}
-                  
-                  <div className="mt-auto">
-                    <Link href="https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled" target="_blank" rel="noopener noreferrer" className={plan.popular ? 'btn-primary w-full' : 'btn-outline w-full'}>
-                      Get Started
-                    </Link>
-                  </div>
-                </div>
-              </ScrollAnimation>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -721,12 +734,12 @@ export default function Home() {
               Ready to turn LinkedIn into real pipeline?
             </h2>
             <p className="text-xl text-muted-jade mb-8 max-w-2xl mx-auto">
-              Speak with a strategist. We'll map your ICP and messaging in the first call.
+              Speak with a strategist. We&apos;ll map your ICP and messaging in the first call.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled" target="_blank" rel="noopener noreferrer" className="btn-primary text-lg px-10 py-4">
-                Book a discovery call
+                Book a Free Demo
               </Link>
               <Link href="/#linkedin-20x" className="btn-outline text-lg px-10 py-4">
                 Learn More About 20X

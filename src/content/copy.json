@@ -19,7 +19,7 @@
   "hero": {
     "title": "Human‑Led LinkedIn Outreach. Real CXO conversations.",
     "subtitle": "Human‑driven personalised outreach. Every message is researched and written by trained SDRs. On LinkedIn we study each prospect's posts.",
-    "supportNote": "LinkedIn Outreach Excellence — 20X",
+    "supportNote": "LinkedIn Outreach Excellence - 20X",
     "primaryCta": {"label": "Book a discovery call", "href": "https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled"},
     "secondaryCta": {"label": "See how 20X works", "href": "/#linkedin-20x"},
     "proof": [
@@ -33,12 +33,12 @@
     "bullets": [
       {"title": "Activity‑based research", "desc": "We study each prospect's posts, comments, and intent before writing."},
       {"title": "CXO‑first messaging", "desc": "Conversation starters tailored to decision‑makers, not generic scripts."},
-      {"title": "Human‑driven personalised outreach", "desc": "Zero automation. No bots, no mass‑blasts. 100% accountable humans. Human‑led — not automated. To keep your LinkedIn accounts secure."}
+      {"title": "Human‑driven personalised outreach", "desc": "Zero automation. No bots, no mass‑blasts. 100% accountable humans. Human-led, not automated. To keep your LinkedIn accounts secure."}
     ]
   },
   "linkedin20x": {
     "id": "linkedin-20x",
-    "title": "LinkedIn Outreach Excellence — 20X",
+    "title": "LinkedIn Outreach Excellence - 20X",
     "sub": "Maximise LinkedIn with human research and scale‑safe systems.",
     "highlights": [
       "LinkedIn provides 50 inmail messages per month per license whereas MillionCXO sends 1,000 inmail messages per license per month for you",
@@ -114,7 +114,7 @@
       {
         "id": "excellence-20x",
         "name": "LinkedIn Outreach Excellence 20X (License)",
-        "price": "Custom — license‑based",
+        "price": "Custom - license-based",
         "includes": [
           "1,000+ InMails per license/month",
           "Guaranteed ≥4 positive replies/license/month",

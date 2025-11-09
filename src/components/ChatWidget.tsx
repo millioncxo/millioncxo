@@ -1,92 +1,92 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import ChatMessage from './ChatMessage'
 import ChatToggle from './ChatToggle'
 
 const STEPS = {
   welcome: {
-    text: "Hi! 👋 I’m your millionCXO Assistant. What are you looking for today?",
+    text: "Hi! 👋 I'm your millionCXO Assistant. What are you looking for today?",
     options: [
-      "Book qualified CXO meetings",
-      "Hire a dedicated SDR",
-      "Set up sales infrastructure",
+      "LinkedIn Outreach Excellence 20X",
+      "LinkedIn Followers Boost",
+      "SDR as a Service",
       "Just have questions"
     ]
   },
-  book_cxo: {
-    text: `Our **Pilot Program** gets you 4 guaranteed, qualified CXO meetings in 30 days ($99/meeting, total $396, pay only for meetings delivered). Would you like to see the detailed terms or go straight to booking a discovery call?`,
+  linkedin_20x: {
+    text: `Our **LinkedIn Outreach Excellence 20X** delivers 1,000 InMails per license per month with research-based outreach.\n- $250/month per license (discounts available)\n- 4 Guaranteed interested customers per license per month\n- 100% money-back guarantee if your account gets blocked\n- Zero additional tool costs\n\nWould you like to learn more or book a Free Demo?`,
     options: [
-      "Show me the detailed terms",
-      "Book my discovery call"
+      "Tell me more about 20X",
+      "Book a Free Demo",
+      "Back to main menu"
     ]
   },
-  book_cxo_terms: {
-    text: `**Pilot Program Terms:**\n- 4 Qualified CXO Meetings in 30 days\n- $99 per meeting (total $396, upfront)\n- No charge for prospect no-shows\n- Refund for any unbooked meetings\n- 15 days for prospect research before delivery starts\n\nReady to book a discovery call and see if you qualify?`,
+  linkedin_20x_more: {
+    text: `**LinkedIn Outreach Excellence 20X Details:**\n- 1,000 InMails per license per month (vs LinkedIn's 50)\n- Research-based outreach using prospect's LinkedIn activity\n- 4 Guaranteed interested customers per license per month\n- Account safety guarantee: 100% refund if account gets blocked\n- Industry's lowest price starting at $250/month per license\n- All tools included, no hidden costs\n\nReady to book a Free Demo?`,
     options: [
-      "Yes, book my call",
+      "Book a Free Demo",
+      "Back to main menu"
+    ]
+  },
+  followers_boost: {
+    text: `Our **LinkedIn Followers Boost** helps you build brand authority with 10,000+ targeted followers per month.\n- $499/month\n- Organic growth strategy\n- Content optimization for your brand\n- Engagement boost\n\nBuild brand authority, one follower at a time. Want to book a Free Demo?`,
+    options: [
+      "Book a Free Demo",
+      "Tell me more",
+      "Back to main menu"
+    ]
+  },
+  followers_more: {
+    text: `**LinkedIn Followers Boost Details:**\n- 10,000+ targeted followers per month\n- Organic growth strategy (no bots, no automation)\n- Content optimization tailored to your brand\n- Engagement boost to increase visibility\n- Human-driven approach to keep your account secure\n\nReady to grow your LinkedIn presence? Book a Free Demo!`,
+    options: [
+      "Book a Free Demo",
       "Back to main menu"
     ]
   },
   sdr_service: {
-    text: `Our **SDR as a Service** provides a dedicated full-time SDR, handling 300 emails, 150 calls, and 70 LinkedIn InMails every day.\n- $2,250/month (monthly), $1,999/month (quarterly)\n- 5 Qualified CXO Meetings/month as KPI\nWant to discuss your specific needs or book a call?`,
+    text: `Our **SDR as a Service** provides a dedicated full-time SDR for your outreach campaigns.\n- $2,000/month\n- 200+ emails/day\n- 150+ cold calls/day\n- 80 ICP profiles researched/day\n- Target: 4+ qualified CXO meetings/month\n\nWant to discuss your specific needs or book a Free Demo?`,
     options: [
-      "Book my discovery call",
+      "Book a Free Demo",
       "Tell me more",
       "Back to main menu"
     ]
   },
   sdr_more: {
-    text: `You'll get a trained SDR on your campaigns, plus daily reporting and CRM integration. Want to see case studies or book a call?`,
+    text: `**SDR as a Service Details:**\n- Dedicated full-time SDR on your campaigns\n- Daily reporting and CRM integration\n- Trained in your value proposition before outreach\n- Human-driven, no automation\n- Guaranteed qualified meetings (your ICP, your criteria)\n\nWant to see how this works? Book a Free Demo!`,
     options: [
-      "Show case studies",
-      "Book my discovery call",
-      "Back to main menu"
-    ]
-  },
-  setup_infra: {
-    text: `We set up CRM (HubSpot/Zoho), automate your email & LinkedIn outreach, write custom sales scripts, warm up domains, implement lead routing, and design reporting dashboards. Want to discuss your stack or book a call?`,
-    options: [
-      "Book my discovery call",
-      "Discuss tech stack",
-      "Back to main menu"
-    ]
-  },
-  infra_stack: {
-    text: `We work with all major tools: Apollo, Lemlist, Salesloft, Aircall, Clay, and more. Want a call to map your workflow?`,
-    options: [
-      "Book my discovery call",
+      "Book a Free Demo",
       "Back to main menu"
     ]
   },
   questions: {
-    text: "Ask me anything about our Pilot, SDR, or Infrastructure services—or type your question below. For most questions, I’ll suggest a discovery call to make things easier.",
+    text: "Ask me anything about our LinkedIn Outreach Excellence 20X, LinkedIn Followers Boost, or SDR as a Service - or type your question below. For most questions, I'll suggest a Free Demo to make things easier.",
     options: [
-      "What’s included in each service?",
-      "How do you ensure meeting quality?",
+      "What's included in each service?",
+      "How do you ensure account safety?",
       "Can you customize for my industry?",
-      "Book my discovery call",
+      "Book a Free Demo",
       "Back to main menu"
     ]
   },
   included_services: {
-    text: `Each service is customized to your GTM goals. For full details and a custom proposal, would you like to book a discovery call?`,
+    text: `Each service is customized to your GTM goals:\n\n**LinkedIn Outreach Excellence 20X:** 1,000 InMails/license/month, 4 guaranteed customers/license/month\n\n**LinkedIn Followers Boost:** 10,000+ targeted followers/month, organic growth\n\n**SDR as a Service:** Full-time dedicated SDR, 4+ CXO meetings/month\n\nFor full details and a custom proposal, would you like to book a Free Demo?`,
     options: [
-      "Book my discovery call",
+      "Book a Free Demo",
       "Back to main menu"
     ]
   },
-  quality: {
-    text: `We only charge for *qualified meetings* (your ICP, your criteria). If a prospect no-shows, you aren’t charged. SDRs are trained in your value prop before outreach. Want to talk process?`,
+  account_safety: {
+    text: `We guarantee **100% account safety** with our human-driven approach:\n- Zero automation, no bots\n- Research-based outreach using LinkedIn activity\n- Human-led methodology preserves account integrity\n- 100% money-back guarantee if any LinkedIn account gets blocked\n\nWant to learn more? Book a Free Demo!`,
     options: [
-      "Book my discovery call",
+      "Book a Free Demo",
       "Back to main menu"
     ]
   },
   customize: {
-    text: `Absolutely! Every engagement is tailored—startup, SaaS, consulting, services. Book a call for a custom roadmap?`,
+    text: `Absolutely! Every engagement is tailored - startup, SaaS, consulting, services. We customize our approach to your industry, ICP, and goals. Book a Free Demo for a custom roadmap?`,
     options: [
-      "Book my discovery call",
+      "Book a Free Demo",
       "Back to main menu"
     ]
   },
@@ -108,6 +108,14 @@ export default function ChatWidget() {
   ])
   const [currentStep, setCurrentStep] = useState<StepKey>('welcome')
   const [isTyping, setIsTyping] = useState(false)
+
+  // Auto-open chat on page visit
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsOpen(true)
+    }, 1000) // Open after 1 second delay
+    return () => clearTimeout(timer)
+  }, [])
 
   const handleToggle = () => setIsOpen(!isOpen)
 
@@ -131,19 +139,18 @@ export default function ChatWidget() {
 
       // Top-level routing
       if (currentStep === "welcome") {
-        if (userInput.toLowerCase().includes("cxo") || userInput.toLowerCase().includes("meeting")) nextStep = "book_cxo"
+        if (userInput.toLowerCase().includes("20x") || userInput.toLowerCase().includes("linkedin outreach") || userInput.toLowerCase().includes("excellence")) nextStep = "linkedin_20x"
+        else if (userInput.toLowerCase().includes("followers") || userInput.toLowerCase().includes("boost")) nextStep = "followers_boost"
         else if (userInput.toLowerCase().includes("sdr")) nextStep = "sdr_service"
-        else if (userInput.toLowerCase().includes("infra") || userInput.toLowerCase().includes("crm") || userInput.toLowerCase().includes("setup")) nextStep = "setup_infra"
         else if (userInput.toLowerCase().includes("question") || userInput.toLowerCase().includes("help") || userInput.toLowerCase().includes("info")) nextStep = "questions"
         else nextStep = "welcome"
       }
-      else if (currentStep === "book_cxo" && userInput.includes("term")) nextStep = "book_cxo_terms"
-      else if ((currentStep === "book_cxo" || currentStep === "book_cxo_terms" || currentStep === "sdr_service" || currentStep === "sdr_more" || currentStep === "setup_infra" || currentStep === "infra_stack" || currentStep === "included_services" || currentStep === "quality" || currentStep === "customize" || currentStep === "questions") && userInput.toLowerCase().includes("book")) nextStep = "book_call"
-      else if (currentStep === "sdr_service" && userInput.toLowerCase().includes("tell")) nextStep = "sdr_more"
-      else if (currentStep === "sdr_more" && userInput.toLowerCase().includes("case")) nextStep = "included_services"
-      else if (currentStep === "setup_infra" && userInput.toLowerCase().includes("stack")) nextStep = "infra_stack"
+      else if (currentStep === "linkedin_20x" && (userInput.toLowerCase().includes("tell") || userInput.toLowerCase().includes("more"))) nextStep = "linkedin_20x_more"
+      else if (currentStep === "followers_boost" && (userInput.toLowerCase().includes("tell") || userInput.toLowerCase().includes("more"))) nextStep = "followers_more"
+      else if (currentStep === "sdr_service" && (userInput.toLowerCase().includes("tell") || userInput.toLowerCase().includes("more"))) nextStep = "sdr_more"
+      else if ((currentStep === "linkedin_20x" || currentStep === "linkedin_20x_more" || currentStep === "followers_boost" || currentStep === "followers_more" || currentStep === "sdr_service" || currentStep === "sdr_more" || currentStep === "included_services" || currentStep === "account_safety" || currentStep === "customize" || currentStep === "questions") && userInput.toLowerCase().includes("book")) nextStep = "book_call"
       else if (currentStep === "questions" && userInput.toLowerCase().includes("included")) nextStep = "included_services"
-      else if (currentStep === "questions" && userInput.toLowerCase().includes("quality")) nextStep = "quality"
+      else if (currentStep === "questions" && (userInput.toLowerCase().includes("safety") || userInput.toLowerCase().includes("account"))) nextStep = "account_safety"
       else if (currentStep === "questions" && userInput.toLowerCase().includes("customize")) nextStep = "customize"
       else if (userInput.toLowerCase().includes("back")) nextStep = "welcome"
 

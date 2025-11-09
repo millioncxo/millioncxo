@@ -112,7 +112,7 @@ export default function Contact() {
               
               <div className="animate-fade-in-delay">
                 <p className="text-xl text-muted-jade mb-8 leading-relaxed">
-                  Tell us about your LinkedIn goals — our team replies personally within 24 hours (no bots ever).
+                  Tell us about your LinkedIn goals - our team replies personally within 24 hours (no bots ever).
                 </p>
                 
                 <div className="space-y-4 text-muted-jade">

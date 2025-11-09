@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import CounterAnimation from '@/components/CounterAnimation'
 import ScrollAnimation from '@/components/ScrollAnimation'
-import { Mail, Phone, BarChart3, Calendar, Target, FileSearch, Shield, DollarSign, Check } from 'lucide-react'
+import { Mail, Phone, BarChart3, Calendar, Target, FileSearch, Shield, DollarSign, Check, Users, TrendingUp } from 'lucide-react'
 
 export default function Services() {
   return (
@@ -62,15 +62,15 @@ export default function Services() {
                     </div>
                     <div className="text-center">
                       <div className="text-3xl font-bold text-golden-opal mb-2">
-                        <CounterAnimation end={118} duration={1200} suffix="K+" />
-                      </div>
-                      <div className="text-ivory-silk text-sm">Discovery Calls</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-3xl font-bold text-golden-opal mb-2">
                         <CounterAnimation end={30} duration={1200} suffix="" />
                       </div>
                       <div className="text-ivory-silk text-sm">Days to 1st Meeting</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-3xl font-bold text-golden-opal mb-2">
+                        <CounterAnimation end={28} duration={1200} suffix="+" />
+                      </div>
+                      <div className="text-ivory-silk text-sm">Clients</div>
                     </div>
                   </div>
 
@@ -156,29 +156,41 @@ export default function Services() {
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            
+            {/* LinkedIn Followers Boost */}
+            <div className="bg-ivory-silk/90 border border-golden-opal/20 rounded-2xl shadow-lg flex flex-col items-center text-center p-8 h-full">
+              <span className="text-golden-opal font-bold text-lg mb-2">LINKEDIN FOLLOWERS BOOST</span>
+              <div className="text-3xl font-bold text-onyx-black mb-2">$499<span className="text-base font-medium text-muted-jade">/month</span></div>
+              <div className="text-muted-jade mb-4 text-sm">Build brand authority, one follower at a time</div>
+              <ul className="mb-6 space-y-2 text-left w-full max-w-xs mx-auto flex-grow">
+                <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> 10,000+ targeted followers per month</li>
+                <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> Organic growth strategy</li>
+                <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> Content optimization for your brand</li>
+                <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> Engagement boost</li>
+              </ul>
+              <Link href="https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled" target="_blank" rel="noopener noreferrer" className="btn-outline w-full">Book a Demo call!</Link>
+            </div>
             
             {/* LinkedIn Outreach Excellence 20X - CENTER */}
             <div className="bg-ivory-silk/90 border-2 border-golden-opal rounded-2xl shadow-xl flex flex-col items-center text-center p-8 relative h-full">
               <span className="absolute -top-4 left-1/2 -translate-x-1/2 bg-golden-opal text-onyx-black px-4 py-1 rounded-full text-xs font-bold shadow">Most Popular</span>
-              <span className="text-golden-opal font-bold text-lg mb-2">LinkedIn Outreach Excellence 20X</span>
-              <div className="text-3xl font-bold text-onyx-black mb-2">From $150<span className="text-base font-medium text-muted-jade">/license</span></div>
+              <span className="text-golden-opal font-bold text-lg mb-2">LINKEDIN OUTREACH EXCELLENCE 20X</span>
+              <div className="text-3xl font-bold text-onyx-black mb-2">$250<span className="text-base font-medium text-muted-jade">/license</span></div>
               <div className="text-muted-jade mb-4 text-sm">License-based LinkedIn scaling</div>
               <ul className="mb-6 space-y-2 text-left w-full max-w-xs mx-auto flex-grow">
-                <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> 1,000 InMails/month/license (vs LinkedIn's 50)</li>
-                <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> 4 guaranteed interested customers/month</li>
-                <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> Research-based outreach</li>
-                <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> 100% money-back if account blocked</li>
-                <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> Zero tool costs</li>
+                <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> 1,000 InMails per license per month</li>
+                <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> 4 guaranteed prospects per license per month</li>
+                <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> Research-based outreach using LinkedIn activity </li>
+                <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> 100% money-back guaranteed if your account gets blocked</li>
+                
+                <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> Zero additional tool costs</li>
               </ul>
-              <Link href="https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled" target="_blank" rel="noopener noreferrer" className="btn-primary w-full">Get Started</Link>
+              <Link href="https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled" target="_blank" rel="noopener noreferrer" className="btn-primary w-full">Book a Demo call!</Link>
             </div>
             
             {/* SDR as a Service */}
             <div className="bg-ivory-silk/90 border border-golden-opal/20 rounded-2xl shadow-lg flex flex-col items-center text-center p-8 h-full">
-              <span className="text-golden-opal font-bold text-lg mb-2">SDR as a Service</span>
+              <span className="text-golden-opal font-bold text-lg mb-2">SDR AS A SERVICE</span>
               <div className="text-3xl font-bold text-onyx-black mb-2">$2,000<span className="text-base font-medium text-muted-jade">/month</span></div>
-              <div className="text-golden-opal text-sm font-semibold mb-1">First 3 months @ $1,199</div>
               <div className="text-muted-jade mb-4 text-sm">Full-time SDR, 4+ CXO meetings/month</div>
               <ul className="mb-6 space-y-2 text-left w-full max-w-xs mx-auto flex-grow">
                 <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> 200+ emails/day</li>
@@ -186,7 +198,7 @@ export default function Services() {
                 <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> 80 ICP profiles researched/day</li>
                 <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> Target: 4 qualified CXO meetings/month</li>
               </ul>
-              <Link href="https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled" target="_blank" rel="noopener noreferrer" className="btn-outline w-full">Get Started</Link>
+              <Link href="https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled" target="_blank" rel="noopener noreferrer" className="btn-outline w-full">Book a Demo call!</Link>
             </div>
           </div>
         </div>
@@ -340,11 +352,10 @@ export default function Services() {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
             {[
               { number: 93, label: "Success Rate", suffix: "%" },
               { number: 23, label: "Avg Meetings/Month", suffix: "" },
-              { number: 118, label: "Discovery Calls Delivered", suffix: "K+" },
               { number: 30, label: "Days to First Meeting", suffix: "" }
             ].map((metric, index) => (
               <ScrollAnimation key={index} delay={index * 100}>

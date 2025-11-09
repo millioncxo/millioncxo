@@ -30,8 +30,8 @@ export default function Navigation() {
           {
             title: "Get Started",
             items: [
-              { href: 'https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled', label: 'Request Demo', desc: 'See our platform in action' },
-              { href: 'https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled', label: 'Free Consultation', desc: 'Discuss your outreach needs' }
+              { href: 'https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled', label: 'Book a Free Demo', desc: 'See our platform in action' },
+              { href: '/#pricing', label: 'View Pricing', desc: 'Simple, transparent pricing' }
             ]
           }
         ]
@@ -72,16 +72,16 @@ export default function Navigation() {
           {
             title: "Outreach Services",
             items: [
-              { href: '/services#pilot', label: 'Pilot Program', desc: '$99/meeting - 4 qualified CXO meetings' },
-              { href: '/services#sdr', label: 'SDR as a Service', desc: '$1,999/month - Dedicated full-time SDR' },
-              { href: '/services#consultation', label: 'Consultation & Infrastructure', desc: 'Complete CRM & outreach setup' }
+              { href: '/services#linkedin-20x', label: 'LinkedIn Outreach Excellence 20X', desc: '$250/license - 1,000 InMails, 4 guaranteed customers' },
+              { href: '/services#followers', label: 'LinkedIn Followers Boost', desc: '$499/month - 10,000+ targeted followers' },
+              { href: '/services#sdr', label: 'SDR as a Service', desc: '$2,000/month - Dedicated full-time SDR' }
             ]
           },
           {
-            title: "Consultation",
+            title: "What You Get",
             items: [
-              { href: '/services#strategy', label: 'Strategy Design', desc: 'Complete lead generation strategy' },
-              { href: '/services#training', label: 'Team Training', desc: 'Outbound best practices' }
+              { href: '/services#features', label: 'Key Features', desc: 'Research-based outreach, account safety guarantee' },
+              { href: '/services#process', label: 'Our Process', desc: 'Human-driven methodology' }
             ]
           }
         ]
@@ -96,9 +96,9 @@ export default function Navigation() {
           {
             title: "Start Your Journey",
             items: [
-              { href: '/contact#demo', label: 'Request Demo', desc: 'See our platform in action' },
-              { href: '/contact#consultation', label: 'Free Consultation', desc: 'Discuss your specific needs' },
-              { href: '/contact#quote', label: 'Get Custom Quote', desc: 'Tailored pricing for your business' }
+              { href: 'https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled', label: 'Book a Free Demo', desc: 'See our platform in action' },
+              { href: '/#pricing', label: 'View Pricing', desc: 'Simple, transparent pricing' },
+              { href: '/contact', label: 'Contact Us', desc: 'Get in touch with our team' }
             ]
           }
         ]
@@ -226,8 +226,8 @@ export default function Navigation() {
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <Link href="https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled" target="_blank" rel="noopener noreferrer" className="btn-primary px-6 py-2 text-sm">
-              Get Started
+            <Link href="https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled" target="_blank" rel="noopener noreferrer" className="btn-primary !px-4 !py-1.5 text-sm">
+              Book a Free Demo
             </Link>
           </div>
 
@@ -267,7 +267,7 @@ export default function Navigation() {
                 </Link>
               ))}
               <Link href="https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled" target="_blank" rel="noopener noreferrer" className="btn-primary mt-4">
-                Get Started
+                Book a Free Demo
               </Link>
             </nav>
           </div>
