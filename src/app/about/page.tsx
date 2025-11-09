@@ -15,7 +15,7 @@ export default function About() {
             <div className="text-left">
               <div className="animate-fade-in">
                 <div className="inline-flex items-center bg-golden-opal/10 rounded-full px-4 py-2 mb-6">
-                  <span className="text-golden-opal font-semibold text-sm">The Human Connection Company</span>
+                  <span className="text-golden-opal font-semibold text-sm">Proudly Human‑Driven • Human‑Driven Personalised Outreach</span>
                 </div>
                 
                 <h1 className="text-5xl lg:text-7xl font-bold text-ivory-silk mb-8 leading-tight">
@@ -25,7 +25,7 @@ export default function About() {
               
               <div className="animate-fade-in-delay">
                 <p className="text-xl text-muted-jade mb-6 leading-relaxed">
-                  We don&apos;t just generate leads. We craft conversations that matter.
+                  We help B2B companies book qualified meetings with real decision‑makers, not just leads. The future of outbound isn&apos;t automation; it&apos;s verified conversations backed by intelligence, process, and people.
                 </p>
                 
                 <div className="space-y-4 mb-8">
@@ -188,8 +188,7 @@ export default function About() {
                   Our journey began with a simple observation: too many companies struggle with inconsistent lead generation and low-quality prospects.
                 </p>
                 <p className="text-lg text-muted-jade leading-relaxed mb-6">
-                  We set out to change that by focusing exclusively on human-driven outreach. No automation, no mass emails, no generic approaches. 
-                  Just strategic, personalized conversations that open doors to real business opportunities.
+                  We set out to change that by focusing exclusively on human-driven personalised outreach. Human-led, not automated. To keep your LinkedIn accounts secure. Just strategic, personalized conversations that open doors to real business opportunities.
                 </p>
                 <p className="text-lg text-muted-jade leading-relaxed">
                   Today, we&apos;re proud to help businesses across the globe connect with the CXOs and decision-makers who can transform their growth trajectory.
@@ -336,7 +335,7 @@ export default function About() {
               },
               {
                 value: "Human-Driven",
-                description: "No automation, no mass emails. Every outreach is personalized and authentic, building real relationships with decision-makers.",
+                description: "Human-driven personalised outreach. Zero automation. No bots, no mass-blasts. 100% accountable humans. Human-led, not automated. To keep your LinkedIn accounts secure.",
                 icon: (
                   <svg className="w-8 h-8 text-golden-opal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />

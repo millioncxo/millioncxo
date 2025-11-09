@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import CounterAnimation from '@/components/CounterAnimation'
 import ScrollAnimation from '@/components/ScrollAnimation'
+import { Mail, Phone, BarChart3, Calendar, Target, FileSearch, Shield, DollarSign, Check, Users, TrendingUp } from 'lucide-react'
 
 export default function Services() {
   return (
@@ -15,18 +16,18 @@ export default function Services() {
             <div className="text-left">
               <div className="animate-fade-in">
                 <div className="inline-flex items-center bg-golden-opal/10 rounded-full px-4 py-2 mb-6">
-                  <span className="text-golden-opal font-semibold text-sm">Fully Managed Outbound Engine</span>
+                  <span className="text-golden-opal font-semibold text-sm">Proudly Human‑Driven • Human‑Driven Personalised Outreach</span>
                 </div>
                 
                 <h1 className="text-5xl lg:text-7xl font-bold text-ivory-silk mb-8 leading-tight">
-                  Our <span className="text-golden-opal">Services</span>
+                  LinkedIn Outreach <span className="text-golden-opal">Services</span>
                 </h1>
               </div>
               
               <div className="animate-fade-in-delay">
                 <p className="text-xl text-muted-jade mb-8 leading-relaxed">
-                  We are a fully managed outbound engine that delivers high-value CXO meetings. 
-                  Choose the package that fits your growth stage and scale as needed.
+                  Human‑led LinkedIn outreach that delivers real CXO conversations. 
+                  Research‑based, not random spam. Choose the package that fits your growth stage.
                 </p>
                 
                 <div className="flex flex-col sm:flex-row gap-4">
@@ -61,15 +62,15 @@ export default function Services() {
                     </div>
                     <div className="text-center">
                       <div className="text-3xl font-bold text-golden-opal mb-2">
-                        <CounterAnimation end={118} duration={1200} suffix="K+" />
-                      </div>
-                      <div className="text-ivory-silk text-sm">Discovery Calls</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-3xl font-bold text-golden-opal mb-2">
                         <CounterAnimation end={30} duration={1200} suffix="" />
                       </div>
                       <div className="text-ivory-silk text-sm">Days to 1st Meeting</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-3xl font-bold text-golden-opal mb-2">
+                        <CounterAnimation end={28} duration={1200} suffix="+" />
+                      </div>
+                      <div className="text-ivory-silk text-sm">Clients</div>
                     </div>
                   </div>
 
@@ -155,45 +156,49 @@ export default function Services() {
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {/* Pilot Program */}
-            <div className="bg-ivory-silk/90 border border-golden-opal/20 rounded-2xl shadow-lg flex flex-col items-center text-center p-8">
-              <span className="text-golden-opal font-bold text-lg mb-2">Pilot Program</span>
-              <div className="text-3xl font-bold text-onyx-black mb-2">$99<span className="text-base font-medium text-muted-jade">/meeting</span></div>
-              <div className="text-muted-jade mb-4">Test our CXO meeting engine risk-free (4 meetings, 30 days)</div>
-              <ul className="mb-6 space-y-2 text-left w-full max-w-xs mx-auto">
-                <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> 4 guaranteed CXO meetings in 30 days</li>
-                <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> Only pay for delivered meetings</li>
-                <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> No charge for prospect no-shows</li>
-                <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> Fast onboarding, minimal risk</li>
+            {/* LinkedIn Followers Boost */}
+            <div className="bg-ivory-silk/90 border border-golden-opal/20 rounded-2xl shadow-lg flex flex-col items-center text-center p-8 h-full">
+              <span className="text-golden-opal font-bold text-lg mb-2">LINKEDIN FOLLOWERS BOOST</span>
+              <div className="text-3xl font-bold text-onyx-black mb-2">$499<span className="text-base font-medium text-muted-jade">/month</span></div>
+              <div className="text-muted-jade mb-4 text-sm">Build brand authority, one follower at a time</div>
+              <ul className="mb-6 space-y-2 text-left w-full max-w-xs mx-auto flex-grow">
+                <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> 10,000+ targeted followers per month</li>
+                <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> Organic growth strategy</li>
+                <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> Content optimization for your brand</li>
+                <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> Engagement boost</li>
               </ul>
-                              <Link href="https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled" target="_blank" rel="noopener noreferrer" className="btn-outline w-full">Start Pilot</Link>
+              <Link href="https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled" target="_blank" rel="noopener noreferrer" className="btn-outline w-full">Book a Demo call!</Link>
             </div>
-            {/* SDR as a Service */}
-            <div className="bg-ivory-silk/90 border-2 border-golden-opal rounded-2xl shadow-xl flex flex-col items-center text-center p-8 relative">
+            
+            {/* LinkedIn Outreach Excellence 20X - CENTER */}
+            <div className="bg-ivory-silk/90 border-2 border-golden-opal rounded-2xl shadow-xl flex flex-col items-center text-center p-8 relative h-full">
               <span className="absolute -top-4 left-1/2 -translate-x-1/2 bg-golden-opal text-onyx-black px-4 py-1 rounded-full text-xs font-bold shadow">Most Popular</span>
-              <span className="text-golden-opal font-bold text-lg mb-2">SDR as a Service</span>
-              <div className="text-3xl font-bold text-onyx-black mb-2">$1,999<span className="text-base font-medium text-muted-jade">/month</span></div>
-              <div className="text-muted-jade mb-4">Dedicated full-time SDR, 5+ CXO meetings/month</div>
-              <ul className="mb-6 space-y-2 text-left w-full max-w-xs mx-auto">
-                <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> Dedicated full-time SDR</li>
-                <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> 5+ qualified meetings/month</li>
-                <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> Multi-channel outreach (email, calls, LinkedIn)</li>
-                <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> Monthly or quarterly contract</li>
+              <span className="text-golden-opal font-bold text-lg mb-2">LINKEDIN OUTREACH EXCELLENCE 20X</span>
+              <div className="text-3xl font-bold text-onyx-black mb-2">$250<span className="text-base font-medium text-muted-jade">/license</span></div>
+              <div className="text-muted-jade mb-4 text-sm">License-based LinkedIn scaling</div>
+              <ul className="mb-6 space-y-2 text-left w-full max-w-xs mx-auto flex-grow">
+                <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> 1,000 InMails per license per month</li>
+                <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> 4 guaranteed prospects per license per month</li>
+                <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> Research-based outreach using LinkedIn activity </li>
+                <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> 100% money-back guaranteed if your account gets blocked</li>
+                
+                <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> Zero additional tool costs</li>
               </ul>
-                              <Link href="https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled" target="_blank" rel="noopener noreferrer" className="btn-primary w-full">Get Started</Link>
+              <Link href="https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled" target="_blank" rel="noopener noreferrer" className="btn-primary w-full">Book a Demo call!</Link>
             </div>
-            {/* Consultation & Infrastructure */}
-            <div className="bg-ivory-silk/90 border border-golden-opal/20 rounded-2xl shadow-lg flex flex-col items-center text-center p-8">
-              <span className="text-golden-opal font-bold text-lg mb-2">Consultation & Infrastructure</span>
-              <div className="text-3xl font-bold text-onyx-black mb-2">Custom</div>
-              <div className="text-muted-jade mb-4">Complete CRM, outreach, and sales setup</div>
-              <ul className="mb-6 space-y-2 text-left w-full max-w-xs mx-auto">
-                <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> CRM & outreach automation setup</li>
-                <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> Custom sales scripts & reporting</li>
-                <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> Tech stack integration (HubSpot, Apollo, etc.)</li>
-                <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> Team training included</li>
+            
+            {/* SDR as a Service */}
+            <div className="bg-ivory-silk/90 border border-golden-opal/20 rounded-2xl shadow-lg flex flex-col items-center text-center p-8 h-full">
+              <span className="text-golden-opal font-bold text-lg mb-2">SDR AS A SERVICE</span>
+              <div className="text-3xl font-bold text-onyx-black mb-2">$2,000<span className="text-base font-medium text-muted-jade">/month</span></div>
+              <div className="text-muted-jade mb-4 text-sm">Full-time SDR, 4+ CXO meetings/month</div>
+              <ul className="mb-6 space-y-2 text-left w-full max-w-xs mx-auto flex-grow">
+                <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> 200+ emails/day</li>
+                <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> 150+ cold calls/day</li>
+                <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> 80 ICP profiles researched/day</li>
+                <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> Target: 4 qualified CXO meetings/month</li>
               </ul>
-                              <Link href="https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled" target="_blank" rel="noopener noreferrer" className="btn-outline w-full">Get Custom Quote</Link>
+              <Link href="https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled" target="_blank" rel="noopener noreferrer" className="btn-outline w-full">Book a Demo call!</Link>
             </div>
           </div>
         </div>
@@ -347,11 +352,10 @@ export default function Services() {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
             {[
               { number: 93, label: "Success Rate", suffix: "%" },
               { number: 23, label: "Avg Meetings/Month", suffix: "" },
-              { number: 118, label: "Discovery Calls Delivered", suffix: "K+" },
               { number: 30, label: "Days to First Meeting", suffix: "" }
             ].map((metric, index) => (
               <ScrollAnimation key={index} delay={index * 100}>

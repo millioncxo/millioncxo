@@ -8,8 +8,11 @@ export default function Footer() {
           {/* Company Info */}
           <div className="space-y-4">
             <h3 className="text-2xl font-bold text-golden-opal">millionCXO</h3>
-            <p className="text-muted-jade text-sm">
-              Connecting B2B companies with decision-makers through strategic outreach and proven methodologies.
+            <p className="text-muted-jade text-sm mb-2">
+              Human‑led LinkedIn outreach that delivers real CXO conversations.
+            </p>
+            <p className="text-golden-opal text-xs font-semibold">
+              Human‑Driven • Human‑Driven Personalised Outreach
             </p>
           </div>
 
@@ -26,9 +29,9 @@ export default function Footer() {
 
               <div className="flex items-center space-x-2">
                 <svg className="w-4 h-4 text-golden-opal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
-                <span className="text-muted-jade">24-hour response time</span>
+                <Link href="https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled" target="_blank" rel="noopener noreferrer" className="text-muted-jade hover:text-golden-opal transition-colors">Book a Demo Call</Link>
               </div>
               <div className="flex items-center space-x-2">
                 <a href="https://www.linkedin.com/company/millioncxo" target="_blank" rel="noopener noreferrer" className="text-muted-jade hover:text-golden-opal transition-colors">

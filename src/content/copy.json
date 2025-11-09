@@ -1,0 +1,159 @@
+{
+  "meta": {
+    "brand": "MillionCXO",
+    "lastUpdated": "2024-12-19 12:00:00 IST",
+    "tagline": "Proudly human‑driven. Human‑driven personalised outreach."
+  },
+  "nav": {
+    "links": [
+      {"label": "Home", "href": "/"},
+      {"label": "LinkedIn Outreach 20X", "href": "/#linkedin-20x"},
+      {"label": "SDR as a Service", "href": "/#sdr-service"},
+      {"label": "Process", "href": "/#process"},
+      {"label": "Pricing", "href": "/#pricing"},
+      {"label": "About", "href": "/about"},
+      {"label": "Contact", "href": "/contact"}
+    ],
+    "badge": "Human‑Driven"
+  },
+  "hero": {
+    "title": "Human‑Led LinkedIn Outreach. Real CXO conversations.",
+    "subtitle": "Human‑driven personalised outreach. Every message is researched and written by trained SDRs. On LinkedIn we study each prospect's posts.",
+    "supportNote": "LinkedIn Outreach Excellence - 20X",
+    "primaryCta": {"label": "Book a discovery call", "href": "https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled"},
+    "secondaryCta": {"label": "See how 20X works", "href": "/#linkedin-20x"},
+    "proof": [
+      "CXO‑focused outreach",
+      "Research‑based, not random spam",
+      "Guaranteed responses per license"
+    ]
+  },
+  "whyHuman": {
+    "title": "Why Human‑Driven",
+    "bullets": [
+      {"title": "Activity‑based research", "desc": "We study each prospect's posts, comments, and intent before writing."},
+      {"title": "CXO‑first messaging", "desc": "Conversation starters tailored to decision‑makers, not generic scripts."},
+      {"title": "Human‑driven personalised outreach", "desc": "Zero automation. No bots, no mass‑blasts. 100% accountable humans. Human-led, not automated. To keep your LinkedIn accounts secure."}
+    ]
+  },
+  "linkedin20x": {
+    "id": "linkedin-20x",
+    "title": "LinkedIn Outreach Excellence - 20X",
+    "sub": "Maximise LinkedIn with human research and scale‑safe systems.",
+    "highlights": [
+      "LinkedIn provides 50 inmail messages per month per license whereas MillionCXO sends 1,000 inmail messages per license per month for you",
+      "We provide a guarantee of 4 interested customers per license per month",
+      "We provide research‑based outreach using customer's LinkedIn activity",
+      "We provide a money back guarantee on your LinkedIn account safety that not even a single account of yours will be blocked or else, we will refund your entire amount back into your account",
+      "We provide industry's lowest price at as low as 150 USD per month per license",
+      "Zero extra tool cost for you"
+    ],
+    "tiles": [
+      {"title": "Goal", "desc": "Maximizing LinkedIn outreach efficiency (20X)"},
+      {"title": "ICP Discovery + Messaging", "desc": "Define segments, talk tracks, and value hooks."},
+      {"title": "1,000 InMails/month", "desc": "Per license, delivered by trained SDRs."},
+      {"title": "Guaranteed replies", "desc": "≥4 positive replies/license/month or pro‑rated refund."}
+    ]
+  },
+  "outcomes": {
+    "title": "Measurable Outcomes",
+    "comparison": {
+      "labels": ["MillionCXO", "Generic Agency", "In‑House Sales Team"],
+      "rows": [
+        {
+          "label": "Cost to generate 1 appointment",
+          "values": ["< $70", "> $500", "> $800"]
+        },
+        {
+          "label": "Positive replies per license/month",
+          "values": ["≥ 4", "0–1", "0–1"]
+        },
+        {
+          "label": "LinkedIn InMails per license/month",
+          "values": ["1000+", "< 50", "< 50"]
+        },
+        {
+          "label": "CXO‑focused outreach",
+          "values": ["Yes", "No", "Partial"]
+        },
+        {
+          "label": "Human research on every send",
+          "values": ["Yes", "No", "No"]
+        }
+      ]
+    },
+    "note": "Figures based on MillionCXO deck benchmarks and delivery commitments."
+  },
+  "process": {
+    "title": "Outbound, the human way",
+    "steps": [
+      {"title": "Data Mining", "desc": "Sales Navigator and public signals to build clean lists."},
+      {"title": "Profiling", "desc": "Industry, role, geo, tech stack, revenue fit."},
+      {"title": "Cleaning", "desc": "Activity‑based filters from posts, comments, and likes."},
+      {"title": "InMail Outreach", "desc": "1,000+ InMails per license per month, hand‑written."},
+      {"title": "Positive Response → Booking", "desc": "Our team confirms, your team gets calendar holds."},
+      {"title": "Meeting Conducted", "desc": "Real conversations. Real pipeline."}
+    ]
+  },
+  "pricing": {
+    "title": "Pricing",
+    "plans": [
+      {
+        "id": "sdr-service",
+        "name": "SDR as a Service",
+        "price": "$2,000 / month",
+        "promo": "First 3 months @ $1,199 / month",
+        "includes": [
+          "200+ emails/day",
+          "150+ cold calls/day",
+          "80 ICP profiles researched/day",
+          "Target: 4 qualified CXO meetings/month"
+        ],
+        "footnote": "Minimum SDRs to be hired."
+      },
+      {
+        "id": "excellence-20x",
+        "name": "LinkedIn Outreach Excellence 20X (License)",
+        "price": "Custom - license-based",
+        "includes": [
+          "1,000+ InMails per license/month",
+          "Guaranteed ≥4 positive replies/license/month",
+          "Zero extra tool cost",
+          "Research‑based, human‑written messages"
+        ],
+        "earlyBird": [
+          "3–5 licenses @10% → $225 / month / license",
+          "6–10 licenses @20% → $200 / month / license",
+          "11–20 licenses @30% → $175 / month / license"
+        ]
+      }
+    ]
+  },
+  "about": {
+    "title": "About MillionCXO",
+    "blurb": "We help B2B companies book qualified meetings with real decision‑makers, not just leads. The future of outbound isn't automation; it's verified conversations backed by intelligence, process, and people.",
+    "specialize": [
+      "Multichannel outbound (Email, LinkedIn, Calls)",
+      "Research‑based outreach",
+      "Outcome‑based solutions"
+    ],
+    "belief": "Proudly human‑driven. Human‑driven personalised outreach."
+  },
+  "testimonials": {
+    "title": "What our clients say",
+    "items": [
+      {"quote": "They don't spam; they research. Our CXO reply rate finally moved.", "author": "VP Sales, B2B SaaS"},
+      {"quote": "The team hit their reply guarantees and kept meetings qualified.", "author": "Founder, Consulting"}
+    ]
+  },
+  "cta": {
+    "headline": "Ready to turn LinkedIn into real pipeline?",
+    "sub": "Speak with a strategist. We'll map your ICP and messaging in the first call.",
+    "button": {"label": "Book a discovery call", "href": "https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled"}
+  },
+  "footer": {
+    "badge": "Human‑Driven • Human‑Driven Personalised Outreach",
+    "email": "hello@millioncxo.com",
+    "social": [{"label": "LinkedIn", "href": "https://www.linkedin.com/company/millioncxo/"}]
+  }
+}
