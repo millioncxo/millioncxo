@@ -455,6 +455,7 @@ export default function Home() {
                   { text: "100% garanteed money-back if your account gets blocked", icon: Shield },
                   
                   
+                  
                 ],
                 earlyBird: [
                   "3–5 licenses @10% → $225 / month / license",
@@ -548,25 +549,25 @@ export default function Home() {
         </div>
         
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-16">
+          <div className="text-center mb-12 sm:mb-16">
             
-            <h2 className="text-4xl lg:text-5xl font-bold text-onyx-black mb-6">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-onyx-black mb-4 sm:mb-6">
               Measurable <span className="text-gradient">Outcomes</span>
             </h2>
-            <p className="text-xl text-muted-jade max-w-3xl mx-auto">
+            <p className="text-lg sm:text-xl text-muted-jade max-w-3xl mx-auto px-4">
               Real results that speak for themselves
             </p>
           </div>
           
-          <div className="overflow-x-auto">
-            <div className="bg-ivory-silk/80 backdrop-blur-sm rounded-3xl shadow-2xl border-2 border-golden-opal/30 p-1">
-              <table className="w-full rounded-2xl overflow-hidden">
+          <div className="overflow-x-auto -mx-4 sm:mx-0">
+            <div className="bg-ivory-silk/80 backdrop-blur-sm rounded-2xl sm:rounded-3xl shadow-2xl border-2 border-golden-opal/30 p-1 min-w-full sm:min-w-0">
+              <table className="w-full rounded-xl sm:rounded-2xl overflow-hidden">
                 <thead>
                   <tr className="bg-gradient-to-r from-imperial-emerald via-petrol-smoke to-imperial-emerald">
-                    <th className="px-6 py-5 text-left text-ivory-silk font-bold text-base">Metric</th>
-                    <th className="px-6 py-5 text-center text-golden-opal font-bold text-base">MillionCXO</th>
-                    <th className="px-6 py-5 text-center text-muted-jade/80 font-semibold text-base">Generic Agency</th>
-                    <th className="px-6 py-5 text-center text-muted-jade/80 font-semibold text-base">In‑House Sales Team</th>
+                    <th className="px-2 py-3 sm:px-4 sm:py-4 lg:px-6 lg:py-5 text-left text-ivory-silk font-bold text-xs sm:text-sm lg:text-base">Metric</th>
+                    <th className="px-2 py-3 sm:px-4 sm:py-4 lg:px-6 lg:py-5 text-center text-golden-opal font-bold text-xs sm:text-sm lg:text-base">MillionCXO</th>
+                    <th className="px-2 py-3 sm:px-4 sm:py-4 lg:px-6 lg:py-5 text-center text-muted-jade/80 font-semibold text-xs sm:text-sm lg:text-base">Generic Agency</th>
+                    <th className="px-2 py-3 sm:px-4 sm:py-4 lg:px-6 lg:py-5 text-center text-muted-jade/80 font-semibold text-xs sm:text-sm lg:text-base">In‑House Sales Team</th>
                   </tr>
                 </thead>
                 <tbody className="bg-ivory-silk divide-y divide-golden-opal/20">
@@ -593,14 +594,14 @@ export default function Home() {
                     }
                   ].map((row, index) => (
                     <tr key={index} className="hover:bg-golden-opal/10 transition-all duration-300 group">
-                      <td className="px-6 py-5 text-onyx-black font-semibold group-hover:text-golden-opal transition-colors">{row.metric}</td>
-                      <td className="px-6 py-5 text-center">
-                        <span className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-golden-opal/20 to-golden-opal/30 text-golden-opal rounded-full font-bold text-sm shadow-md border border-golden-opal/40">
+                      <td className="px-2 py-3 sm:px-4 sm:py-4 lg:px-6 lg:py-5 text-onyx-black font-semibold text-xs sm:text-sm lg:text-base group-hover:text-golden-opal transition-colors">{row.metric}</td>
+                      <td className="px-2 py-3 sm:px-4 sm:py-4 lg:px-6 lg:py-5 text-center">
+                        <span className="inline-flex items-center px-2 py-1 sm:px-3 sm:py-1.5 lg:px-4 lg:py-2 bg-gradient-to-r from-golden-opal/20 to-golden-opal/30 text-golden-opal rounded-full font-bold text-xs sm:text-sm shadow-md border border-golden-opal/40">
                           {row.values[0]}
                         </span>
                       </td>
-                      <td className="px-6 py-5 text-center text-muted-jade font-medium">{row.values[1]}</td>
-                      <td className="px-6 py-5 text-center text-muted-jade font-medium">{row.values[2]}</td>
+                      <td className="px-2 py-3 sm:px-4 sm:py-4 lg:px-6 lg:py-5 text-center text-muted-jade font-medium text-xs sm:text-sm lg:text-base">{row.values[1]}</td>
+                      <td className="px-2 py-3 sm:px-4 sm:py-4 lg:px-6 lg:py-5 text-center text-muted-jade font-medium text-xs sm:text-sm lg:text-base">{row.values[2]}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -614,12 +615,12 @@ export default function Home() {
       {/* Process Section - Outbound the Human Way */}
       <section id="process" className="py-24 bg-gradient-to-br from-petrol-smoke via-imperial-emerald to-petrol-smoke relative overflow-hidden">
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-16">
+          <div className="text-center mb-12 sm:mb-16">
             
-            <h2 className="text-4xl lg:text-5xl font-bold text-ivory-silk mb-6">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-ivory-silk mb-4 sm:mb-6">
               Outbound, the <span className="text-golden-opal">Human Way</span>
             </h2>
-            <p className="text-xl text-muted-jade max-w-3xl mx-auto">
+            <p className="text-lg sm:text-xl text-muted-jade max-w-3xl mx-auto px-4">
               A systematic approach that consistently delivers results
             </p>
           </div>
