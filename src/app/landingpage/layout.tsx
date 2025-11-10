@@ -21,9 +21,25 @@ export default function LandingPageLayout({
       })
     }
 
-    // Use a small delay to ensure root nav is rendered
-    const timeoutId = setTimeout(hideRootNav, 100)
+    // Hide the ChatWidget component on landing page
+    const hideChatWidget = () => {
+      // Find the ChatWidget by checking for fixed positioning and z-50
+      const allDivs = document.querySelectorAll('div.fixed')
+      allDivs.forEach((div) => {
+        const classes = div.className
+        if (classes.includes('bottom-5') && classes.includes('right-5') && classes.includes('z-50')) {
+          ;(div as HTMLElement).style.display = 'none'
+        }
+      })
+    }
+
+    // Use a small delay to ensure components are rendered
+    const timeoutId = setTimeout(() => {
+      hideRootNav()
+      hideChatWidget()
+    }, 100)
     hideRootNav() // Also try immediately
+    hideChatWidget() // Also try immediately
 
     return () => {
       clearTimeout(timeoutId)
@@ -32,6 +48,14 @@ export default function LandingPageLayout({
       allNavs.forEach((nav) => {
         if (!nav.hasAttribute('data-simple-nav')) {
           ;(nav as HTMLElement).style.display = ''
+        }
+      })
+      // Restore chat widget when leaving landing page
+      const allDivs = document.querySelectorAll('div.fixed')
+      allDivs.forEach((div) => {
+        const classes = div.className
+        if (classes.includes('bottom-5') && classes.includes('right-5') && classes.includes('z-50')) {
+          ;(div as HTMLElement).style.display = ''
         }
       })
     }
