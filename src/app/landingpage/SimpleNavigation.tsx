@@ -24,7 +24,7 @@ export default function SimpleNavigation() {
           {/* Book a Demo Button */}
           <div>
             <Link 
-              href="https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled" 
+              href="https://calendly.com/millioncxo/loe-20x" 
               target="_blank" 
               rel="noopener noreferrer" 
               className="btn-primary !px-4 !py-1.5 text-sm"

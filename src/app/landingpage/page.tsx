@@ -62,7 +62,7 @@ export default function LandingPage() {
               
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-delay">
-                <Link href="https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled" target="_blank" rel="noopener noreferrer" className="btn-primary inline-flex items-center justify-center">
+                <Link href="https://calendly.com/millioncxo/loe-20x" target="_blank" rel="noopener noreferrer" className="btn-primary inline-flex items-center justify-center">
                   <span>Book a Free Demo</span>
                   <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -396,7 +396,7 @@ export default function LandingPage() {
                   Every message crafted, every connection verified - human to human.
                 </p>
                 <Link
-                  href="https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled"
+                  href="https://calendly.com/millioncxo/loe-20x"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-primary text-lg px-10 py-4 inline-flex items-center"
@@ -511,7 +511,7 @@ export default function LandingPage() {
                   )}
                   
                   <div className="mt-auto">
-                    <Link href="https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled" target="_blank" rel="noopener noreferrer" className={plan.popular ? 'btn-primary w-full' : 'btn-outline w-full'}>
+                    <Link href="https://calendly.com/millioncxo/loe-20x" target="_blank" rel="noopener noreferrer" className={plan.popular ? 'btn-primary w-full' : 'btn-outline w-full'}>
                       Book a Free Demo
                     </Link>
                   </div>
@@ -711,7 +711,7 @@ export default function LandingPage() {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled" target="_blank" rel="noopener noreferrer" className="btn-primary text-lg px-10 py-4">
+              <Link href="https://calendly.com/millioncxo/loe-20x" target="_blank" rel="noopener noreferrer" className="btn-primary text-lg px-10 py-4">
                 Book a Free Demo
               </Link>
               <Link href="/landingpage#linkedin-20x" className="btn-outline text-lg px-10 py-4">

@@ -97,7 +97,7 @@ const STEPS = {
   }
 }
 
-const BOOKING_LINK = "https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled"
+const BOOKING_LINK = "https://calendly.com/millioncxo/loe-20x"
 
 type StepKey = keyof typeof STEPS;
 

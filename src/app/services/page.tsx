@@ -167,7 +167,7 @@ export default function Services() {
                 <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> Content optimization for your brand</li>
                 <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> Engagement boost</li>
               </ul>
-              <Link href="https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled" target="_blank" rel="noopener noreferrer" className="btn-outline w-full">Book a Demo call!</Link>
+              <Link href="https://calendly.com/millioncxo/loe-20x" target="_blank" rel="noopener noreferrer" className="btn-outline w-full">Book a Demo call!</Link>
             </div>
             
             {/* LinkedIn Outreach Excellence 20X - CENTER */}
@@ -184,7 +184,7 @@ export default function Services() {
                 
                 <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> Zero additional tool costs</li>
               </ul>
-              <Link href="https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled" target="_blank" rel="noopener noreferrer" className="btn-primary w-full">Book a Demo call!</Link>
+              <Link href="https://calendly.com/millioncxo/loe-20x" target="_blank" rel="noopener noreferrer" className="btn-primary w-full">Book a Demo call!</Link>
             </div>
             
             {/* SDR as a Service */}
@@ -198,7 +198,7 @@ export default function Services() {
                 <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> 80 ICP profiles researched/day</li>
                 <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> Target: 4 qualified CXO meetings/month</li>
               </ul>
-              <Link href="https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled" target="_blank" rel="noopener noreferrer" className="btn-outline w-full">Book a Demo call!</Link>
+              <Link href="https://calendly.com/millioncxo/loe-20x" target="_blank" rel="noopener noreferrer" className="btn-outline w-full">Book a Demo call!</Link>
             </div>
           </div>
         </div>

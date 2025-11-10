@@ -72,7 +72,7 @@ export default function Contact() {
 
       // Redirect to booking link after a short delay
       setTimeout(() => {
-        window.location.href = 'https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled'
+        window.location.href = 'https://calendly.com/millioncxo/loe-20x'
       }, 2000)
 
     } catch (error: any) {
@@ -384,7 +384,7 @@ export default function Contact() {
                   <div className="mt-4 text-center">
                     <p className="text-muted-jade text-sm mb-3">Having trouble? You can also book directly:</p>
                     <a 
-                      href="https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled"
+                      href="https://calendly.com/millioncxo/loe-20x"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="btn-outline text-sm px-6 py-2 inline-block"

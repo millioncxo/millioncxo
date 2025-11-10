@@ -30,7 +30,7 @@ export default function Navigation() {
           {
             title: "Get Started",
             items: [
-              { href: 'https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled', label: 'Book a Free Demo', desc: 'See our platform in action' },
+              { href: 'https://calendly.com/millioncxo/loe-20x', label: 'Book a Free Demo', desc: 'See our platform in action' },
               { href: '/#pricing', label: 'View Pricing', desc: 'Simple, transparent pricing' }
             ]
           }
@@ -96,7 +96,7 @@ export default function Navigation() {
           {
             title: "Start Your Journey",
             items: [
-              { href: 'https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled', label: 'Book a Free Demo', desc: 'See our platform in action' },
+              { href: 'https://calendly.com/millioncxo/loe-20x', label: 'Book a Free Demo', desc: 'See our platform in action' },
               { href: '/#pricing', label: 'View Pricing', desc: 'Simple, transparent pricing' },
               { href: '/contact', label: 'Contact Us', desc: 'Get in touch with our team' }
             ]
@@ -226,7 +226,7 @@ export default function Navigation() {
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <Link href="https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled" target="_blank" rel="noopener noreferrer" className="btn-primary !px-4 !py-1.5 text-sm">
+            <Link href="https://calendly.com/millioncxo/loe-20x" target="_blank" rel="noopener noreferrer" className="btn-primary !px-4 !py-1.5 text-sm">
               Book a Free Demo
             </Link>
           </div>
@@ -266,7 +266,7 @@ export default function Navigation() {
                   {item.label}
                 </Link>
               ))}
-              <Link href="https://outlook.office.com/book/BookYourDiscoveryCall@millioncxo.com/s/3nnbUYEr9E28OGQwzgOAUQ2?ismsaljsauthenabled" target="_blank" rel="noopener noreferrer" className="btn-primary mt-4">
+              <Link href="https://calendly.com/millioncxo/loe-20x" target="_blank" rel="noopener noreferrer" className="btn-primary mt-4">
                 Book a Free Demo
               </Link>
             </nav>
