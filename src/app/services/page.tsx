@@ -378,7 +378,7 @@ export default function Services() {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-20 bg-petrol-smoke">
+      {/* <section className="py-20 bg-petrol-smoke">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold text-ivory-silk mb-6">
@@ -422,7 +422,7 @@ export default function Services() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-r from-imperial-emerald to-petrol-smoke">

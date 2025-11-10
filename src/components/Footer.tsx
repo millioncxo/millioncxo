@@ -12,7 +12,7 @@ export default function Footer() {
               Human‑led LinkedIn outreach that delivers real CXO conversations.
             </p>
             <p className="text-golden-opal text-xs font-semibold">
-              Human‑Driven • Human‑Driven Personalised Outreach
+              Human‑Driven Personalised Outreach
             </p>
           </div>
 

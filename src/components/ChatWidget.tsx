@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { usePathname } from 'next/navigation'
 import ChatMessage from './ChatMessage'
 import ChatToggle from './ChatToggle'
 
@@ -101,6 +102,7 @@ const BOOKING_LINK = "https://outlook.office.com/book/BookYourDiscoveryCall@mill
 type StepKey = keyof typeof STEPS;
 
 export default function ChatWidget() {
+  const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false)
   const [inputText, setInputText] = useState('')
   const [messages, setMessages] = useState([
@@ -110,12 +112,16 @@ export default function ChatWidget() {
   const [isTyping, setIsTyping] = useState(false)
 
   // Auto-open chat on page visit
+  // 20 seconds delay for landing page, 1 second for other pages
   useEffect(() => {
+    const isLandingPage = pathname === '/landingpage'
+    const delay = isLandingPage ? 20000 : 1000 // 20 seconds for landing page, 1 second for others
+    
     const timer = setTimeout(() => {
       setIsOpen(true)
-    }, 1000) // Open after 1 second delay
+    }, delay)
     return () => clearTimeout(timer)
-  }, [])
+  }, [pathname])
 
   const handleToggle = () => setIsOpen(!isOpen)
 
