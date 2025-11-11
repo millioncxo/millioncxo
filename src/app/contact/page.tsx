@@ -70,6 +70,13 @@ export default function Contact() {
         timeline: ''
       })
 
+      // Track conversion before redirect
+      if (typeof window !== 'undefined' && (window as any).gtag) {
+        (window as any).gtag('event', 'conversion', {
+          'send_to': 'AW-17718087441'
+        });
+      }
+
       // Redirect to booking link after a short delay
       setTimeout(() => {
         window.location.href = 'https://calendly.com/millioncxo/loe-20x'
@@ -388,6 +395,13 @@ export default function Contact() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="btn-outline text-sm px-6 py-2 inline-block"
+                      onClick={() => {
+                        if (typeof window !== 'undefined' && (window as any).gtag) {
+                          (window as any).gtag('event', 'conversion', {
+                            'send_to': 'AW-17718087441'
+                          });
+                        }
+                      }}
                     >
                       Book Discovery Call Directly
                     </a>

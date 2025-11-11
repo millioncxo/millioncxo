@@ -1,3 +1,5 @@
+'use client'
+
 import Link from 'next/link'
 import CounterAnimation from '@/components/CounterAnimation'
 import ScrollAnimation from '@/components/ScrollAnimation'
@@ -167,7 +169,15 @@ export default function Services() {
                 <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> Content optimization for your brand</li>
                 <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> Engagement boost</li>
               </ul>
-              <Link href="https://calendly.com/millioncxo/loe-20x" target="_blank" rel="noopener noreferrer" className="btn-outline w-full">Book a Demo call!</Link>
+              <Link href="https://calendly.com/millioncxo/loe-20x" target="_blank" rel="noopener noreferrer" className="btn-outline w-full"
+                onClick={() => {
+                  if (typeof window !== 'undefined' && (window as any).gtag) {
+                    (window as any).gtag('event', 'conversion', {
+                      'send_to': 'AW-17718087441'
+                    });
+                  }
+                }}
+              >Book a Demo call!</Link>
             </div>
             
             {/* LinkedIn Outreach Excellence 20X - CENTER */}
@@ -184,7 +194,15 @@ export default function Services() {
                 
                 <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> Zero additional tool costs</li>
               </ul>
-              <Link href="https://calendly.com/millioncxo/loe-20x" target="_blank" rel="noopener noreferrer" className="btn-primary w-full">Book a Demo call!</Link>
+              <Link href="https://calendly.com/millioncxo/loe-20x" target="_blank" rel="noopener noreferrer" className="btn-primary w-full"
+                onClick={() => {
+                  if (typeof window !== 'undefined' && (window as any).gtag) {
+                    (window as any).gtag('event', 'conversion', {
+                      'send_to': 'AW-17718087441'
+                    });
+                  }
+                }}
+              >Book a Demo call!</Link>
             </div>
             
             {/* SDR as a Service */}
@@ -198,7 +216,15 @@ export default function Services() {
                 <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> 80 ICP profiles researched/day</li>
                 <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> Target: 4 qualified CXO meetings/month</li>
               </ul>
-              <Link href="https://calendly.com/millioncxo/loe-20x" target="_blank" rel="noopener noreferrer" className="btn-outline w-full">Book a Demo call!</Link>
+              <Link href="https://calendly.com/millioncxo/loe-20x" target="_blank" rel="noopener noreferrer" className="btn-outline w-full"
+                onClick={() => {
+                  if (typeof window !== 'undefined' && (window as any).gtag) {
+                    (window as any).gtag('event', 'conversion', {
+                      'send_to': 'AW-17718087441'
+                    });
+                  }
+                }}
+              >Book a Demo call!</Link>
             </div>
           </div>
         </div>

@@ -203,6 +203,13 @@ export default function Navigation() {
                                     target={subItem.href.startsWith('http') ? "_blank" : undefined}
                                     rel={subItem.href.startsWith('http') ? "noopener noreferrer" : undefined}
                                     className="block p-3 rounded-lg hover:bg-golden-opal/10 transition-all duration-300 group"
+                                    onClick={() => {
+                                      if (subItem.href.includes('calendly.com/millioncxo/loe-20x') && typeof window !== 'undefined' && (window as any).gtag) {
+                                        (window as any).gtag('event', 'conversion', {
+                                          'send_to': 'AW-17718087441'
+                                        });
+                                      }
+                                    }}
                                   >
                                     <div className="text-sm font-medium text-onyx-black group-hover:text-golden-opal">
                                       {subItem.label}
@@ -226,7 +233,15 @@ export default function Navigation() {
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <Link href="https://calendly.com/millioncxo/loe-20x" target="_blank" rel="noopener noreferrer" className="btn-primary !px-4 !py-1.5 text-sm">
+            <Link href="https://calendly.com/millioncxo/loe-20x" target="_blank" rel="noopener noreferrer" className="btn-primary !px-4 !py-1.5 text-sm"
+              onClick={() => {
+                if (typeof window !== 'undefined' && (window as any).gtag) {
+                  (window as any).gtag('event', 'conversion', {
+                    'send_to': 'AW-17718087441'
+                  });
+                }
+              }}
+            >
               Book a Free Demo
             </Link>
           </div>
@@ -266,7 +281,15 @@ export default function Navigation() {
                   {item.label}
                 </Link>
               ))}
-              <Link href="https://calendly.com/millioncxo/loe-20x" target="_blank" rel="noopener noreferrer" className="btn-primary mt-4">
+              <Link href="https://calendly.com/millioncxo/loe-20x" target="_blank" rel="noopener noreferrer" className="btn-primary mt-4"
+                onClick={() => {
+                  if (typeof window !== 'undefined' && (window as any).gtag) {
+                    (window as any).gtag('event', 'conversion', {
+                      'send_to': 'AW-17718087441'
+                    });
+                  }
+                }}
+              >
                 Book a Free Demo
               </Link>
             </nav>

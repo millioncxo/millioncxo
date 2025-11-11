@@ -168,6 +168,14 @@ export default function ChatWidget() {
         ])
         setIsTyping(false)
         setCurrentStep("book_call")
+        
+        // Track conversion
+        if (typeof window !== 'undefined' && (window as any).gtag) {
+          (window as any).gtag('event', 'conversion', {
+            'send_to': 'AW-17718087441'
+          });
+        }
+        
         window.open(BOOKING_LINK, '_blank')
         return
       }

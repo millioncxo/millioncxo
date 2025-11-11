@@ -28,6 +28,13 @@ export default function SimpleNavigation() {
               target="_blank" 
               rel="noopener noreferrer" 
               className="btn-primary !px-4 !py-1.5 text-sm"
+              onClick={() => {
+                if (typeof window !== 'undefined' && (window as any).gtag) {
+                  (window as any).gtag('event', 'conversion', {
+                    'send_to': 'AW-17718087441'
+                  });
+                }
+              }}
             >
               Book a Demo
             </Link>
