@@ -11,7 +11,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Maximize LinkedIn Outreach by 20X | MillionCXO - 1,000 InMails per License',
-  description: 'Maximize your LinkedIn outreach efficiency by 20X with MillionCXO. Get 1,000 InMails per license per month , 4 guaranteed interested customers, research-based outreach, and 100% account safety guarantee. Starting at $250/month per license.',
+  description: 'Maximize your LinkedIn outreach efficiency by 20X with MillionCXO. Get 1,000 InMails per license per month , /* 4 guaranteed interested customers, */ research-based outreach, and 100% account safety guarantee. Starting at $250/month per license.',
   keywords: [
     'LinkedIn outreach 20X',
     'maximize LinkedIn outreach',
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     title: 'Maximize LinkedIn Outreach by 20X | MillionCXO',
-    description: 'Get 1,000 InMails per license per month, 4 guaranteed interested customers, and research-based human-driven outreach. Starting at $250/month.',
+    description: 'Get 1,000 InMails per license per month, /* 4 guaranteed interested customers, */ and research-based human-driven outreach. Starting at $250/month.',
     url: 'https://millioncxo.com',
     siteName: 'MillionCXO',
     type: 'website',
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Maximize LinkedIn Outreach by 20X | MillionCXO',
-    description: '1,000 InMails per license per month, 4 guaranteed customers, research-based outreach. Human-driven LinkedIn excellence.',
+    description: '1,000 InMails per license per month, /* 4 guaranteed customers, */ research-based outreach. Human-driven LinkedIn excellence.',
     images: ['https://millioncxo.com/logo.svg'],
   },
   alternates: {

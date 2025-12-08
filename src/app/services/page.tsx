@@ -161,7 +161,7 @@ export default function Services() {
             {/* LinkedIn Followers Boost */}
             <div className="bg-ivory-silk/90 border border-golden-opal/20 rounded-2xl shadow-lg flex flex-col items-center text-center p-8 h-full">
               <span className="text-golden-opal font-bold text-lg mb-2">LINKEDIN FOLLOWERS BOOST</span>
-              <div className="text-3xl font-bold text-onyx-black mb-2">$499<span className="text-base font-medium text-muted-jade">/month</span></div>
+              <div className="text-3xl font-bold text-onyx-black mb-2"><span className="text-sm font-medium text-muted-jade mr-2">Starting from</span>$499</div>
               <div className="text-muted-jade mb-4 text-sm">Build brand authority, one follower at a time</div>
               <ul className="mb-6 space-y-2 text-left w-full max-w-xs mx-auto flex-grow">
                 <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> 10,000+ targeted followers per month</li>
@@ -188,7 +188,7 @@ export default function Services() {
               <div className="text-muted-jade mb-4 text-sm">License-based LinkedIn scaling</div>
               <ul className="mb-6 space-y-2 text-left w-full max-w-xs mx-auto flex-grow">
                 <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> 1,000 InMails per license per month</li>
-                <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> 4 guaranteed prospects per license per month</li>
+                {/* <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> 4 guaranteed prospects per license per month</li> */}
                 <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> Research-based outreach using LinkedIn activity </li>
                 <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> 100% money-back guaranteed if your account gets blocked</li>
                 

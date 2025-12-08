@@ -52,7 +52,7 @@
       {"title": "Goal", "desc": "Maximizing LinkedIn outreach efficiency (20X)"},
       {"title": "ICP Discovery + Messaging", "desc": "Define segments, talk tracks, and value hooks."},
       {"title": "1,000 InMails/month", "desc": "Per license, delivered by trained SDRs."},
-      {"title": "Guaranteed replies", "desc": "≥4 positive replies/license/month or pro‑rated refund."}
+      {/* {"title": "Guaranteed replies", "desc": "≥4 positive replies/license/month or pro‑rated refund."} */}
     ]
   },
   "outcomes": {
@@ -64,10 +64,10 @@
           "label": "Cost to generate 1 appointment",
           "values": ["< $70", "> $500", "> $800"]
         },
-        {
+        /* {
           "label": "Positive replies per license/month",
           "values": ["≥ 4", "0–1", "0–1"]
-        },
+        }, */
         {
           "label": "LinkedIn InMails per license/month",
           "values": ["1000+", "< 50", "< 50"]
@@ -117,7 +117,7 @@
         "price": "Custom - license-based",
         "includes": [
           "1,000+ InMails per license/month",
-          "Guaranteed ≥4 positive replies/license/month",
+          /* "Guaranteed ≥4 positive replies/license/month", */
           "Zero extra tool cost",
           "Research‑based, human‑written messages"
         ],

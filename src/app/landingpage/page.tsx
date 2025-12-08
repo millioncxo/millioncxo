@@ -300,22 +300,22 @@ export default function LandingPage() {
                 )
               },
               { 
-                value: "≥4", 
-                label: "Guaranteed Interested Customers", 
-                desc: "Per license per month - or you get a pro-rated refund.",
-                icon: (
-                  <svg className="w-8 h-8 text-golden-opal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                )
-              },
-              { 
                 value: "10×", 
                 label: "Cost Efficiency", 
                 desc: "Compared to in-house SDR teams. No additional tool costs. No hidden charges.",
                 icon: (
                   <svg className="w-8 h-8 text-golden-opal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                  </svg>
+                )
+              },
+              { 
+                value: "100%", 
+                label: "Account Safety Guarantee", 
+                desc: "Money-back guarantee if your LinkedIn account gets blocked. We protect your accounts.",
+                icon: (
+                  <svg className="w-8 h-8 text-golden-opal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                   </svg>
                 )
               }
@@ -345,11 +345,6 @@ export default function LandingPage() {
                     title: "1000 InMails per license per month",
                     text: "We deliver 1,000 InMails per license per month.",
                     icon: Mail
-                  },
-                  {
-                    title: "4 Interested Customers Guaranteed",
-                    text: "Per license per month. Pro-rated refund on missed targets.",
-                    icon: TrendingUp
                   },
                   {
                     title: "Research-Based Outreach",
@@ -445,7 +440,7 @@ export default function LandingPage() {
               {
                 name: "LinkedIn Followers Boost",
                 price: "$499",
-                unit: "/month",
+                unit: "Starting from",
                 
                 tagline: "Build brand authority, one follower at a time.",
                 features: [
@@ -465,9 +460,8 @@ export default function LandingPage() {
                 description: "Discounts available!",
                 features: [
                   { text: "1,000 InMails per license per month ", icon: Mail },
-                  { text: "4 Guaranteed interested prospects per license per month", icon: Target },
                   { text: "Research-based outreach using LinkedIn activity", icon: FileSearch },
-                  { text: "100% garanteed money-back if your account gets blocked", icon: Shield },
+                  { text: "100% guaranteed money-back if your account gets blocked", icon: Shield },
                   
                   
                   
@@ -493,8 +487,17 @@ export default function LandingPage() {
                   <div className="text-center mb-6">
                     <h3 className="text-2xl font-bold text-onyx-black mb-2">{plan.name}</h3>
                     <div className="mb-2">
-                      <span className="text-4xl font-bold text-golden-opal">{plan.price}</span>
-                      <span className="text-muted-jade ml-2">{plan.unit}</span>
+                      {plan.name === "LinkedIn Followers Boost" ? (
+                        <>
+                          <span className="text-muted-jade text-sm mr-2">{plan.unit}</span>
+                          <span className="text-4xl font-bold text-golden-opal">{plan.price}</span>
+                        </>
+                      ) : (
+                        <>
+                          <span className="text-4xl font-bold text-golden-opal">{plan.price}</span>
+                          <span className="text-muted-jade ml-2">{plan.unit}</span>
+                        </>
+                      )}
                     </div>
                     {plan.promo && (
                       <p className="text-golden-opal text-sm font-semibold mb-2">{plan.promo}</p>
@@ -580,10 +583,6 @@ export default function LandingPage() {
                     {
                       metric: "Cost to generate 1 appointment",
                       values: ["< $70", "> $500", "> $800"]
-                    },
-                    {
-                      metric: "Positive replies per license/month",
-                      values: ["≥ 4", "0–1", "0–1"]
                     },
                     {
                       metric: "LinkedIn InMails per license/month",

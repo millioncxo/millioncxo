@@ -16,7 +16,7 @@ const STEPS = {
     ]
   },
   linkedin_20x: {
-    text: `Our **LinkedIn Outreach Excellence 20X** delivers 1,000 InMails per license per month with research-based outreach.\n- $250/month per license (discounts available)\n- 4 Guaranteed interested customers per license per month\n- 100% money-back guarantee if your account gets blocked\n- Zero additional tool costs\n\nWould you like to learn more or book a Free Demo?`,
+    text: `Our **LinkedIn Outreach Excellence 20X** delivers 1,000 InMails per license per month with research-based outreach.\n- $250/month per license (discounts available)\n- /* 4 Guaranteed interested customers per license per month */\n- 100% money-back guarantee if your account gets blocked\n- Zero additional tool costs\n\nWould you like to learn more or book a Free Demo?`,
     options: [
       "Tell me more about 20X",
       "Book a Free Demo",
@@ -24,14 +24,14 @@ const STEPS = {
     ]
   },
   linkedin_20x_more: {
-    text: `**LinkedIn Outreach Excellence 20X Details:**\n- 1,000 InMails per license per month (vs LinkedIn's 50)\n- Research-based outreach using prospect's LinkedIn activity\n- 4 Guaranteed interested customers per license per month\n- Account safety guarantee: 100% refund if account gets blocked\n- Industry's lowest price starting at $250/month per license\n- All tools included, no hidden costs\n\nReady to book a Free Demo?`,
+    text: `**LinkedIn Outreach Excellence 20X Details:**\n- 1,000 InMails per license per month (vs LinkedIn's 50)\n- Research-based outreach using prospect's LinkedIn activity\n- /* 4 Guaranteed interested customers per license per month */\n- Account safety guarantee: 100% refund if account gets blocked\n- Industry's lowest price starting at $250/month per license\n- All tools included, no hidden costs\n\nReady to book a Free Demo?`,
     options: [
       "Book a Free Demo",
       "Back to main menu"
     ]
   },
   followers_boost: {
-    text: `Our **LinkedIn Followers Boost** helps you build brand authority with 10,000+ targeted followers per month.\n- $499/month\n- Organic growth strategy\n- Content optimization for your brand\n- Engagement boost\n\nBuild brand authority, one follower at a time. Want to book a Free Demo?`,
+    text: `Our **LinkedIn Followers Boost** helps you build brand authority with 10,000+ targeted followers per month.\n- Starting from $499\n- Organic growth strategy\n- Content optimization for your brand\n- Engagement boost\n\nBuild brand authority, one follower at a time. Want to book a Free Demo?`,
     options: [
       "Book a Free Demo",
       "Tell me more",
@@ -71,7 +71,7 @@ const STEPS = {
     ]
   },
   included_services: {
-    text: `Each service is customized to your GTM goals:\n\n**LinkedIn Outreach Excellence 20X:** 1,000 InMails/license/month, 4 guaranteed customers/license/month\n\n**LinkedIn Followers Boost:** 10,000+ targeted followers/month, organic growth\n\n**SDR as a Service:** Full-time dedicated SDR, 4+ CXO meetings/month\n\nFor full details and a custom proposal, would you like to book a Free Demo?`,
+    text: `Each service is customized to your GTM goals:\n\n**LinkedIn Outreach Excellence 20X:** 1,000 InMails/license/month /* , 4 guaranteed customers/license/month */\n\n**LinkedIn Followers Boost:** 10,000+ targeted followers/month, organic growth\n\n**SDR as a Service:** Full-time dedicated SDR, 4+ CXO meetings/month\n\nFor full details and a custom proposal, would you like to book a Free Demo?`,
     options: [
       "Book a Free Demo",
       "Back to main menu"

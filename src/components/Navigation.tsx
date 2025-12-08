@@ -72,8 +72,8 @@ export default function Navigation() {
           {
             title: "Outreach Services",
             items: [
-              { href: '/services#linkedin-20x', label: 'LinkedIn Outreach Excellence 20X', desc: '$250/license - 1,000 InMails, 4 guaranteed customers' },
-              { href: '/services#followers', label: 'LinkedIn Followers Boost', desc: '$499/month - 10,000+ targeted followers' },
+              { href: '/services#linkedin-20x', label: 'LinkedIn Outreach Excellence 20X', desc: '$250/license - 1,000 InMails' /* , 4 guaranteed customers */ },
+              { href: '/services#followers', label: 'LinkedIn Followers Boost', desc: 'Starting from $499 - 10,000+ targeted followers' },
               { href: '/services#sdr', label: 'SDR as a Service', desc: '$2,000/month - Dedicated full-time SDR' }
             ]
           },
