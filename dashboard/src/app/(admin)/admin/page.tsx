@@ -1,9 +1,18 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import LogoComponent from '@/components/LogoComponent';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { 
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer 
+} from 'recharts';
+import { 
+  Users, TrendingUp, DollarSign, Activity, Search, Filter, 
+  ChevronRight, Download, FileText, CheckCircle2, Clock, 
+  AlertCircle, Building2, User, Mail, ExternalLink, X,
+  UserPlus, BarChart3, Calendar, Globe, MapPin, Phone, ShieldCheck,
+  CreditCard, Layout, List, History, StickyNote
+} from 'lucide-react';
 
 interface OverviewRow {
   _id: string;
@@ -379,17 +388,39 @@ export default function AdminDashboard() {
   }
 
   return (
-    <>
-      <div style={{ padding: '2rem' }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
-        <LogoComponent width={48} height={26} hoverGradient={true} />
-        <div style={{ flex: 1 }}>
-          <h1 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '0.25rem', color: 'var(--imperial-emerald)' }}>
-            Admin Consolidated Overview
+    <div style={{ 
+      minHeight: '100vh',
+      background: 'linear-gradient(135deg, var(--ivory-silk) 0%, #f0ede8 100%)',
+      padding: '1.5rem'
+    }}>
+      <div style={{ 
+        display: 'flex', 
+        alignItems: 'center', 
+        justifyContent: 'space-between',
+        gap: '1rem', 
+        marginBottom: '2rem',
+        background: 'white',
+        padding: '1.25rem 1.5rem',
+        borderRadius: '1rem',
+        boxShadow: '0 2px 12px rgba(11, 46, 43, 0.04)',
+        border: '1px solid rgba(196, 183, 91, 0.15)'
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
+          <LogoComponent width={42} height={24} hoverGradient={true} />
+          <div>
+            <h1 style={{ 
+              fontSize: '1.75rem', 
+              fontWeight: '800', 
+              color: 'var(--imperial-emerald)',
+              letterSpacing: '-0.02em',
+              lineHeight: 1.2
+            }}>
+              Admin Workspace
           </h1>
-          <p style={{ color: 'var(--muted-jade)', fontSize: '0.875rem' }}>
-            Full visibility across clients, SDRs, targets, and achieved work
+            <p style={{ color: 'var(--muted-jade)', fontSize: '0.875rem', fontWeight: '500' }}>
+              Full visibility across clients, SDRs, and performance targets
           </p>
+          </div>
         </div>
         <button
           onClick={async () => {
@@ -410,14 +441,37 @@ export default function AdminDashboard() {
             }
           }}
           className="btn-secondary"
-          style={{ whiteSpace: 'nowrap' }}
+          style={{ 
+            whiteSpace: 'nowrap',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+            padding: '0.625rem 1.25rem',
+            borderRadius: '0.75rem',
+            fontSize: '0.875rem',
+            fontWeight: '600'
+          }}
         >
+          <Download size={16} />
           Export Clients (CSV)
         </button>
       </div>
 
       {error && (
-        <div className="card" style={{ background: '#fee2e2', color: '#dc2626', marginBottom: '1rem' }}>
+        <div style={{ 
+          background: '#fee2e2', 
+          color: '#dc2626', 
+          padding: '1rem 1.25rem',
+          borderRadius: '0.75rem',
+          marginBottom: '1.5rem',
+          border: '1px solid #fecaca',
+          fontSize: '0.875rem',
+          fontWeight: '500',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '0.75rem'
+        }}>
+          <AlertCircle size={18} />
           {error}
         </div>
       )}
@@ -426,26 +480,127 @@ export default function AdminDashboard() {
       {!statsLoading && stats && (
         <div style={{ 
           display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', 
-          gap: '0.75rem', 
-          marginBottom: '1.5rem' 
+          gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', 
+          gap: '1rem', 
+          marginBottom: '2rem' 
         }}>
-          <div className="card" style={{ padding: '1rem' }}>
-            <div style={{ color: 'var(--muted-jade)', fontSize: '0.8rem', marginBottom: '0.375rem' }}>Total Clients</div>
-            <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--imperial-emerald)' }}>
+          <div style={{ 
+            background: 'white',
+            padding: '1.25rem',
+            borderRadius: '1rem',
+            border: '1px solid rgba(196, 183, 91, 0.15)',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.02)',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '1rem'
+          }}>
+            <div style={{ 
+              width: '42px', 
+              height: '42px', 
+              borderRadius: '10px', 
+              background: 'rgba(11, 46, 43, 0.05)', 
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'center',
+              color: 'var(--imperial-emerald)'
+            }}>
+              <Users size={20} />
+            </div>
+            <div>
+              <div style={{ color: 'var(--muted-jade)', fontSize: '0.75rem', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.25rem' }}>Total Clients</div>
+              <div style={{ fontSize: '1.5rem', fontWeight: '800', color: 'var(--imperial-emerald)' }}>
               {stats.totalClients}
             </div>
           </div>
-          <div className="card" style={{ padding: '1rem' }}>
-            <div style={{ color: 'var(--muted-jade)', fontSize: '0.8rem', marginBottom: '0.375rem' }}>Total Revenue</div>
-            <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--imperial-emerald)' }}>
-              ${stats.revenue.total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+            </div>
+
+          <div style={{ 
+            background: 'white',
+            padding: '1.25rem',
+            borderRadius: '1rem',
+            border: '1px solid rgba(196, 183, 91, 0.15)',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.02)',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '1rem'
+          }}>
+            <div style={{ 
+              width: '42px', 
+              height: '42px', 
+              borderRadius: '10px', 
+              background: 'rgba(196, 183, 91, 0.1)', 
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'center',
+              color: 'var(--imperial-emerald)'
+            }}>
+              <TrendingUp size={20} />
+          </div>
+            <div>
+              <div style={{ color: 'var(--muted-jade)', fontSize: '0.75rem', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.25rem' }}>Total Revenue</div>
+              <div style={{ fontSize: '1.5rem', fontWeight: '800', color: 'var(--imperial-emerald)' }}>
+                ${stats.revenue.total.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+              </div>
             </div>
           </div>
-          <div className="card" style={{ padding: '1rem' }}>
-            <div style={{ color: 'var(--muted-jade)', fontSize: '0.8rem', marginBottom: '0.375rem' }}>Total SDRs</div>
-            <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--imperial-emerald)' }}>
+
+          <div style={{ 
+            background: 'white',
+            padding: '1.25rem',
+            borderRadius: '1rem',
+            border: '1px solid rgba(196, 183, 91, 0.15)',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.02)',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '1rem'
+          }}>
+            <div style={{ 
+              width: '42px', 
+              height: '42px', 
+              borderRadius: '10px', 
+              background: 'rgba(11, 46, 43, 0.05)', 
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'center',
+              color: 'var(--imperial-emerald)'
+            }}>
+              <Activity size={20} />
+            </div>
+            <div>
+              <div style={{ color: 'var(--muted-jade)', fontSize: '0.75rem', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.25rem' }}>Total SDRs</div>
+              <div style={{ fontSize: '1.5rem', fontWeight: '800', color: 'var(--imperial-emerald)' }}>
               {stats.totalSdrs}
+              </div>
+            </div>
+          </div>
+
+          <div style={{ 
+            background: 'white',
+            padding: '1.25rem',
+            borderRadius: '1rem',
+            border: '1px solid rgba(196, 183, 91, 0.15)',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.02)',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '1rem'
+          }}>
+            <div style={{ 
+              width: '42px', 
+              height: '42px', 
+              borderRadius: '10px', 
+              background: 'rgba(16, 185, 129, 0.1)', 
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'center',
+              color: '#10b981'
+            }}>
+              <DollarSign size={20} />
+            </div>
+            <div>
+              <div style={{ color: 'var(--muted-jade)', fontSize: '0.75rem', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.25rem' }}>Monthly Revenue</div>
+              <div style={{ fontSize: '1.5rem', fontWeight: '800', color: '#10b981' }}>
+                ${stats.revenue.thisMonth.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+              </div>
             </div>
           </div>
         </div>
@@ -453,118 +608,175 @@ export default function AdminDashboard() {
 
       {/* Charts Section */}
       {!chartsLoading && chartData && (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(500px, 1fr))', gap: '1.5rem', marginBottom: '1.5rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(500px, 1fr))', gap: '1.5rem', marginBottom: '2rem' }}>
           {/* Revenue Trend Chart */}
-          <div className="card" style={{ padding: '1.5rem', background: 'linear-gradient(135deg, rgba(11, 46, 43, 0.02) 0%, rgba(196, 183, 91, 0.02) 100%)', border: '1px solid rgba(196, 183, 91, 0.2)' }}>
-            <h3 style={{ fontSize: '1.25rem', fontWeight: '600', marginBottom: '1rem', color: 'var(--imperial-emerald)' }}>
-              Revenue Trend (Last 12 Months)
+          <div style={{ 
+            background: 'white', 
+            padding: '1.5rem', 
+            borderRadius: '1.25rem',
+            border: '1px solid rgba(196, 183, 91, 0.15)',
+            boxShadow: '0 4px 20px rgba(11, 46, 43, 0.03)'
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem' }}>
+              <div style={{ 
+                width: '32px', 
+                height: '32px', 
+                borderRadius: '8px', 
+                background: 'rgba(11, 46, 43, 0.05)', 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                color: 'var(--imperial-emerald)'
+              }}>
+                <TrendingUp size={18} />
+              </div>
+              <h3 style={{ fontSize: '1.125rem', fontWeight: '700', color: 'var(--imperial-emerald)' }}>
+                Revenue Trend
             </h3>
+            </div>
             {chartData.revenueTrend && chartData.revenueTrend.length > 0 ? (
               <ResponsiveContainer width="100%" height={320}>
                 <LineChart data={chartData.revenueTrend} margin={{ top: 5, right: 20, left: 0, bottom: 5 }}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(11, 46, 43, 0.1)" />
+                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(11, 46, 43, 0.05)" vertical={false} />
                   <XAxis 
                     dataKey="month" 
                     stroke="var(--muted-jade)"
-                    style={{ fontSize: '0.75rem' }}
-                    angle={-45}
-                    textAnchor="end"
-                    height={60}
+                    style={{ fontSize: '0.75rem', fontWeight: '500' }}
+                    axisLine={false}
+                    tickLine={false}
+                    dy={10}
                   />
                   <YAxis 
                     stroke="var(--muted-jade)"
-                    style={{ fontSize: '0.75rem' }}
-                    tickFormatter={(value) => `$${value.toLocaleString()}`}
-                    domain={[0, 50000]}
+                    style={{ fontSize: '0.75rem', fontWeight: '500' }}
+                    axisLine={false}
+                    tickLine={false}
+                    tickFormatter={(value: number) => `$${(value/1000)}k`}
                   />
                   <Tooltip 
                     contentStyle={{ 
-                      backgroundColor: 'white', 
-                      border: '1px solid rgba(196, 183, 91, 0.3)',
-                      borderRadius: '0.5rem',
-                      padding: '0.75rem'
+                      backgroundColor: 'rgba(255, 255, 255, 0.98)', 
+                      border: '1px solid rgba(196, 183, 91, 0.2)',
+                      borderRadius: '0.75rem',
+                      padding: '0.75rem',
+                      boxShadow: '0 10px 25px rgba(11, 46, 43, 0.08)',
+                      backdropFilter: 'blur(4px)'
                     }}
-                    formatter={(value: number) => [`$${value.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`, '']}
+                    itemStyle={{ fontSize: '0.875rem', fontWeight: '600', padding: '0.25rem 0' }}
+                    labelStyle={{ fontSize: '0.75rem', fontWeight: '700', color: 'var(--muted-jade)', marginBottom: '0.5rem', textTransform: 'uppercase' }}
+                    formatter={(value: number | undefined) => {
+                      if (value === undefined) return ['$0.00', ''];
+                      return [`$${value.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`, ''];
+                    }}
                   />
                   <Legend 
-                    wrapperStyle={{ paddingTop: '1rem' }}
-                    iconType="line"
+                    verticalAlign="top" 
+                    align="right"
+                    wrapperStyle={{ paddingBottom: '2rem', fontSize: '0.75rem', fontWeight: '600' }}
+                    iconType="circle"
                   />
                   <Line 
                     type="monotone" 
                     dataKey="revenue" 
                     stroke="var(--imperial-emerald)" 
-                    strokeWidth={3}
-                    dot={{ fill: 'var(--imperial-emerald)', r: 4 }}
-                    activeDot={{ r: 6 }}
+                    strokeWidth={4}
+                    dot={{ fill: 'var(--imperial-emerald)', r: 4, strokeWidth: 2, stroke: 'white' }}
+                    activeDot={{ r: 6, strokeWidth: 0 }}
                     name="Total Revenue" 
                   />
                   <Line 
                     type="monotone" 
                     dataKey="paid" 
                     stroke="#10b981" 
-                    strokeWidth={3}
-                    dot={{ fill: '#10b981', r: 4 }}
-                    activeDot={{ r: 6 }}
+                    strokeWidth={4}
+                    dot={{ fill: '#10b981', r: 4, strokeWidth: 2, stroke: 'white' }}
+                    activeDot={{ r: 6, strokeWidth: 0 }}
                     name="Paid Revenue" 
                   />
                 </LineChart>
               </ResponsiveContainer>
             ) : (
-              <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '320px', color: 'var(--muted-jade)' }}>
-                <p>No revenue data available</p>
+              <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '320px', color: 'var(--muted-jade)', background: 'rgba(11, 46, 43, 0.02)', borderRadius: '1rem' }}>
+                <p style={{ fontWeight: '500' }}>No revenue data available</p>
               </div>
             )}
           </div>
 
           {/* Client Growth Chart */}
-          <div className="card" style={{ padding: '1.5rem', background: 'linear-gradient(135deg, rgba(11, 46, 43, 0.02) 0%, rgba(196, 183, 91, 0.02) 100%)', border: '1px solid rgba(196, 183, 91, 0.2)' }}>
-            <h3 style={{ fontSize: '1.25rem', fontWeight: '600', marginBottom: '1rem', color: 'var(--imperial-emerald)' }}>
-              Client Growth (Last 12 Months)
+          <div style={{ 
+            background: 'white', 
+            padding: '1.5rem', 
+            borderRadius: '1.25rem',
+            border: '1px solid rgba(196, 183, 91, 0.15)',
+            boxShadow: '0 4px 20px rgba(11, 46, 43, 0.03)'
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem' }}>
+              <div style={{ 
+                width: '32px', 
+                height: '32px', 
+                borderRadius: '8px', 
+                background: 'rgba(11, 46, 43, 0.05)', 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                color: 'var(--imperial-emerald)'
+              }}>
+                <Users size={18} />
+              </div>
+              <h3 style={{ fontSize: '1.125rem', fontWeight: '700', color: 'var(--imperial-emerald)' }}>
+                Client Growth
             </h3>
+            </div>
             {chartData.clientGrowth && chartData.clientGrowth.length > 0 ? (
               <ResponsiveContainer width="100%" height={320}>
                 <LineChart data={chartData.clientGrowth} margin={{ top: 5, right: 20, left: 0, bottom: 5 }}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(11, 46, 43, 0.1)" />
+                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(11, 46, 43, 0.05)" vertical={false} />
                   <XAxis 
                     dataKey="month" 
                     stroke="var(--muted-jade)"
-                    style={{ fontSize: '0.75rem' }}
-                    angle={-45}
-                    textAnchor="end"
-                    height={60}
+                    style={{ fontSize: '0.75rem', fontWeight: '500' }}
+                    axisLine={false}
+                    tickLine={false}
+                    dy={10}
                   />
                   <YAxis 
                     stroke="var(--muted-jade)"
-                    style={{ fontSize: '0.75rem' }}
-                    domain={[0, 100]}
+                    style={{ fontSize: '0.75rem', fontWeight: '500' }}
+                    axisLine={false}
+                    tickLine={false}
                   />
                   <Tooltip 
                     contentStyle={{ 
-                      backgroundColor: 'white', 
-                      border: '1px solid rgba(196, 183, 91, 0.3)',
-                      borderRadius: '0.5rem',
-                      padding: '0.75rem'
+                      backgroundColor: 'rgba(255, 255, 255, 0.98)', 
+                      border: '1px solid rgba(196, 183, 91, 0.2)',
+                      borderRadius: '0.75rem',
+                      padding: '0.75rem',
+                      boxShadow: '0 10px 25px rgba(11, 46, 43, 0.08)',
+                      backdropFilter: 'blur(4px)'
                     }}
+                    itemStyle={{ fontSize: '0.875rem', fontWeight: '600', padding: '0.25rem 0' }}
+                    labelStyle={{ fontSize: '0.75rem', fontWeight: '700', color: 'var(--muted-jade)', marginBottom: '0.5rem', textTransform: 'uppercase' }}
                   />
                   <Legend 
-                    wrapperStyle={{ paddingTop: '1rem' }}
-                    iconType="line"
+                    verticalAlign="top" 
+                    align="right"
+                    wrapperStyle={{ paddingBottom: '2rem', fontSize: '0.75rem', fontWeight: '600' }}
+                    iconType="circle"
                   />
                   <Line 
                     type="monotone" 
                     dataKey="totalClients" 
                     stroke="var(--imperial-emerald)" 
-                    strokeWidth={3}
-                    dot={{ fill: 'var(--imperial-emerald)', r: 4 }}
-                    activeDot={{ r: 6 }}
+                    strokeWidth={4}
+                    dot={{ fill: 'var(--imperial-emerald)', r: 4, strokeWidth: 2, stroke: 'white' }}
+                    activeDot={{ r: 6, strokeWidth: 0 }}
                     name="Total Clients" 
                   />
                 </LineChart>
               </ResponsiveContainer>
             ) : (
-              <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '320px', color: 'var(--muted-jade)' }}>
-                <p>No client data available</p>
+              <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '320px', color: 'var(--muted-jade)', background: 'rgba(11, 46, 43, 0.02)', borderRadius: '1rem' }}>
+                <p style={{ fontWeight: '500' }}>No client data available</p>
               </div>
             )}
           </div>
@@ -573,93 +785,195 @@ export default function AdminDashboard() {
 
       {/* Recent Activity Feed */}
       {!activityLoading && (
-        <div className="card" style={{ marginBottom: '1.5rem', padding: '1.5rem' }}>
-          <h3 style={{ fontSize: '1.25rem', fontWeight: '600', marginBottom: '1rem', color: 'var(--imperial-emerald)' }}>
-            Recent Activity (Last 5 Hours)
+        <div style={{ 
+          background: 'white', 
+          padding: '1.5rem', 
+          borderRadius: '1.25rem',
+          border: '1px solid rgba(196, 183, 91, 0.15)',
+          boxShadow: '0 4px 20px rgba(11, 46, 43, 0.03)',
+          marginBottom: '2rem'
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem' }}>
+            <div style={{ 
+              width: '32px', 
+              height: '32px', 
+              borderRadius: '8px', 
+              background: 'rgba(11, 46, 43, 0.05)', 
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'center',
+              color: 'var(--imperial-emerald)'
+            }}>
+              <Activity size={18} />
+            </div>
+            <h3 style={{ fontSize: '1.125rem', fontWeight: '700', color: 'var(--imperial-emerald)' }}>
+              Recent Activity
           </h3>
+          </div>
+
           {recentActivity.length > 0 ? (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', position: 'relative' }}>
+            {/* Timeline connector line */}
+            <div style={{
+              position: 'absolute',
+              left: '21px',
+              top: '10px',
+              bottom: '10px',
+              width: '2px',
+              background: 'rgba(11, 46, 43, 0.05)',
+              zIndex: 0
+            }} />
+
             {recentActivity.map((activity, index) => {
-              const activityColors: Record<string, string> = {
-                INVOICE_GENERATED: '#f59e0b',
-                PAYMENT_RECEIVED: '#10b981',
-                CLIENT_CREATED: '#3b82f6',
-                CLIENT_UPDATED: '#6366f1',
-                SDR_ASSIGNED: '#8b5cf6',
-                REPORT_CREATED: '#ec4899',
+              const activityConfig: Record<string, { color: string, icon: any, bg: string }> = {
+                INVOICE_GENERATED: { color: '#f59e0b', icon: FileText, bg: '#fef3c7' },
+                PAYMENT_RECEIVED: { color: '#10b981', icon: DollarSign, bg: '#d1fae5' },
+                CLIENT_CREATED: { color: '#3b82f6', icon: UserPlus, bg: '#dbeafe' },
+                CLIENT_UPDATED: { color: '#6366f1', icon: User, bg: '#e0e7ff' },
+                SDR_ASSIGNED: { color: '#8b5cf6', icon: Users, bg: '#ede9fe' },
+                REPORT_CREATED: { color: '#ec4899', icon: BarChart3, bg: '#fce7f3' },
               };
-              const color = activityColors[activity.type] || 'var(--muted-jade)';
+              
+              const config = activityConfig[activity.type] || { color: 'var(--muted-jade)', icon: Activity, bg: 'rgba(11, 46, 43, 0.05)' };
+              const Icon = config.icon;
 
               return (
                 <div
                   key={index}
                   style={{
-                    padding: '0.75rem',
-                    borderLeft: `3px solid ${color}`,
-                    background: 'rgba(11, 46, 43, 0.03)',
-                    borderRadius: '0.375rem',
+                    display: 'flex',
+                    gap: '1.25rem',
+                    position: 'relative',
+                    zIndex: 1
                   }}
                 >
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '0.25rem' }}>
-                    <span style={{ fontWeight: '600', color: 'var(--imperial-emerald)', fontSize: '0.875rem' }}>
+                  <div style={{
+                    width: '42px',
+                    height: '42px',
+                    borderRadius: '12px',
+                    background: 'white',
+                    border: `1px solid rgba(196, 183, 91, 0.15)`,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: config.color,
+                    boxShadow: '0 2px 8px rgba(0,0,0,0.03)',
+                    flexShrink: 0
+                  }}>
+                    <Icon size={18} />
+                  </div>
+                  
+                  <div style={{
+                    flex: 1,
+                    padding: '1rem',
+                    background: 'rgba(11, 46, 43, 0.02)',
+                    borderRadius: '0.875rem',
+                    border: '1px solid rgba(11, 46, 43, 0.03)',
+                    transition: 'all 0.2s ease',
+                  }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '0.375rem' }}>
+                      <span style={{ fontWeight: '700', color: 'var(--imperial-emerald)', fontSize: '0.9375rem' }}>
                       {activity.title}
                     </span>
-                    <span style={{ fontSize: '0.75rem', color: 'var(--muted-jade)' }}>
-                      {new Date(activity.date).toLocaleDateString()} {new Date(activity.date).toLocaleTimeString()}
+                      <span style={{ fontSize: '0.75rem', color: 'var(--muted-jade)', fontWeight: '600' }}>
+                        {new Date(activity.date).toLocaleDateString()} {new Date(activity.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                     </span>
                   </div>
-                  <div style={{ fontSize: '0.875rem', color: 'var(--muted-jade)' }}>
+                    <div style={{ fontSize: '0.875rem', color: 'var(--muted-jade)', lineHeight: '1.5' }}>
                     {activity.description}
                   </div>
                   {activity.clientName && (
-                    <div style={{ fontSize: '0.75rem', color: 'var(--muted-jade)', marginTop: '0.25rem', fontStyle: 'italic' }}>
-                      Client: {activity.clientName}
+                      <div style={{ 
+                        fontSize: '0.75rem', 
+                        color: 'var(--imperial-emerald)', 
+                        marginTop: '0.75rem', 
+                        fontWeight: '600',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '0.375rem',
+                        padding: '0.25rem 0.625rem',
+                        background: 'white',
+                        borderRadius: '2rem',
+                        border: '1px solid rgba(196, 183, 91, 0.2)'
+                      }}>
+                        <Building2 size={12} />
+                        {activity.clientName}
                     </div>
                   )}
+                  </div>
                 </div>
               );
             })}
           </div>
           ) : (
-            <div style={{ textAlign: 'center', padding: '2rem', color: 'var(--muted-jade)' }}>
-              <p style={{ fontSize: '1rem' }}>No recent activity in the past 5 hours</p>
+            <div style={{ textAlign: 'center', padding: '3rem', color: 'var(--muted-jade)', background: 'rgba(11, 46, 43, 0.02)', borderRadius: '1rem' }}>
+              <p style={{ fontSize: '0.9375rem', fontWeight: '500' }}>No recent activity in the past 5 hours</p>
             </div>
           )}
         </div>
       )}
 
-      <div className="card" style={{ marginBottom: '1.5rem', padding: '1rem', display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap' }}>
-        <form onSubmit={handleSearchSubmit} style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', alignItems: 'center', width: '100%' }}>
+      <div style={{ 
+        background: 'white', 
+        padding: '1.25rem', 
+        borderRadius: '1rem', 
+        border: '1px solid rgba(196, 183, 91, 0.15)',
+        boxShadow: '0 4px 12px rgba(11, 46, 43, 0.03)',
+        marginBottom: '1.5rem',
+        display: 'flex', 
+        gap: '1rem', 
+        alignItems: 'center' 
+      }}>
+        <form onSubmit={handleSearchSubmit} style={{ display: 'flex', gap: '1rem', flex: 1, alignItems: 'center' }}>
+          <div style={{ position: 'relative', flex: 1 }}>
+            <Search size={18} style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--muted-jade)' }} />
           <input
             type="text"
-            placeholder="Search business or POC"
+              placeholder="Search business or contact name..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             style={{
-              padding: '0.65rem 0.75rem',
-              borderRadius: '0.5rem',
-              border: '1px solid rgba(11,46,43,0.2)',
-              minWidth: '220px',
-              flex: '1',
-            }}
-          />
+                width: '100%',
+                padding: '0.75rem 1rem 0.75rem 2.75rem',
+                borderRadius: '0.75rem',
+                border: '1px solid rgba(11, 46, 43, 0.1)',
+                fontSize: '0.9375rem',
+                background: 'rgba(11, 46, 43, 0.01)',
+                fontWeight: '500'
+              }}
+            />
+          </div>
+          
+          <div style={{ display: 'flex', gap: '0.75rem' }}>
+            <div style={{ position: 'relative' }}>
+              <Filter size={16} style={{ position: 'absolute', left: '0.875rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--muted-jade)', pointerEvents: 'none' }} />
           <select
             value={sdrFilter}
             onChange={(e) => handleSdrFilter(e.target.value)}
             style={{
-              padding: '0.65rem 0.75rem',
-              borderRadius: '0.5rem',
-              border: '1px solid rgba(11,46,43,0.2)',
+                  padding: '0.75rem 1rem 0.75rem 2.5rem',
+                  borderRadius: '0.75rem',
+                  border: '1px solid rgba(11, 46, 43, 0.1)',
+                  fontSize: '0.875rem',
+                  background: 'white',
+                  fontWeight: '600',
+                  color: 'var(--imperial-emerald)',
+                  appearance: 'none',
               minWidth: '200px',
+                  cursor: 'pointer'
             }}
           >
             <option value="">All SDRs</option>
             {uniqueSdrs.map((sdr) => (
               <option key={sdr._id} value={sdr._id}>
-                {sdr.name} ({sdr.email})
+                    {sdr.name}
               </option>
             ))}
           </select>
+            </div>
+
+            <div style={{ position: 'relative' }}>
+              <Activity size={16} style={{ position: 'absolute', left: '0.875rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--muted-jade)', pointerEvents: 'none' }} />
           <select
             value={statusFilter}
             onChange={(e) => {
@@ -667,10 +981,16 @@ export default function AdminDashboard() {
               fetchOverview({ page: 1, status: e.target.value });
             }}
             style={{
-              padding: '0.65rem 0.75rem',
-              borderRadius: '0.5rem',
-              border: '1px solid rgba(11,46,43,0.2)',
-              minWidth: '180px',
+                  padding: '0.75rem 1rem 0.75rem 2.5rem',
+                  borderRadius: '0.75rem',
+                  border: '1px solid rgba(11, 46, 43, 0.1)',
+                  fontSize: '0.875rem',
+                  background: 'white',
+                  fontWeight: '600',
+                  color: 'var(--imperial-emerald)',
+                  appearance: 'none',
+                  minWidth: '160px',
+                  cursor: 'pointer'
             }}
           >
             <option value="">All Status</option>
@@ -678,69 +998,117 @@ export default function AdminDashboard() {
             <option value="IN_PROGRESS">In Progress</option>
             <option value="OVERDUE">Overdue</option>
           </select>
+            </div>
+          </div>
+
           <button
             type="submit"
             style={{
-              padding: '0.65rem 1rem',
-              borderRadius: '0.5rem',
+              padding: '0.75rem 1.5rem',
+              borderRadius: '0.75rem',
               border: 'none',
               background: 'var(--imperial-emerald)',
               color: 'white',
-              fontWeight: 600,
+              fontWeight: '700',
               cursor: 'pointer',
+              fontSize: '0.875rem',
+              boxShadow: '0 4px 12px rgba(11, 46, 43, 0.15)',
+              transition: 'all 0.2s ease'
             }}
+            onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-1px)'}
+            onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
           >
             Search
           </button>
         </form>
       </div>
 
-      <div className="card" style={{ marginBottom: '2rem', padding: '0' }}>
+      <div style={{ 
+        background: 'white', 
+        borderRadius: '1.25rem', 
+        border: '1px solid rgba(196, 183, 91, 0.15)',
+        boxShadow: '0 4px 24px rgba(11, 46, 43, 0.04)',
+        overflow: 'hidden',
+        marginBottom: '2rem'
+      }}>
         <div
           style={{
             padding: '1.5rem',
-            borderBottom: '2px solid rgba(196, 183, 91, 0.3)',
-            background: 'linear-gradient(135deg, rgba(196, 183, 91, 0.1) 0%, rgba(196, 183, 91, 0.05) 100%)',
+            borderBottom: '1px solid rgba(196, 183, 91, 0.1)',
+            background: 'linear-gradient(to right, rgba(196, 183, 91, 0.05), transparent)',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center'
           }}
         >
-          <h2 style={{ fontSize: '1.5rem', marginBottom: '0.25rem', color: 'var(--imperial-emerald)', fontWeight: '600' }}>
+          <div>
+            <h2 style={{ fontSize: '1.25rem', color: 'var(--imperial-emerald)', fontWeight: '750', letterSpacing: '-0.01em' }}>
             Clients Overview
         </h2>
-          <p style={{ color: 'var(--muted-jade)', fontSize: '0.875rem' }}>
-            {total} {total === 1 ? 'client' : 'clients'} · Page {page} of {totalPages}
-          </p>
+            <p style={{ color: 'var(--muted-jade)', fontSize: '0.8125rem', fontWeight: '500', marginTop: '0.25rem' }}>
+              {total} total clients registered across all portfolios
+            </p>
+          </div>
+          <div style={{ 
+            fontSize: '0.75rem', 
+            fontWeight: '700', 
+            color: 'var(--muted-jade)',
+            background: 'rgba(11, 46, 43, 0.05)',
+            padding: '0.375rem 0.75rem',
+            borderRadius: '2rem'
+          }}>
+            Page {page} of {totalPages}
+          </div>
         </div>
 
         {rows.length === 0 ? (
-          <div style={{ textAlign: 'center', padding: '3rem' }}>
-            <p style={{ color: 'var(--muted-jade)', marginBottom: '1.5rem', fontSize: '1rem' }}>
-              No clients found. Adjust filters or create a client to get started.
+          <div style={{ textAlign: 'center', padding: '4rem 2rem' }}>
+            <div style={{ 
+              width: '64px', 
+              height: '64px', 
+              background: 'rgba(11, 46, 43, 0.03)', 
+              borderRadius: '50%', 
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'center',
+              margin: '0 auto 1.5rem',
+              color: 'var(--muted-jade)'
+            }}>
+              <Search size={32} />
+            </div>
+            <p style={{ color: 'var(--muted-jade)', marginBottom: '1.5rem', fontSize: '1rem', fontWeight: '500' }}>
+              No clients found matching your search criteria.
             </p>
-            <a href="/admin/clients" className="btn-primary" style={{ textDecoration: 'none', display: 'inline-block' }}>
-              Go to Clients Management
-            </a>
+            <button 
+              onClick={() => {
+                setSearch('');
+                setSdrFilter('');
+                setStatusFilter('');
+                fetchOverview({ page: 1, search: '', sdrId: '', status: '' });
+              }}
+              className="btn-primary" 
+              style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}
+            >
+              Clear all filters
+            </button>
           </div>
         ) : (
           <div style={{ overflowX: 'auto' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse' }}>
               <thead>
-                <tr
-                  style={{
-                    background: 'rgba(11, 46, 43, 0.05)',
-                    borderBottom: '2px solid rgba(196, 183, 91, 0.3)',
-                  }}
-                >
-                  {['Business Name', 'POC', 'Payment Dates', 'Progress', 'Total Target', 'Total Achieved', 'SDR', 'Actions'].map((header) => (
+                <tr style={{ background: 'rgba(11, 46, 43, 0.02)' }}>
+                  {['Business Name', 'Point of Contact', 'Payment History', 'Completion', 'Target / Achieved', 'Assigned SDR', 'Actions'].map((header) => (
                     <th
                       key={header}
                       style={{
-                        padding: '1rem',
+                        padding: '1.125rem 1.25rem',
                         textAlign: 'left',
-                        fontWeight: '600',
-                        color: 'var(--imperial-emerald)',
-                        fontSize: '0.875rem',
+                        fontWeight: '700',
+                        color: 'var(--muted-jade)',
+                        fontSize: '0.75rem',
                         textTransform: 'uppercase',
-                        letterSpacing: '0.05em',
+                        letterSpacing: '0.075em',
+                        borderBottom: '1px solid rgba(196, 183, 91, 0.15)'
                       }}
                     >
                       {header}
@@ -753,103 +1121,133 @@ export default function AdminDashboard() {
                   <tr
                     key={row._id}
                     style={{
-                      borderBottom: '1px solid rgba(196, 183, 91, 0.15)',
+                      borderBottom: '1px solid rgba(196, 183, 91, 0.08)',
                       transition: 'all 0.2s ease',
                       cursor: 'pointer',
                     }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.background = 'rgba(196, 183, 91, 0.05)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.background = '';
-                    }}
+                    onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(196, 183, 91, 0.03)'}
+                    onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
                     onClick={() => openDetail(row._id)}
                   >
-                    <td style={{ padding: '1rem' }}>
-                      <div style={{ fontWeight: '600', color: 'var(--imperial-emerald)', marginBottom: '0.25rem' }}>
+                    <td style={{ padding: '1.25rem' }}>
+                      <div style={{ fontWeight: '750', color: 'var(--imperial-emerald)', fontSize: '0.9375rem' }}>
                         {row.businessName}
                       </div>
                     </td>
-                    <td style={{ padding: '1rem' }}>
-                      <div style={{ color: 'var(--muted-jade)', fontSize: '0.875rem' }}>
-                        <div style={{ fontWeight: '500', marginBottom: '0.125rem' }}>{row.pointOfContactName}</div>
-                        <div style={{ fontSize: '0.75rem', color: 'var(--muted-jade)' }}>{row.pointOfContactEmail}</div>
+                    <td style={{ padding: '1.25rem' }}>
+                      <div style={{ display: 'flex', flexDirection: 'column' }}>
+                        <span style={{ fontWeight: '600', color: 'var(--imperial-emerald)', fontSize: '0.875rem' }}>{row.pointOfContactName}</span>
+                        <span style={{ fontSize: '0.75rem', color: 'var(--muted-jade)', marginTop: '0.125rem' }}>{row.pointOfContactEmail}</span>
                       </div>
                     </td>
-                    <td style={{ padding: '1rem' }}>
+                    <td style={{ padding: '1.25rem' }}>
                       {row.paymentCount && row.paymentCount > 0 ? (
-                        <div style={{ fontSize: '0.875rem' }}>
-                          <div style={{ fontWeight: '500', color: 'var(--imperial-emerald)', marginBottom: '0.125rem' }}>
-                            {row.paymentCount} {row.paymentCount === 1 ? 'payment' : 'payments'}
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.625rem' }}>
+                          <div style={{ 
+                            background: 'rgba(16, 185, 129, 0.1)', 
+                            color: '#059669', 
+                            padding: '0.25rem 0.5rem', 
+                            borderRadius: '0.5rem',
+                            fontSize: '0.75rem',
+                            fontWeight: '700'
+                          }}>
+                            {row.paymentCount} Paid
                           </div>
                           {row.lastPaymentDate && (
-                            <div style={{ fontSize: '0.75rem', color: 'var(--muted-jade)' }}>
-                              Last: {new Date(row.lastPaymentDate).toLocaleDateString()}
-                            </div>
+                            <span style={{ fontSize: '0.75rem', color: 'var(--muted-jade)', fontWeight: '500' }}>
+                              {new Date(row.lastPaymentDate).toLocaleDateString([], { month: 'short', day: 'numeric' })}
+                            </span>
                           )}
                         </div>
                       ) : (
-                        <span style={{ color: 'var(--muted-jade)', fontSize: '0.875rem', fontStyle: 'italic' }}>
-                          No payments yet
+                        <span style={{ color: 'var(--muted-jade)', fontSize: '0.75rem', fontWeight: '500', fontStyle: 'italic' }}>
+                          No payments
                         </span>
                       )}
                     </td>
-                    <td style={{ padding: '1rem' }}>
-                      <span style={{ fontWeight: '600', color: 'var(--imperial-emerald)', fontSize: '0.875rem' }}>
+                    <td style={{ padding: '1.25rem' }}>
+                      <div style={{ width: '100px' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.375rem' }}>
+                          <span style={{ fontSize: '0.75rem', fontWeight: '700', color: 'var(--imperial-emerald)' }}>
                         {row.totalTarget > 0 
                           ? `${Math.round((row.totalAchieved / row.totalTarget) * 100)}%`
-                          : row.totalAchieved > 0 
-                          ? '100%'
-                          : '0%'}
+                              : row.totalAchieved > 0 ? '100%' : '0%'}
                       </span>
+                        </div>
+                        <div style={{ width: '100%', height: '6px', background: 'rgba(11, 46, 43, 0.05)', borderRadius: '10px', overflow: 'hidden' }}>
+                          <div style={{ 
+                            width: `${row.totalTarget > 0 ? Math.min(100, (row.totalAchieved / row.totalTarget) * 100) : row.totalAchieved > 0 ? 100 : 0}%`, 
+                            height: '100%', 
+                            background: 'var(--imperial-emerald)',
+                            borderRadius: '10px'
+                          }} />
+                        </div>
+                      </div>
                     </td>
-                    <td style={{ padding: '1rem' }}>
-                      <span style={{ fontWeight: '600', color: 'var(--imperial-emerald)', fontSize: '0.875rem' }}>
-                        {row.totalTarget || 0}
-                      </span>
+                    <td style={{ padding: '1.25rem' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                        <span style={{ fontWeight: '700', color: 'var(--imperial-emerald)', fontSize: '0.875rem' }}>{row.totalAchieved || 0}</span>
+                        <span style={{ color: 'var(--muted-jade)', fontSize: '0.875rem' }}>/</span>
+                        <span style={{ color: 'var(--muted-jade)', fontSize: '0.875rem', fontWeight: '500' }}>{row.totalTarget || 0}</span>
+                      </div>
                     </td>
-                    <td style={{ padding: '1rem' }}>
-                      <span style={{ fontWeight: '600', color: 'var(--imperial-emerald)', fontSize: '0.875rem' }}>
-                        {row.totalAchieved || 0}
-                      </span>
-                    </td>
-                    <td style={{ padding: '1rem' }}>
+                    <td style={{ padding: '1.25rem' }}>
                       {row.assignedSdr ? (
-                        <div style={{ color: 'var(--muted-jade)', fontSize: '0.875rem' }}>
-                          <div style={{ fontWeight: '500' }}>{row.assignedSdr.name}</div>
-                          <div style={{ fontSize: '0.75rem' }}>{row.assignedSdr.email}</div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.625rem' }}>
+                          <div style={{ 
+                            width: '28px', 
+                            height: '28px', 
+                            borderRadius: '50%', 
+                            background: 'var(--imperial-emerald)', 
+                            color: 'white',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            fontSize: '0.75rem',
+                            fontWeight: '700'
+                          }}>
+                            {row.assignedSdr.name.charAt(0)}
+                          </div>
+                          <span style={{ fontSize: '0.875rem', fontWeight: '600', color: 'var(--imperial-emerald)' }}>{row.assignedSdr.name}</span>
                         </div>
                       ) : (
-                        <span style={{ color: 'var(--muted-jade)', fontSize: '0.875rem', fontStyle: 'italic' }}>
-                          No SDR assigned
-                        </span>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.375rem', color: 'var(--muted-jade)', fontSize: '0.8125rem', fontWeight: '500' }}>
+                          <AlertCircle size={14} />
+                          Unassigned
+                        </div>
                       )}
                     </td>
-                    <td style={{ padding: '1rem' }}>
+                    <td style={{ padding: '1.25rem' }}>
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
                           openDetail(row._id);
                         }}
                         style={{
-                          padding: '0.4rem 0.75rem',
-                          borderRadius: '0.375rem',
-                          border: '1px solid rgba(11,46,43,0.2)',
+                          padding: '0.5rem 1rem',
+                          borderRadius: '0.625rem',
+                          border: '1px solid rgba(196, 183, 91, 0.2)',
                           background: 'white',
                           color: 'var(--imperial-emerald)',
-                          fontWeight: '500',
-                          fontSize: '0.875rem',
+                          fontWeight: '700',
+                          fontSize: '0.8125rem',
                           cursor: 'pointer',
                           transition: 'all 0.2s ease',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '0.5rem'
                         }}
                         onMouseEnter={(e) => {
-                          e.currentTarget.style.background = 'rgba(11,46,43,0.05)';
+                          e.currentTarget.style.background = 'rgba(11, 46, 43, 0.03)';
+                          e.currentTarget.style.borderColor = 'rgba(11, 46, 43, 0.1)';
                         }}
                         onMouseLeave={(e) => {
                           e.currentTarget.style.background = 'white';
+                          e.currentTarget.style.borderColor = 'rgba(196, 183, 91, 0.2)';
                         }}
                       >
-                        View
+                        Details
+                        <ChevronRight size={14} />
                       </button>
                     </td>
                   </tr>
@@ -860,34 +1258,63 @@ export default function AdminDashboard() {
         )}
 
         {totalPages > 1 && (
-          <div style={{ display: 'flex', justifyContent: 'space-between', padding: '1rem 1.5rem' }}>
+          <div style={{ 
+            display: 'flex', 
+            justifyContent: 'space-between', 
+            alignItems: 'center',
+            padding: '1.25rem 1.5rem',
+            background: 'rgba(11, 46, 43, 0.01)',
+            borderTop: '1px solid rgba(196, 183, 91, 0.1)'
+          }}>
             <button
               onClick={() => handlePageChange(page - 1)}
               disabled={page <= 1}
               style={{
-                padding: '0.6rem 1rem',
-                borderRadius: '0.5rem',
-                border: '1px solid rgba(11,46,43,0.2)',
-                background: page <= 1 ? 'rgba(0,0,0,0.03)' : 'white',
-                color: 'var(--imperial-emerald)',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                padding: '0.625rem 1rem',
+                borderRadius: '0.75rem',
+                border: '1px solid rgba(11, 46, 43, 0.1)',
+                background: page <= 1 ? 'transparent' : 'white',
+                color: page <= 1 ? 'var(--muted-jade)' : 'var(--imperial-emerald)',
                 cursor: page <= 1 ? 'not-allowed' : 'pointer',
+                fontSize: '0.875rem',
+                fontWeight: '600',
+                opacity: page <= 1 ? 0.5 : 1,
+                transition: 'all 0.2s ease'
               }}
             >
               Previous
             </button>
-            <div style={{ color: 'var(--muted-jade)', fontWeight: 600 }}>
-              Page {page} of {totalPages}
+            <div style={{ 
+              fontSize: '0.875rem', 
+              fontWeight: '700', 
+              color: 'var(--imperial-emerald)',
+              display: 'flex',
+              gap: '0.375rem'
+            }}>
+              <span>{page}</span>
+              <span style={{ color: 'var(--muted-jade)' }}>/</span>
+              <span style={{ color: 'var(--muted-jade)' }}>{totalPages}</span>
             </div>
             <button
               onClick={() => handlePageChange(page + 1)}
               disabled={page >= totalPages}
               style={{
-                padding: '0.6rem 1rem',
-                borderRadius: '0.5rem',
-                border: '1px solid rgba(11,46,43,0.2)',
-                background: page >= totalPages ? 'rgba(0,0,0,0.03)' : 'white',
-                color: 'var(--imperial-emerald)',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                padding: '0.625rem 1rem',
+                borderRadius: '0.75rem',
+                border: '1px solid rgba(11, 46, 43, 0.1)',
+                background: page >= totalPages ? 'transparent' : 'white',
+                color: page >= totalPages ? 'var(--muted-jade)' : 'var(--imperial-emerald)',
                 cursor: page >= totalPages ? 'not-allowed' : 'pointer',
+                fontSize: '0.875rem',
+                fontWeight: '600',
+                opacity: page >= totalPages ? 0.5 : 1,
+                transition: 'all 0.2s ease'
               }}
             >
               Next
@@ -896,156 +1323,288 @@ export default function AdminDashboard() {
         )}
       </div>
 
-    </div>
     {showDetail && (
       <div
         style={{
           position: 'fixed',
           inset: 0,
-          background: 'rgba(0,0,0,0.4)',
+          background: 'rgba(11, 46, 43, 0.4)',
+          backdropFilter: 'blur(4px)',
           display: 'flex',
           justifyContent: 'flex-end',
-          zIndex: 50,
+          zIndex: 100,
         }}
         onClick={closeDetail}
       >
         <div
           style={{
             width: 'min(900px, 95vw)',
-            background: 'white',
+            background: 'var(--ivory-silk)',
             height: '100%',
             overflowY: 'auto',
-            padding: '1.5rem',
+            padding: '2rem',
+            boxShadow: '-10px 0 40px rgba(0,0,0,0.1)',
+            animation: 'slideIn 0.3s ease-out'
           }}
           onClick={(e) => e.stopPropagation()}
         >
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-            <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--imperial-emerald)' }}>Client Detail</h3>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+              <div style={{ 
+                width: '42px', 
+                height: '42px', 
+                borderRadius: '12px', 
+                background: 'var(--imperial-emerald)', 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                color: 'white'
+              }}>
+                <Building2 size={24} />
+              </div>
+              <div>
+                <h3 style={{ fontSize: '1.5rem', fontWeight: '800', color: 'var(--imperial-emerald)', letterSpacing: '-0.02em' }}>
+                  Client Detail
+                </h3>
+                <p style={{ color: 'var(--muted-jade)', fontSize: '0.8125rem', fontWeight: '500' }}>
+                  Complete view of account performance and billing
+                </p>
+              </div>
+            </div>
             <button
               onClick={closeDetail}
               style={{
-                border: 'none',
-                background: 'transparent',
-                fontSize: '1rem',
+                width: '36px',
+                height: '36px',
+                borderRadius: '50%',
+                border: '1px solid rgba(196, 183, 91, 0.2)',
+                background: 'white',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
                 cursor: 'pointer',
                 color: 'var(--muted-jade)',
+                transition: 'all 0.2s ease'
               }}
+              onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(239, 68, 68, 0.1)'}
+              onMouseLeave={(e) => e.currentTarget.style.background = 'white'}
             >
-              Close
+              <X size={20} />
             </button>
           </div>
 
           {detailLoading ? (
-            <div style={{ textAlign: 'center', padding: '2rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '400px', gap: '1rem' }}>
               <div className="spinner" />
+              <p style={{ color: 'var(--muted-jade)', fontWeight: '600', fontSize: '0.875rem' }}>Loading client intelligence...</p>
             </div>
           ) : detailError ? (
-            <div className="card" style={{ background: '#fee2e2', color: '#dc2626' }}>
-              {detailError}
+            <div style={{ 
+              background: '#fee2e2', 
+              color: '#dc2626', 
+              padding: '1.5rem', 
+              borderRadius: '1rem',
+              border: '1px solid #fecaca',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '1rem'
+            }}>
+              <AlertCircle size={24} />
+              <span style={{ fontWeight: '600' }}>{detailError}</span>
             </div>
           ) : detail ? (
             (() => {
               const d = detail as DetailResponse;
               return (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              {/* Summary cards */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+              {/* Summary Metrics */}
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
-                <div className="card" style={{ padding: '1rem' }}>
-                  <div style={{ color: 'var(--muted-jade)', fontSize: '0.85rem', marginBottom: '0.35rem' }}>No. of Licenses</div>
-                  <div style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--imperial-emerald)' }}>
+                <div style={{ background: 'white', padding: '1.25rem', borderRadius: '1rem', border: '1px solid rgba(196, 183, 91, 0.15)', boxShadow: '0 2px 8px rgba(0,0,0,0.02)' }}>
+                  <div style={{ color: 'var(--muted-jade)', fontSize: '0.75rem', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem' }}>Licenses</div>
+                  <div style={{ fontSize: '1.75rem', fontWeight: '800', color: 'var(--imperial-emerald)' }}>
                     {d.summary.totalLicenses}
                   </div>
                 </div>
-                <div className="card" style={{ padding: '1rem' }}>
-                  <div style={{ color: 'var(--muted-jade)', fontSize: '0.85rem', marginBottom: '0.35rem' }}>Total Target (placeholder)</div>
-                  <div style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--imperial-emerald)' }}>
+                <div style={{ background: 'white', padding: '1.25rem', borderRadius: '1rem', border: '1px solid rgba(196, 183, 91, 0.15)', boxShadow: '0 2px 8px rgba(0,0,0,0.02)' }}>
+                  <div style={{ color: 'var(--muted-jade)', fontSize: '0.75rem', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem' }}>Total Target</div>
+                  <div style={{ fontSize: '1.75rem', fontWeight: '800', color: 'var(--imperial-emerald)' }}>
                     {d.summary.totalTarget}
                   </div>
                 </div>
-                <div className="card" style={{ padding: '1rem' }}>
-                  <div style={{ color: 'var(--muted-jade)', fontSize: '0.85rem', marginBottom: '0.35rem' }}>Total Achieved</div>
-                  <div style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--imperial-emerald)' }}>
+                <div style={{ background: 'white', padding: '1.25rem', borderRadius: '1rem', border: '1px solid rgba(196, 183, 91, 0.15)', boxShadow: '0 2px 8px rgba(0,0,0,0.02)' }}>
+                  <div style={{ color: 'var(--muted-jade)', fontSize: '0.75rem', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem' }}>Total Achieved</div>
+                  <div style={{ fontSize: '1.75rem', fontWeight: '800', color: '#10b981' }}>
                     {d.summary.totalAchieved}
                   </div>
                 </div>
-                <div className="card" style={{ padding: '1rem' }}>
-                  <div style={{ color: 'var(--muted-jade)', fontSize: '0.85rem', marginBottom: '0.35rem' }}>Status</div>
+                <div style={{ background: 'white', padding: '1.25rem', borderRadius: '1rem', border: '1px solid rgba(196, 183, 91, 0.15)', boxShadow: '0 2px 8px rgba(0,0,0,0.02)' }}>
+                  <div style={{ color: 'var(--muted-jade)', fontSize: '0.75rem', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem' }}>Performance Status</div>
                   {(() => {
                     const status = d.summary.achievementStatus || 'IN_PROGRESS';
                     const statusConfig = {
-                      ACHIEVED: { color: '#10b981', bg: '#d1fae5', label: 'Achieved' },
-                      IN_PROGRESS: { color: '#f59e0b', bg: '#fef3c7', label: 'In Progress' },
-                      OVERDUE: { color: '#ef4444', bg: '#fee2e2', label: 'Overdue' },
+                      ACHIEVED: { color: '#10b981', bg: '#d1fae5', icon: CheckCircle2, label: 'On Target' },
+                      IN_PROGRESS: { color: '#f59e0b', bg: '#fef3c7', icon: Clock, label: 'In Progress' },
+                      OVERDUE: { color: '#ef4444', bg: '#fee2e2', icon: AlertCircle, label: 'Overdue' },
                     };
                     const config = statusConfig[status] || statusConfig.IN_PROGRESS;
+                    const StatusIcon = config.icon;
                     return (
-                      <span
-                        style={{
-                          display: 'inline-block',
-                          padding: '0.5rem 1rem',
-                          borderRadius: '0.5rem',
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                        <div style={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '0.5rem',
+                          padding: '0.375rem 0.75rem',
+                          borderRadius: '2rem',
                           background: config.bg,
                           color: config.color,
                           fontWeight: '700',
-                          fontSize: '1rem',
-                          textTransform: 'uppercase',
-                          letterSpacing: '0.05em',
-                        }}
-                      >
+                          fontSize: '0.8125rem',
+                          width: 'fit-content'
+                        }}>
+                          <StatusIcon size={14} />
                         {config.label}
-                      </span>
-                    );
-                  })()}
+                        </div>
                   {d.summary.deadlineDate && (
-                    <div style={{ marginTop: '0.5rem', fontSize: '0.85rem', color: 'var(--muted-jade)' }}>
+                          <div style={{ fontSize: '0.75rem', color: 'var(--muted-jade)', fontWeight: '500' }}>
                       Deadline: {new Date(d.summary.deadlineDate).toLocaleDateString()}
                     </div>
                   )}
+                      </div>
+                    );
+                  })()}
                 </div>
               </div>
 
-              {/* Client + plan info */}
-              <div className="card" style={{ padding: '1rem' }}>
-                <h4 style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--imperial-emerald)', marginBottom: '0.75rem' }}>
-                  Client & Plan
-                </h4>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1rem' }}>
+              {/* Information Cards */}
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '1.5rem' }}>
+                <div style={{ background: 'white', padding: '1.5rem', borderRadius: '1.25rem', border: '1px solid rgba(196, 183, 91, 0.15)', boxShadow: '0 4px 12px rgba(0,0,0,0.02)' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.25rem' }}>
+                    <div style={{ width: '32px', height: '32px', borderRadius: '8px', background: 'rgba(11, 46, 43, 0.05)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--imperial-emerald)' }}>
+                      <Building2 size={18} />
+                    </div>
+                    <h4 style={{ fontSize: '1rem', fontWeight: '750', color: 'var(--imperial-emerald)' }}>Company Information</h4>
+                  </div>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem' }}>
                   <div>
-                    <div style={{ color: 'var(--muted-jade)', fontSize: '0.85rem' }}>Business</div>
-                    <div style={{ fontWeight: 700 }}>{d.client.businessName}</div>
+                      <span style={{ fontSize: '0.75rem', color: 'var(--muted-jade)', fontWeight: '600', display: 'block', marginBottom: '0.25rem' }}>Business Name</span>
+                      <span style={{ fontWeight: '700', color: 'var(--imperial-emerald)' }}>{d.client.businessName}</span>
                   </div>
                   <div>
-                    <div style={{ color: 'var(--muted-jade)', fontSize: '0.85rem' }}>POC</div>
-                    <div style={{ fontWeight: 700 }}>{d.client.pointOfContact.name}</div>
-                    <div style={{ fontSize: '0.85rem', color: 'var(--muted-jade)' }}>{d.client.pointOfContact.email}</div>
-                    {d.client.pointOfContact.phone && (
-                      <div style={{ fontSize: '0.85rem', color: 'var(--muted-jade)' }}>{d.client.pointOfContact.phone}</div>
+                      <span style={{ fontSize: '0.75rem', color: 'var(--muted-jade)', fontWeight: '600', display: 'block', marginBottom: '0.25rem' }}>Country</span>
+                      <span style={{ fontWeight: '700', color: 'var(--imperial-emerald)' }}>{d.client.country || '—'}</span>
+                    </div>
+                    <div style={{ gridColumn: 'span 2' }}>
+                      <span style={{ fontSize: '0.75rem', color: 'var(--muted-jade)', fontWeight: '600', display: 'block', marginBottom: '0.25rem' }}>Registered Address</span>
+                      <span style={{ fontWeight: '700', color: 'var(--imperial-emerald)', fontSize: '0.875rem' }}>{d.client.fullRegisteredAddress || '—'}</span>
+                    </div>
+                    {d.client.websiteAddress && (
+                      <div style={{ gridColumn: 'span 2' }}>
+                        <span style={{ fontSize: '0.75rem', color: 'var(--muted-jade)', fontWeight: '600', display: 'block', marginBottom: '0.25rem' }}>Website</span>
+                        <a href={d.client.websiteAddress.startsWith('http') ? d.client.websiteAddress : `https://${d.client.websiteAddress}`} target="_blank" rel="noopener noreferrer" style={{ fontWeight: '700', color: 'var(--imperial-emerald)', display: 'flex', alignItems: 'center', gap: '0.375rem', textDecoration: 'none' }}>
+                          {d.client.websiteAddress} <ExternalLink size={12} />
+                        </a>
+                      </div>
                     )}
                   </div>
-                  <div>
-                    <div style={{ color: 'var(--muted-jade)', fontSize: '0.85rem' }}>Plan</div>
-                    <div style={{ fontWeight: 700 }}>{d.client.plan.name}</div>
-                    <div style={{ fontSize: '0.85rem', color: 'var(--muted-jade)' }}>
-                      {d.client.plan.planType || '—'} · {d.client.plan.currency} {d.client.plan.pricePerLicense ?? '—'} each
+                </div>
+
+                <div style={{ background: 'white', padding: '1.5rem', borderRadius: '1.25rem', border: '1px solid rgba(196, 183, 91, 0.15)', boxShadow: '0 4px 12px rgba(0,0,0,0.02)' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.25rem' }}>
+                    <div style={{ width: '32px', height: '32px', borderRadius: '8px', background: 'rgba(11, 46, 43, 0.05)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--imperial-emerald)' }}>
+                      <User size={18} />
+                    </div>
+                    <h4 style={{ fontSize: '1rem', fontWeight: '750', color: 'var(--imperial-emerald)' }}>Key Contact</h4>
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                    <div>
+                      <span style={{ fontSize: '0.75rem', color: 'var(--muted-jade)', fontWeight: '600', display: 'block', marginBottom: '0.25rem' }}>Contact Name</span>
+                      <div style={{ fontWeight: '700', color: 'var(--imperial-emerald)', fontSize: '1.125rem' }}>{d.client.pointOfContact.name}</div>
+                      <span style={{ fontSize: '0.8125rem', color: 'var(--muted-jade)', fontWeight: '500' }}>{d.client.pointOfContact.title || 'Decision Maker'}</span>
+                    </div>
+                    <div style={{ display: 'flex', gap: '2rem' }}>
+                      <div>
+                        <span style={{ fontSize: '0.75rem', color: 'var(--muted-jade)', fontWeight: '600', display: 'block', marginBottom: '0.25rem' }}>Email</span>
+                        <div style={{ fontWeight: '700', color: 'var(--imperial-emerald)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                          <Mail size={14} />
+                          {d.client.pointOfContact.email}
+                        </div>
                       </div>
+                    {d.client.pointOfContact.phone && (
+                        <div>
+                          <span style={{ fontSize: '0.75rem', color: 'var(--muted-jade)', fontWeight: '600', display: 'block', marginBottom: '0.25rem' }}>Phone</span>
+                          <div style={{ fontWeight: '700', color: 'var(--imperial-emerald)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                            <Phone size={14} />
+                            {d.client.pointOfContact.phone}
+                          </div>
+                        </div>
+                    )}
+                  </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Plan & Billing Card */}
+              <div style={{ background: 'white', padding: '1.5rem', borderRadius: '1.25rem', border: '1px solid rgba(196, 183, 91, 0.15)', boxShadow: '0 4px 12px rgba(0,0,0,0.02)' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                    <div style={{ width: '32px', height: '32px', borderRadius: '8px', background: 'rgba(11, 46, 43, 0.05)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--imperial-emerald)' }}>
+                      <CreditCard size={18} />
+                    </div>
+                    <h4 style={{ fontSize: '1rem', fontWeight: '750', color: 'var(--imperial-emerald)' }}>Plan & Account Details</h4>
+                  </div>
+                  <div style={{ 
+                    padding: '0.375rem 0.75rem', 
+                    borderRadius: '2rem', 
+                    background: 'rgba(11, 46, 43, 0.05)', 
+                    color: 'var(--imperial-emerald)',
+                    fontSize: '0.75rem',
+                    fontWeight: '700'
+                  }}>
+                    {d.client.plan.planType || 'REGULAR'} PLAN
+                  </div>
+                </div>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem' }}>
+                  <div>
+                    <span style={{ fontSize: '0.75rem', color: 'var(--muted-jade)', fontWeight: '600', display: 'block', marginBottom: '0.25rem' }}>Active Plan</span>
+                    <div style={{ fontWeight: '700', color: 'var(--imperial-emerald)' }}>{d.client.plan.name}</div>
+                      </div>
+                  <div>
+                    <span style={{ fontSize: '0.75rem', color: 'var(--muted-jade)', fontWeight: '600', display: 'block', marginBottom: '0.25rem' }}>License Pricing</span>
+                    <div style={{ fontWeight: '700', color: 'var(--imperial-emerald)' }}>
+                      {d.client.plan.currency} {d.client.plan.pricePerLicense?.toLocaleString() || '0'} / license
+                    </div>
+                  </div>
+                  <div>
+                    <span style={{ fontSize: '0.75rem', color: 'var(--muted-jade)', fontWeight: '600', display: 'block', marginBottom: '0.25rem' }}>Total Licenses</span>
+                    <div style={{ fontWeight: '700', color: 'var(--imperial-emerald)' }}>{d.client.plan.numberOfLicenses} Seats</div>
+                  </div>
+                  <div>
+                    <span style={{ fontSize: '0.75rem', color: 'var(--muted-jade)', fontWeight: '600', display: 'block', marginBottom: '0.25rem' }}>Account Manager</span>
+                    <div style={{ fontWeight: '700', color: 'var(--imperial-emerald)' }}>{d.client.accountManager?.name || 'Unassigned'}</div>
                   </div>
                 </div>
       </div>
 
-              {/* Licenses */}
-              <div className="card" style={{ padding: '1rem' }}>
-                <h4 style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--imperial-emerald)', marginBottom: '0.75rem' }}>
-                  Licenses
-                </h4>
+              {/* Licenses Section */}
+              <div style={{ background: 'white', padding: '1.5rem', borderRadius: '1.25rem', border: '1px solid rgba(196, 183, 91, 0.15)', boxShadow: '0 4px 12px rgba(0,0,0,0.02)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.25rem' }}>
+                  <div style={{ width: '32px', height: '32px', borderRadius: '8px', background: 'rgba(11, 46, 43, 0.05)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--imperial-emerald)' }}>
+                    <ShieldCheck size={18} />
+                  </div>
+                  <h4 style={{ fontSize: '1rem', fontWeight: '750', color: 'var(--imperial-emerald)' }}>Active Licenses</h4>
+                </div>
                 {d.licenses.length === 0 ? (
-                  <p style={{ color: 'var(--muted-jade)' }}>No licenses.</p>
+                  <div style={{ textAlign: 'center', padding: '2rem', background: 'rgba(11, 46, 43, 0.02)', borderRadius: '0.75rem' }}>
+                    <p style={{ color: 'var(--muted-jade)', fontWeight: '500' }}>No active licenses found.</p>
+                  </div>
                 ) : (
                   <div style={{ overflowX: 'auto' }}>
                     <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                       <thead>
-                        <tr style={{ background: 'rgba(11, 46, 43, 0.05)', borderBottom: '2px solid rgba(196, 183, 91, 0.3)' }}>
-                          {['Service', 'Type', 'Label', 'Status', 'Start', 'End'].map((h) => (
-                            <th key={h} style={{ padding: '0.75rem', textAlign: 'left', fontSize: '0.85rem', color: 'var(--imperial-emerald)' }}>
+                        <tr style={{ background: 'rgba(11, 46, 43, 0.02)' }}>
+                          {['Service / Product', 'Type', 'Label', 'Status', 'Start Date'].map((h) => (
+                            <th key={h} style={{ padding: '0.75rem 1rem', textAlign: 'left', fontSize: '0.75rem', fontWeight: '700', color: 'var(--muted-jade)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                               {h}
                             </th>
                           ))}
@@ -1053,13 +1612,41 @@ export default function AdminDashboard() {
                       </thead>
                       <tbody>
                         {d.licenses.map((lic) => (
-                          <tr key={lic.id} style={{ borderBottom: '1px solid rgba(196, 183, 91, 0.15)' }}>
-                            <td style={{ padding: '0.75rem' }}>{lic.productOrServiceName}</td>
-                            <td style={{ padding: '0.75rem' }}>{lic.serviceType}</td>
-                            <td style={{ padding: '0.75rem' }}>{lic.label}</td>
-                            <td style={{ padding: '0.75rem' }}>{lic.status}</td>
-                            <td style={{ padding: '0.75rem' }}>{new Date(lic.startDate).toLocaleDateString()}</td>
-                            <td style={{ padding: '0.75rem' }}>{lic.endDate ? new Date(lic.endDate).toLocaleDateString() : '—'}</td>
+                          <tr key={lic.id} style={{ borderBottom: '1px solid rgba(196, 183, 91, 0.08)' }}>
+                            <td style={{ padding: '1rem' }}>
+                              <div style={{ fontWeight: '700', color: 'var(--imperial-emerald)', fontSize: '0.875rem' }}>{lic.productOrServiceName}</div>
+                            </td>
+                            <td style={{ padding: '1rem' }}>
+                              <span style={{ fontSize: '0.8125rem', fontWeight: '600', color: 'var(--muted-jade)' }}>{lic.serviceType}</span>
+                            </td>
+                            <td style={{ padding: '1rem' }}>
+                              <span style={{ 
+                                padding: '0.25rem 0.625rem', 
+                                borderRadius: '0.5rem', 
+                                background: 'rgba(196, 183, 91, 0.1)', 
+                                color: 'var(--imperial-emerald)',
+                                fontSize: '0.75rem',
+                                fontWeight: '700'
+                              }}>
+                                {lic.label}
+                              </span>
+                            </td>
+                            <td style={{ padding: '1rem' }}>
+                              <span style={{ 
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                gap: '0.375rem',
+                                fontSize: '0.75rem',
+                                fontWeight: '700',
+                                color: lic.status === 'ACTIVE' ? '#10b981' : '#f59e0b'
+                              }}>
+                                <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: lic.status === 'ACTIVE' ? '#10b981' : '#f59e0b' }} />
+                                {lic.status}
+                              </span>
+                            </td>
+                            <td style={{ padding: '1rem', fontSize: '0.8125rem', color: 'var(--muted-jade)', fontWeight: '500' }}>
+                              {new Date(lic.startDate).toLocaleDateString()}
+                            </td>
                           </tr>
                         ))}
                       </tbody>
@@ -1068,107 +1655,91 @@ export default function AdminDashboard() {
                 )}
               </div>
 
-              {/* Updates */}
-              <div className="card" style={{ padding: '1rem' }}>
-                <h4 style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--imperial-emerald)', marginBottom: '0.75rem' }}>
-                  Updates (latest 50)
-                </h4>
+              {/* Updates Timeline Section */}
+              <div style={{ background: 'white', padding: '1.5rem', borderRadius: '1.25rem', border: '1px solid rgba(196, 183, 91, 0.15)', boxShadow: '0 4px 12px rgba(0,0,0,0.02)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem' }}>
+                  <div style={{ width: '32px', height: '32px', borderRadius: '8px', background: 'rgba(11, 46, 43, 0.05)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--imperial-emerald)' }}>
+                    <History size={18} />
+                  </div>
+                  <h4 style={{ fontSize: '1rem', fontWeight: '750', color: 'var(--imperial-emerald)' }}>Recent Activity Logs</h4>
+                </div>
                 {d.updates && d.updates.length > 0 ? (
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                     {d.updates.map((u) => (
-                      <div key={u.id} style={{ padding: '0.75rem', border: '1px solid rgba(11,46,43,0.1)', borderRadius: '0.5rem' }}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.35rem' }}>
-                          <span style={{ fontWeight: 700, color: 'var(--imperial-emerald)' }}>{u.title}</span>
-                          <span style={{ fontSize: '0.8rem', color: 'var(--muted-jade)' }}>{new Date(u.date).toLocaleDateString()}</span>
+                      <div key={u.id} style={{ 
+                        padding: '1rem', 
+                        background: 'rgba(11, 46, 43, 0.02)', 
+                        borderRadius: '1rem',
+                        border: '1px solid rgba(11, 46, 43, 0.02)'
+                      }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
+                          <span style={{ fontWeight: '750', color: 'var(--imperial-emerald)', fontSize: '0.9375rem' }}>{u.title}</span>
+                          <span style={{ fontSize: '0.75rem', color: 'var(--muted-jade)', fontWeight: '600' }}>{new Date(u.date).toLocaleDateString()}</span>
                         </div>
-                        <div style={{ fontSize: '0.9rem', color: 'var(--muted-jade)', marginBottom: '0.35rem' }}>{u.description}</div>
-                        <div style={{ fontSize: '0.8rem', color: 'var(--muted-jade)' }}>
-                          {u.sdr ? `By ${u.sdr.name} (${u.sdr.email})` : '—'}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <p style={{ color: 'var(--muted-jade)' }}>No updates yet.</p>
-                )}
-              </div>
-
-              {/* Reports */}
-              <div className="card" style={{ padding: '1rem' }}>
-                <h4 style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--imperial-emerald)', marginBottom: '0.75rem' }}>
-                  Reports (latest 50)
-                </h4>
-                {d.reports && d.reports.length > 0 ? (
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                    {d.reports.map((r) => (
-                      <div key={r.id} style={{ padding: '0.75rem', border: '1px solid rgba(11,46,43,0.1)', borderRadius: '0.5rem' }}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.35rem' }}>
-                          <span style={{ fontWeight: 700, color: 'var(--imperial-emerald)' }}>{r.type}</span>
-                          <span style={{ fontSize: '0.8rem', color: 'var(--muted-jade)' }}>
-                            {new Date(r.periodStart).toLocaleDateString()} - {new Date(r.periodEnd).toLocaleDateString()}
-                          </span>
-                        </div>
-                        <div style={{ fontSize: '0.9rem', color: 'var(--muted-jade)', marginBottom: '0.35rem' }}>{r.summary}</div>
-                        <div style={{ fontSize: '0.8rem', color: 'var(--muted-jade)' }}>
-                          {r.createdBy ? `By ${r.createdBy.name} (${r.createdBy.email})` : '—'}
+                        <p style={{ fontSize: '0.875rem', color: 'var(--muted-jade)', lineHeight: '1.5', marginBottom: '0.75rem' }}>{u.description}</p>
+                        <div style={{ 
+                          fontSize: '0.75rem', 
+                          color: 'var(--imperial-emerald)', 
+                          fontWeight: '600',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '0.375rem'
+                        }}>
+                          <User size={12} />
+                          {u.sdr ? `${u.sdr.name}` : 'Automated System'}
                         </div>
                       </div>
                     ))}
                   </div>
                 ) : (
-                  <p style={{ color: 'var(--muted-jade)' }}>No reports yet.</p>
+                  <div style={{ textAlign: 'center', padding: '2rem', background: 'rgba(11, 46, 43, 0.02)', borderRadius: '0.75rem' }}>
+                    <p style={{ color: 'var(--muted-jade)', fontWeight: '500' }}>No updates logged for this client yet.</p>
+                  </div>
                 )}
               </div>
 
-              {/* Payment History */}
+              {/* Payment History Card */}
               {d.paymentHistory && (
-                <div className="card" style={{ padding: '1rem' }}>
-                  <h4 style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--imperial-emerald)', marginBottom: '0.75rem' }}>
-                    Payment History
-                  </h4>
-                  <div style={{ marginBottom: '1rem', padding: '0.75rem', background: 'rgba(11,46,43,0.05)', borderRadius: '0.5rem' }}>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '1rem', fontSize: '0.875rem' }}>
+                <div style={{ background: 'white', padding: '1.5rem', borderRadius: '1.25rem', border: '1px solid rgba(196, 183, 91, 0.15)', boxShadow: '0 4px 12px rgba(0,0,0,0.02)' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem' }}>
+                    <div style={{ width: '32px', height: '32px', borderRadius: '8px', background: 'rgba(11, 46, 43, 0.05)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--imperial-emerald)' }}>
+                      <CreditCard size={18} />
+                        </div>
+                    <h4 style={{ fontSize: '1rem', fontWeight: '750', color: 'var(--imperial-emerald)' }}>Payment & Billing History</h4>
+              </div>
+
+                  <div style={{ 
+                    display: 'grid', 
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', 
+                    gap: '1rem', 
+                    marginBottom: '1.5rem',
+                    background: 'rgba(11, 46, 43, 0.02)',
+                    padding: '1.25rem',
+                    borderRadius: '1rem'
+                  }}>
                       <div>
-                        <div style={{ color: 'var(--muted-jade)', marginBottom: '0.25rem' }}>Total Invoices</div>
-                        <div style={{ fontWeight: 700, color: 'var(--imperial-emerald)' }}>{d.paymentHistory.paymentSummary.totalInvoices}</div>
+                      <span style={{ fontSize: '0.7rem', fontWeight: '700', color: 'var(--muted-jade)', textTransform: 'uppercase', display: 'block', marginBottom: '0.25rem' }}>Invoiced</span>
+                      <div style={{ fontWeight: '800', color: 'var(--imperial-emerald)', fontSize: '1.25rem' }}>{d.paymentHistory.paymentSummary.totalInvoices}</div>
                       </div>
                       <div>
-                        <div style={{ color: 'var(--muted-jade)', marginBottom: '0.25rem' }}>Paid</div>
-                        <div style={{ fontWeight: 700, color: '#10b981' }}>{d.paymentHistory.paymentSummary.paidCount}</div>
+                      <span style={{ fontSize: '0.7rem', fontWeight: '700', color: 'var(--muted-jade)', textTransform: 'uppercase', display: 'block', marginBottom: '0.25rem' }}>Fully Paid</span>
+                      <div style={{ fontWeight: '800', color: '#10b981', fontSize: '1.25rem' }}>{d.paymentHistory.paymentSummary.paidCount}</div>
                       </div>
                       <div>
-                        <div style={{ color: 'var(--muted-jade)', marginBottom: '0.25rem' }}>Total Paid</div>
-                        <div style={{ fontWeight: 700, color: 'var(--imperial-emerald)' }}>
+                      <span style={{ fontSize: '0.7rem', fontWeight: '700', color: 'var(--muted-jade)', textTransform: 'uppercase', display: 'block', marginBottom: '0.25rem' }}>Total Value</span>
+                      <div style={{ fontWeight: '800', color: 'var(--imperial-emerald)', fontSize: '1.25rem' }}>
                           {d.paymentHistory.paymentSummary.totalPaid.toLocaleString()} {d.paymentHistory.invoices[0]?.currency || 'USD'}
                         </div>
                       </div>
-                      {d.paymentHistory.paymentSummary.lastPaymentDate && (
-                        <div>
-                          <div style={{ color: 'var(--muted-jade)', marginBottom: '0.25rem' }}>Last Payment</div>
-                          <div style={{ fontWeight: 700, color: 'var(--imperial-emerald)' }}>
-                            {new Date(d.paymentHistory.paymentSummary.lastPaymentDate).toLocaleDateString()}
                           </div>
-                        </div>
-                      )}
-                    </div>
-                  </div>
+
                   {d.paymentHistory.invoices.length > 0 ? (
                     <div style={{ overflowX: 'auto' }}>
-                      <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.875rem' }}>
+                      <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                         <thead>
-                          <tr style={{ background: 'rgba(11, 46, 43, 0.05)', borderBottom: '2px solid rgba(196, 183, 91, 0.3)' }}>
-                            {['Invoice #', 'Invoice Date', 'Payment Date', 'Amount', 'Status', 'Actions'].map((header) => (
-                              <th
-                                key={header}
-                                style={{
-                                  padding: '0.75rem',
-                                  textAlign: header === 'Actions' ? 'center' : 'left',
-                                  fontWeight: '600',
-                                  color: 'var(--imperial-emerald)',
-                                  fontSize: '0.75rem',
-                                  textTransform: 'uppercase',
-                                }}
-                              >
+                          <tr style={{ background: 'rgba(11, 46, 43, 0.02)' }}>
+                            {['Invoice #', 'Date', 'Amount', 'Status', 'Download'].map((header) => (
+                              <th key={header} style={{ padding: '0.75rem 1rem', textAlign: 'left', fontWeight: '700', color: 'var(--muted-jade)', fontSize: '0.75rem', textTransform: 'uppercase' }}>
                                 {header}
                               </th>
                             ))}
@@ -1176,42 +1747,35 @@ export default function AdminDashboard() {
                         </thead>
                         <tbody>
                           {d.paymentHistory.invoices.map((inv) => (
-                            <tr key={inv.id} style={{ borderBottom: '1px solid rgba(196, 183, 91, 0.15)' }}>
-                              <td style={{ padding: '0.75rem' }}>{inv.invoiceNumber}</td>
-                              <td style={{ padding: '0.75rem' }}>{new Date(inv.invoiceDate).toLocaleDateString()}</td>
-                              <td style={{ padding: '0.75rem' }}>
-                                {inv.paymentDate ? new Date(inv.paymentDate).toLocaleDateString() : '—'}
+                            <tr key={inv.id} style={{ borderBottom: '1px solid rgba(196, 183, 91, 0.08)' }}>
+                              <td style={{ padding: '1rem' }}>
+                                <div style={{ fontWeight: '700', color: 'var(--imperial-emerald)', fontSize: '0.875rem' }}>{inv.invoiceNumber}</div>
                               </td>
-                              <td style={{ padding: '0.75rem', fontWeight: '600' }}>
+                              <td style={{ padding: '1rem', fontSize: '0.8125rem', color: 'var(--muted-jade)', fontWeight: '500' }}>
+                                {new Date(inv.invoiceDate).toLocaleDateString()}
+                              </td>
+                              <td style={{ padding: '1rem' }}>
+                                <div style={{ fontWeight: '700', color: 'var(--imperial-emerald)', fontSize: '0.875rem' }}>
                                 {inv.amount.toLocaleString()} {inv.currency}
+                                </div>
                               </td>
-                              <td style={{ padding: '0.75rem' }}>
-                                <span
-                                  style={{
-                                    display: 'inline-block',
-                                    padding: '0.25rem 0.5rem',
-                                    borderRadius: '0.25rem',
-                                    background:
-                                      inv.status === 'PAID'
-                                        ? '#d1fae5'
-                                        : inv.status === 'OVERDUE'
-                                        ? '#fee2e2'
-                                        : '#fef3c7',
-                                    color:
-                                      inv.status === 'PAID'
-                                        ? '#10b981'
-                                        : inv.status === 'OVERDUE'
-                                        ? '#ef4444'
-                                        : '#f59e0b',
-                                    fontWeight: '600',
-                                    fontSize: '0.75rem',
-                                    textTransform: 'uppercase',
-                                  }}
-                                >
+                              <td style={{ padding: '1rem' }}>
+                                <span style={{
+                                  display: 'inline-flex',
+                                  alignItems: 'center',
+                                  gap: '0.375rem',
+                                  padding: '0.25rem 0.625rem',
+                                  borderRadius: '0.5rem',
+                                  background: inv.status === 'PAID' ? '#d1fae5' : inv.status === 'OVERDUE' ? '#fee2e2' : '#fef3c7',
+                                  color: inv.status === 'PAID' ? '#10b981' : inv.status === 'OVERDUE' ? '#ef4444' : '#f59e0b',
+                                  fontWeight: '700',
+                                  fontSize: '0.75rem'
+                                }}>
+                                  <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: 'currentColor' }} />
                                   {inv.status}
                                 </span>
                               </td>
-                              <td style={{ padding: '0.75rem', textAlign: 'center' }}>
+                              <td style={{ padding: '1rem' }}>
                                 {inv.fileId ? (
                                   <a
                                     href={`/api/admin/clients/${d.client.id}/invoice/${inv.fileId}`}
@@ -1219,29 +1783,25 @@ export default function AdminDashboard() {
                                     style={{
                                       display: 'inline-flex',
                                       alignItems: 'center',
-                                      justifyContent: 'center',
+                                      gap: '0.5rem',
                                       padding: '0.375rem 0.75rem',
-                                      borderRadius: '0.375rem',
-                                      background: 'rgba(196, 183, 91, 0.1)',
+                                      borderRadius: '0.5rem',
+                                      background: 'white',
+                                      border: '1px solid rgba(196, 183, 91, 0.3)',
                                       color: 'var(--imperial-emerald)',
                                       textDecoration: 'none',
                                       fontSize: '0.75rem',
-                                      fontWeight: '500',
-                                      transition: 'all 0.2s ease',
-                                      border: '1px solid rgba(196, 183, 91, 0.3)',
+                                      fontWeight: '700',
+                                      transition: 'all 0.2s ease'
                                     }}
-                                    onMouseEnter={(e) => {
-                                      e.currentTarget.style.background = 'rgba(196, 183, 91, 0.2)';
-                                    }}
-                                    onMouseLeave={(e) => {
-                                      e.currentTarget.style.background = 'rgba(196, 183, 91, 0.1)';
-                                    }}
-                                    title="Download Invoice PDF"
+                                    onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(196, 183, 91, 0.1)'}
+                                    onMouseLeave={(e) => e.currentTarget.style.background = 'white'}
                                   >
-                                    📄 PDF
+                                    <FileText size={14} />
+                                    PDF
                                   </a>
                                 ) : (
-                                  <span style={{ color: 'var(--muted-jade)', fontSize: '0.75rem', fontStyle: 'italic' }}>—</span>
+                                  <span style={{ color: 'var(--muted-jade)', fontSize: '0.75rem', fontStyle: 'italic' }}>Not generated</span>
                                 )}
                               </td>
                             </tr>
@@ -1250,79 +1810,134 @@ export default function AdminDashboard() {
                       </table>
                     </div>
                   ) : (
-                    <p style={{ color: 'var(--muted-jade)', textAlign: 'center', padding: '2rem' }}>No invoices yet.</p>
+                    <div style={{ textAlign: 'center', padding: '2rem', background: 'rgba(11, 46, 43, 0.02)', borderRadius: '0.75rem' }}>
+                      <p style={{ color: 'var(--muted-jade)', fontWeight: '500' }}>No invoice history available.</p>
+                    </div>
                   )}
                 </div>
               )}
 
-              {/* Admin Notes */}
-              <div className="card" style={{ padding: '1rem' }}>
-                <h4 style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--imperial-emerald)', marginBottom: '0.75rem' }}>
-                  Admin Notes
-                </h4>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '0.75rem', marginBottom: '0.75rem' }}>
+              {/* Internal Admin Notes */}
+              <div style={{ background: 'white', padding: '1.5rem', borderRadius: '1.25rem', border: '1px solid rgba(196, 183, 91, 0.15)', boxShadow: '0 4px 12px rgba(0,0,0,0.02)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem' }}>
+                  <div style={{ width: '32px', height: '32px', borderRadius: '8px', background: 'rgba(11, 46, 43, 0.05)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--imperial-emerald)' }}>
+                    <StickyNote size={18} />
+                  </div>
+                  <h4 style={{ fontSize: '1rem', fontWeight: '750', color: 'var(--imperial-emerald)' }}>Internal Portfolio Notes</h4>
+                </div>
+                
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 240px', gap: '1rem', marginBottom: '1.5rem' }}>
                   <textarea
                     value={newNoteContent}
                     onChange={(e) => setNewNoteContent(e.target.value)}
-                    placeholder="Add a note"
-                    style={{ padding: '0.6rem', borderRadius: '0.5rem', border: '1px solid rgba(11,46,43,0.2)', minHeight: '80px' }}
+                    placeholder="Document internal strategy, risks or account updates..."
+                    style={{ 
+                      padding: '1rem', 
+                      borderRadius: '1rem', 
+                      border: '1px solid rgba(11, 46, 43, 0.1)', 
+                      minHeight: '120px',
+                      fontSize: '0.9375rem',
+                      background: 'rgba(11, 46, 43, 0.01)',
+                      resize: 'vertical',
+                      fontWeight: '500'
+                    }}
                   />
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                     <select
                       value={newNoteTag}
                       onChange={(e) => setNewNoteTag(e.target.value as any)}
-                      style={{ padding: '0.6rem', borderRadius: '0.5rem', border: '1px solid rgba(11,46,43,0.2)' }}
+                      style={{ 
+                        padding: '0.75rem', 
+                        borderRadius: '0.75rem', 
+                        border: '1px solid rgba(11, 46, 43, 0.1)',
+                        fontWeight: '700',
+                        color: 'var(--imperial-emerald)',
+                        background: 'white',
+                        cursor: 'pointer'
+                      }}
                     >
-                      <option value="ACCOUNT">ACCOUNT</option>
-                      <option value="BILLING">BILLING</option>
-                      <option value="RISK">RISK</option>
+                      <option value="ACCOUNT">STRATEGIC ACCOUNT</option>
+                      <option value="BILLING">BILLING/FINANCE</option>
+                      <option value="RISK">CHURN RISK</option>
                     </select>
-                    <label style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', color: 'var(--muted-jade)', fontSize: '0.9rem' }}>
-                      <input type="checkbox" checked={newNotePinned} onChange={(e) => setNewNotePinned(e.target.checked)} />
-                      Pin
-                    </label>
+                    <div style={{ 
+                      padding: '0.75rem', 
+                      borderRadius: '0.75rem', 
+                      background: 'white', 
+                      border: '1px solid rgba(11, 46, 43, 0.1)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.5rem'
+                    }}>
+                      <input type="checkbox" id="pinNote" checked={newNotePinned} onChange={(e) => setNewNotePinned(e.target.checked)} style={{ cursor: 'pointer' }} />
+                      <label htmlFor="pinNote" style={{ fontSize: '0.8125rem', fontWeight: '700', color: 'var(--imperial-emerald)', cursor: 'pointer' }}>Pin to top</label>
+                    </div>
                     <button
                       onClick={addNote}
+                      disabled={!newNoteContent.trim()}
                       style={{
-                        padding: '0.65rem 0.9rem',
-                        borderRadius: '0.5rem',
+                        padding: '0.75rem',
+                        borderRadius: '0.75rem',
                         border: 'none',
                         background: 'var(--imperial-emerald)',
                         color: 'white',
-                        fontWeight: 700,
+                        fontWeight: '700',
                         cursor: 'pointer',
+                        boxShadow: '0 4px 12px rgba(11, 46, 43, 0.15)',
+                        opacity: !newNoteContent.trim() ? 0.5 : 1,
+                        transition: 'all 0.2s ease'
                       }}
                     >
-                      Add Note
+                      Save Note
                     </button>
                   </div>
                 </div>
+
                 {notesLoading ? (
-                  <div style={{ textAlign: 'center', padding: '1rem' }}>
-                    <div className="spinner" />
+                  <div style={{ textAlign: 'center', padding: '2rem' }}>
+                    <div className="spinner" style={{ margin: '0 auto' }} />
           </div>
                 ) : notes.length === 0 ? (
-                  <p style={{ color: 'var(--muted-jade)' }}>No notes yet.</p>
+                  <div style={{ textAlign: 'center', padding: '2rem', background: 'rgba(11, 46, 43, 0.02)', borderRadius: '0.75rem' }}>
+                    <p style={{ color: 'var(--muted-jade)', fontWeight: '500' }}>No internal notes yet.</p>
+                  </div>
                 ) : (
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                     {notes.map((n) => (
                       <div
                         key={n._id}
                         style={{
-                          padding: '0.75rem',
-                          border: '1px solid rgba(11,46,43,0.1)',
-                          borderRadius: '0.5rem',
-                          background: n.pinned ? 'rgba(196,183,91,0.12)' : 'white',
+                          padding: '1.25rem',
+                          borderRadius: '1rem',
+                          border: n.pinned ? '1px solid rgba(196, 183, 91, 0.4)' : '1px solid rgba(11, 46, 43, 0.05)',
+                          background: n.pinned ? 'rgba(196, 183, 91, 0.05)' : 'white',
+                          position: 'relative',
+                          boxShadow: n.pinned ? '0 2px 12px rgba(196, 183, 91, 0.1)' : 'none'
                         }}
                       >
-                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.25rem' }}>
-                          <span style={{ fontWeight: 700, color: 'var(--imperial-emerald)' }}>{n.tag}</span>
-                          <span style={{ fontSize: '0.8rem', color: 'var(--muted-jade)' }}>{new Date(n.createdAt).toLocaleString()}</span>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                            <span style={{ 
+                              padding: '0.25rem 0.625rem', 
+                              borderRadius: '2rem', 
+                              fontSize: '0.65rem', 
+                              fontWeight: '800', 
+                              textTransform: 'uppercase',
+                              letterSpacing: '0.05em',
+                              background: n.tag === 'RISK' ? '#fee2e2' : n.tag === 'BILLING' ? '#fef3c7' : 'rgba(11, 46, 43, 0.05)',
+                              color: n.tag === 'RISK' ? '#ef4444' : n.tag === 'BILLING' ? '#f59e0b' : 'var(--imperial-emerald)'
+                            }}>
+                              {n.tag}
+                            </span>
+                            {n.pinned && <span style={{ fontSize: '0.65rem', fontWeight: '800', color: 'var(--imperial-emerald)', background: 'rgba(196, 183, 91, 0.2)', padding: '0.25rem 0.625rem', borderRadius: '2rem' }}>PINNED</span>}
         </div>
-                        <div style={{ color: 'var(--muted-jade)' }}>{n.content}</div>
+                          <span style={{ fontSize: '0.75rem', color: 'var(--muted-jade)', fontWeight: '600' }}>{new Date(n.createdAt).toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' })}</span>
+                        </div>
+                        <p style={{ color: 'var(--imperial-emerald)', fontSize: '0.9375rem', fontWeight: '500', lineHeight: '1.6', marginBottom: '1rem' }}>{n.content}</p>
                         {n.authorId && (
-                          <div style={{ fontSize: '0.8rem', color: 'var(--muted-jade)', marginTop: '0.25rem' }}>
-                            By {(n.authorId as any).name} {(n.authorId as any).email ? `(${(n.authorId as any).email})` : ''}
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.75rem', color: 'var(--muted-jade)', fontWeight: '600', paddingTop: '0.75rem', borderTop: '1px solid rgba(0,0,0,0.03)' }}>
+                            <div style={{ width: '20px', height: '20px', borderRadius: '50%', background: 'var(--imperial-emerald)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.6rem' }}>{(n.authorId as any).name?.charAt(0) || 'A'}</div>
+                            By {(n.authorId as any).name || 'Administrator'}
           </div>
                         )}
         </div>
@@ -1330,13 +1945,13 @@ export default function AdminDashboard() {
           </div>
                 )}
         </div>
+            </div>
+              );
+            })()
+          ) : null}
+        </div>
       </div>
-        );
-      })()
-    ) : null}
+    )}
     </div>
-  </div>
-)}
-</>
   );
 }
