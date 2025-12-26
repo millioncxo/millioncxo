@@ -206,7 +206,7 @@ export async function POST(
         { status: 500 }
       );
     }
-    console.log('[Invoice Generate API] Invoice verified in database:', foundInvoice._id.toString());
+    console.log('[Invoice Generate API] Invoice verified in database:', foundInvoice._id?.toString() || foundInvoice.id);
 
     return NextResponse.json(
       {

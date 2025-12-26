@@ -63,10 +63,14 @@ export async function GET(req: NextRequest) {
       .populate('sdrId', 'name email')
       .lean();
 
+    const target = client.targetThisMonth ?? client.numberOfLicenses ?? 0;
+    const achieved = client.achievedThisMonth ?? 0;
+    const progressPercent = target > 0 ? Math.round((achieved / target) * 100) : 0;
+
     const targetsAndDeliverables = {
-      currentMonthTarget: client.targetThisMonth ?? client.numberOfLicenses ?? 0,
-      currentMonthDelivered: client.achievedThisMonth ?? 0,
-      targetType: 'Licenses / Deliverables',
+      progressPercent,
+      status: progressPercent >= 100 ? 'ACHIEVED' : progressPercent >= 75 ? 'ON_TRACK' : 'IN_PROGRESS',
+      targetType: 'Monthly Progress',
       lastUpdated: new Date(),
     };
 

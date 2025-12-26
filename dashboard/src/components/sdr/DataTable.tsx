@@ -1,6 +1,8 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
+
+import { ChevronDown, ChevronUp, ChevronsUpDown, ChevronLeft, ChevronRight } from 'lucide-react';
 
 export interface Column<T> {
   key: string;
@@ -36,7 +38,7 @@ export default function DataTable<T extends { _id: string }>({
   data,
   columns,
   loading = false,
-  emptyMessage = 'No data available',
+  emptyMessage = 'No records found',
   onSort,
   sortBy,
   sortOrder,
@@ -68,17 +70,11 @@ export default function DataTable<T extends { _id: string }>({
 
   const SortIcon = ({ columnKey }: { columnKey: string }) => {
     if (sortBy !== columnKey) {
-      return (
-        <span style={{ marginLeft: '0.5rem', color: 'var(--muted-jade)', fontSize: '0.75rem' }}>
-          ↕
-        </span>
-      );
+      return <ChevronsUpDown size={14} style={{ marginLeft: '0.5rem', color: 'var(--muted-jade)', opacity: 0.5 }} />;
     }
-    return (
-      <span style={{ marginLeft: '0.5rem', color: 'var(--imperial-emerald)', fontSize: '0.75rem' }}>
-        {sortOrder === 'asc' ? '↑' : '↓'}
-      </span>
-    );
+    return sortOrder === 'asc' ? 
+      <ChevronUp size={14} style={{ marginLeft: '0.5rem', color: 'var(--imperial-emerald)' }} /> : 
+      <ChevronDown size={14} style={{ marginLeft: '0.5rem', color: 'var(--imperial-emerald)' }} />;
   };
 
   if (loading) {
@@ -149,9 +145,8 @@ export default function DataTable<T extends { _id: string }>({
           </thead>
           <tbody>
             {data.map((row) => (
-              <>
+              <React.Fragment key={row._id}>
                 <tr
-                  key={row._id}
                   style={{
                     borderBottom: '1px solid rgba(196, 183, 91, 0.15)',
                     cursor: onRowClick ? 'pointer' : 'default',
@@ -173,15 +168,21 @@ export default function DataTable<T extends { _id: string }>({
                           toggleRow(row._id);
                         }}
                         style={{
-                          background: 'transparent',
+                          background: 'rgba(196, 183, 91, 0.1)',
                           border: 'none',
+                          borderRadius: '0.375rem',
                           cursor: 'pointer',
                           color: 'var(--imperial-emerald)',
-                          fontSize: '0.875rem',
-                          padding: '0.25rem 0.5rem',
+                          width: '24px',
+                          height: '24px',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          transition: 'all 0.2s ease',
+                          margin: '0 auto'
                         }}
                       >
-                        {expandedRows.has(row._id) ? '▼' : '▶'}
+                        {expandedRows.has(row._id) ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
                       </button>
                     </td>
                   )}
@@ -208,7 +209,7 @@ export default function DataTable<T extends { _id: string }>({
                     </td>
                   </tr>
                 )}
-              </>
+              </React.Fragment>
             ))}
           </tbody>
         </table>
@@ -247,39 +248,53 @@ export default function DataTable<T extends { _id: string }>({
             <span>of {pagination.total} entries</span>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
             <button
               onClick={() => pagination.onPageChange(pagination.page - 1)}
               disabled={pagination.page === 1}
               style={{
-                padding: '0.5rem 1rem',
+                padding: '0.5rem',
                 border: '1px solid rgba(196, 183, 91, 0.3)',
-                borderRadius: '0.375rem',
-                background: pagination.page === 1 ? 'rgba(196, 183, 91, 0.1)' : 'white',
+                borderRadius: '0.5rem',
+                background: pagination.page === 1 ? 'rgba(0,0,0,0.02)' : 'white',
                 color: pagination.page === 1 ? 'var(--muted-jade)' : 'var(--imperial-emerald)',
                 cursor: pagination.page === 1 ? 'not-allowed' : 'pointer',
-                fontSize: '0.875rem',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
               }}
             >
-              Previous
+              <ChevronLeft size={16} />
             </button>
-            <span style={{ fontSize: '0.875rem', color: 'var(--muted-jade)', padding: '0 0.5rem' }}>
-              Page {pagination.page} of {pagination.totalPages}
-            </span>
+            <div style={{ 
+              display: 'flex', 
+              alignItems: 'center', 
+              padding: '0 1rem', 
+              height: '34px',
+              background: 'rgba(11, 46, 43, 0.05)',
+              borderRadius: '0.5rem',
+              fontSize: '0.8125rem',
+              color: 'var(--imperial-emerald)',
+              fontWeight: '600'
+            }}>
+              Page {pagination.page} <span style={{ margin: '0 0.375rem', opacity: 0.5 }}>of</span> {pagination.totalPages}
+            </div>
             <button
               onClick={() => pagination.onPageChange(pagination.page + 1)}
               disabled={pagination.page >= pagination.totalPages}
               style={{
-                padding: '0.5rem 1rem',
+                padding: '0.5rem',
                 border: '1px solid rgba(196, 183, 91, 0.3)',
-                borderRadius: '0.375rem',
-                background: pagination.page >= pagination.totalPages ? 'rgba(196, 183, 91, 0.1)' : 'white',
+                borderRadius: '0.5rem',
+                background: pagination.page >= pagination.totalPages ? 'rgba(0,0,0,0.02)' : 'white',
                 color: pagination.page >= pagination.totalPages ? 'var(--muted-jade)' : 'var(--imperial-emerald)',
                 cursor: pagination.page >= pagination.totalPages ? 'not-allowed' : 'pointer',
-                fontSize: '0.875rem',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
               }}
             >
-              Next
+              <ChevronRight size={16} />
             </button>
           </div>
         </div>

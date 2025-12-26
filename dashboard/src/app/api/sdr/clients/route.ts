@@ -43,7 +43,7 @@ export async function GET(req: NextRequest) {
     const assignments = await SdrClientAssignment.find({ sdrId })
       .populate({
         path: 'clientId',
-        select: 'businessName businessAddress pointOfContactName pointOfContactTitle pointOfContactEmail pointOfContactPhone websiteAddress country fullRegisteredAddress numberOfLicenses currentPlanId accountManagerId',
+        select: 'businessName businessAddress pointOfContactName pointOfContactTitle pointOfContactEmail pointOfContactPhone websiteAddress country fullRegisteredAddress numberOfLicenses currentPlanId accountManagerId targetThisMonth achievedThisMonth positiveResponsesTarget meetingsBookedTarget targetDeadline',
         populate: [
           {
             path: 'currentPlanId',
@@ -73,28 +73,38 @@ export async function GET(req: NextRequest) {
       latestUpdates.map((u: any) => [u._id.toString(), u.latestUpdate.date])
     );
 
-    // Calculate total active licenses assigned to this SDR
-    // Active licenses = licenses assigned to SDR (in assignment.licenses) with status 'active'
-    let totalActiveLicenses = 0;
-    const allAssignedLicenseIds: string[] = [];
-    
-    assignments.forEach((assignment: any) => {
-      if (assignment.licenses && Array.isArray(assignment.licenses)) {
-        assignment.licenses.forEach((license: any) => {
-          if (license && license._id) {
-            allAssignedLicenseIds.push(license._id.toString());
-            // Count only active licenses
-            if (license.status === 'active') {
-              totalActiveLicenses++;
-            }
-          }
-        });
+    // Calculate total active licenses (all active licenses for assigned clients)
+    // This will be calculated after fetching all licenses
+
+    // Fetch all licenses for all assigned clients
+    const allClientIds = assignments.map((a: any) => a.clientId._id);
+    const allClientLicenses = await License.find({ clientId: { $in: allClientIds } })
+      .sort({ createdAt: -1 })
+      .lean();
+
+    // Group licenses by clientId
+    const licensesByClient = new Map<string, any[]>();
+    allClientLicenses.forEach((license: any) => {
+      const clientIdStr = license.clientId.toString();
+      if (!licensesByClient.has(clientIdStr)) {
+        licensesByClient.set(clientIdStr, []);
       }
+      licensesByClient.get(clientIdStr)!.push(license);
     });
 
     // Format response
     const clients = assignments.map((assignment) => {
       const client = assignment.clientId as any; // Populated client object
+      const clientIdStr = client._id.toString();
+      const allLicensesForClient = licensesByClient.get(clientIdStr) || [];
+      const assignedLicenseIds = (assignment.licenses || []).map((id: any) => id.toString());
+      
+      // Mark which licenses are assigned to this SDR
+      const licensesWithAssignment = allLicensesForClient.map((license: any) => ({
+        ...license,
+        isAssignedToSdr: assignedLicenseIds.includes(license._id.toString()),
+      }));
+
       return {
         clientId: client._id,
         businessName: client.businessName,
@@ -110,16 +120,19 @@ export async function GET(req: NextRequest) {
         country: client.country,
         plan: client.currentPlanId,
         accountManager: client.accountManagerId,
-        numberOfLicenses: client.numberOfLicenses,
-        licenses: assignment.licenses || [],
+        numberOfLicenses: client.numberOfLicenses || 0,
+        licenses: licensesWithAssignment, // All licenses for the client, with assignment flag
         assignmentId: assignment._id,
         assignedAt: assignment.createdAt,
         lastUpdateDate: updatesMap.get(client._id.toString()) || null,
       };
     });
 
-    // Calculate total licenses assigned (regardless of status)
-    const totalLicenses = allAssignedLicenseIds.length;
+    // Calculate total licenses (all licenses for all assigned clients, not just assigned ones)
+    const totalLicenses = allClientLicenses.length;
+    
+    // Calculate active licenses (all active licenses for assigned clients)
+    const totalActiveLicenses = allClientLicenses.filter((l: any) => l.status === 'active').length;
 
     return NextResponse.json(
       {

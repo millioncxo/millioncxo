@@ -1,3 +1,6 @@
+import React from 'react';
+import { X, ClipboardList, Calendar, Type, AlignLeft } from 'lucide-react';
+
 interface UpdateFormProps {
   show: boolean;
   onClose: () => void;
@@ -22,12 +25,13 @@ export default function UpdateForm({ show, onClose, onSubmit, formData, onFormDa
         left: 0,
         right: 0,
         bottom: 0,
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        backgroundColor: 'rgba(11, 46, 43, 0.4)',
+        backdropFilter: 'blur(4px)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         zIndex: 1000,
-        padding: '2rem',
+        padding: '1.5rem',
         overflow: 'auto'
       }}
       onClick={(e) => {
@@ -37,114 +41,197 @@ export default function UpdateForm({ show, onClose, onSubmit, formData, onFormDa
       }}
     >
       <div
-        className="card"
         style={{
-          maxWidth: '700px',
+          maxWidth: '600px',
           width: '100%',
           maxHeight: '90vh',
-          overflow: 'auto',
-          margin: 'auto',
-          position: 'relative',
-          boxShadow: '0 20px 60px rgba(0, 0, 0, 0.3)'
+          background: 'white',
+          borderRadius: '1.25rem',
+          overflow: 'hidden',
+          boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+          display: 'flex',
+          flexDirection: 'column'
         }}
         onClick={(e) => e.stopPropagation()}
       >
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
-          <h2 style={{ fontSize: '1.5rem', margin: 0, color: 'var(--imperial-emerald)' }}>
-            Add New Update
-          </h2>
+        {/* Header */}
+        <div style={{ 
+          padding: '1.5rem', 
+          background: 'rgba(196, 183, 91, 0.1)', 
+          borderBottom: '1px solid rgba(196, 183, 91, 0.2)',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center'
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+            <div style={{ padding: '0.5rem', background: 'white', borderRadius: '0.75rem', color: 'var(--imperial-emerald)', boxShadow: '0 2px 4px rgba(0,0,0,0.05)' }}>
+              <ClipboardList size={20} />
+            </div>
+            <div>
+              <h2 style={{ fontSize: '1.125rem', fontWeight: '700', margin: 0, color: 'var(--imperial-emerald)' }}>
+                Log Client Activity
+              </h2>
+              <p style={{ fontSize: '0.75rem', color: 'var(--muted-jade)', margin: 0 }}>Create a new update for this client</p>
+            </div>
+          </div>
           <button
             type="button"
             onClick={onClose}
             style={{
-              background: 'transparent',
-              border: 'none',
-              fontSize: '1.5rem',
+              background: 'white',
+              border: '1px solid rgba(0,0,0,0.05)',
+              borderRadius: '0.5rem',
+              padding: '0.375rem',
               cursor: 'pointer',
               color: 'var(--muted-jade)',
-              padding: '0.25rem 0.5rem',
-              lineHeight: 1
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              transition: 'all 0.2s ease'
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.color = 'var(--imperial-emerald)';
+              e.currentTarget.style.background = '#fee2e2';
+              e.currentTarget.style.color = '#dc2626';
             }}
             onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'white';
               e.currentTarget.style.color = 'var(--muted-jade)';
             }}
           >
-            ×
+            <X size={18} />
           </button>
         </div>
-        <form onSubmit={onSubmit}>
-          <div style={{ display: 'grid', gap: '1rem', marginBottom: '1rem' }}>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
-              <div>
-                <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>
-                  Update Type *
+
+        <form onSubmit={onSubmit} style={{ padding: '1.5rem', overflow: 'auto' }}>
+          <div style={{ display: 'grid', gap: '1.25rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                <label style={{ fontSize: '0.8125rem', fontWeight: '700', color: 'var(--imperial-emerald)', textTransform: 'uppercase', letterSpacing: '0.025em' }}>
+                  Activity Type
                 </label>
-                <select
-                  value={formData.type}
-                  onChange={(e) => onFormDataChange({ type: e.target.value as any })}
-                  className="input"
-                  required
-                >
-                  <option value="CALL">Call</option>
-                  <option value="EMAIL">Email</option>
-                  <option value="MEETING">Meeting</option>
-                  <option value="NOTE">Note</option>
-                  <option value="REPORT">Report</option>
-                  <option value="OTHER">Other</option>
-                </select>
+                <div style={{ position: 'relative' }}>
+                  <select
+                    value={formData.type}
+                    onChange={(e) => onFormDataChange({ type: e.target.value as any })}
+                    style={{ 
+                      width: '100%',
+                      padding: '0.625rem 1rem',
+                      borderRadius: '0.75rem',
+                      border: '1px solid rgba(0,0,0,0.1)',
+                      fontSize: '0.9375rem',
+                      appearance: 'none',
+                      background: 'white',
+                      cursor: 'pointer'
+                    }}
+                    required
+                  >
+                    <option value="CALL">📞 Call</option>
+                    <option value="EMAIL">📧 Email</option>
+                    <option value="MEETING">🤝 Meeting</option>
+                    <option value="NOTE">📝 Note</option>
+                    <option value="REPORT">📊 Report</option>
+                    <option value="OTHER">✨ Other</option>
+                  </select>
+                </div>
               </div>
-              <div>
-                <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>
-                  Date *
+              
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                <label style={{ fontSize: '0.8125rem', fontWeight: '700', color: 'var(--imperial-emerald)', textTransform: 'uppercase', letterSpacing: '0.025em' }}>
+                  Event Date
                 </label>
                 <input
                   type="date"
                   value={formData.date}
                   onChange={(e) => onFormDataChange({ date: e.target.value })}
-                  className="input"
+                  style={{ 
+                    width: '100%',
+                    padding: '0.625rem 1rem',
+                    borderRadius: '0.75rem',
+                    border: '1px solid rgba(0,0,0,0.1)',
+                    fontSize: '0.9375rem',
+                    background: 'white'
+                  }}
                   required
                 />
               </div>
             </div>
-            <div>
-              <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>
-                Title *
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+              <label style={{ fontSize: '0.8125rem', fontWeight: '700', color: 'var(--imperial-emerald)', textTransform: 'uppercase', letterSpacing: '0.025em' }}>
+                Subject / Title
               </label>
               <input
                 type="text"
                 value={formData.title}
                 onChange={(e) => onFormDataChange({ title: e.target.value })}
-                className="input"
+                style={{ 
+                  width: '100%',
+                  padding: '0.625rem 1rem',
+                  borderRadius: '0.75rem',
+                  border: '1px solid rgba(0,0,0,0.1)',
+                  fontSize: '0.9375rem',
+                  background: 'white'
+                }}
                 required
-                placeholder="Brief title for this update"
+                placeholder="What was this activity about?"
               />
             </div>
-            <div>
-              <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>
-                Description *
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+              <label style={{ fontSize: '0.8125rem', fontWeight: '700', color: 'var(--imperial-emerald)', textTransform: 'uppercase', letterSpacing: '0.025em' }}>
+                Detailed Notes
               </label>
               <textarea
                 value={formData.description}
                 onChange={(e) => onFormDataChange({ description: e.target.value })}
-                className="input"
+                style={{ 
+                  width: '100%',
+                  padding: '0.75rem 1rem',
+                  borderRadius: '0.75rem',
+                  border: '1px solid rgba(0,0,0,0.1)',
+                  fontSize: '0.9375rem',
+                  minHeight: '120px',
+                  resize: 'vertical',
+                  background: 'white'
+                }}
                 required
-                rows={4}
-                placeholder="Detailed description of the update..."
+                placeholder="Record the key takeaways and next steps..."
               />
             </div>
           </div>
-          <div style={{ display: 'flex', gap: '0.5rem', marginTop: '1.5rem' }}>
-            <button type="submit" className="btn-primary" style={{ fontSize: '0.875rem', padding: '0.5rem 1rem' }}>
-              Save Update
+
+          <div style={{ display: 'flex', gap: '1rem', marginTop: '2rem' }}>
+            <button 
+              type="submit" 
+              className="btn-primary" 
+              style={{ 
+                flex: 2,
+                padding: '0.75rem',
+                borderRadius: '0.75rem',
+                fontSize: '0.9375rem',
+                fontWeight: '700',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '0.5rem'
+              }}
+            >
+              Confirm & Save Update
             </button>
             <button
               type="button"
               onClick={onClose}
-              className="btn-secondary"
-              style={{ fontSize: '0.875rem', padding: '0.5rem 1rem' }}
+              style={{ 
+                flex: 1,
+                padding: '0.75rem',
+                borderRadius: '0.75rem',
+                fontSize: '0.9375rem',
+                fontWeight: '600',
+                background: '#f1f5f9',
+                color: '#64748b',
+                border: 'none',
+                cursor: 'pointer'
+              }}
             >
               Cancel
             </button>
@@ -154,4 +241,3 @@ export default function UpdateForm({ show, onClose, onSubmit, formData, onFormDa
     </div>
   );
 }
-

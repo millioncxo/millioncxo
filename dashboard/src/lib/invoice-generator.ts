@@ -106,11 +106,18 @@ export async function generateBrandedInvoicePDF(
         .fillColor(primaryColor)
         .fontSize(24)
         .font('Helvetica-Bold')
-        .text('MillionCXO', 50, 50, { align: 'left' })
+        .text('MillionCXO', 50, 50)
         .fontSize(10)
         .font('Helvetica')
         .fillColor(textColor)
-        .text('Invoice', 50, 80, { align: 'left' });
+        .text('Invoice', 50, 80);
+
+      doc
+        .strokeColor(accentColor)
+        .lineWidth(1)
+        .moveTo(50, 100)
+        .lineTo(550, 100)
+        .stroke();
 
       // Invoice details (right side)
       const invoiceNumber = options?.invoiceNumber || invoice.invoiceNumber || `INV-${invoice._id.toString().substring(0, 8).toUpperCase()}`;
@@ -121,113 +128,188 @@ export async function generateBrandedInvoicePDF(
         .fontSize(10)
         .fillColor(textColor)
         .text(`Invoice #: ${invoiceNumber}`, 400, 50, { align: 'right' })
-        .text(`Date: ${invoiceDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}`, 400, 65, { align: 'right' })
-        .text(`Due Date: ${dueDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}`, 400, 80, { align: 'right' });
+        .text(`Date: ${new Date(invoiceDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}`, 400, 65, { align: 'right' })
+        .text(`Due Date: ${new Date(dueDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}`, 400, 80, { align: 'right' });
 
-      // Bill To section
+      // Bill To section - use relative positioning for proper text wrapping
       doc
         .fontSize(12)
         .font('Helvetica-Bold')
         .fillColor(primaryColor)
-        .text('Bill To:', 50, 130)
-        .fontSize(10)
-        .font('Helvetica')
-        .fillColor(textColor)
-        .text(client.businessName, 50, 150)
-        .text(client.fullRegisteredAddress, 50, 165);
+        .text('Bill To:', 50, 130);
 
+      // Set position for Bill To content
+      doc.y = 152;
+      doc.x = 50;
+      
+      // Business Name
+      if (client.businessName) {
+        doc
+          .fontSize(10)
+          .font('Helvetica')
+          .fillColor(textColor)
+          .text(client.businessName, { width: 300 });
+        doc.moveDown(1);
+      }
+
+      // Address - will wrap automatically
+      if (client.fullRegisteredAddress) {
+        doc
+          .fontSize(10)
+          .font('Helvetica')
+          .fillColor(textColor)
+          .text(client.fullRegisteredAddress, { width: 300 });
+        doc.moveDown(1);
+      }
+
+      // Contact Name
       if (client.pointOfContactName) {
-        doc.text(`Contact: ${client.pointOfContactName}`, 50, 180);
+        doc
+          .fontSize(10)
+          .font('Helvetica')
+          .fillColor(textColor)
+          .text(`Contact: ${client.pointOfContactName}`);
+        doc.moveDown(1);
       }
+      
+      // Email
       if (client.pointOfContactEmail) {
-        doc.text(`Email: ${client.pointOfContactEmail}`, 50, 195);
+        doc
+          .fontSize(10)
+          .font('Helvetica')
+          .fillColor(textColor)
+          .text(`Email: ${client.pointOfContactEmail}`);
+        doc.moveDown(1);
       }
 
-      // Service details table
+      // Get final Y position for next section and add spacing
+      let currentY = doc.y + 20;
+
+      // Service details section
       doc
         .fontSize(12)
         .font('Helvetica-Bold')
         .fillColor(primaryColor)
-        .text('Service Details', 50, 240);
+        .text('Service Details', 50, currentY);
 
-      // Table header
+      // Table configuration
+      const tableTop = currentY + 20;
+      const col1X = 60; // Description
+      const col2X = 320; // Quantity
+      const col3X = 400; // Unit Price
+      const col4X = 480; // Amount
+      const tableWidth = 500;
+
+      // Table header background
       doc
-        .rect(50, 260, 500, 20)
-        .fill(accentColor)
-        .fillOpacity(0.2)
-        .fillOpacity(1)
+        .rect(50, tableTop, tableWidth, 25)
+        .fill(accentColor);
+
+      // Table header text
+      doc
         .fillColor(primaryColor)
         .fontSize(10)
         .font('Helvetica-Bold')
-        .text('Description', 60, 265)
-        .text('Quantity', 300, 265)
-        .text('Unit Price', 380, 265)
-        .text('Amount', 470, 265);
+        .text('Description', col1X, tableTop + 8)
+        .text('Qty', col2X, tableTop + 8)
+        .text('Unit Price', col3X, tableTop + 8)
+        .text('Total', col4X, tableTop + 8, { width: 60, align: 'right' });
 
       // Service row
+      const rowY = tableTop + 35;
       const quantity = client.numberOfSdrs || client.numberOfLicenses || 1;
       const unitPrice = calculation.baseAmount / (quantity || 1);
-      const rowY = 285;
+
+      // Use a fixed row height that accommodates wrapped text
+      const rowHeight = 30;
 
       doc
         .fillColor(textColor)
         .font('Helvetica')
-        .text(calculation.description, 60, rowY)
-        .text(quantity.toString(), 300, rowY)
-        .text(`${client.currency || 'USD'} ${unitPrice.toFixed(2)}`, 380, rowY)
-        .text(`${client.currency || 'USD'} ${calculation.baseAmount.toFixed(2)}`, 470, rowY);
+        .fontSize(10)
+        .text(calculation.description, col1X, rowY, { width: 250 })
+        .text(quantity.toString(), col2X, rowY)
+        .text(`${client.currency || 'USD'} ${unitPrice.toLocaleString('en-US', { minimumFractionDigits: 2 })}`, col3X, rowY)
+        .text(`${client.currency || 'USD'} ${calculation.baseAmount.toLocaleString('en-US', { minimumFractionDigits: 2 })}`, col4X, rowY, { width: 60, align: 'right' });
+
+      // Move Y down based on row height
+      currentY = rowY + rowHeight;
 
       // Discount row (if applicable)
-      let currentY = rowY + 20;
       if (calculation.discountAmount > 0) {
         doc
-          .text(`Discount (${client.discountPercentage || 0}%)`, 60, currentY)
-          .text(`-${client.currency || 'USD'} ${calculation.discountAmount.toFixed(2)}`, 470, currentY);
+          .fillColor(textColor)
+          .text(`Discount (${client.discountPercentage || 0}%)`, col1X, currentY)
+          .text(`-${client.currency || 'USD'} ${calculation.discountAmount.toLocaleString('en-US', { minimumFractionDigits: 2 })}`, col4X, currentY, { width: 60, align: 'right' });
         currentY += 20;
       }
 
-      // Total row
+      // Total Amount row
       doc
-        .rect(50, currentY, 500, 25)
-        .fill(accentColor)
-        .fillOpacity(0.1)
-        .fillOpacity(1)
+        .rect(50, currentY, tableWidth, 30)
+        .fill(accentColor);
+
+      doc
+        .fillColor(primaryColor)
         .font('Helvetica-Bold')
         .fontSize(12)
-        .fillColor(primaryColor)
-        .text('Total Amount', 60, currentY + 8)
-        .text(`${client.currency || 'USD'} ${calculation.finalAmount.toFixed(2)}`, 470, currentY + 8);
+        .text('Total Invoice Amount', col1X, currentY + 9)
+        .text(`${client.currency || 'USD'} ${calculation.finalAmount.toLocaleString('en-US', { minimumFractionDigits: 2 })}`, col4X - 20, currentY + 9, { width: 80, align: 'right' });
 
       // Payment terms
       currentY += 50;
       const paymentTermsText = options?.paymentTerms || client.paymentDetails?.paymentTerms || 'Net 30';
+      
+      doc
+        .fontSize(11)
+        .font('Helvetica-Bold')
+        .fillColor(primaryColor)
+        .text('Payment Terms:', 50, currentY);
+
+      currentY += 18;
+      
       doc
         .fontSize(10)
         .font('Helvetica')
         .fillColor(textColor)
-        .text('Payment Terms:', 50, currentY)
-        .text(paymentTermsText, 50, currentY + 15);
+        .text(paymentTermsText, 50, currentY);
 
       if (client.paymentDetails?.numberOfMonths && client.paymentDetails.numberOfMonths > 1) {
-        doc.text(`Monthly Payment: ${client.currency || 'USD'} ${calculation.monthlyAmount.toFixed(2)}`, 50, currentY + 30);
-        currentY += 20;
+        currentY += 18;
+        doc
+          .fontSize(10)
+          .font('Helvetica')
+          .fillColor(textColor)
+          .text(`Monthly Payment: ${client.currency || 'USD'} ${calculation.monthlyAmount.toLocaleString('en-US', { minimumFractionDigits: 2 })}`, 50, currentY);
       }
 
       // Notes section (if provided)
       if (options?.notes) {
         currentY += 30;
         doc
-          .fontSize(10)
+          .fontSize(11)
           .font('Helvetica-Bold')
           .fillColor(primaryColor)
-          .text('Notes:', 50, currentY)
+          .text('Notes:', 50, currentY);
+        
+        currentY += 18;
+        
+        doc
+          .fontSize(10)
           .font('Helvetica')
           .fillColor(textColor)
-          .text(options.notes, 50, currentY + 15, { width: 500 });
+          .text(options.notes, 50, currentY, { width: 500 });
       }
 
       // Footer
       const pageHeight = doc.page.height;
+      doc
+        .strokeColor(accentColor)
+        .lineWidth(0.5)
+        .moveTo(50, pageHeight - 70)
+        .lineTo(550, pageHeight - 70)
+        .stroke();
+
       doc
         .fontSize(8)
         .fillColor(textColor)

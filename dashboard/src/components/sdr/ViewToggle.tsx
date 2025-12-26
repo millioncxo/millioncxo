@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react';
 
+import { List, Clock } from 'lucide-react';
+
 export type ViewMode = 'table' | 'timeline';
 
 interface ViewToggleProps {
@@ -36,63 +38,54 @@ export default function ViewToggle({ currentView, onViewChange, storageKey = 'sd
   return (
     <div style={{
       display: 'inline-flex',
-      border: '1px solid rgba(196, 183, 91, 0.3)',
-      borderRadius: '0.375rem',
-      overflow: 'hidden',
-      background: 'white',
+      padding: '0.25rem',
+      background: 'rgba(11, 46, 43, 0.05)',
+      borderRadius: '0.625rem',
+      gap: '0.25rem'
     }}>
       <button
         type="button"
         onClick={() => handleViewChange('table')}
         style={{
-          padding: '0.5rem 1rem',
+          padding: '0.375rem 0.75rem',
           border: 'none',
-          background: currentView === 'table' ? 'var(--golden-opal)' : 'transparent',
-          color: currentView === 'table' ? 'var(--onyx-black)' : 'var(--muted-jade)',
-          fontWeight: currentView === 'table' ? '600' : '400',
+          background: currentView === 'table' ? 'white' : 'transparent',
+          color: currentView === 'table' ? 'var(--imperial-emerald)' : 'var(--muted-jade)',
+          fontWeight: '700',
           cursor: 'pointer',
-          fontSize: '0.875rem',
+          fontSize: '0.75rem',
+          borderRadius: '0.5rem',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '0.375rem',
           transition: 'all 0.2s ease',
-          borderRight: '1px solid rgba(196, 183, 91, 0.3)',
-        }}
-        onMouseEnter={(e) => {
-          if (currentView !== 'table') {
-            e.currentTarget.style.background = 'rgba(196, 183, 91, 0.1)';
-          }
-        }}
-        onMouseLeave={(e) => {
-          if (currentView !== 'table') {
-            e.currentTarget.style.background = 'transparent';
-          }
+          boxShadow: currentView === 'table' ? '0 2px 4px rgba(0,0,0,0.05)' : 'none'
         }}
       >
-        📊 Table
+        <List size={14} />
+        Table
       </button>
       <button
         type="button"
         onClick={() => handleViewChange('timeline')}
         style={{
-          padding: '0.5rem 1rem',
+          padding: '0.375rem 0.75rem',
           border: 'none',
-          background: currentView === 'timeline' ? 'var(--golden-opal)' : 'transparent',
-          color: currentView === 'timeline' ? 'var(--onyx-black)' : 'var(--muted-jade)',
-          fontWeight: currentView === 'timeline' ? '600' : '400',
+          background: currentView === 'timeline' ? 'white' : 'transparent',
+          color: currentView === 'timeline' ? 'var(--imperial-emerald)' : 'var(--muted-jade)',
+          fontWeight: '700',
           cursor: 'pointer',
-          fontSize: '0.875rem',
+          fontSize: '0.75rem',
+          borderRadius: '0.5rem',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '0.375rem',
           transition: 'all 0.2s ease',
-        }}
-        onMouseEnter={(e) => {
-          if (currentView !== 'timeline') {
-            e.currentTarget.style.background = 'rgba(196, 183, 91, 0.1)';
-          }
-        }}
-        onMouseLeave={(e) => {
-          if (currentView !== 'timeline') {
-            e.currentTarget.style.background = 'transparent';
-          }
+          boxShadow: currentView === 'timeline' ? '0 2px 4px rgba(0,0,0,0.05)' : 'none'
         }}
       >
-        📅 Timeline
+        <Clock size={14} />
+        Timeline
       </button>
     </div>
   );

@@ -30,7 +30,7 @@ export async function GET(req: NextRequest) {
     // Generate last 6 months of data
     const now = new Date();
     const months: Array<{ month: string; active: number; total: number }> = [];
-    const progressTrend: Array<{ month: string; target: number; achieved: number }> = [];
+    const progressTrend: Array<{ month: string; progress: number }> = [];
     const licenseUsage: Array<{ month: string; used: number; available: number }> = [];
 
     for (let i = 5; i >= 0; i--) {
@@ -55,11 +55,11 @@ export async function GET(req: NextRequest) {
       // This is simplified - ideally you'd track monthly targets/achievements
       const target = (client as any)?.targetThisMonth || clientTotalLicenses || 0;
       const achieved = (client as any)?.achievedThisMonth || 0;
+      const progressPercent = target > 0 ? Math.round((achieved / target) * 100) : 0;
       
       progressTrend.push({
         month: monthName,
-        target: i === 5 ? target : Math.round(target * (0.8 + Math.random() * 0.4)), // Simulate variation
-        achieved: i === 5 ? achieved : Math.round(achieved * (0.7 + Math.random() * 0.5)),
+        progress: i === 0 ? progressPercent : Math.round(progressPercent * (0.8 + Math.random() * 0.4)), // Simulate variation
       });
 
       // For license usage

@@ -23,12 +23,14 @@ export default function Sidebar({ role }: SidebarProps) {
 
   const sdrLinks = [
     { href: '/sdr', label: 'Dashboard', ariaLabel: 'Go to SDR dashboard' },
+    { href: '/sdr/messages', label: 'Messages', ariaLabel: 'View client messages' },
     { href: '/sdr/clients', label: 'My Clients', ariaLabel: 'View my clients' },
     { href: '/sdr/reports', label: 'Reports', ariaLabel: 'View reports' },
   ];
 
   const clientLinks = [
     { href: '/client', label: 'Dashboard', ariaLabel: 'Go to client dashboard' },
+    { href: '/client/chat', label: 'Messages', ariaLabel: 'Chat with your SDR' },
     { href: '/client/plan', label: 'Plan', ariaLabel: 'View plan details' },
     { href: '/client/reports', label: 'Reports', ariaLabel: 'View reports' },
     { href: '/client/billing', label: 'Billing', ariaLabel: 'View billing information' },

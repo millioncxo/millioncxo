@@ -135,7 +135,7 @@ export const createUpdateSchema = z.object({
   description: z.string().min(1, 'Description is required'),
   date: z.string().datetime().optional().or(z.string().regex(/^\d{4}-\d{2}-\d{2}$/)),
   attachments: z.array(z.string()).optional().default([]),
-  chatHistory: z.string().optional(),
+  chatHistory: z.string().min(1, 'LinkedIn chat snippet is required'),
   visibleToClient: z.boolean().default(false),
   priority: z.string().optional(),
 }).strict();
@@ -145,6 +145,15 @@ export const createUpdateSchema = z.object({
  */
 export const updateChatHistorySchema = z.object({
   chatHistory: z.string().nullable().optional(),
+}).strict();
+
+/**
+ * Message validation schema
+ */
+export const createMessageSchema = z.object({
+  text: z.string().min(1, 'Message text is required').max(5000, 'Message text cannot exceed 5000 characters'),
+  clientId: objectIdSchema.optional(), // Required for SDR, optional for CLIENT (uses auth token)
+  sdrId: objectIdSchema.optional(), // Not used, derived from assignment
 }).strict();
 
 /**

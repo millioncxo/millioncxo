@@ -76,10 +76,18 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // If no licenses are selected, auto-assign all licenses for this client
+    let finalLicenseIds = licenseIds;
+    if (licenseIds.length === 0) {
+      const allClientLicenses = await License.find({ clientId }).select('_id').lean();
+      finalLicenseIds = allClientLicenses.map((l: any) => l._id);
+      console.log(`Auto-assigning ${finalLicenseIds.length} license(s) to SDR ${sdrId} for client ${clientId}`);
+    }
+
     // Verify all licenses exist and belong to the client
-    if (licenseIds.length > 0) {
-      const licenses = await License.find({ _id: { $in: licenseIds } });
-      if (licenses.length !== licenseIds.length) {
+    if (finalLicenseIds.length > 0) {
+      const licenses = await License.find({ _id: { $in: finalLicenseIds } });
+      if (licenses.length !== finalLicenseIds.length) {
         return NextResponse.json(
           { error: 'One or more licenses not found' },
           { status: 404 }
@@ -101,7 +109,7 @@ export async function POST(req: NextRequest) {
     // Create or update assignment
     const assignment = await SdrClientAssignment.findOneAndUpdate(
       { sdrId, clientId },
-      { sdrId, clientId, licenses: licenseIds },
+      { sdrId, clientId, licenses: finalLicenseIds },
       { upsert: true, new: true }
     )
       .populate('sdrId', 'name email')

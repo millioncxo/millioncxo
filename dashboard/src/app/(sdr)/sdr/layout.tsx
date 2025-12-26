@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Sidebar from '@/components/Sidebar';
 import ResponsiveMenu from '@/components/ResponsiveMenu';
 
@@ -23,6 +23,7 @@ export default function SdrLayout({
 
   const menuItems = [
     { href: '/sdr', label: 'Dashboard' },
+    { href: '/sdr/messages', label: 'Messages' },
     { href: '/sdr/clients', label: 'My Clients' },
     { href: '/sdr/reports', label: 'Reports' },
   ];

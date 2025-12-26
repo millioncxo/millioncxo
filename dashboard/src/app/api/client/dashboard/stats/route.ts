@@ -61,17 +61,10 @@ export async function GET(req: NextRequest) {
       : 0;
 
     // Calculate performance metrics
-    const currentMonth = new Date().getMonth() + 1;
-    const currentYear = new Date().getFullYear();
-    const currentMonthTarget = (client as any)?.targetThisMonth || (client as any)?.numberOfLicenses || 0;
-    const currentMonthDelivered = (client as any)?.achievedThisMonth || 0;
-    const currentMonthProgress = currentMonthTarget > 0 
-      ? Math.round((currentMonthDelivered / currentMonthTarget) * 100) 
-      : 0;
-
-    // Calculate average monthly progress (last 6 months)
-    // This is a simplified calculation - in a real scenario, you'd track historical data
-    const averageMonthlyProgress = currentMonthProgress; // Placeholder - would need historical tracking
+    const clientData = client as any;
+    const target = clientData?.targetThisMonth || clientData?.numberOfLicenses || 0;
+    const achieved = clientData?.achievedThisMonth || 0;
+    const progressPercent = target > 0 ? Math.round((achieved / target) * 100) : 0;
 
     return NextResponse.json(
       {
@@ -90,8 +83,8 @@ export async function GET(req: NextRequest) {
             utilizationPercent,
           },
           performance: {
-            currentMonthProgress,
-            averageMonthlyProgress,
+            progressPercent,
+            status: progressPercent >= 100 ? 'ACHIEVED' : progressPercent >= 75 ? 'ON_TRACK' : 'IN_PROGRESS',
           },
         },
       },

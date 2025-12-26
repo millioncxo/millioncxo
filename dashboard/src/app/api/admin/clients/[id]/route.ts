@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { connectToDatabase } from '@/lib/db';
 import Client from '@/models/Client';
+import License from '@/models/License';
+import SdrClientAssignment from '@/models/SdrClientAssignment';
 import Plan from '@/models/Plan';
 import { requireRole } from '@/lib/auth';
 import { createOrUpdateInvoice } from '@/lib/invoice-generator';
@@ -234,6 +236,49 @@ export async function PUT(
 
     if (updateResult.modifiedCount === 0) {
       console.warn('⚠️  Update matched but no fields were modified');
+    }
+
+    // Auto-generate License records if numberOfLicenses increased
+    if (numberOfLicenses !== undefined) {
+      const existingLicensesCount = await License.countDocuments({ clientId: params.id });
+      
+      if (numberOfLicenses > existingLicensesCount) {
+        const licensesToCreate = numberOfLicenses - existingLicensesCount;
+        const newLicenseIds = [];
+        
+        for (let i = 1; i <= licensesToCreate; i++) {
+          const newLicense = await License.create({
+            clientId: params.id,
+            productOrServiceName: `LinkedIn License ${existingLicensesCount + i}`,
+            serviceType: 'LinkedIn Outreach',
+            label: `License ${existingLicensesCount + i}`,
+            status: 'active',
+            startDate: new Date(),
+          });
+          newLicenseIds.push(newLicense._id);
+        }
+        console.log(`✅ Auto-generated ${licensesToCreate} license(s) for client ${params.id}`);
+        
+        // Auto-assign newly created licenses to existing SDR assignments for this client
+        if (newLicenseIds.length > 0) {
+          const existingAssignments = await SdrClientAssignment.find({ clientId: params.id });
+          for (const assignment of existingAssignments) {
+            // Add new licenses to existing assignment (avoid duplicates)
+            const currentLicenseIds = (assignment.licenses || []).map((id: any) => id.toString());
+            const newIds = newLicenseIds.map((id: any) => id.toString());
+            const combinedIds = [...new Set([...currentLicenseIds, ...newIds])];
+            
+            await SdrClientAssignment.findByIdAndUpdate(
+              assignment._id,
+              { licenses: combinedIds },
+              { new: true }
+            );
+          }
+          if (existingAssignments.length > 0) {
+            console.log(`✅ Auto-assigned ${newLicenseIds.length} new license(s) to ${existingAssignments.length} existing SDR assignment(s)`);
+          }
+        }
+      }
     }
 
     // Fetch fresh with populated fields

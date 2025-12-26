@@ -138,6 +138,21 @@ export async function POST(req: NextRequest) {
       }
     }
 
+    // Auto-generate License records if numberOfLicenses > 0 and no licenses provided
+    if (numberOfLicenses > 0 && (!licenses || licenses.length === 0)) {
+      for (let i = 1; i <= numberOfLicenses; i++) {
+        const license = await License.create({
+          clientId: newClient._id,
+          productOrServiceName: `LinkedIn License ${i}`,
+          serviceType: 'LinkedIn Outreach',
+          label: `License ${i}`,
+          status: 'active',
+          startDate: new Date(),
+        });
+        createdLicenses.push(license);
+      }
+    }
+
     // Automatically generate invoice for current month if plan is assigned
     let generatedInvoice = null;
     if (currentPlanId) {

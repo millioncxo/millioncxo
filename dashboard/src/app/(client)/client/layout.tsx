@@ -23,6 +23,7 @@ export default function ClientLayout({
 
   const menuItems = [
     { href: '/client', label: 'Dashboard' },
+    { href: '/client/chat', label: 'Messages' },
     { href: '/client/plan', label: 'Plan' },
     { href: '/client/reports', label: 'Reports' },
     { href: '/client/billing', label: 'Billing' },

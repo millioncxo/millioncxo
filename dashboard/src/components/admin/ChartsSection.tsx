@@ -47,7 +47,10 @@ export default function ChartsSection({ chartData, loading }: ChartsSectionProps
                   borderRadius: '0.5rem',
                   padding: '0.75rem'
                 }}
-                formatter={(value: number) => [`$${value.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`, '']}
+                formatter={(value: number | undefined) => {
+                  if (value === undefined) return ['$0.00', ''];
+                  return [`$${value.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`, ''];
+                }}
               />
               <Legend 
                 wrapperStyle={{ paddingTop: '1rem' }}

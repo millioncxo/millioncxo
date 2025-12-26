@@ -214,16 +214,24 @@ export default function UpdatesTable({ clientId, onExport, refreshTrigger }: Upd
 
   return (
     <div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', flexWrap: 'wrap', gap: '1rem' }}>
-        <h3 style={{ fontSize: '1.25rem', fontWeight: '600', color: 'var(--imperial-emerald)', margin: 0 }}>
-          Updates & Activity ({pagination.total})
-        </h3>
+      <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '1rem' }}>
         <button
           onClick={handleExport}
-          className="btn-secondary"
-          style={{ fontSize: '0.875rem', padding: '0.5rem 1rem' }}
+          style={{ 
+            fontSize: '0.75rem', 
+            fontWeight: '600',
+            padding: '0.375rem 0.75rem',
+            background: 'white',
+            border: '1px solid rgba(196, 183, 91, 0.3)',
+            borderRadius: '0.5rem',
+            color: 'var(--imperial-emerald)',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.375rem'
+          }}
         >
-          📥 Export CSV
+          📥 Export Workspace Logs
         </button>
       </div>
 
@@ -239,7 +247,7 @@ export default function UpdatesTable({ clientId, onExport, refreshTrigger }: Upd
         data={updates}
         columns={columns}
         loading={loading}
-        emptyMessage="No updates found. Add your first update to track client activity."
+        emptyMessage="No workspace logs found for this client."
         onSort={handleSort}
         sortBy={sortBy}
         sortOrder={sortOrder}
@@ -249,16 +257,16 @@ export default function UpdatesTable({ clientId, onExport, refreshTrigger }: Upd
           onLimitChange: handleLimitChange,
         }}
         expandableRow={(row) => (
-          <div style={{ padding: '1rem', background: 'rgba(196, 183, 91, 0.05)', borderRadius: '0.5rem' }}>
+          <div style={{ padding: '1.25rem', background: 'rgba(11, 46, 43, 0.03)', borderRadius: '0.75rem', border: '1px solid rgba(0,0,0,0.05)' }}>
             <div style={{ marginBottom: '0.75rem' }}>
-              <strong style={{ color: 'var(--imperial-emerald)', fontSize: '0.875rem' }}>Description:</strong>
-              <p style={{ marginTop: '0.5rem', color: 'var(--muted-jade)', lineHeight: '1.6', fontSize: '0.875rem' }}>
+              <strong style={{ color: 'var(--imperial-emerald)', fontSize: '0.8125rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Full Log Description:</strong>
+              <p style={{ marginTop: '0.5rem', color: 'var(--imperial-emerald)', lineHeight: '1.6', fontSize: '0.875rem' }}>
                 {row.description}
               </p>
             </div>
             {row.attachments && row.attachments.length > 0 && (
-              <div style={{ marginTop: '0.75rem' }}>
-                <strong style={{ color: 'var(--imperial-emerald)', fontSize: '0.875rem' }}>Attachments:</strong>
+              <div style={{ marginTop: '1rem', paddingTop: '0.75rem', borderTop: '1px solid rgba(0,0,0,0.05)' }}>
+                <strong style={{ color: 'var(--imperial-emerald)', fontSize: '0.8125rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Reference Files:</strong>
                 <div style={{ marginTop: '0.5rem', display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
                   {row.attachments.map((attachment, idx) => (
                     <a
@@ -267,15 +275,17 @@ export default function UpdatesTable({ clientId, onExport, refreshTrigger }: Upd
                       target="_blank"
                       rel="noopener noreferrer"
                       style={{
-                        padding: '0.25rem 0.75rem',
-                        background: 'rgba(196, 183, 91, 0.2)',
-                        borderRadius: '0.375rem',
+                        padding: '0.375rem 0.75rem',
+                        background: 'white',
+                        border: '1px solid rgba(196, 183, 91, 0.2)',
+                        borderRadius: '0.5rem',
                         fontSize: '0.75rem',
                         color: 'var(--imperial-emerald)',
                         textDecoration: 'none',
+                        fontWeight: '600'
                       }}
                     >
-                      Attachment {idx + 1}
+                      📎 File {idx + 1}
                     </a>
                   ))}
                 </div>
