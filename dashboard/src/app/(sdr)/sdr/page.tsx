@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import LogoComponent from '@/components/LogoComponent';
 import StatsCards from '@/components/sdr/StatsCards';
@@ -37,6 +37,11 @@ interface Client {
     email: string;
   };
   numberOfLicenses: number;
+  targetThisMonth?: number;
+  achievedThisMonth?: number;
+  positiveResponsesTarget?: number;
+  meetingsBookedTarget?: number;
+  targetDeadline?: string;
   licenses: Array<{
     _id: string;
     productOrServiceName?: string;
@@ -91,6 +96,11 @@ interface ClientDetails {
     email: string;
   };
   numberOfLicenses: number;
+  targetThisMonth?: number;
+  achievedThisMonth?: number;
+  positiveResponsesTarget?: number;
+  meetingsBookedTarget?: number;
+  targetDeadline?: string;
   licenses: Array<{
     _id: string;
     productOrServiceName: string;
@@ -110,8 +120,6 @@ export default function SdrDashboard() {
   const [clients, setClients] = useState<Client[]>([]);
   const [expandedClient, setExpandedClient] = useState<string | null>(null);
   const [clientDetails, setClientDetails] = useState<ClientDetails | null>(null);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [filterStatus, setFilterStatus] = useState<string>('all');
   const [updates, setUpdates] = useState<Update[]>([]);
   const [showUpdateForm, setShowUpdateForm] = useState(false);
   const [showChatHistoryForm, setShowChatHistoryForm] = useState(false);
@@ -129,20 +137,14 @@ export default function SdrDashboard() {
     title: string;
     description: string;
     date: string;
-    chatHistory?: string;
   }>({
     type: 'NOTE',
     title: '',
     description: '',
     date: new Date().toISOString().split('T')[0],
-    chatHistory: '',
   });
 
-  useEffect(() => {
-    fetchClients();
-  }, []);
-
-  const fetchClients = async () => {
+  const fetchClients = useCallback(async () => {
     try {
       const response = await fetch('/api/sdr/clients');
       if (!response.ok) {
@@ -163,7 +165,7 @@ export default function SdrDashboard() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [router]);
 
   const fetchClientDetails = async (clientId: string) => {
     if (expandedClient === clientId && clientDetails) {
@@ -223,10 +225,7 @@ export default function SdrDashboard() {
       const response = await fetch(`/api/sdr/clients/${expandedClient}/updates`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          ...updateFormData,
-          chatHistory: updateFormData.chatHistory || undefined,
-        }),
+        body: JSON.stringify(updateFormData),
       });
 
       if (!response.ok) {
@@ -255,7 +254,6 @@ export default function SdrDashboard() {
         title: '',
         description: '',
         date: new Date().toISOString().split('T')[0],
-        chatHistory: '',
       });
     } catch (err: any) {
       setError(err.message || 'Failed to create update');
@@ -316,120 +314,104 @@ export default function SdrDashboard() {
   }, 0);
 
   return (
-    <div style={{ padding: '2rem' }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem' }}>
-        <LogoComponent width={48} height={26} hoverGradient={true} />
-        <div>
-          <h1 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '0.25rem', color: 'var(--imperial-emerald)' }}>
-            SDR Dashboard
-          </h1>
-          <p style={{ color: 'var(--muted-jade)', fontSize: '0.875rem' }}>
-            Manage your assigned clients and activities
-          </p>
+    <div style={{ 
+      padding: '1.5rem',
+      background: 'linear-gradient(135deg, var(--ivory-silk) 0%, #f0ede8 100%)',
+      minHeight: '100vh'
+    }}>
+      {/* Header Section */}
+      <div style={{ 
+        display: 'flex', 
+        alignItems: 'center', 
+        justifyContent: 'space-between',
+        marginBottom: '1.5rem',
+        padding: '1.25rem 1.5rem',
+        background: 'white',
+        borderRadius: '1rem',
+        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.05)'
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          <LogoComponent width={48} height={26} hoverGradient={true} />
+          <div>
+            <h1 style={{ 
+              fontSize: '1.75rem', 
+              fontWeight: '800', 
+              marginBottom: '0.125rem', 
+              color: 'var(--imperial-emerald)',
+              letterSpacing: '-0.02em'
+            }}>
+              SDR Workspace
+            </h1>
+            <p style={{ color: 'var(--muted-jade)', fontSize: '0.875rem', fontWeight: '500' }}>
+              Manage your assigned clients and track daily outreach activities
+            </p>
+          </div>
+        </div>
+        <div id="success-message" style={{ display: 'none', color: '#10b981', fontWeight: '700', fontSize: '0.875rem', background: 'rgba(16, 185, 129, 0.1)', padding: '0.5rem 1rem', borderRadius: '0.5rem' }}>
+          ✓ Changes saved successfully
         </div>
       </div>
 
+      <StatsCards 
+        clientsCount={clients.length} 
+        totalLicenses={totalLicenses} 
+        activeLicenses={activeLicenses} 
+      />
+
       {error && (
-        <div className="card" style={{ background: '#fee2e2', color: '#dc2626', marginBottom: '1rem' }}>
+        <div className="card" style={{ background: '#fee2e2', color: '#dc2626', marginBottom: '1.5rem' }}>
           {error}
         </div>
       )}
 
-      {/* Stats Overview */}
-      <StatsCards 
-        clientsCount={clients.length}
-        totalLicenses={totalLicenses}
-        activeLicenses={activeLicenses}
-      />
-
-      {/* Clients List */}
-      <div className="card" style={{ padding: '0' }}>
-        <div style={{ 
-          padding: '1.5rem', 
-          borderBottom: '2px solid rgba(196, 183, 91, 0.3)',
-          background: 'linear-gradient(135deg, rgba(196, 183, 91, 0.1) 0%, rgba(196, 183, 91, 0.05) 100%)'
-        }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', marginBottom: '1rem' }}>
-            <div>
-          <h2 style={{ fontSize: '1.5rem', marginBottom: '0.25rem', color: 'var(--imperial-emerald)', fontWeight: '600' }}>
-            My Clients
-          </h2>
-          <p style={{ color: 'var(--muted-jade)', fontSize: '0.875rem' }}>
-            {clients.length} {clients.length === 1 ? 'client' : 'clients'} assigned to you
-          </p>
-        </div>
-            <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-              <input
-                type="text"
-                placeholder="Search clients..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="input"
-                style={{ minWidth: '200px', fontSize: '0.875rem', padding: '0.5rem 1rem' }}
-              />
-              <select
-                value={filterStatus}
-                onChange={(e) => setFilterStatus(e.target.value)}
-                className="input"
-                style={{ fontSize: '0.875rem', padding: '0.5rem 1rem' }}
-              >
-                <option value="all">All Clients</option>
-                <option value="with-updates">With Updates</option>
-                <option value="no-updates">No Updates</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        {/* Success message for chat history */}
-        {!error && chatHistory && !showChatHistoryForm && (
-          <div className="card" style={{ background: '#d1fae5', color: '#065f46', margin: '1rem', padding: '0.75rem', borderRadius: '0.5rem', display: 'none' }} id="success-message">
-            Chat history saved successfully!
-          </div>
-        )}
-
+      {/* Main Content Area */}
+      <div className="card" style={{ 
+        padding: '0', 
+        borderRadius: '1rem', 
+        background: 'white', 
+        boxShadow: '0 4px 20px rgba(0, 0, 0, 0.04)',
+        border: '1px solid rgba(196, 183, 91, 0.15)',
+        overflow: 'hidden'
+      }}>
         {clients.length === 0 ? (
-          <div style={{ textAlign: 'center', padding: '3rem' }}>
-            <p style={{ color: 'var(--muted-jade)', fontSize: '1rem' }}>
-              No clients assigned yet. Contact your admin to get assigned to clients.
-            </p>
+          <div style={{ textAlign: 'center', padding: '4rem 2rem' }}>
+            <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>📋</div>
+            <h2 style={{ color: 'var(--imperial-emerald)', fontSize: '1.5rem', fontWeight: '700' }}>No Assigned Clients</h2>
+            <p style={{ color: 'var(--muted-jade)', marginTop: '0.5rem' }}>Contact your administrator to receive client assignments.</p>
           </div>
         ) : (
           <div style={{ overflowX: 'auto' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse' }}>
               <thead>
-                <tr style={{ 
-                  background: 'rgba(11, 46, 43, 0.05)',
-                  borderBottom: '2px solid rgba(196, 183, 91, 0.3)'
-                }}>
+                <tr style={{ background: 'rgba(11, 46, 43, 0.02)', borderBottom: '2px solid rgba(196, 183, 91, 0.15)' }}>
                   <th style={{ 
                     padding: '1rem', 
                     textAlign: 'left', 
-                    fontWeight: '600', 
+                    fontWeight: '700', 
                     color: 'var(--imperial-emerald)',
-                    fontSize: '0.875rem',
+                    fontSize: '0.75rem',
                     textTransform: 'uppercase',
                     letterSpacing: '0.05em'
                   }}>
-                    Business Name
+                    Client Organization
                   </th>
                   <th style={{ 
                     padding: '1rem', 
                     textAlign: 'left', 
-                    fontWeight: '600', 
+                    fontWeight: '700', 
                     color: 'var(--imperial-emerald)',
-                    fontSize: '0.875rem',
+                    fontSize: '0.75rem',
                     textTransform: 'uppercase',
                     letterSpacing: '0.05em'
                   }}>
-                    Contact
+                    Primary Contact
                   </th>
                   <th style={{ 
                     padding: '1rem', 
                     textAlign: 'center', 
-                    fontWeight: '600', 
+                    fontWeight: '700', 
                     color: 'var(--imperial-emerald)',
-                    fontSize: '0.875rem',
+                    fontSize: '0.75rem',
                     textTransform: 'uppercase',
                     letterSpacing: '0.05em'
                   }}>
@@ -438,180 +420,259 @@ export default function SdrDashboard() {
                   <th style={{ 
                     padding: '1rem', 
                     textAlign: 'left', 
-                    fontWeight: '600', 
+                    fontWeight: '700', 
                     color: 'var(--imperial-emerald)',
-                    fontSize: '0.875rem',
+                    fontSize: '0.75rem',
                     textTransform: 'uppercase',
                     letterSpacing: '0.05em'
                   }}>
-                    Last Update
+                    Activity
                   </th>
                   <th style={{ 
                     padding: '1rem', 
                     textAlign: 'center', 
-                    fontWeight: '600', 
+                    fontWeight: '700', 
                     color: 'var(--imperial-emerald)',
-                    fontSize: '0.875rem',
+                    fontSize: '0.75rem',
                     textTransform: 'uppercase',
                     letterSpacing: '0.05em'
                   }}>
-                    Actions
+                    Workspace
                   </th>
                 </tr>
               </thead>
               <tbody>
                 {clients
                   .filter((client) => {
-                    // Search filter
-                    if (searchQuery) {
-                      const query = searchQuery.toLowerCase();
-                      const matchesSearch = 
-                        client.businessName.toLowerCase().includes(query) ||
-                        client.pointOfContact?.email?.toLowerCase().includes(query) ||
-                        client.pointOfContact?.name?.toLowerCase().includes(query);
-                      if (!matchesSearch) return false;
-                    }
-                    
-                    // Status filter
-                    if (filterStatus === 'with-updates' && !client.lastUpdateDate) return false;
-                    if (filterStatus === 'no-updates' && client.lastUpdateDate) return false;
-                    
                     return true;
                   })
                   .map((client) => (
-                  <>
+                  <React.Fragment key={client.clientId}>
                     <tr 
-                      key={client.clientId}
                       style={{ 
-                        borderBottom: '1px solid rgba(196, 183, 91, 0.15)',
+                        borderBottom: '1px solid rgba(196, 183, 91, 0.1)',
                         transition: 'all 0.2s ease',
-                        cursor: 'pointer'
+                        cursor: 'pointer',
+                        background: expandedClient === client.clientId ? 'rgba(196, 183, 91, 0.05)' : 'transparent'
                       }}
                       onClick={() => fetchClientDetails(client.clientId)}
                       onMouseEnter={(e) => {
-                        e.currentTarget.style.background = 'rgba(196, 183, 91, 0.05)';
+                        if (expandedClient !== client.clientId) {
+                          e.currentTarget.style.background = 'rgba(196, 183, 91, 0.03)';
+                        }
                       }}
                       onMouseLeave={(e) => {
-                        e.currentTarget.style.background = '';
+                        if (expandedClient !== client.clientId) {
+                          e.currentTarget.style.background = '';
+                        }
                       }}
                     >
                       <td style={{ padding: '1rem' }}>
-                        <div style={{ fontWeight: '600', color: 'var(--imperial-emerald)', marginBottom: '0.25rem' }}>
+                        <div style={{ 
+                          fontWeight: '600', 
+                          color: 'var(--imperial-emerald)', 
+                          fontSize: '0.9375rem'
+                        }}>
                           {client.businessName}
                         </div>
                       </td>
                       <td style={{ padding: '1rem' }}>
                         <div style={{ color: 'var(--muted-jade)', fontSize: '0.875rem' }}>
-                          <div style={{ fontWeight: '500', marginBottom: '0.125rem' }}>
+                          <div style={{ 
+                            fontWeight: '600', 
+                            color: 'var(--imperial-emerald)'
+                          }}>
                             {client.pointOfContact.name}
-                            {client.pointOfContact.title && ` (${client.pointOfContact.title})`}
                           </div>
-                          <div style={{ fontSize: '0.75rem', color: 'var(--muted-jade)' }}>{client.pointOfContact.email}</div>
+                          <div style={{ 
+                            fontSize: '0.75rem', 
+                            color: 'var(--muted-jade)'
+                          }}>
+                            {client.pointOfContact.email}
+                          </div>
                         </div>
                       </td>
                       <td style={{ padding: '1rem', textAlign: 'center' }}>
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem', alignItems: 'center' }}>
+                        <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem' }}>
                           <span style={{ 
-                            display: 'inline-block',
-                            padding: '0.25rem 0.75rem',
-                            borderRadius: '0.375rem',
-                            background: 'rgba(196, 183, 91, 0.2)',
+                            padding: '0.125rem 0.5rem',
+                            borderRadius: '0.25rem',
+                            background: 'rgba(11, 46, 43, 0.05)',
                             color: 'var(--imperial-emerald)',
                             fontWeight: '600',
-                            fontSize: '0.875rem'
+                            fontSize: '0.75rem'
                           }}>
-                            {client.licenses.length} Assigned
+                            {client.numberOfLicenses || 0} Total
                           </span>
                         </div>
                       </td>
                       <td style={{ padding: '1rem' }}>
-                        {client.lastUpdateDate ? (
-                          <div style={{ color: 'var(--muted-jade)', fontSize: '0.875rem' }}>
-                            {new Date(client.lastUpdateDate).toLocaleDateString()}
-                          </div>
-                        ) : (
-                          <span style={{ color: 'var(--muted-jade)', fontSize: '0.875rem', fontStyle: 'italic' }}>
-                            No updates yet
-                          </span>
-                        )}
+                        <div style={{ fontSize: '0.75rem', color: 'var(--muted-jade)', fontWeight: '500' }}>
+                          {client.lastUpdateDate ? (
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.375rem' }}>
+                              <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#10b981' }} />
+                              Last activity: {new Date(client.lastUpdateDate).toLocaleDateString()}
+                            </div>
+                          ) : (
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.375rem' }}>
+                              <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#f59e0b' }} />
+                              No activities logged
+                            </div>
+                          )}
+                        </div>
                       </td>
                       <td style={{ padding: '1rem', textAlign: 'center' }}>
-                        <span style={{ color: 'var(--muted-jade)', fontSize: '0.875rem' }}>
-                          {expandedClient === client.clientId ? '▼ Hide' : '▶ View'} Details
-                        </span>
+                        <div style={{ 
+                          display: 'inline-flex',
+                          padding: '0.375rem 0.75rem',
+                          borderRadius: '0.5rem',
+                          background: expandedClient === client.clientId ? 'var(--imperial-emerald)' : 'transparent',
+                          color: expandedClient === client.clientId ? 'white' : 'var(--imperial-emerald)',
+                          border: `1px solid ${expandedClient === client.clientId ? 'var(--imperial-emerald)' : 'rgba(11, 46, 43, 0.15)'}`,
+                          fontSize: '0.75rem',
+                          fontWeight: '700',
+                          transition: 'all 0.2s ease'
+                        }}>
+                          {expandedClient === client.clientId ? 'Active' : 'Open'}
+                        </div>
                       </td>
                     </tr>
-                    {/* Expanded Client Details Row */}
                     {expandedClient === client.clientId && (
                       <tr>
-                        <td colSpan={5} style={{ padding: '0' }}>
-                          <div className="card" style={{ margin: '0.5rem', background: 'rgba(196, 183, 91, 0.05)' }}>
-                    <ClientDetailPanel clientDetails={clientDetails} loading={loadingDetails} />
-
-                        {/* LinkedIn Chat History Section */}
-                    <ChatHistorySection
-                      chatHistory={chatHistory}
-                      loading={chatHistoryLoading}
-                      onEdit={() => setShowChatHistoryForm(!showChatHistoryForm)}
-                      showForm={showChatHistoryForm}
-                      onSave={handleSaveChatHistory}
-                      onCancel={() => {
-                        setShowChatHistoryForm(false);
-                        // Reset to original chat history if cancelled
-                        if (expandedClient) {
-                          fetch(`/api/sdr/clients/${expandedClient}/chat-history`)
-                            .then(res => res.json())
-                            .then(data => setChatHistory(data.chatHistory || ''));
-                        }
-                      }}
-                      chatHistoryValue={chatHistory}
-                      onChatHistoryChange={setChatHistory}
-                      saving={chatHistorySaving}
-                    />
-
-                        {/* Updates Section */}
-                        <div style={{ marginTop: '2rem', borderTop: '2px solid var(--golden-opal)', paddingTop: '1.5rem' }}>
-                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', flexWrap: 'wrap', gap: '1rem' }}>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                              <h3 style={{ fontSize: '1.25rem', fontWeight: '600', color: 'var(--imperial-emerald)', margin: 0 }}>
-                                Updates & Activity
-                            </h3>
-                              <ViewToggle currentView={updatesView} onViewChange={setUpdatesView} />
+                        <td colSpan={5} style={{ padding: '0', background: 'rgba(196, 183, 91, 0.02)' }}>
+                          <div style={{ 
+                            padding: '2rem', 
+                            borderBottom: '2px solid rgba(196, 183, 91, 0.1)',
+                            animation: 'fadeIn 0.3s ease-out'
+                          }}>
+                            {/* Workspace Header */}
+                            <div style={{ 
+                              display: 'flex', 
+                              justifyContent: 'space-between', 
+                              alignItems: 'center', 
+                              marginBottom: '2rem',
+                              borderBottom: '1px solid rgba(11, 46, 43, 0.05)',
+                              paddingBottom: '1rem'
+                            }}>
+                              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                                <div style={{ 
+                                  width: '40px', 
+                                  height: '40px', 
+                                  borderRadius: '10px', 
+                                  background: 'var(--imperial-emerald)', 
+                                  display: 'flex', 
+                                  alignItems: 'center', 
+                                  justifyContent: 'center',
+                                  color: 'white',
+                                  fontWeight: '800'
+                                }}>
+                                  {client.businessName.charAt(0)}
+                                </div>
+                                <div>
+                                  <h3 style={{ fontSize: '1.125rem', fontWeight: '700', color: 'var(--imperial-emerald)', margin: 0 }}>
+                                    {client.businessName}
+                                  </h3>
+                                  <div style={{ fontSize: '0.75rem', color: 'var(--muted-jade)', fontWeight: '500' }}>
+                                    Client Workspace
+                                  </div>
+                                </div>
+                              </div>
+                              <button 
+                                onClick={() => setExpandedClient(null)}
+                                style={{ 
+                                  padding: '0.5rem', 
+                                  borderRadius: '0.5rem', 
+                                  border: 'none', 
+                                  background: 'rgba(0,0,0,0.03)', 
+                                  cursor: 'pointer',
+                                  color: 'var(--muted-jade)',
+                                  fontSize: '0.75rem',
+                                  fontWeight: '600'
+                                }}
+                              >
+                                Exit Workspace
+                              </button>
                             </div>
-                            <button
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                setShowUpdateForm(!showUpdateForm);
+
+                            <ClientDetailPanel clientDetails={clientDetails} loading={loadingDetails} />
+
+                            {/* LinkedIn Chat History Section */}
+                            <ChatHistorySection
+                              chatHistory={chatHistory}
+                              loading={chatHistoryLoading}
+                              onEdit={() => setShowChatHistoryForm(!showChatHistoryForm)}
+                              showForm={showChatHistoryForm}
+                              onSave={handleSaveChatHistory}
+                              onCancel={() => {
+                                setShowChatHistoryForm(false);
+                                // Reset to original chat history if cancelled
+                                if (expandedClient) {
+                                  fetch(`/api/sdr/clients/${expandedClient}/chat-history`)
+                                    .then(res => res.json())
+                                    .then(data => setChatHistory(data.chatHistory || ''));
+                                }
                               }}
-                              className="btn-primary"
-                              style={{ fontSize: '0.875rem', padding: '0.5rem 1rem' }}
-                            >
-                              + Add Update
-                            </button>
-                          </div>
-                          {updatesView === 'table' ? (
-                            <UpdatesTable 
-                              clientId={expandedClient!}
-                              refreshTrigger={refreshTrigger}
-                              onExport={(updates) => {
-                                // Export handled by UpdatesTable component
-                              }}
+                              chatHistoryValue={chatHistory}
+                              onChatHistoryChange={setChatHistory}
+                              saving={chatHistorySaving}
                             />
-                          ) : (
-                            <UpdatesTimeline updates={updates} />
-                          )}
-                      </div>
+
+                            {/* Updates Section */}
+                            <div style={{ marginTop: '2rem', borderTop: '1px solid rgba(196, 183, 91, 0.2)', paddingTop: '1.5rem' }}>
+                              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '1rem' }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
+                                  <h3 style={{ fontSize: '1.125rem', fontWeight: '700', color: 'var(--imperial-emerald)', margin: 0 }}>
+                                    Activity & Updates
+                                  </h3>
+                                  <ViewToggle currentView={updatesView} onViewChange={setUpdatesView} />
+                                </div>
+                                <button
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    setShowUpdateForm(!showUpdateForm);
+                                  }}
+                                  className="btn-primary"
+                                  style={{ fontSize: '0.8125rem', padding: '0.5rem 1rem', borderRadius: '0.5rem' }}
+                                >
+                                  + New Update
+                                </button>
+                              </div>
+                              {updatesView === 'table' ? (
+                                <UpdatesTable 
+                                  clientId={expandedClient!}
+                                  refreshTrigger={refreshTrigger}
+                                  onExport={(updates) => {
+                                    // Export handled by UpdatesTable component
+                                  }}
+                                />
+                              ) : (
+                                <UpdatesTimeline updates={updates} />
+                              )}
+                            </div>
                           </div>
                         </td>
                       </tr>
                     )}
-                  </>
+                  </React.Fragment>
                 ))}
               </tbody>
             </table>
           </div>
         )}
       </div>
+
+      <UpdateForm
+        show={showUpdateForm}
+        onClose={() => setShowUpdateForm(false)}
+        onSubmit={handleAddUpdate}
+        formData={{
+          type: updateFormData.type,
+          title: updateFormData.title,
+          description: updateFormData.description,
+          date: updateFormData.date
+        }}
+        onFormDataChange={(data) => setUpdateFormData({ ...updateFormData, ...data })}
+      />
     </div>
   );
 }

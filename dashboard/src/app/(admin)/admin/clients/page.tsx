@@ -1,9 +1,14 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import LogoComponent from '@/components/LogoComponent';
-import { Edit, Receipt, UserPlus, Trash2 } from 'lucide-react';
+import { 
+  Edit, Receipt, UserPlus, Trash2, Search, Filter, 
+  ChevronRight, Download, Plus, Building2, User, 
+  Mail, Globe, MapPin, Phone, ShieldCheck, CreditCard,
+  AlertCircle, Layout, List, History, StickyNote, X
+} from 'lucide-react';
 import { validateEmail, isValidEmail } from '@/lib/email-validation';
 import NotificationContainer, { useNotifications } from '@/components/Notification';
 
@@ -70,6 +75,282 @@ interface LicenseInput {
   label: string;
 }
 
+interface LicenseEditCardProps {
+  license: {
+    _id: string;
+    productOrServiceName: string;
+    serviceType: string;
+    label: string;
+    status: string;
+    startDate?: string;
+    endDate?: string;
+  };
+  onUpdate: () => void;
+}
+
+function LicenseEditCard({ license, onUpdate }: LicenseEditCardProps) {
+  const [isEditing, setIsEditing] = useState(false);
+  const [editData, setEditData] = useState({
+    productOrServiceName: license.productOrServiceName,
+    serviceType: license.serviceType,
+    label: license.label,
+    status: license.status,
+    startDate: license.startDate ? new Date(license.startDate).toISOString().split('T')[0] : '',
+    endDate: license.endDate ? new Date(license.endDate).toISOString().split('T')[0] : '',
+  });
+  const [saving, setSaving] = useState(false);
+  const [deleting, setDeleting] = useState(false);
+  const { showNotification } = useNotifications();
+
+  const handleSave = async () => {
+    setSaving(true);
+    try {
+      const response = await fetch(`/api/admin/licenses/${license._id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(editData),
+      });
+
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.error || 'Failed to update license');
+      }
+
+      showNotification('License updated successfully', 'success');
+      setIsEditing(false);
+      onUpdate();
+    } catch (err: any) {
+      showNotification(err.message || 'Failed to update license', 'error');
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const handleDelete = async () => {
+    if (!confirm('Are you sure you want to delete this license? This action cannot be undone.')) {
+      return;
+    }
+
+    setDeleting(true);
+    try {
+      const response = await fetch(`/api/admin/licenses/${license._id}`, {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.error || 'Failed to delete license');
+      }
+
+      showNotification('License deleted successfully', 'success');
+      onUpdate();
+    } catch (err: any) {
+      showNotification(err.message || 'Failed to delete license', 'error');
+    } finally {
+      setDeleting(false);
+    }
+  };
+
+  if (isEditing) {
+    return (
+      <div style={{ 
+        padding: '1.25rem', 
+        background: 'white', 
+        borderRadius: '1rem', 
+        border: '1px solid var(--golden-opal)',
+        boxShadow: '0 4px 12px rgba(196, 183, 91, 0.1)'
+      }}>
+        <div style={{ display: 'grid', gap: '1rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem' }}>
+            <div>
+              <label style={{ display: 'block', marginBottom: '0.375rem', fontSize: '0.75rem', fontWeight: '700', color: 'var(--imperial-emerald)', textTransform: 'uppercase' }}>
+                Product/Service
+              </label>
+              <input
+                type="text"
+                value={editData.productOrServiceName}
+                onChange={(e) => setEditData({ ...editData, productOrServiceName: e.target.value })}
+                className="input"
+                required
+                style={{ fontSize: '0.875rem', padding: '0.625rem' }}
+              />
+            </div>
+            <div>
+              <label style={{ display: 'block', marginBottom: '0.375rem', fontSize: '0.75rem', fontWeight: '700', color: 'var(--imperial-emerald)', textTransform: 'uppercase' }}>
+                Type
+              </label>
+              <input
+                type="text"
+                value={editData.serviceType}
+                onChange={(e) => setEditData({ ...editData, serviceType: e.target.value })}
+                className="input"
+                required
+                style={{ fontSize: '0.875rem', padding: '0.625rem' }}
+              />
+            </div>
+            <div>
+              <label style={{ display: 'block', marginBottom: '0.375rem', fontSize: '0.75rem', fontWeight: '700', color: 'var(--imperial-emerald)', textTransform: 'uppercase' }}>
+                Label
+              </label>
+              <input
+                type="text"
+                value={editData.label}
+                onChange={(e) => setEditData({ ...editData, label: e.target.value })}
+                className="input"
+                required
+                style={{ fontSize: '0.875rem', padding: '0.625rem' }}
+              />
+            </div>
+            <div>
+              <label style={{ display: 'block', marginBottom: '0.375rem', fontSize: '0.75rem', fontWeight: '700', color: 'var(--imperial-emerald)', textTransform: 'uppercase' }}>
+                Status
+              </label>
+              <select
+                value={editData.status}
+                onChange={(e) => setEditData({ ...editData, status: e.target.value })}
+                className="input"
+                required
+                style={{ fontSize: '0.875rem', padding: '0.625rem' }}
+              >
+                <option value="active">Active</option>
+                <option value="paused">Paused</option>
+              </select>
+            </div>
+          </div>
+          <div style={{ display: 'flex', gap: '0.75rem', marginTop: '0.5rem' }}>
+            <button
+              type="button"
+              onClick={handleSave}
+              className="btn-primary"
+              style={{ fontSize: '0.8125rem', padding: '0.5rem 1.25rem', borderRadius: '0.5rem' }}
+              disabled={saving}
+            >
+              {saving ? 'Saving...' : 'Save Changes'}
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setIsEditing(false);
+                setEditData({
+                  productOrServiceName: license.productOrServiceName,
+                  serviceType: license.serviceType,
+                  label: license.label,
+                  status: license.status,
+                  startDate: license.startDate ? new Date(license.startDate).toISOString().split('T')[0] : '',
+                  endDate: license.endDate ? new Date(license.endDate).toISOString().split('T')[0] : '',
+                });
+              }}
+              className="btn-secondary"
+              style={{ fontSize: '0.8125rem', padding: '0.5rem 1.25rem', borderRadius: '0.5rem' }}
+              disabled={saving}
+            >
+              Cancel
+            </button>
+            <div style={{ flex: 1 }} />
+            <button
+              type="button"
+              onClick={handleDelete}
+              style={{ 
+                fontSize: '0.8125rem', 
+                padding: '0.5rem 1rem', 
+                background: 'transparent', 
+                color: '#dc2626',
+                border: '1px solid rgba(220, 38, 38, 0.2)',
+                borderRadius: '0.5rem',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.375rem'
+              }}
+              disabled={saving || deleting}
+            >
+              <Trash2 size={14} />
+              {deleting ? 'Deleting...' : 'Remove License'}
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div style={{ 
+      padding: '1.25rem', 
+      background: 'white', 
+      borderRadius: '1rem', 
+      border: '1px solid rgba(11, 46, 43, 0.05)',
+      boxShadow: '0 2px 8px rgba(0,0,0,0.02)',
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      transition: 'all 0.2s ease'
+    }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
+        <div style={{ 
+          width: '40px', 
+          height: '40px', 
+          borderRadius: '10px', 
+          background: 'rgba(11, 46, 43, 0.03)', 
+          display: 'flex', 
+          alignItems: 'center', 
+          justifyContent: 'center',
+          color: 'var(--imperial-emerald)'
+        }}>
+          <ShieldCheck size={20} />
+        </div>
+        <div>
+          <div style={{ fontWeight: '750', color: 'var(--imperial-emerald)', fontSize: '0.9375rem', marginBottom: '0.25rem' }}>
+            {license.productOrServiceName}
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+            <span style={{ fontSize: '0.75rem', color: 'var(--muted-jade)', fontWeight: '600', textTransform: 'uppercase' }}>{license.serviceType}</span>
+            <span style={{ width: '4px', height: '4px', borderRadius: '50%', background: 'rgba(0,0,0,0.1)' }} />
+            <span style={{ 
+              fontSize: '0.75rem', 
+              fontWeight: '700', 
+              color: license.status === 'active' ? '#10b981' : '#f59e0b',
+              textTransform: 'uppercase'
+            }}>
+              {license.status}
+            </span>
+            {license.startDate && (
+              <>
+                <span style={{ width: '4px', height: '4px', borderRadius: '50%', background: 'rgba(0,0,0,0.1)' }} />
+                <span style={{ fontSize: '0.75rem', color: 'var(--muted-jade)', fontWeight: '500' }}>
+                  Started {new Date(license.startDate).toLocaleDateString([], { month: 'short', year: 'numeric' })}
+                </span>
+              </>
+            )}
+          </div>
+        </div>
+      </div>
+      <button
+        type="button"
+        onClick={() => setIsEditing(true)}
+        style={{
+          padding: '0.5rem 1rem',
+          borderRadius: '0.5rem',
+          background: 'white',
+          border: '1px solid rgba(196, 183, 91, 0.3)',
+          color: 'var(--imperial-emerald)',
+          fontSize: '0.8125rem',
+          fontWeight: '700',
+          cursor: 'pointer',
+          transition: 'all 0.2s ease',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '0.375rem'
+        }}
+        onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(196, 183, 91, 0.05)'}
+        onMouseLeave={(e) => e.currentTarget.style.background = 'white'}
+      >
+        <Edit size={14} />
+        Configure
+      </button>
+    </div>
+  );
+}
+
 export default function ClientsPage() {
   const router = useRouter();
   const [clients, setClients] = useState<Client[]>([]);
@@ -130,6 +411,8 @@ export default function ClientsPage() {
   const [additionalEmailInput, setAdditionalEmailInput] = useState('');
   const [emailError, setEmailError] = useState<string | null>(null);
   const [additionalEmailError, setAdditionalEmailError] = useState<string | null>(null);
+  const [existingLicenses, setExistingLicenses] = useState<any[]>([]);
+  const [loadingLicenses, setLoadingLicenses] = useState(false);
   
   // Notification system
   const { notifications, showNotification, dismissNotification } = useNotifications();
@@ -192,10 +475,59 @@ export default function ClientsPage() {
     return {};
   };
 
+  const fetchClients = useCallback(async () => {
+    try {
+      // Add timestamp to bypass cache and ensure fresh data
+      const response = await fetch(`/api/admin/clients?t=${Date.now()}`, {
+        cache: 'no-store',
+        headers: {
+          'Cache-Control': 'no-cache',
+        },
+      });
+      if (!response.ok) {
+        if (response.status === 401 || response.status === 403) {
+          router.push('/login');
+          return;
+        }
+        throw new Error('Failed to fetch clients');
+      }
+      const data = await response.json();
+      
+      // Force React to recognize the state change by creating a new array
+      const clientsList = data.clients || [];
+      
+      // Set clients state
+      setClients([...clientsList]);
+      setFilteredClients([...clientsList]);
+    } catch (err: any) {
+      showNotification(`Failed to load clients: ${err.message || 'Unknown error'}`, 'error');
+    } finally {
+      setLoading(false);
+    }
+  }, [router, showNotification]);
+
+  const fetchPlans = useCallback(async () => {
+    try {
+      const response = await fetch('/api/admin/plans');
+      if (!response.ok) {
+        console.error('Failed to fetch plans:', response.status, response.statusText);
+        return;
+      }
+      const data = await response.json();
+      if (data.success && data.plans) {
+        setPlans(data.plans || []);
+      } else {
+        console.error('Invalid plans response:', data);
+      }
+    } catch (err: any) {
+      console.error('Failed to fetch plans:', err);
+    }
+  }, []);
+
   useEffect(() => {
     fetchClients();
     fetchPlans();
-  }, []);
+  }, [fetchClients, fetchPlans]);
 
   // Auto-calculate invoice due date based on selected month/year (last day of month)
   useEffect(() => {
@@ -239,54 +571,6 @@ export default function ClientsPage() {
     setFilteredClients(filtered);
   }, [searchTerm, clients]);
 
-  const fetchClients = async () => {
-    try {
-      // Add timestamp to bypass cache and ensure fresh data
-      const response = await fetch(`/api/admin/clients?t=${Date.now()}`, {
-        cache: 'no-store',
-        headers: {
-          'Cache-Control': 'no-cache',
-        },
-      });
-      if (!response.ok) {
-        if (response.status === 401 || response.status === 403) {
-          router.push('/login');
-          return;
-        }
-        throw new Error('Failed to fetch clients');
-      }
-      const data = await response.json();
-      
-      // Force React to recognize the state change by creating a new array
-      const clientsList = data.clients || [];
-      
-      // Set clients state
-      setClients([...clientsList]);
-      setFilteredClients([...clientsList]);
-    } catch (err: any) {
-      showNotification(`Failed to load clients: ${err.message || 'Unknown error'}`, 'error');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const fetchPlans = async () => {
-    try {
-      const response = await fetch('/api/admin/plans');
-      if (!response.ok) {
-        console.error('Failed to fetch plans:', response.status, response.statusText);
-        return;
-      }
-      const data = await response.json();
-      if (data.success && data.plans) {
-        setPlans(data.plans || []);
-      } else {
-        console.error('Invalid plans response:', data);
-      }
-    } catch (err: any) {
-      console.error('Failed to fetch plans:', err);
-    }
-  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -439,6 +723,50 @@ export default function ClientsPage() {
       },
     });
     setAdditionalEmailInput('');
+    setEditingClient(null);
+    setExistingLicenses([]);
+  };
+
+  const fetchClientLicenses = async (clientId: string) => {
+    setLoadingLicenses(true);
+    try {
+      const response = await fetch(`/api/admin/licenses?clientId=${clientId}`);
+      if (response.ok) {
+        const data = await response.json();
+        setExistingLicenses(data.licenses || []);
+      }
+    } catch (err) {
+      console.error('Failed to fetch licenses:', err);
+      setExistingLicenses([]);
+    } finally {
+      setLoadingLicenses(false);
+    }
+  };
+
+  const generateLicenses = async () => {
+    if (!editingClient?._id) return;
+
+    setLoadingLicenses(true);
+    try {
+      const response = await fetch(`/api/admin/clients/${editingClient._id}/generate-licenses`, {
+        method: 'POST',
+      });
+
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.error || 'Failed to generate licenses');
+      }
+
+      const data = await response.json();
+      showNotification(data.message || `Successfully generated ${data.licensesCreated || 0} license(s)`, 'success');
+      
+      // Refresh licenses list
+      await fetchClientLicenses(editingClient._id);
+    } catch (err: any) {
+      showNotification(err.message || 'Failed to generate licenses', 'error');
+    } finally {
+      setLoadingLicenses(false);
+    }
   };
 
   const handleEdit = (client: Client) => {
@@ -479,6 +807,10 @@ export default function ClientsPage() {
         notes: '',
       },
     });
+    // Fetch existing licenses for this client
+    if (client._id) {
+      fetchClientLicenses(client._id);
+    }
     setShowForm(true);
   };
 
@@ -701,35 +1033,73 @@ export default function ClientsPage() {
 
   if (loading) {
     return (
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '50vh' }}>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh', background: 'var(--ivory-silk)' }}>
         <div className="spinner" />
       </div>
     );
   }
 
   return (
-    <div style={{ padding: '2rem' }}>
+    <div style={{ 
+      minHeight: '100vh',
+      background: 'linear-gradient(135deg, var(--ivory-silk) 0%, #f0ede8 100%)',
+      padding: '1.5rem'
+    }}>
       <NotificationContainer notifications={notifications} onDismiss={dismissNotification} />
-      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem' }}>
-        <LogoComponent width={48} height={26} hoverGradient={true} />
-        <div style={{ flex: 1 }}>
-          <h1 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '0.25rem', color: 'var(--imperial-emerald)' }}>
-          Clients Management
-        </h1>
-          <p style={{ color: 'var(--muted-jade)', fontSize: '0.875rem' }}>
-            Manage all client accounts and information
-          </p>
+      
+      <div style={{ 
+        display: 'flex', 
+        alignItems: 'center', 
+        justifyContent: 'space-between',
+        gap: '1rem', 
+        marginBottom: '2rem',
+        background: 'white',
+        padding: '1.25rem 1.5rem',
+        borderRadius: '1rem',
+        boxShadow: '0 2px 12px rgba(11, 46, 43, 0.04)',
+        border: '1px solid rgba(196, 183, 91, 0.15)'
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
+          <LogoComponent width={42} height={24} hoverGradient={true} />
+          <div>
+            <h1 style={{ 
+              fontSize: '1.75rem', 
+              fontWeight: '800', 
+              color: 'var(--imperial-emerald)',
+              letterSpacing: '-0.02em',
+              lineHeight: 1.2
+            }}>
+              Clients Management
+            </h1>
+            <p style={{ color: 'var(--muted-jade)', fontSize: '0.875rem', fontWeight: '500' }}>
+              Configure client portfolios, plans, and active licenses
+            </p>
+          </div>
         </div>
-        <button
-          onClick={() => {
-            setShowForm(true);
-            setEditingClient(null);
-            resetForm();
-          }}
-          className="btn-primary"
-        >
-          + Create Client
-        </button>
+        {!showForm && (
+          <button
+            onClick={() => {
+              setEditingClient(null);
+              resetForm();
+              setFieldErrors({});
+              setShowForm(true);
+            }}
+            className="btn-primary"
+            style={{ 
+              display: 'flex', 
+              alignItems: 'center', 
+              gap: '0.5rem',
+              padding: '0.625rem 1.25rem',
+              borderRadius: '0.75rem',
+              fontSize: '0.875rem',
+              fontWeight: '700',
+              boxShadow: '0 4px 12px rgba(11, 46, 43, 0.15)'
+            }}
+          >
+            <Plus size={18} />
+            Register New Client
+          </button>
+        )}
       </div>
 
       {/* Error messages now shown as pop-up alerts instead of banners */}
@@ -1179,12 +1549,76 @@ export default function ClientsPage() {
                     required
                   />
                   <p style={{ fontSize: '0.75rem', color: 'var(--muted-jade)', marginTop: '0.25rem' }}>
-                    Enter the number of licenses (1-999)
+                    Enter the number of licenses (1-999). License records will be auto-generated when you save.
                   </p>
                 </div>
                     );
                   }
                 })()}
+                
+                {/* License Records Management Section */}
+                {formData.numberOfLicenses > 0 && editingClient && (
+                  <div style={{ 
+                    gridColumn: '1 / -1', 
+                    marginTop: '1.5rem', 
+                    padding: '1.5rem', 
+                    background: 'rgba(196, 183, 91, 0.05)', 
+                    borderRadius: '0.5rem', 
+                    border: '1px solid rgba(196, 183, 91, 0.3)' 
+                  }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                      <h4 style={{ fontSize: '1.125rem', fontWeight: '600', color: 'var(--imperial-emerald)' }}>
+                        License Records ({existingLicenses.length} of {formData.numberOfLicenses})
+                      </h4>
+                      <button
+                        type="button"
+                        onClick={() => fetchClientLicenses(editingClient._id)}
+                        className="btn-secondary"
+                        style={{ fontSize: '0.875rem', padding: '0.5rem 1rem' }}
+                        disabled={loadingLicenses}
+                      >
+                        {loadingLicenses ? 'Loading...' : 'Refresh'}
+                      </button>
+                    </div>
+                    {loadingLicenses ? (
+                      <div style={{ textAlign: 'center', padding: '2rem' }}>
+                        <div className="spinner" />
+                      </div>
+                    ) : existingLicenses.length === 0 ? (
+                      <div style={{ textAlign: 'center', padding: '2rem' }}>
+                        <p style={{ color: 'var(--muted-jade)', fontSize: '0.875rem', marginBottom: '1rem' }}>
+                          No license records found. Click the button below to generate {formData.numberOfLicenses} license(s) based on the numberOfLicenses value.
+                        </p>
+                        <button
+                          type="button"
+                          onClick={generateLicenses}
+                          className="btn-primary"
+                          style={{ fontSize: '0.875rem', padding: '0.75rem 1.5rem' }}
+                          disabled={loadingLicenses || !formData.numberOfLicenses || formData.numberOfLicenses === 0}
+                        >
+                          {loadingLicenses ? 'Generating...' : `Generate ${formData.numberOfLicenses} License(s)`}
+                        </button>
+                        {(!formData.numberOfLicenses || formData.numberOfLicenses === 0) && (
+                          <p style={{ color: '#dc2626', fontSize: '0.75rem', marginTop: '0.5rem' }}>
+                            Please set numberOfLicenses first
+                          </p>
+                        )}
+                      </div>
+                    ) : (
+                      <div style={{ display: 'grid', gap: '1rem' }}>
+                        {existingLicenses.map((license) => (
+                          <LicenseEditCard 
+                            key={license._id} 
+                            license={license} 
+                            onUpdate={async () => {
+                              await fetchClientLicenses(editingClient._id);
+                            }}
+                          />
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )}
                 {(() => {
                   const selectedPlan = plans.find(p => p._id === formData.currentPlanId);
                   const fixedPrice = selectedPlan?.planConfiguration?.fixedPrice;
@@ -1840,228 +2274,246 @@ export default function ClientsPage() {
         </div>
       )}
 
-      {/* Filter Section */}
-      <div className="card" style={{ marginBottom: '1.5rem', padding: '1rem' }}>
-        <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
-          <div style={{ flex: 1, minWidth: '200px' }}>
-            <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500', fontSize: '0.875rem', color: 'var(--imperial-emerald)' }}>
-              Search Clients
-            </label>
-            <input
-              type="text"
-              placeholder="Search by business name or email..."
-              className="input"
-              style={{ width: '100%' }}
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-          </div>
-        </div>
-      </div>
-
-      {filteredClients.length === 0 && clients.length > 0 ? (
-        <div className="card" style={{ textAlign: 'center', padding: '3rem' }}>
-          <p style={{ color: 'var(--muted-jade)', fontSize: '1.125rem', marginBottom: '1rem' }}>
-            No clients match your search.
-          </p>
-        </div>
-      ) : filteredClients.length === 0 ? (
-        <div className="card" style={{ textAlign: 'center', padding: '3rem' }}>
-          <p style={{ color: 'var(--muted-jade)', fontSize: '1.125rem', marginBottom: '1rem' }}>
-            No clients found.
-          </p>
-          <button onClick={() => {
-            setShowForm(true);
-            resetForm();
-          }} className="btn-primary">
-            Create Your First Client
-          </button>
-        </div>
-      ) : (
-        <div className="card" style={{ padding: '0' }}>
+      {!showForm && (
+        <>
           <div style={{ 
-            padding: '1.5rem', 
-            borderBottom: '2px solid rgba(196, 183, 91, 0.3)',
-            background: 'linear-gradient(135deg, rgba(196, 183, 91, 0.1) 0%, rgba(196, 183, 91, 0.05) 100%)'
+            background: 'white', 
+            padding: '1.25rem', 
+            borderRadius: '1rem', 
+            border: '1px solid rgba(196, 183, 91, 0.15)',
+            boxShadow: '0 4px 12px rgba(11, 46, 43, 0.03)',
+            marginBottom: '1.5rem',
+            display: 'flex', 
+            gap: '1rem', 
+            alignItems: 'center' 
           }}>
-            <h2 style={{ fontSize: '1.5rem', marginBottom: '0.25rem', color: 'var(--imperial-emerald)', fontWeight: '600' }}>
-              All Clients
-            </h2>
-            <p style={{ color: 'var(--muted-jade)', fontSize: '0.875rem' }}>
-              {filteredClients.length} {filteredClients.length === 1 ? 'client' : 'clients'} {searchTerm ? '(filtered)' : 'total'}
-            </p>
-          </div>
-          <div style={{ overflowX: 'auto' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-              <thead>
-                <tr style={{ 
+            <div style={{ position: 'relative', flex: 1 }}>
+              <Search size={18} style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--muted-jade)' }} />
+              <input
+                type="text"
+                placeholder="Search by business name, contact, or email..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                style={{
+                  width: '100%',
+                  padding: '0.75rem 1rem 0.75rem 2.75rem',
+                  borderRadius: '0.75rem',
+                  border: '1px solid rgba(11, 46, 43, 0.1)',
+                  fontSize: '0.9375rem',
+                  background: 'rgba(11, 46, 43, 0.01)',
+                  fontWeight: '500'
+                }}
+              />
+            </div>
+            {searchTerm && (
+              <button 
+                onClick={() => setSearchTerm('')}
+                style={{
                   background: 'rgba(11, 46, 43, 0.05)',
-                  borderBottom: '2px solid rgba(196, 183, 91, 0.3)'
+                  border: 'none',
+                  padding: '0.5rem 1rem',
+                  borderRadius: '0.5rem',
+                  color: 'var(--imperial-emerald)',
+                  fontSize: '0.8125rem',
+                  fontWeight: '700',
+                  cursor: 'pointer'
+                }}
+              >
+                Clear
+              </button>
+            )}
+          </div>
+
+          <div style={{ 
+            background: 'white', 
+            borderRadius: '1.25rem', 
+            border: '1px solid rgba(196, 183, 91, 0.15)',
+            boxShadow: '0 4px 24px rgba(11, 46, 43, 0.04)',
+            overflow: 'hidden'
+          }}>
+            <div
+              style={{
+                padding: '1.5rem',
+                borderBottom: '1px solid rgba(196, 183, 91, 0.1)',
+                background: 'linear-gradient(to right, rgba(196, 183, 91, 0.05), transparent)',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center'
+              }}
+            >
+              <div>
+                <h2 style={{ fontSize: '1.25rem', color: 'var(--imperial-emerald)', fontWeight: '750', letterSpacing: '-0.01em' }}>
+                  Registered Clients
+                </h2>
+                <p style={{ color: 'var(--muted-jade)', fontSize: '0.8125rem', fontWeight: '500', marginTop: '0.25rem' }}>
+                  {filteredClients.length} clients in current view
+                </p>
+              </div>
+            </div>
+
+            {filteredClients.length === 0 ? (
+              <div style={{ textAlign: 'center', padding: '4rem 2rem' }}>
+                <div style={{ 
+                  width: '64px', 
+                  height: '64px', 
+                  background: 'rgba(11, 46, 43, 0.03)', 
+                  borderRadius: '50%', 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  justifyContent: 'center',
+                  margin: '0 auto 1.5rem',
+                  color: 'var(--muted-jade)'
                 }}>
-                  <th style={{ 
-                    padding: '1rem', 
-                    textAlign: 'left', 
-                    fontWeight: '600', 
-                    color: 'var(--imperial-emerald)',
-                    fontSize: '0.875rem',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.05em'
-                  }}>
-                    Business Name
-                  </th>
-                  <th style={{ 
-                    padding: '1rem', 
-                    textAlign: 'left', 
-                    fontWeight: '600', 
-                    color: 'var(--imperial-emerald)',
-                    fontSize: '0.875rem',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.05em'
-                  }}>
-                    Contact
-                  </th>
-                  <th style={{ 
-                    padding: '1rem', 
-                    textAlign: 'center', 
-                    fontWeight: '600', 
-                    color: 'var(--imperial-emerald)',
-                    fontSize: '0.875rem',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.05em'
-                  }}>
-                    Licenses
-                  </th>
-                  <th style={{ 
-                    padding: '1rem', 
-                    textAlign: 'center', 
-                    fontWeight: '600', 
-                    color: 'var(--imperial-emerald)',
-                    fontSize: '0.875rem',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.05em'
-                  }}>
-                    Final Cost
-                  </th>
-                  <th style={{ 
-                    padding: '1rem', 
-                    textAlign: 'center', 
-                    fontWeight: '600', 
-                    color: 'var(--imperial-emerald)',
-                    fontSize: '0.875rem',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.05em'
-                  }}>
-                    Actions
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredClients.map((client) => (
-                  <tr 
-                    key={client._id}
-                    style={{ 
-                      borderBottom: '1px solid rgba(196, 183, 91, 0.15)',
-                      transition: 'all 0.2s ease',
-                      cursor: 'pointer'
-                    }}
-                    onClick={() => handleEdit(client)}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.background = 'rgba(196, 183, 91, 0.05)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.background = '';
-                    }}
-                  >
-                    <td style={{ padding: '1rem' }}>
-                      <div style={{ fontWeight: '600', color: 'var(--imperial-emerald)', marginBottom: '0.25rem' }}>
-                        {client.businessName}
-                      </div>
-                      {client.country && (
-                        <div style={{ fontSize: '0.75rem', color: 'var(--muted-jade)' }}>
-                          {client.country}
-                        </div>
-                      )}
-                    </td>
-                    <td style={{ padding: '1rem' }}>
-                      <div style={{ color: 'var(--muted-jade)', fontSize: '0.875rem' }}>
-                        <div style={{ fontWeight: '500', marginBottom: '0.125rem' }}>
-                          {client.pointOfContactName}
-                          {client.pointOfContactTitle && ` (${client.pointOfContactTitle})`}
-                        </div>
-                        <div style={{ fontSize: '0.75rem', color: 'var(--muted-jade)' }}>{client.pointOfContactEmail}</div>
-                      </div>
-                    </td>
-                    <td style={{ padding: '1rem', textAlign: 'center' }}>
-                      <span style={{ 
-                        display: 'inline-block',
-                        padding: '0.25rem 0.75rem',
-                        borderRadius: '0.375rem',
-                        background: 'rgba(196, 183, 91, 0.2)',
-                        color: 'var(--imperial-emerald)',
-                        fontWeight: '600',
-                        fontSize: '0.875rem'
-                      }}>
-                        {client.numberOfLicenses ?? 0}
-                      </span>
-                    </td>
-                    <td style={{ padding: '1rem', textAlign: 'center' }}>
-                      {(() => {
-                        const baseCost = (client.numberOfLicenses || 0) * ((client as any).pricePerLicense || 0);
-                        const discountPercent = (client as any).discountPercentage || 0;
-                        const discountAmount = baseCost > 0 && discountPercent > 0 ? (baseCost * discountPercent) / 100 : 0;
-                        const finalCost = baseCost - discountAmount;
-                        const currencySymbol = (client as any).currency === 'INR' ? '₹' : '$';
-                        
-                        if (baseCost > 0) {
-                          return (
-                            <div style={{ fontSize: '0.875rem' }}>
-                              <div style={{ fontWeight: '600', color: 'var(--imperial-emerald)', marginBottom: '0.125rem' }}>
-                                {currencySymbol}{finalCost.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                              </div>
-                              {discountPercent > 0 && (
-                                <div style={{ fontSize: '0.75rem', color: '#ef4444' }}>
-                                  {discountPercent}% off
-                                </div>
+                  <Building2 size={32} />
+                </div>
+                <p style={{ color: 'var(--muted-jade)', marginBottom: '1.5rem', fontSize: '1rem', fontWeight: '500' }}>
+                  No clients found.
+                </p>
+                <button 
+                  onClick={() => setSearchTerm('')}
+                  className="btn-primary" 
+                >
+                  Clear search
+                </button>
+              </div>
+            ) : (
+              <div style={{ overflowX: 'auto' }}>
+                <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+                  <thead>
+                    <tr style={{ background: 'rgba(11, 46, 43, 0.02)' }}>
+                      {['Business Name', 'Contact Information', 'Active Seats', 'Portfolio Value', 'Actions'].map((header) => (
+                        <th
+                          key={header}
+                          style={{
+                            padding: '1.125rem 1.25rem',
+                            textAlign: header === 'Actions' ? 'center' : 'left',
+                            fontWeight: '700',
+                            color: 'var(--muted-jade)',
+                            fontSize: '0.75rem',
+                            textTransform: 'uppercase',
+                            letterSpacing: '0.075em',
+                            borderBottom: '1px solid rgba(196, 183, 91, 0.15)'
+                          }}
+                        >
+                          {header}
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {filteredClients.map((client) => (
+                      <tr 
+                        key={client._id}
+                        style={{ 
+                          borderBottom: '1px solid rgba(196, 183, 91, 0.08)',
+                          transition: 'all 0.2s ease',
+                          cursor: 'pointer'
+                        }}
+                        onClick={() => handleEdit(client)}
+                        onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(196, 183, 91, 0.03)'}
+                        onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
+                      >
+                        <td style={{ padding: '1.25rem' }}>
+                          <div style={{ fontWeight: '750', color: 'var(--imperial-emerald)', fontSize: '0.9375rem', marginBottom: '0.25rem' }}>
+                            {client.businessName}
+                          </div>
+                          {client.country && (
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.375rem', fontSize: '0.75rem', color: 'var(--muted-jade)', fontWeight: '500' }}>
+                              <Globe size={12} />
+                              {client.country}
+                            </div>
+                          )}
+                        </td>
+                        <td style={{ padding: '1.25rem' }}>
+                          <div style={{ display: 'flex', flexDirection: 'column' }}>
+                            <div style={{ fontWeight: '600', color: 'var(--imperial-emerald)', fontSize: '0.875rem' }}>
+                              {client.pointOfContactName}
+                              {client.pointOfContactTitle && (
+                                <span style={{ color: 'var(--muted-jade)', fontWeight: '500', marginLeft: '0.5rem', fontSize: '0.75rem' }}>
+                                  ({client.pointOfContactTitle})
+                                </span>
                               )}
                             </div>
-                          );
-                        }
-                        return <span style={{ color: 'var(--muted-jade)', fontSize: '0.875rem', fontStyle: 'italic' }}>—</span>;
-                      })()}
-                    </td>
-                    <td style={{ padding: '1rem', textAlign: 'center' }} onClick={(e) => e.stopPropagation()}>
-                      <button
-                        onClick={() => handleEdit(client)}
-                        style={{
-                          padding: '0.5rem',
-                          border: 'none',
-                          background: 'rgba(196, 183, 91, 0.1)',
-                          borderRadius: '0.375rem',
-                          cursor: 'pointer',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          transition: 'all 0.2s ease'
-                        }}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.background = 'rgba(196, 183, 91, 0.2)';
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.background = 'rgba(196, 183, 91, 0.1)';
-                        }}
-                        title="Edit Client"
-                      >
-                        <Edit size={16} color="var(--imperial-emerald)" />
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.375rem', fontSize: '0.75rem', color: 'var(--muted-jade)', marginTop: '0.125rem', fontWeight: '500' }}>
+                              <Mail size={12} />
+                              {client.pointOfContactEmail}
+                            </div>
+                          </div>
+                        </td>
+                        <td style={{ padding: '1.25rem' }}>
+                          <span style={{ 
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '0.375rem',
+                            padding: '0.375rem 0.75rem',
+                            borderRadius: '2rem',
+                            background: 'rgba(11, 46, 43, 0.05)',
+                            color: 'var(--imperial-emerald)',
+                            fontWeight: '700',
+                            fontSize: '0.8125rem'
+                          }}>
+                            <ShieldCheck size={14} />
+                            {client.numberOfLicenses ?? 0}
+                          </span>
+                        </td>
+                        <td style={{ padding: '1.25rem' }}>
+                          {(() => {
+                            const baseCost = (client.numberOfLicenses || 0) * ((client as any).pricePerLicense || 0);
+                            const discountPercent = (client as any).discountPercentage || 0;
+                            const discountAmount = baseCost > 0 && discountPercent > 0 ? (baseCost * discountPercent) / 100 : 0;
+                            const finalCost = baseCost - discountAmount;
+                            const currencySymbol = (client as any).currency === 'INR' ? '₹' : '$';
+                            
+                            if (baseCost > 0) {
+                              return (
+                                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                  <div style={{ fontWeight: '800', color: 'var(--imperial-emerald)', fontSize: '0.9375rem' }}>
+                                    {currencySymbol}{finalCost.toLocaleString()}
+                                  </div>
+                                  {discountPercent > 0 && (
+                                    <span style={{ fontSize: '0.6875rem', color: '#dc2626', fontWeight: '700', background: '#fee2e2', padding: '0.125rem 0.375rem', borderRadius: '4px', width: 'fit-content', marginTop: '0.25rem' }}>
+                                      {discountPercent}% SAVING
+                                    </span>
+                                  )}
+                                </div>
+                              );
+                            }
+                            return <span style={{ color: 'var(--muted-jade)', fontSize: '0.8125rem', fontStyle: 'italic', fontWeight: '500' }}>No plan active</span>;
+                          })()}
+                        </td>
+                        <td style={{ padding: '1.25rem', textAlign: 'center' }} onClick={(e) => e.stopPropagation()}>
+                          <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem' }}>
+                            <button
+                              onClick={() => handleEdit(client)}
+                              style={{
+                                padding: '0.5rem',
+                                border: '1px solid rgba(196, 183, 91, 0.2)',
+                                background: 'white',
+                                borderRadius: '0.625rem',
+                                cursor: 'pointer',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                transition: 'all 0.2s ease',
+                                color: 'var(--imperial-emerald)'
+                              }}
+                              onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(11, 46, 43, 0.03)'}
+                              onMouseLeave={(e) => e.currentTarget.style.background = 'white'}
+                              title="Edit Client"
+                            >
+                              <Edit size={16} />
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
           </div>
-        </div>
+        </>
       )}
-      
     </div>
   );
 }

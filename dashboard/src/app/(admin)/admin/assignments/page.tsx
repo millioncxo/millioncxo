@@ -1,9 +1,9 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import LogoComponent from '@/components/LogoComponent';
-import { Edit, UserX, MoreVertical } from 'lucide-react';
+import { Edit, UserX, Users, Briefcase, CheckCircle2, AlertCircle, X, Search, Filter, Plus, UserPlus, ShieldCheck, Mail, Building2, Calendar } from 'lucide-react';
 
 interface User {
   _id: string;
@@ -33,15 +33,39 @@ interface Assignment {
   createdAt: string;
 }
 
+// Notification Component
+const Notification = ({ message, type, onClose }: { message: string, type: 'success' | 'error', onClose: () => void }) => (
+  <div style={{
+    position: 'fixed',
+    top: '2rem',
+    right: '2rem',
+    zIndex: 1100,
+    background: 'white',
+    padding: '1rem 1.5rem',
+    borderRadius: '1rem',
+    boxShadow: '0 10px 25px rgba(0,0,0,0.1)',
+    borderLeft: `4px solid ${type === 'success' ? '#10b981' : '#ef4444'}`,
+    display: 'flex',
+    alignItems: 'center',
+    gap: '1rem',
+    animation: 'slideIn 0.3s ease-out'
+  }}>
+    {type === 'success' ? <CheckCircle2 size={20} color="#10b981" /> : <AlertCircle size={20} color="#ef4444" />}
+    <span style={{ fontWeight: '600', color: 'var(--imperial-emerald)', fontSize: '0.875rem' }}>{message}</span>
+    <button onClick={onClose} style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: 'var(--muted-jade)' }}>
+      <X size={16} />
+    </button>
+  </div>
+);
+
 export default function AssignmentsPage() {
   const router = useRouter();
   const [sdrUsers, setSdrUsers] = useState<User[]>([]);
   const [clients, setClients] = useState<Client[]>([]);
   const [licenses, setLicenses] = useState<License[]>([]);
   const [assignments, setAssignments] = useState<Assignment[]>([]);
-  const [filteredAssignments, setFilteredAssignments] = useState<Assignment[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [notification, setNotification] = useState<{ message: string, type: 'success' | 'error' } | null>(null);
   const [showForm, setShowForm] = useState(false);
   const [editingAssignment, setEditingAssignment] = useState<Assignment | null>(null);
   const [sdrFilter, setSdrFilter] = useState<string>('');
@@ -53,39 +77,14 @@ export default function AssignmentsPage() {
     licenseIds: [] as string[],
   });
 
-  useEffect(() => {
-    fetchData();
+  const showNotification = useCallback((message: string, type: 'success' | 'error') => {
+    setNotification({ message, type });
+    setTimeout(() => setNotification(null), 5000);
   }, []);
 
-  // Apply filters when sdrFilter, clientFilter, searchTerm, or assignments change
-  useEffect(() => {
-    let filtered = [...assignments];
-
-    // Apply search filter
-    if (searchTerm) {
-      const term = searchTerm.toLowerCase();
-      filtered = filtered.filter(assignment => 
-        assignment.sdrId.name.toLowerCase().includes(term) ||
-        assignment.sdrId.email.toLowerCase().includes(term) ||
-        assignment.clientId.businessName.toLowerCase().includes(term)
-      );
-    }
-
-    // Apply SDR filter
-    if (sdrFilter) {
-      filtered = filtered.filter(assignment => assignment.sdrId._id === sdrFilter);
-    }
-
-    // Apply client filter
-    if (clientFilter) {
-      filtered = filtered.filter(assignment => assignment.clientId._id === clientFilter);
-    }
-
-    setFilteredAssignments(filtered);
-  }, [sdrFilter, clientFilter, searchTerm, assignments]);
-
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     try {
+      setLoading(true);
       // Fetch SDR users
       const sdrResponse = await fetch('/api/admin/users?role=SDR');
       if (sdrResponse.ok) {
@@ -122,15 +121,16 @@ export default function AssignmentsPage() {
         }
       });
       setAssignments(assignmentsList);
-      setFilteredAssignments(assignmentsList);
-
-      // Fetch licenses for the selected client (will be done when client is selected)
     } catch (err: any) {
-      setError(err.message || 'Failed to load data');
+      showNotification(err.message || 'Failed to load data', 'error');
     } finally {
       setLoading(false);
     }
-  };
+  }, [router, showNotification]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
   const fetchLicensesForClient = async (clientId: string) => {
     try {
@@ -146,6 +146,31 @@ export default function AssignmentsPage() {
     }
   };
 
+  const stats = useMemo(() => {
+    const totalAssignments = assignments.length;
+    const uniqueSDRs = new Set(assignments.map(a => a.sdrId._id)).size;
+    const uniqueClients = new Set(assignments.map(a => a.clientId._id)).size;
+    const totalLicenses = assignments.reduce((acc, a) => acc + a.licenses.length, 0);
+
+    return [
+      { label: 'Active Assignments', value: totalAssignments, icon: ShieldCheck, color: 'var(--imperial-emerald)' },
+      { label: 'Deployed SDRs', value: uniqueSDRs, icon: Users, color: '#10b981' },
+      { label: 'Serviced Clients', value: uniqueClients, icon: Building2, color: 'var(--golden-opal)' },
+      { label: 'Managed Licenses', value: totalLicenses, icon: Briefcase, color: 'var(--muted-jade)' },
+    ];
+  }, [assignments]);
+
+  const filteredAssignments = useMemo(() => {
+    return assignments.filter(assignment => {
+      const matchesSearch = assignment.sdrId.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                          assignment.sdrId.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                          assignment.clientId.businessName.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesSdr = !sdrFilter || assignment.sdrId._id === sdrFilter;
+      const matchesClient = !clientFilter || assignment.clientId._id === clientFilter;
+      return matchesSearch && matchesSdr && matchesClient;
+    });
+  }, [assignments, searchTerm, sdrFilter, clientFilter]);
+
   const handleClientChange = (clientId: string) => {
     setFormData({ ...formData, clientId, licenseIds: [] });
     if (clientId) {
@@ -155,10 +180,9 @@ export default function AssignmentsPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
 
     if (!formData.sdrId || !formData.clientId) {
-      setError('SDR and Client are required');
+      showNotification('SDR and Client are required', 'error');
       return;
     }
 
@@ -185,30 +209,77 @@ export default function AssignmentsPage() {
         clientId: '',
         licenseIds: [],
       });
-      setError('');
+      showNotification(`SDR successfully assigned to client`, 'success');
     } catch (err: any) {
-      setError(err.message || 'Failed to assign SDR');
+      showNotification(err.message || 'Failed to assign SDR', 'error');
     }
   };
 
-  if (loading) {
+  const handleUnassign = async (assignment: Assignment) => {
+    if (!confirm(`Are you sure you want to unassign ${assignment.sdrId.name} from ${assignment.clientId.businessName}? This action will be logged.`)) {
+      return;
+    }
+    try {
+      const response = await fetch('/api/admin/assign-sdr', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          assignmentId: assignment._id,
+          sdrId: assignment.sdrId._id,
+          clientId: assignment.clientId._id,
+        }),
+      });
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.error || 'Failed to unassign SDR');
+      }
+      await fetchData();
+      showNotification('SDR unassigned successfully. Action has been logged.', 'success');
+    } catch (err: any) {
+      showNotification(err.message || 'Failed to unassign SDR', 'error');
+    }
+  };
+
+  if (loading && assignments.length === 0) {
     return (
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '50vh' }}>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh', background: 'var(--ivory-silk)' }}>
         <div className="spinner" />
       </div>
     );
   }
 
   return (
-    <div style={{ padding: '2rem' }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem' }}>
-        <LogoComponent width={48} height={26} hoverGradient={true} />
+    <div style={{ 
+      padding: '2rem',
+      minHeight: '100vh',
+      background: 'linear-gradient(135deg, var(--ivory-silk) 0%, #f0ede8 100%)'
+    }}>
+      {notification && <Notification {...notification} onClose={() => setNotification(null)} />}
+
+      <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', marginBottom: '2.5rem' }}>
+        <div style={{ 
+          padding: '0.75rem',
+          background: 'white',
+          borderRadius: '1rem',
+          boxShadow: '0 4px 12px rgba(11, 46, 43, 0.05)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}>
+          <LogoComponent width={42} height={22} hoverGradient={true} />
+        </div>
         <div style={{ flex: 1 }}>
-          <h1 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '0.25rem', color: 'var(--imperial-emerald)' }}>
-            SDR Assignments
+          <h1 style={{ 
+            fontSize: '1.875rem', 
+            fontWeight: '800', 
+            color: 'var(--imperial-emerald)',
+            letterSpacing: '-0.02em',
+            margin: 0
+          }}>
+            Workforce Allocation
           </h1>
-          <p style={{ color: 'var(--muted-jade)', fontSize: '0.875rem' }}>
-            Manage SDR assignments to clients
+          <p style={{ color: 'var(--muted-jade)', fontSize: '0.9375rem', fontWeight: '500', marginTop: '0.25rem' }}>
+            Strategically deploy SDRs across client accounts and licenses
           </p>
         </div>
         <button
@@ -221,347 +292,196 @@ export default function AssignmentsPage() {
             });
             setShowForm(true);
           }}
-          className="btn-primary"
+          style={{
+            padding: '0.75rem 1.5rem',
+            background: 'var(--imperial-emerald)',
+            color: 'white',
+            borderRadius: '0.75rem',
+            border: 'none',
+            fontWeight: '750',
+            fontSize: '0.875rem',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+            boxShadow: '0 4px 12px rgba(11, 46, 43, 0.15)',
+            transition: 'all 0.2s ease'
+          }}
+          onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
+          onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
         >
-          + Assign SDR to Client
+          <UserPlus size={18} />
+          Create Allocation
         </button>
       </div>
 
-      {error && (
-        <div className="card" style={{ background: '#fee2e2', color: '#dc2626', marginBottom: '1rem' }}>
-          {error}
-        </div>
-      )}
-
-      {showForm && (
-        <div
-          style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      {/* KPI Section */}
+      <div style={{ 
+        display: 'grid', 
+        gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', 
+        gap: '1.5rem', 
+        marginBottom: '2.5rem' 
+      }}>
+        {stats.map((stat, idx) => (
+          <div key={idx} style={{ 
+            background: 'white', 
+            padding: '1.5rem', 
+            borderRadius: '1.25rem', 
+            boxShadow: '0 4px 20px rgba(11, 46, 43, 0.04)',
+            border: '1px solid rgba(196, 183, 91, 0.15)',
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center',
-            zIndex: 1000,
-            padding: '2rem',
-            overflow: 'auto'
-          }}
-          onClick={(e) => {
-            if (e.target === e.currentTarget) {
-              setShowForm(false);
-              setEditingAssignment(null);
-              setFormData({
-                sdrId: '',
-                clientId: '',
-                licenseIds: [],
-              });
-            }
-          }}
-        >
-          <div
-            className="card"
+            gap: '1.25rem'
+          }}>
+            <div style={{ 
+              width: '56px', 
+              height: '56px', 
+              borderRadius: '1rem', 
+              background: `rgba(${stat.color === 'var(--imperial-emerald)' ? '11, 46, 43' : '16, 185, 129'}, 0.08)`, 
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'center',
+              color: stat.color
+            }}>
+              <stat.icon size={28} />
+            </div>
+            <div>
+              <div style={{ fontSize: '0.8125rem', fontWeight: '700', color: 'var(--muted-jade)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.25rem' }}>
+                {stat.label}
+              </div>
+              <div style={{ fontSize: '1.75rem', fontWeight: '800', color: 'var(--imperial-emerald)', lineHeight: 1 }}>
+                {stat.value}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Filter Bar */}
+      <div style={{ 
+        background: 'white', 
+        padding: '1.25rem', 
+        borderRadius: '1.25rem', 
+        border: '1px solid rgba(196, 183, 91, 0.15)',
+        boxShadow: '0 4px 12px rgba(11, 46, 43, 0.03)',
+        marginBottom: '1.5rem',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '1rem',
+        flexWrap: 'wrap'
+      }}>
+        <div style={{ position: 'relative', flex: 2, minWidth: '240px' }}>
+          <Search size={16} style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--muted-jade)' }} />
+          <input
+            type="text"
+            placeholder="Search by SDR name or client business..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
             style={{
-              maxWidth: '700px',
               width: '100%',
-              maxHeight: '90vh',
-              overflow: 'auto',
-              margin: 'auto',
-              position: 'relative',
-              boxShadow: '0 20px 60px rgba(0, 0, 0, 0.3)'
+              padding: '0.75rem 1rem 0.75rem 2.75rem',
+              borderRadius: '0.75rem',
+              border: '1px solid rgba(11, 46, 43, 0.1)',
+              fontSize: '0.875rem',
+              fontWeight: '500',
+              background: 'rgba(11, 46, 43, 0.01)',
+              outline: 'none'
             }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
-              <h2 style={{ fontSize: '1.5rem', margin: 0, color: 'var(--imperial-emerald)' }}>
-                {editingAssignment ? 'Edit Assignment' : 'Assign SDR to Client'}
-              </h2>
-              <button
-                type="button"
-                onClick={() => {
-                  setShowForm(false);
-                  setEditingAssignment(null);
-                  setFormData({
-                    sdrId: '',
-                    clientId: '',
-                    licenseIds: [],
-                  });
-                }}
-                style={{
-                  background: 'transparent',
-                  border: 'none',
-                  fontSize: '1.5rem',
-                  cursor: 'pointer',
-                  color: 'var(--muted-jade)',
-                  padding: '0.25rem 0.5rem',
-                  lineHeight: 1
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.color = 'var(--imperial-emerald)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.color = 'var(--muted-jade)';
-                }}
-              >
-                ×
-              </button>
-            </div>
-            <form onSubmit={handleSubmit}>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1rem', marginBottom: '1rem' }}>
-              <div>
-                <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>
-                  Select SDR *
-                </label>
-                <select
-                  value={formData.sdrId}
-                  onChange={(e) => setFormData({ ...formData, sdrId: e.target.value })}
-                  className="input"
-                  required
-                >
-                  <option value="">Choose SDR...</option>
-                  {sdrUsers.map((sdr) => (
-                    <option key={sdr._id} value={sdr._id}>
-                      {sdr.name} ({sdr.email})
-                    </option>
-                  ))}
-                </select>
-                {sdrUsers.length === 0 && (
-                  <p style={{ fontSize: '0.875rem', color: 'var(--muted-jade)', marginTop: '0.25rem' }}>
-                    No SDR users found. Create SDR users first in Users page.
-                  </p>
-                )}
-              </div>
-
-              <div>
-                <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>
-                  Select Client *
-                </label>
-                <select
-                  value={formData.clientId}
-                  onChange={(e) => handleClientChange(e.target.value)}
-                  className="input"
-                  required
-                >
-                  <option value="">Choose Client...</option>
-                  {clients.map((client) => (
-                    <option key={client._id} value={client._id}>
-                      {client.businessName}
-                    </option>
-                  ))}
-                </select>
-                {clients.length === 0 && (
-                  <p style={{ fontSize: '0.875rem', color: 'var(--muted-jade)', marginTop: '0.25rem' }}>
-                    No clients found. Create clients first in Clients page.
-                  </p>
-                )}
-              </div>
-            </div>
-
-            {licenses.length > 0 && (
-              <div style={{ marginBottom: '1rem' }}>
-                <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>
-                  Select Licenses (Optional)
-                </label>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                  {licenses.map((license) => (
-                    <label key={license._id} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
-                      <input
-                        type="checkbox"
-                        checked={formData.licenseIds.includes(license._id)}
-                        onChange={(e) => {
-                          if (e.target.checked) {
-                            setFormData({ ...formData, licenseIds: [...formData.licenseIds, license._id] });
-                          } else {
-                            setFormData({ ...formData, licenseIds: formData.licenseIds.filter(id => id !== license._id) });
-                          }
-                        }}
-                      />
-                      <span>{license.label} ({license.serviceType})</span>
-                    </label>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {formData.clientId && licenses.length === 0 && (
-              <div style={{ padding: '1rem', background: 'rgba(196, 183, 91, 0.1)', borderRadius: '0.5rem', marginBottom: '1rem' }}>
-                <p style={{ fontSize: '0.875rem', color: 'var(--muted-jade)' }}>
-                  No licenses found for this client. Licenses can be assigned later or created separately.
-                </p>
-              </div>
-            )}
-
-              <div style={{ display: 'flex', gap: '1rem', marginTop: '1.5rem' }}>
-                <button type="submit" className="btn-primary">
-                  {editingAssignment ? 'Update Assignment' : 'Assign SDR'}
-                </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setShowForm(false);
-                    setEditingAssignment(null);
-                    setFormData({
-                      sdrId: '',
-                      clientId: '',
-                      licenseIds: [],
-                    });
-                  }}
-                  className="btn-secondary"
-                >
-                  Cancel
-                </button>
-              </div>
-            </form>
-          </div>
+          />
         </div>
-      )}
-
-      {/* Filter Section */}
-      <div className="card" style={{ marginBottom: '1.5rem', padding: '1rem' }}>
-        <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
-          <div style={{ flex: 1, minWidth: '200px' }}>
-            <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500', fontSize: '0.875rem', color: 'var(--imperial-emerald)' }}>
-              Search
-            </label>
-            <input
-              type="text"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="Search by SDR or client name..."
-              className="input"
-              style={{ width: '100%' }}
-            />
-          </div>
-          <div style={{ flex: 1, minWidth: '200px' }}>
-            <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500', fontSize: '0.875rem', color: 'var(--imperial-emerald)' }}>
-              Filter by SDR
-            </label>
-            <select
-              value={sdrFilter}
-              onChange={(e) => setSdrFilter(e.target.value)}
-              className="input"
-              style={{ width: '100%' }}
-            >
-              <option value="">All SDRs</option>
-              {sdrUsers.map((sdr) => (
-                <option key={sdr._id} value={sdr._id}>
-                  {sdr.name}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div style={{ flex: 1, minWidth: '200px' }}>
-            <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500', fontSize: '0.875rem', color: 'var(--imperial-emerald)' }}>
-              Filter by Client
-            </label>
-            <select
-              value={clientFilter}
-              onChange={(e) => setClientFilter(e.target.value)}
-              className="input"
-              style={{ width: '100%' }}
-            >
-              <option value="">All Clients</option>
-              {clients.map((client) => (
-                <option key={client._id} value={client._id}>
-                  {client.businessName}
-                </option>
-              ))}
-            </select>
-          </div>
+        <div style={{ flex: 1, minWidth: '160px' }}>
+          <select
+            value={sdrFilter}
+            onChange={(e) => setSdrFilter(e.target.value)}
+            style={{
+              width: '100%',
+              padding: '0.75rem 1rem',
+              borderRadius: '0.75rem',
+              border: '1px solid rgba(11, 46, 43, 0.1)',
+              fontSize: '0.875rem',
+              fontWeight: '600',
+              color: 'var(--imperial-emerald)',
+              background: 'white',
+              cursor: 'pointer',
+              outline: 'none'
+            }}
+          >
+            <option value="">Filter by SDR</option>
+            {sdrUsers.map((sdr) => (
+              <option key={sdr._id} value={sdr._id}>{sdr.name}</option>
+            ))}
+          </select>
+        </div>
+        <div style={{ flex: 1, minWidth: '160px' }}>
+          <select
+            value={clientFilter}
+            onChange={(e) => setClientFilter(e.target.value)}
+            style={{
+              width: '100%',
+              padding: '0.75rem 1rem',
+              borderRadius: '0.75rem',
+              border: '1px solid rgba(11, 46, 43, 0.1)',
+              fontSize: '0.875rem',
+              fontWeight: '600',
+              color: 'var(--imperial-emerald)',
+              background: 'white',
+              cursor: 'pointer',
+              outline: 'none'
+            }}
+          >
+            <option value="">Filter by Client</option>
+            {clients.map((client) => (
+              <option key={client._id} value={client._id}>{client.businessName}</option>
+            ))}
+          </select>
         </div>
       </div>
 
-      <div className="card" style={{ padding: '0' }}>
-        <div style={{ 
-          padding: '1.5rem', 
-          borderBottom: '2px solid rgba(196, 183, 91, 0.3)',
-          background: 'linear-gradient(135deg, rgba(196, 183, 91, 0.1) 0%, rgba(196, 183, 91, 0.05) 100%)'
-        }}>
-          <h2 style={{ fontSize: '1.5rem', marginBottom: '0.25rem', color: 'var(--imperial-emerald)', fontWeight: '600' }}>
-            Current Assignments
-          </h2>
-          <p style={{ color: 'var(--muted-jade)', fontSize: '0.875rem' }}>
-            {filteredAssignments.length} {filteredAssignments.length === 1 ? 'assignment' : 'assignments'} {sdrFilter || clientFilter || searchTerm ? '(filtered)' : 'total'}
+      {/* Assignments Table */}
+      <div style={{ 
+        background: 'white', 
+        borderRadius: '1.5rem', 
+        border: '1px solid rgba(196, 183, 91, 0.15)',
+        boxShadow: '0 10px 30px rgba(11, 46, 43, 0.04)',
+        overflow: 'hidden'
+      }}>
+        <div style={{ padding: '1.5rem 2rem', borderBottom: '1px solid rgba(196, 183, 91, 0.1)', background: 'linear-gradient(to right, rgba(196, 183, 91, 0.05), transparent)' }}>
+          <h2 style={{ fontSize: '1.25rem', color: 'var(--imperial-emerald)', fontWeight: '750', margin: 0 }}>Allocation Matrix</h2>
+          <p style={{ color: 'var(--muted-jade)', fontSize: '0.8125rem', fontWeight: '500', marginTop: '0.25rem' }}>
+            Current operational mapping between talent and client assets
           </p>
         </div>
 
-        {filteredAssignments.length === 0 && assignments.length > 0 ? (
-          <div style={{ textAlign: 'center', padding: '3rem' }}>
-            <p style={{ color: 'var(--muted-jade)', fontSize: '1rem' }}>
-              No assignments match the selected filters.
-            </p>
-          </div>
-        ) : filteredAssignments.length === 0 ? (
-          <div style={{ textAlign: 'center', padding: '3rem' }}>
-            <p style={{ color: 'var(--muted-jade)', fontSize: '1rem' }}>
-              No SDR assignments yet. Create an assignment to get started.
+        {filteredAssignments.length === 0 ? (
+          <div style={{ padding: '5rem 2rem', textAlign: 'center' }}>
+            <div style={{ 
+              width: '80px', 
+              height: '80px', 
+              background: 'rgba(11, 46, 43, 0.03)', 
+              borderRadius: '50%', 
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'center',
+              margin: '0 auto 1.5rem',
+              color: 'var(--muted-jade)'
+            }}>
+              <ShieldCheck size={40} />
+            </div>
+            <h3 style={{ fontSize: '1.25rem', color: 'var(--imperial-emerald)', fontWeight: '750', marginBottom: '0.5rem' }}>No allocations found</h3>
+            <p style={{ color: 'var(--muted-jade)', maxWidth: '400px', margin: '0 auto' }}>
+              No active assignments match your current filter selection. Adjust parameters or create a new allocation.
             </p>
           </div>
         ) : (
           <div style={{ overflowX: 'auto' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse' }}>
               <thead>
-                <tr style={{ 
-                  background: 'rgba(11, 46, 43, 0.05)',
-                  borderBottom: '2px solid rgba(196, 183, 91, 0.3)'
-                }}>
-                  <th style={{ 
-                    padding: '1rem', 
-                    textAlign: 'left', 
-                    fontWeight: '600', 
-                    color: 'var(--imperial-emerald)',
-                    fontSize: '0.875rem',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.05em'
-                  }}>
-                    SDR
-                  </th>
-                  <th style={{ 
-                    padding: '1rem', 
-                    textAlign: 'left', 
-                    fontWeight: '600', 
-                    color: 'var(--imperial-emerald)',
-                    fontSize: '0.875rem',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.05em'
-                  }}>
-                    Client
-                  </th>
-                  <th style={{ 
-                    padding: '1rem', 
-                    textAlign: 'center', 
-                    fontWeight: '600', 
-                    color: 'var(--imperial-emerald)',
-                    fontSize: '0.875rem',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.05em'
-                  }}>
-                    Licenses
-                  </th>
-                  <th style={{ 
-                    padding: '1rem', 
-                    textAlign: 'left', 
-                    fontWeight: '600', 
-                    color: 'var(--imperial-emerald)',
-                    fontSize: '0.875rem',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.05em'
-                  }}>
-                    Assigned Date
-                  </th>
-                  <th style={{ 
-                    padding: '1rem', 
-                    textAlign: 'center', 
-                    fontWeight: '600', 
-                    color: 'var(--imperial-emerald)',
-                    fontSize: '0.875rem',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.05em'
-                  }}>
-                    Actions
-                  </th>
+                <tr style={{ background: 'rgba(11, 46, 43, 0.02)' }}>
+                  <th style={{ padding: '1.25rem 2rem', textAlign: 'left', fontWeight: '700', color: 'var(--muted-jade)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>SDR Professional</th>
+                  <th style={{ padding: '1.25rem 2rem', textAlign: 'left', fontWeight: '700', color: 'var(--muted-jade)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Client Account</th>
+                  <th style={{ padding: '1.25rem 2rem', textAlign: 'left', fontWeight: '700', color: 'var(--muted-jade)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Allocated Licenses</th>
+                  <th style={{ padding: '1.25rem 2rem', textAlign: 'center', fontWeight: '700', color: 'var(--muted-jade)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Effective Since</th>
+                  <th style={{ padding: '1.25rem 2rem', textAlign: 'center', fontWeight: '700', color: 'var(--muted-jade)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -569,72 +489,73 @@ export default function AssignmentsPage() {
                   <tr 
                     key={assignment._id}
                     style={{ 
-                      borderBottom: '1px solid rgba(196, 183, 91, 0.15)',
-                      transition: 'all 0.2s ease',
-                      cursor: 'pointer'
+                      borderBottom: '1px solid rgba(196, 183, 91, 0.08)',
+                      transition: 'all 0.2s ease'
                     }}
-                    onClick={() => {
-                      setEditingAssignment(assignment);
-                      setFormData({
-                        sdrId: assignment.sdrId._id,
-                        clientId: assignment.clientId._id,
-                        licenseIds: assignment.licenses.map(l => l._id),
-                      });
-                      setShowForm(true);
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.background = 'rgba(196, 183, 91, 0.05)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.background = '';
-                    }}
+                    onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(196, 183, 91, 0.03)'}
+                    onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
                   >
-                    <td style={{ padding: '1rem' }}>
-                      <div style={{ fontWeight: '600', color: 'var(--imperial-emerald)', marginBottom: '0.25rem' }}>
-                        {assignment.sdrId.name}
-                      </div>
-                      <div style={{ fontSize: '0.75rem', color: 'var(--muted-jade)' }}>
-                        {assignment.sdrId.email}
-                      </div>
-                    </td>
-                    <td style={{ padding: '1rem' }}>
-                      <div style={{ color: 'var(--muted-jade)', fontSize: '0.875rem', fontWeight: '500' }}>
-                        {assignment.clientId.businessName}
-                      </div>
-                    </td>
-                    <td style={{ padding: '1rem', textAlign: 'center' }}>
-                      {assignment.licenses.length > 0 ? (
-                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.25rem', justifyContent: 'center' }}>
-                          {assignment.licenses.map((license, idx) => (
-                            <span 
-                              key={idx} 
-                              style={{ 
-                                display: 'inline-block',
-                                padding: '0.125rem 0.5rem',
-                                borderRadius: '0.25rem',
-                                background: 'rgba(196, 183, 91, 0.2)',
-                                color: 'var(--imperial-emerald)',
-                                fontSize: '0.75rem',
-                                fontWeight: '500'
-                              }}
-                            >
-                              {license.label}
-                            </span>
-                          ))}
+                    <td style={{ padding: '1.5rem 2rem' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                        <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'var(--imperial-emerald)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: '800', fontSize: '1rem' }}>
+                          {assignment.sdrId.name.charAt(0)}
                         </div>
-                      ) : (
-                        <span style={{ color: 'var(--muted-jade)', fontSize: '0.875rem', fontStyle: 'italic' }}>
-                          No licenses
-                        </span>
-                      )}
-                    </td>
-                    <td style={{ padding: '1rem' }}>
-                      <div style={{ color: 'var(--muted-jade)', fontSize: '0.875rem' }}>
-                        {new Date(assignment.createdAt).toLocaleDateString()}
+                        <div>
+                          <div style={{ fontWeight: '800', color: 'var(--imperial-emerald)', fontSize: '0.9375rem' }}>{assignment.sdrId.name}</div>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', fontSize: '0.75rem', color: 'var(--muted-jade)', marginTop: '0.125rem' }}>
+                            <Mail size={12} /> {assignment.sdrId.email}
+                          </div>
+                        </div>
                       </div>
                     </td>
-                    <td style={{ padding: '1rem', textAlign: 'center' }} onClick={(e) => e.stopPropagation()}>
-                      <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'center', alignItems: 'center' }}>
+                    <td style={{ padding: '1.5rem 2rem' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                        <Building2 size={16} color="var(--imperial-emerald)" />
+                        <div style={{ fontWeight: '700', color: 'var(--imperial-emerald)', fontSize: '0.875rem' }}>{assignment.clientId.businessName}</div>
+                      </div>
+                    </td>
+                    <td style={{ padding: '1.5rem 2rem' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                        {assignment.licenses.length > 0 ? (
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                            <span style={{ 
+                              padding: '0.25rem 0.75rem', 
+                              background: 'var(--imperial-emerald)', 
+                              borderRadius: '2rem',
+                              color: 'white', 
+                              fontSize: '0.8125rem', 
+                              fontWeight: '800'
+                            }}>
+                              {assignment.licenses.length}
+                            </span>
+                            <span style={{ fontSize: '0.8125rem', color: 'var(--muted-jade)', fontWeight: '600' }}>
+                              {assignment.licenses.length === 1 ? 'License' : 'Licenses'} Allocated
+                            </span>
+                          </div>
+                        ) : (
+                          <span style={{ 
+                            fontSize: '0.75rem', 
+                            color: 'var(--golden-opal)', 
+                            fontWeight: '750',
+                            textTransform: 'uppercase',
+                            letterSpacing: '0.02em',
+                            background: 'rgba(196, 183, 91, 0.1)',
+                            padding: '0.25rem 0.625rem',
+                            borderRadius: '0.5rem'
+                          }}>
+                            Universal Access (All)
+                          </span>
+                        )}
+                      </div>
+                    </td>
+                    <td style={{ padding: '1.5rem 2rem', textAlign: 'center' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.375rem', fontSize: '0.8125rem', color: 'var(--imperial-emerald)', fontWeight: '600' }}>
+                        <Calendar size={14} />
+                        {new Date(assignment.createdAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })}
+                      </div>
+                    </td>
+                    <td style={{ padding: '1.5rem 2rem', textAlign: 'center' }}>
+                      <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center' }}>
                         <button
                           onClick={() => {
                             setEditingAssignment(assignment);
@@ -644,78 +565,29 @@ export default function AssignmentsPage() {
                               licenseIds: assignment.licenses.map(l => l._id),
                             });
                             setShowForm(true);
+                            if (assignment.clientId._id) fetchLicensesForClient(assignment.clientId._id);
                           }}
                           style={{
-                            padding: '0.5rem',
-                            border: 'none',
-                            background: 'rgba(196, 183, 91, 0.1)',
-                            borderRadius: '0.375rem',
-                            cursor: 'pointer',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            transition: 'all 0.2s ease'
+                            width: '36px', height: '36px', border: '1px solid rgba(11, 46, 43, 0.1)', background: 'white',
+                            borderRadius: '0.625rem', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                            transition: 'all 0.2s ease', color: 'var(--imperial-emerald)'
                           }}
-                          onMouseEnter={(e) => {
-                            e.currentTarget.style.background = 'rgba(196, 183, 91, 0.2)';
-                          }}
-                          onMouseLeave={(e) => {
-                            e.currentTarget.style.background = 'rgba(196, 183, 91, 0.1)';
-                          }}
-                          title="Edit Assignment"
+                          onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--imperial-emerald)'; e.currentTarget.style.color = 'white'; }}
+                          onMouseLeave={(e) => { e.currentTarget.style.background = 'white'; e.currentTarget.style.color = 'var(--imperial-emerald)'; }}
                         >
-                          <Edit size={16} color="var(--imperial-emerald)" />
+                          <Edit size={16} />
                         </button>
                         <button
-                          onClick={async (e) => {
-                            e.stopPropagation();
-                            if (!confirm(`Are you sure you want to unassign ${assignment.sdrId.name} from ${assignment.clientId.businessName}? This action will be logged.`)) {
-                              return;
-                            }
-                            try {
-                              const response = await fetch('/api/admin/assign-sdr', {
-                                method: 'DELETE',
-                                headers: { 'Content-Type': 'application/json' },
-                                body: JSON.stringify({
-                                  assignmentId: assignment._id,
-                                  sdrId: assignment.sdrId._id,
-                                  clientId: assignment.clientId._id,
-                                }),
-                              });
-                              if (!response.ok) {
-                                const data = await response.json();
-                                throw new Error(data.error || 'Failed to unassign SDR');
-                              }
-                              await fetchData();
-                              alert('SDR unassigned successfully. Action has been logged.');
-                            } catch (err: any) {
-                              setError(err.message || 'Failed to unassign SDR');
-                            }
-                          }}
+                          onClick={() => handleUnassign(assignment)}
                           style={{
-                            padding: '0.4rem 0.6rem',
-                            border: '1px solid rgba(196, 183, 91, 0.3)',
-                            background: 'rgba(196, 183, 91, 0.1)',
-                            borderRadius: '0.375rem',
-                            cursor: 'pointer',
-                            transition: 'all 0.2s ease',
-                            fontSize: '0.875rem',
-                            color: 'var(--imperial-emerald)',
-                            fontWeight: '500',
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '0.25rem'
+                            width: '36px', height: '36px', border: '1px solid rgba(239, 68, 68, 0.1)', background: 'white',
+                            borderRadius: '0.625rem', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                            transition: 'all 0.2s ease', color: '#ef4444'
                           }}
-                          onMouseEnter={(e) => {
-                            e.currentTarget.style.background = 'rgba(196, 183, 91, 0.2)';
-                          }}
-                          onMouseLeave={(e) => {
-                            e.currentTarget.style.background = 'rgba(196, 183, 91, 0.1)';
-                          }}
-                          title="Unassign SDR"
+                          onMouseEnter={(e) => { e.currentTarget.style.background = '#fee2e2'; }}
+                          onMouseLeave={(e) => { e.currentTarget.style.background = 'white'; }}
                         >
-                          <UserX size={14} />
-                          Unassign
+                          <UserX size={16} />
                         </button>
                       </div>
                     </td>
@@ -726,6 +598,126 @@ export default function AssignmentsPage() {
           </div>
         )}
       </div>
+
+      {/* Allocation Modal */}
+      {showForm && (
+        <div style={{
+          position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
+          backgroundColor: 'rgba(11, 46, 43, 0.4)', backdropFilter: 'blur(8px)',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          zIndex: 1050, padding: '2rem'
+        }} onClick={() => setShowForm(false)}>
+          <div style={{
+            background: 'white', borderRadius: '1.5rem', width: '100%', maxWidth: '640px',
+            boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.2)', overflow: 'hidden'
+          }} onClick={e => e.stopPropagation()}>
+            <div style={{
+              padding: '1.75rem 2rem', background: 'linear-gradient(135deg, var(--imperial-emerald) 0%, #064e3b 100%)',
+              color: 'white', display: 'flex', justifyContent: 'space-between', alignItems: 'center'
+            }}>
+              <div>
+                <h2 style={{ fontSize: '1.5rem', fontWeight: '800', margin: 0 }}>{editingAssignment ? 'Edit Workforce Allocation' : 'Establish New Allocation'}</h2>
+                <p style={{ fontSize: '0.8125rem', opacity: 0.8, marginTop: '0.25rem', fontWeight: '500' }}>Map talent to specific client infrastructure</p>
+              </div>
+              <button onClick={() => setShowForm(false)} style={{ background: 'transparent', border: 'none', color: 'white', cursor: 'pointer', opacity: 0.7 }}>
+                <X size={24} />
+              </button>
+            </div>
+
+            <form onSubmit={handleSubmit} style={{ padding: '2rem', maxHeight: '70vh', overflowY: 'auto' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '2rem' }}>
+                <div style={{ gridColumn: 'span 2' }}>
+                  <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.8125rem', fontWeight: '750', color: 'var(--imperial-emerald)', textTransform: 'uppercase' }}>Professional Representative (SDR) *</label>
+                  <select
+                    value={formData.sdrId}
+                    onChange={(e) => setFormData({ ...formData, sdrId: e.target.value })}
+                    required
+                    style={{
+                      width: '100%', padding: '0.875rem 1rem', borderRadius: '0.75rem', border: '1px solid rgba(11, 46, 43, 0.1)',
+                      fontSize: '0.9375rem', fontWeight: '600', color: 'var(--imperial-emerald)', background: 'white'
+                    }}
+                  >
+                    <option value="">Select SDR...</option>
+                    {sdrUsers.map(u => <option key={u._id} value={u._id}>{u.name} ({u.email})</option>)}
+                  </select>
+                </div>
+                <div style={{ gridColumn: 'span 2' }}>
+                  <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.8125rem', fontWeight: '750', color: 'var(--imperial-emerald)', textTransform: 'uppercase' }}>Target Client Organization *</label>
+                  <select
+                    value={formData.clientId}
+                    onChange={(e) => handleClientChange(e.target.value)}
+                    required
+                    style={{
+                      width: '100%', padding: '0.875rem 1rem', borderRadius: '0.75rem', border: '1px solid rgba(11, 46, 43, 0.1)',
+                      fontSize: '0.9375rem', fontWeight: '600', color: 'var(--imperial-emerald)', background: 'white'
+                    }}
+                  >
+                    <option value="">Select Client Organization...</option>
+                    {clients.map(c => <option key={c._id} value={c._id}>{c.businessName}</option>)}
+                  </select>
+                </div>
+              </div>
+
+              {formData.clientId && (
+                <div style={{ marginBottom: '2rem' }}>
+                  <label style={{ display: 'block', marginBottom: '0.75rem', fontSize: '0.8125rem', fontWeight: '750', color: 'var(--imperial-emerald)', textTransform: 'uppercase' }}>Scope of Assignment (Licenses)</label>
+                  {licenses.length > 0 ? (
+                    <div style={{ 
+                      display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', padding: '1.25rem',
+                      background: 'rgba(11, 46, 43, 0.02)', borderRadius: '1rem', border: '1px solid rgba(11, 46, 43, 0.05)',
+                      maxHeight: '320px', overflowY: 'auto'
+                    }}>
+                      {licenses.map(l => (
+                        <label key={l._id} style={{ 
+                          display: 'flex', alignItems: 'center', gap: '0.75rem', cursor: 'pointer', padding: '0.5rem',
+                          borderRadius: '0.5rem', transition: 'all 0.2s ease'
+                        }}>
+                          <input
+                            type="checkbox"
+                            checked={formData.licenseIds.includes(l._id)}
+                            onChange={(e) => {
+                              const ids = e.target.checked 
+                                ? [...formData.licenseIds, l._id] 
+                                : formData.licenseIds.filter(id => id !== l._id);
+                              setFormData({ ...formData, licenseIds: ids });
+                            }}
+                            style={{ width: '18px', height: '18px', accentColor: 'var(--imperial-emerald)' }}
+                          />
+                          <div style={{ flex: 1 }}>
+                            <div style={{ fontSize: '0.875rem', fontWeight: '700', color: 'var(--imperial-emerald)' }}>{l.label}</div>
+                            <div style={{ fontSize: '0.6875rem', color: 'var(--muted-jade)', fontWeight: '600' }}>{l.serviceType}</div>
+                          </div>
+                        </label>
+                      ))}
+                    </div>
+                  ) : (
+                    <div style={{ padding: '1.5rem', background: 'rgba(196, 183, 91, 0.05)', borderRadius: '1rem', border: '1px dashed rgba(196, 183, 91, 0.3)', textAlign: 'center' }}>
+                      <p style={{ margin: 0, fontSize: '0.875rem', color: 'var(--muted-jade)', fontWeight: '500' }}>No active licenses found for this client.</p>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              <div style={{ display: 'flex', gap: '1rem' }}>
+                <button type="submit" style={{
+                  flex: 1, padding: '1rem', borderRadius: '0.75rem', border: 'none',
+                  background: 'var(--imperial-emerald)', color: 'white', fontWeight: '800', fontSize: '0.9375rem',
+                  cursor: 'pointer', boxShadow: '0 4px 12px rgba(11, 46, 43, 0.15)'
+                }}>
+                  {editingAssignment ? 'Update Allocation Matrix' : 'Establish Operational Allocation'}
+                </button>
+                <button type="button" onClick={() => setShowForm(false)} style={{
+                  padding: '1rem 1.5rem', borderRadius: '0.75rem', border: '1px solid rgba(11, 46, 43, 0.1)',
+                  background: 'transparent', color: 'var(--muted-jade)', fontWeight: '750', fontSize: '0.9375rem',
+                  cursor: 'pointer'
+                }}>
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

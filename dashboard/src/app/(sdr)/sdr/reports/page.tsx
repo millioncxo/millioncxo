@@ -1,8 +1,10 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import ReportsTable from '@/components/sdr/ReportsTable';
+import LogoComponent from '@/components/LogoComponent';
+import { FileText, Plus, X, Calendar, User, ShieldCheck, BarChart3, Info } from 'lucide-react';
 
 interface Report {
   _id: string;
@@ -68,12 +70,7 @@ export default function SdrReportsPage() {
     connectionRequestsPositiveResponse: '',
   });
 
-  useEffect(() => {
-    fetchReports();
-    fetchClients();
-  }, []);
-
-  const fetchReports = async () => {
+  const fetchReports = useCallback(async () => {
     try {
       const response = await fetch('/api/sdr/reports');
       if (!response.ok) {
@@ -90,9 +87,9 @@ export default function SdrReportsPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [router]);
 
-  const fetchClients = async () => {
+  const fetchClients = useCallback(async () => {
     try {
       const response = await fetch('/api/sdr/clients');
       if (response.ok) {
@@ -102,7 +99,7 @@ export default function SdrReportsPage() {
     } catch (err: any) {
       // Silently handle client fetch errors for reports page
     }
-  };
+  }, []);
 
   const fetchLicensesForClient = async (clientId: string) => {
     try {
@@ -193,16 +190,50 @@ export default function SdrReportsPage() {
   }
 
   return (
-    <div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
-        <h1 style={{ fontSize: '2rem', fontWeight: 'bold', color: 'var(--imperial-emerald)' }}>
-          Reports
-        </h1>
+    <div style={{ 
+      padding: '1.5rem',
+      background: 'linear-gradient(135deg, var(--ivory-silk) 0%, #f0ede8 100%)',
+      minHeight: '100vh'
+    }}>
+      {/* Header Section */}
+      <div style={{ 
+        display: 'flex', 
+        alignItems: 'center', 
+        justifyContent: 'space-between',
+        marginBottom: '1.5rem',
+        padding: '1.25rem 1.5rem',
+        background: 'white',
+        borderRadius: '1rem',
+        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.05)'
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          <LogoComponent width={48} height={26} hoverGradient={true} />
+          <div>
+            <h1 style={{ 
+              fontSize: '1.75rem', 
+              fontWeight: '800', 
+              marginBottom: '0.125rem', 
+              color: 'var(--imperial-emerald)',
+              letterSpacing: '-0.02em'
+            }}>
+              Activity Reports
+            </h1>
+            <p style={{ 
+              color: 'var(--muted-jade)', 
+              fontSize: '0.875rem',
+              fontWeight: '500'
+            }}>
+              Generate and manage client performance reports
+            </p>
+          </div>
+        </div>
         <button
           onClick={() => setShowForm(true)}
           className="btn-primary"
+          style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.625rem 1.25rem', borderRadius: '0.75rem', fontWeight: '700' }}
         >
-          + Create Report
+          <Plus size={18} />
+          Create Report
         </button>
       </div>
 
@@ -212,6 +243,7 @@ export default function SdrReportsPage() {
         </div>
       )}
 
+      {/* Modernized Report Form Modal */}
       {showForm && (
         <div
           style={{
@@ -220,274 +252,278 @@ export default function SdrReportsPage() {
             left: 0,
             right: 0,
             bottom: 0,
-            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            backgroundColor: 'rgba(11, 46, 43, 0.4)',
+            backdropFilter: 'blur(4px)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             zIndex: 1000,
-            padding: '2rem',
+            padding: '1.5rem',
             overflow: 'auto'
           }}
           onClick={(e) => {
             if (e.target === e.currentTarget) {
               setShowForm(false);
-              setFormData({
-                clientId: '',
-                licenseId: '',
-                type: 'WEEKLY',
-                periodStart: '',
-                periodEnd: '',
-                summary: '',
-                metrics: {},
-                inMailsSent: '',
-                inMailsPositiveResponse: '',
-                connectionRequestsSent: '',
-                connectionRequestsPositiveResponse: '',
-              });
             }
           }}
         >
           <div
-            className="card"
             style={{
-              maxWidth: '900px',
+              maxWidth: '800px',
               width: '100%',
               maxHeight: '90vh',
-              overflow: 'auto',
-              margin: 'auto',
-              position: 'relative',
-              boxShadow: '0 20px 60px rgba(0, 0, 0, 0.3)'
+              background: 'white',
+              borderRadius: '1.25rem',
+              overflow: 'hidden',
+              boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+              display: 'flex',
+              flexDirection: 'column'
             }}
             onClick={(e) => e.stopPropagation()}
           >
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
-              <h2 style={{ fontSize: '1.5rem', margin: 0, color: 'var(--imperial-emerald)' }}>
-            Create New Report
-          </h2>
+            {/* Modal Header */}
+            <div style={{ 
+              padding: '1.5rem', 
+              background: 'rgba(196, 183, 91, 0.1)', 
+              borderBottom: '1px solid rgba(196, 183, 91, 0.2)',
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                <div style={{ padding: '0.5rem', background: 'white', borderRadius: '0.75rem', color: 'var(--imperial-emerald)', boxShadow: '0 2px 4px rgba(0,0,0,0.05)' }}>
+                  <FileText size={20} />
+                </div>
+                <div>
+                  <h2 style={{ fontSize: '1.125rem', fontWeight: '700', margin: 0, color: 'var(--imperial-emerald)' }}>
+                    New Performance Report
+                  </h2>
+                  <p style={{ fontSize: '0.75rem', color: 'var(--muted-jade)', margin: 0 }}>Capture client progress and LinkedIn metrics</p>
+                </div>
+              </div>
               <button
                 type="button"
-                onClick={() => {
-                  setShowForm(false);
-                  setFormData({
-                    clientId: '',
-                    licenseId: '',
-                    type: 'WEEKLY',
-                    periodStart: '',
-                    periodEnd: '',
-                    summary: '',
-                    metrics: {},
-                    inMailsSent: '',
-                    inMailsPositiveResponse: '',
-                    connectionRequestsSent: '',
-                    connectionRequestsPositiveResponse: '',
-                  });
-                }}
+                onClick={() => setShowForm(false)}
                 style={{
-                  background: 'transparent',
-                  border: 'none',
-                  fontSize: '1.5rem',
+                  background: 'white',
+                  border: '1px solid rgba(0,0,0,0.05)',
+                  borderRadius: '0.5rem',
+                  padding: '0.375rem',
                   cursor: 'pointer',
                   color: 'var(--muted-jade)',
-                  padding: '0.25rem 0.5rem',
-                  lineHeight: 1
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  transition: 'all 0.2s ease'
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.color = 'var(--imperial-emerald)';
+                  e.currentTarget.style.background = '#fee2e2';
+                  e.currentTarget.style.color = '#dc2626';
                 }}
                 onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'white';
                   e.currentTarget.style.color = 'var(--muted-jade)';
                 }}
               >
-                ×
+                <X size={18} />
               </button>
-            </div>
-          <form onSubmit={handleSubmit}>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1rem', marginBottom: '1rem' }}>
-              <div>
-                <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>
-                  Client *
-                </label>
-                <select
-                  value={formData.clientId}
-                  onChange={(e) => handleClientChange(e.target.value)}
-                  className="input"
-                  required
-                >
-                  <option value="">Select a client</option>
-                  {clients.map((client) => (
-                    <option key={client.clientId} value={client.clientId}>
-                      {client.businessName}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <div>
-                <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>
-                  License (Optional)
-                </label>
-                <select
-                  value={formData.licenseId}
-                  onChange={(e) => setFormData({ ...formData, licenseId: e.target.value })}
-                  className="input"
-                  disabled={!formData.clientId}
-                >
-                  <option value="">No specific license</option>
-                  {formData.clientId && licenses[formData.clientId]?.map((license) => (
-                    <option key={license._id} value={license._id}>
-                      {license.productOrServiceName || license.label} - {license.serviceType}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <div>
-                <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>
-                  Report Type *
-                </label>
-                <select
-                  value={formData.type}
-                  onChange={(e) => handleTypeChange(e.target.value as any)}
-                  className="input"
-                  required
-                >
-                  <option value="DAILY">Daily</option>
-                  <option value="WEEKLY">Weekly</option>
-                  <option value="MONTHLY">Monthly</option>
-                  <option value="QUARTERLY">Quarterly</option>
-                </select>
-              </div>
-              <div>
-                <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>
-                  Period Start *
-                </label>
-                <input
-                  type="date"
-                  value={formData.periodStart}
-                  onChange={(e) => setFormData({ ...formData, periodStart: e.target.value })}
-                  className="input"
-                  required
-                />
-              </div>
-              <div>
-                <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>
-                  Period End *
-                </label>
-                <input
-                  type="date"
-                  value={formData.periodEnd}
-                  onChange={(e) => setFormData({ ...formData, periodEnd: e.target.value })}
-                  className="input"
-                  required
-                />
-              </div>
-            </div>
-            <div style={{ marginBottom: '1rem' }}>
-              <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>
-                Summary *
-              </label>
-              <textarea
-                value={formData.summary}
-                onChange={(e) => setFormData({ ...formData, summary: e.target.value })}
-                className="input"
-                required
-                rows={6}
-                placeholder="Provide a detailed summary of the report period..."
-              />
             </div>
 
-            {/* LinkedIn Metrics Section */}
-            <div style={{ marginBottom: '1rem', padding: '1rem', background: 'rgba(59, 130, 246, 0.1)', borderRadius: '0.5rem', borderLeft: '3px solid #3b82f6' }}>
-              <h3 style={{ fontSize: '1.125rem', fontWeight: '600', marginBottom: '1rem', color: 'var(--imperial-emerald)' }}>
-                LinkedIn Metrics (Optional)
-              </h3>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1rem' }}>
-                <div>
-                  <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500', fontSize: '0.875rem' }}>
-                    No. of InMails Sent
+            <form onSubmit={handleSubmit} style={{ padding: '1.5rem', overflow: 'auto' }}>
+              <div style={{ display: 'grid', gap: '1.5rem' }}>
+                {/* Basic Info Grid */}
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.25rem' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                    <label style={{ fontSize: '0.8125rem', fontWeight: '700', color: 'var(--imperial-emerald)', textTransform: 'uppercase', letterSpacing: '0.025em' }}>
+                      Target Client
+                    </label>
+                    <select
+                      value={formData.clientId}
+                      onChange={(e) => handleClientChange(e.target.value)}
+                      style={{ width: '100%', padding: '0.625rem 1rem', borderRadius: '0.75rem', border: '1px solid rgba(0,0,0,0.1)', fontSize: '0.9375rem', background: 'white' }}
+                      required
+                    >
+                      <option value="">Select a client</option>
+                      {clients.map((client) => (
+                        <option key={client.clientId} value={client.clientId}>
+                          {client.businessName}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                    <label style={{ fontSize: '0.8125rem', fontWeight: '700', color: 'var(--imperial-emerald)', textTransform: 'uppercase', letterSpacing: '0.025em' }}>
+                      Reporting Interval
+                    </label>
+                    <select
+                      value={formData.type}
+                      onChange={(e) => handleTypeChange(e.target.value as any)}
+                      style={{ width: '100%', padding: '0.625rem 1rem', borderRadius: '0.75rem', border: '1px solid rgba(0,0,0,0.1)', fontSize: '0.9375rem', background: 'white' }}
+                      required
+                    >
+                      <option value="DAILY">Daily Update</option>
+                      <option value="WEEKLY">Weekly Report</option>
+                      <option value="MONTHLY">Monthly Review</option>
+                      <option value="QUARTERLY">Quarterly Strategy</option>
+                    </select>
+                  </div>
+
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                    <label style={{ fontSize: '0.8125rem', fontWeight: '700', color: 'var(--imperial-emerald)', textTransform: 'uppercase', letterSpacing: '0.025em' }}>
+                      Associated License
+                    </label>
+                    <select
+                      value={formData.licenseId}
+                      onChange={(e) => setFormData({ ...formData, licenseId: e.target.value })}
+                      style={{ width: '100%', padding: '0.625rem 1rem', borderRadius: '0.75rem', border: '1px solid rgba(0,0,0,0.1)', fontSize: '0.9375rem', background: 'white', opacity: !formData.clientId ? 0.6 : 1 }}
+                      disabled={!formData.clientId}
+                    >
+                      <option value="">General Account Report</option>
+                      {formData.clientId && licenses[formData.clientId]?.map((license) => (
+                        <option key={license._id} value={license._id}>
+                          {license.productOrServiceName || license.label}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+
+                {/* Date Range Grid */}
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                    <label style={{ fontSize: '0.8125rem', fontWeight: '700', color: 'var(--imperial-emerald)', textTransform: 'uppercase', letterSpacing: '0.025em' }}>
+                      Period Start
+                    </label>
+                    <div style={{ position: 'relative' }}>
+                      <Calendar size={16} style={{ position: 'absolute', right: '1rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--muted-jade)', pointerEvents: 'none' }} />
+                      <input
+                        type="date"
+                        value={formData.periodStart}
+                        onChange={(e) => setFormData({ ...formData, periodStart: e.target.value })}
+                        style={{ width: '100%', padding: '0.625rem 1rem', borderRadius: '0.75rem', border: '1px solid rgba(0,0,0,0.1)', fontSize: '0.9375rem' }}
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                    <label style={{ fontSize: '0.8125rem', fontWeight: '700', color: 'var(--imperial-emerald)', textTransform: 'uppercase', letterSpacing: '0.025em' }}>
+                      Period End
+                    </label>
+                    <div style={{ position: 'relative' }}>
+                      <Calendar size={16} style={{ position: 'absolute', right: '1rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--muted-jade)', pointerEvents: 'none' }} />
+                      <input
+                        type="date"
+                        value={formData.periodEnd}
+                        onChange={(e) => setFormData({ ...formData, periodEnd: e.target.value })}
+                        style={{ width: '100%', padding: '0.625rem 1rem', borderRadius: '0.75rem', border: '1px solid rgba(0,0,0,0.1)', fontSize: '0.9375rem' }}
+                        required
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                  <label style={{ fontSize: '0.8125rem', fontWeight: '700', color: 'var(--imperial-emerald)', textTransform: 'uppercase', letterSpacing: '0.025em' }}>
+                    Executive Summary
                   </label>
-                  <input
-                    type="number"
-                    min="0"
-                    value={formData.inMailsSent}
-                    onChange={(e) => setFormData({ ...formData, inMailsSent: e.target.value })}
-                    className="input"
-                    placeholder="0"
+                  <textarea
+                    value={formData.summary}
+                    onChange={(e) => setFormData({ ...formData, summary: e.target.value })}
+                    style={{ width: '100%', padding: '0.75rem 1rem', borderRadius: '0.75rem', border: '1px solid rgba(0,0,0,0.1)', fontSize: '0.9375rem', minHeight: '120px', resize: 'vertical' }}
+                    required
+                    placeholder="Highlight achievements, challenges, and core outcomes..."
                   />
                 </div>
-                <div>
-                  <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500', fontSize: '0.875rem' }}>
-                    No. of Positive Response for InMails
-                  </label>
-                  <input
-                    type="number"
-                    min="0"
-                    value={formData.inMailsPositiveResponse}
-                    onChange={(e) => setFormData({ ...formData, inMailsPositiveResponse: e.target.value })}
-                    className="input"
-                    placeholder="0"
-                  />
-                </div>
-                <div>
-                  <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500', fontSize: '0.875rem' }}>
-                    No. of Connection Requests Sent
-                  </label>
-                  <input
-                    type="number"
-                    min="0"
-                    value={formData.connectionRequestsSent}
-                    onChange={(e) => setFormData({ ...formData, connectionRequestsSent: e.target.value })}
-                    className="input"
-                    placeholder="0"
-                  />
-                </div>
-                <div>
-                  <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500', fontSize: '0.875rem' }}>
-                    No. of Positive Response for Connection Requests
-                  </label>
-                  <input
-                    type="number"
-                    min="0"
-                    value={formData.connectionRequestsPositiveResponse}
-                    onChange={(e) => setFormData({ ...formData, connectionRequestsPositiveResponse: e.target.value })}
-                    className="input"
-                    placeholder="0"
-                  />
+
+                {/* LinkedIn Metrics Section */}
+                <div style={{ padding: '1.25rem', background: 'rgba(59, 130, 246, 0.03)', borderRadius: '1rem', border: '1px solid rgba(59, 130, 246, 0.1)' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1.25rem' }}>
+                    <BarChart3 size={18} color="#3b82f6" />
+                    <h3 style={{ fontSize: '0.875rem', fontWeight: '700', color: 'var(--imperial-emerald)', margin: 0, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                      LinkedIn Performance Metrics
+                    </h3>
+                  </div>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.25rem' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.375rem' }}>
+                      <label style={{ fontSize: '0.75rem', fontWeight: '600', color: 'var(--muted-jade)' }}>InMails Sent</label>
+                      <input
+                        type="number"
+                        min="0"
+                        value={formData.inMailsSent}
+                        onChange={(e) => setFormData({ ...formData, inMailsSent: e.target.value })}
+                        style={{ width: '100%', padding: '0.5rem 0.75rem', borderRadius: '0.5rem', border: '1px solid rgba(0,0,0,0.1)', fontSize: '0.875rem' }}
+                        placeholder="0"
+                      />
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.375rem' }}>
+                      <label style={{ fontSize: '0.75rem', fontWeight: '600', color: 'var(--muted-jade)' }}>Positive InMail Responses</label>
+                      <input
+                        type="number"
+                        min="0"
+                        value={formData.inMailsPositiveResponse}
+                        onChange={(e) => setFormData({ ...formData, inMailsPositiveResponse: e.target.value })}
+                        style={{ width: '100%', padding: '0.5rem 0.75rem', borderRadius: '0.5rem', border: '1px solid rgba(0,0,0,0.1)', fontSize: '0.875rem' }}
+                        placeholder="0"
+                      />
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.375rem' }}>
+                      <label style={{ fontSize: '0.75rem', fontWeight: '600', color: 'var(--muted-jade)' }}>Connections Sent</label>
+                      <input
+                        type="number"
+                        min="0"
+                        value={formData.connectionRequestsSent}
+                        onChange={(e) => setFormData({ ...formData, connectionRequestsSent: e.target.value })}
+                        style={{ width: '100%', padding: '0.5rem 0.75rem', borderRadius: '0.5rem', border: '1px solid rgba(0,0,0,0.1)', fontSize: '0.875rem' }}
+                        placeholder="0"
+                      />
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.375rem' }}>
+                      <label style={{ fontSize: '0.75rem', fontWeight: '600', color: 'var(--muted-jade)' }}>Positive Conn. Responses</label>
+                      <input
+                        type="number"
+                        min="0"
+                        value={formData.connectionRequestsPositiveResponse}
+                        onChange={(e) => setFormData({ ...formData, connectionRequestsPositiveResponse: e.target.value })}
+                        style={{ width: '100%', padding: '0.5rem 0.75rem', borderRadius: '0.5rem', border: '1px solid rgba(0,0,0,0.1)', fontSize: '0.875rem' }}
+                        placeholder="0"
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-              <div style={{ display: 'flex', gap: '1rem', marginTop: '1.5rem' }}>
-              <button type="submit" className="btn-primary">
-                Create Report
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  setShowForm(false);
-                  setFormData({
-                    clientId: '',
-                    licenseId: '',
-                    type: 'WEEKLY',
-                    periodStart: '',
-                    periodEnd: '',
-                    summary: '',
-                    metrics: {},
-                      inMailsSent: '',
-                      inMailsPositiveResponse: '',
-                      connectionRequestsSent: '',
-                      connectionRequestsPositiveResponse: '',
-                  });
-                }}
-                className="btn-secondary"
-              >
-                Cancel
-              </button>
-            </div>
-          </form>
+
+              <div style={{ display: 'flex', gap: '1rem', marginTop: '2rem' }}>
+                <button 
+                  type="submit" 
+                  className="btn-primary" 
+                  style={{ flex: 2, padding: '0.75rem', borderRadius: '0.75rem', fontSize: '0.9375rem', fontWeight: '700', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}
+                >
+                  Finalize & Submit Report
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setShowForm(false)}
+                  style={{ flex: 1, padding: '0.75rem', borderRadius: '0.75rem', fontSize: '0.9375rem', fontWeight: '600', background: '#f1f5f9', color: '#64748b', border: 'none', cursor: 'pointer' }}
+                >
+                  Discard
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       )}
 
-      <div className="card" style={{ padding: '1.5rem' }}>
-        <ReportsTable refreshTrigger={refreshTrigger} />
+      <div className="card" style={{ padding: '0', borderRadius: '1rem', background: 'white', boxShadow: '0 4px 6px rgba(0, 0, 0, 0.05)', border: '1px solid rgba(196, 183, 91, 0.2)', overflow: 'hidden' }}>
+        <div style={{ padding: '1.25rem 1.5rem', background: 'rgba(196, 183, 91, 0.05)', borderBottom: '1px solid rgba(196, 183, 91, 0.15)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <ShieldCheck size={18} color="var(--imperial-emerald)" />
+          <h3 style={{ fontSize: '1rem', fontWeight: '700', color: 'var(--imperial-emerald)', margin: 0 }}>
+            Published Reports Archive
+          </h3>
+        </div>
+        <div style={{ padding: '1rem' }}>
+          <ReportsTable refreshTrigger={refreshTrigger} />
+        </div>
       </div>
     </div>
   );

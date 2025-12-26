@@ -1,9 +1,14 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import LogoComponent from '@/components/LogoComponent';
-import { Download, FileText, CheckCircle, XCircle, Calendar, DollarSign, Search, Filter, RefreshCw } from 'lucide-react';
+import { 
+  Download, FileText, CheckCircle, XCircle, Calendar, 
+  DollarSign, Search, Filter, RefreshCw, ChevronRight, 
+  Plus, Building2, AlertCircle, FileCheck, Clock, TrendingUp,
+  MoreVertical, CheckCircle2, ChevronDown, Activity, Trash2, X
+} from 'lucide-react';
 
 interface Invoice {
   _id: string;
@@ -59,10 +64,47 @@ export default function InvoicesPage() {
   const [selectedInvoices, setSelectedInvoices] = useState<Set<string>>(new Set());
   const [bulkActionLoading, setBulkActionLoading] = useState(false);
 
+  const fetchInvoices = useCallback(async () => {
+    try {
+      setLoading(true);
+      setError('');
+      const response = await fetch('/api/admin/invoices');
+      if (!response.ok) {
+        if (response.status === 401 || response.status === 403) {
+          router.push('/login');
+          return;
+        }
+        throw new Error('Failed to fetch invoices');
+      }
+      const data = await response.json();
+      console.log('[Invoices Page] Fetched invoices:', data.invoices?.length || 0);
+      setInvoices(data.invoices || []);
+      setFilteredInvoices(data.invoices || []);
+      calculateSummary(data.invoices || []);
+    } catch (err: any) {
+      console.error('[Invoices Page] Error fetching invoices:', err);
+      setError(err.message || 'Failed to load invoices');
+    } finally {
+      setLoading(false);
+    }
+  }, [router]);
+
+  const fetchClients = useCallback(async () => {
+    try {
+      const response = await fetch('/api/admin/clients');
+      if (response.ok) {
+        const data = await response.json();
+        setClients(data.clients || []);
+      }
+    } catch (err) {
+      console.error('Failed to fetch clients:', err);
+    }
+  }, []);
+
   useEffect(() => {
     fetchInvoices();
     fetchClients();
-  }, []);
+  }, [fetchInvoices, fetchClients]);
 
   // Refetch invoices when page becomes visible (user navigates back to page)
   useEffect(() => {
@@ -76,7 +118,7 @@ export default function InvoicesPage() {
     return () => {
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
-  }, []);
+  }, [fetchInvoices]);
 
   // Apply filters
   useEffect(() => {
@@ -137,42 +179,6 @@ export default function InvoicesPage() {
     calculateSummary(filtered);
   }, [statusFilter, clientFilter, dateFrom, dateTo, amountMin, amountMax, searchTerm, invoices]);
 
-  const fetchInvoices = async () => {
-    try {
-      setLoading(true);
-      setError('');
-      const response = await fetch('/api/admin/invoices');
-      if (!response.ok) {
-        if (response.status === 401 || response.status === 403) {
-          router.push('/login');
-          return;
-        }
-        throw new Error('Failed to fetch invoices');
-      }
-      const data = await response.json();
-      console.log('[Invoices Page] Fetched invoices:', data.invoices?.length || 0);
-      setInvoices(data.invoices || []);
-      setFilteredInvoices(data.invoices || []);
-      calculateSummary(data.invoices || []);
-    } catch (err: any) {
-      console.error('[Invoices Page] Error fetching invoices:', err);
-      setError(err.message || 'Failed to load invoices');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const fetchClients = async () => {
-    try {
-      const response = await fetch('/api/admin/clients');
-      if (response.ok) {
-        const data = await response.json();
-        setClients(data.clients || []);
-      }
-    } catch (err) {
-      console.error('Failed to fetch clients:', err);
-    }
-  };
 
   const calculateSummary = (invoiceList: Invoice[]) => {
     const total = invoiceList.length;
@@ -360,16 +366,39 @@ export default function InvoicesPage() {
   }
 
   return (
-    <div style={{ padding: '2rem' }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem' }}>
-        <LogoComponent width={48} height={26} hoverGradient={true} />
-        <div style={{ flex: 1 }}>
-          <h1 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '0.25rem', color: 'var(--imperial-emerald)' }}>
-            Invoice Management
-          </h1>
-          <p style={{ color: 'var(--muted-jade)', fontSize: '0.875rem' }}>
-            View and manage all invoices across all clients
-          </p>
+    <div style={{ 
+      minHeight: '100vh',
+      background: 'linear-gradient(135deg, var(--ivory-silk) 0%, #f0ede8 100%)',
+      padding: '1.5rem'
+    }}>
+      <div style={{ 
+        display: 'flex', 
+        alignItems: 'center', 
+        justifyContent: 'space-between',
+        gap: '1rem', 
+        marginBottom: '2rem',
+        background: 'white',
+        padding: '1.25rem 1.5rem',
+        borderRadius: '1rem',
+        boxShadow: '0 2px 12px rgba(11, 46, 43, 0.04)',
+        border: '1px solid rgba(196, 183, 91, 0.15)'
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
+          <LogoComponent width={42} height={24} hoverGradient={true} />
+          <div>
+            <h1 style={{ 
+              fontSize: '1.75rem', 
+              fontWeight: '800', 
+              color: 'var(--imperial-emerald)',
+              letterSpacing: '-0.02em',
+              lineHeight: 1.2
+            }}>
+              Billing & Ledger
+            </h1>
+            <p style={{ color: 'var(--muted-jade)', fontSize: '0.875rem', fontWeight: '500' }}>
+              Financial oversight and invoice lifecycle management
+            </p>
+          </div>
         </div>
         <button
           onClick={() => {
@@ -377,125 +406,288 @@ export default function InvoicesPage() {
             fetchClients();
           }}
           className="btn-secondary"
-          style={{ whiteSpace: 'nowrap', display: 'flex', alignItems: 'center', gap: '0.5rem' }}
+          style={{ 
+            whiteSpace: 'nowrap', 
+            display: 'flex', 
+            alignItems: 'center', 
+            gap: '0.5rem',
+            padding: '0.625rem 1.25rem',
+            borderRadius: '0.75rem',
+            fontSize: '0.875rem',
+            fontWeight: '600'
+          }}
           title="Refresh invoices list"
         >
-          <RefreshCw size={16} />
-          Refresh
+          <RefreshCw size={16} className={loading ? 'animate-spin' : ''} />
+          Synchronize
         </button>
       </div>
 
       {error && (
-        <div className="card" style={{ background: '#fee2e2', color: '#dc2626', marginBottom: '1rem' }}>
-          {error}
+        <div style={{ 
+          background: '#fee2e2', 
+          color: '#dc2626', 
+          padding: '1rem 1.25rem',
+          borderRadius: '0.75rem',
+          marginBottom: '1.5rem',
+          border: '1px solid #fecaca',
+          fontSize: '0.875rem',
+          fontWeight: '500',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '0.75rem',
+          position: 'relative'
+        }}>
+          <AlertCircle size={18} />
+          <div style={{ flex: 1 }}>{error}</div>
           <button
             onClick={() => setError('')}
-            style={{ marginLeft: '1rem', background: 'transparent', border: 'none', color: '#dc2626', cursor: 'pointer' }}
+            style={{ background: 'transparent', border: 'none', color: '#dc2626', cursor: 'pointer', padding: '0.25rem' }}
           >
-            ×
+            <X size={18} />
           </button>
         </div>
       )}
 
       {/* Summary Cards */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginBottom: '1.5rem' }}>
-        <div className="card" style={{ padding: '1.5rem' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
-            <FileText size={24} color="var(--imperial-emerald)" />
-            <div style={{ color: 'var(--muted-jade)', fontSize: '0.875rem' }}>Total Invoices</div>
+      <div style={{ 
+        display: 'grid', 
+        gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', 
+        gap: '1rem', 
+        marginBottom: '2rem' 
+      }}>
+        <div style={{ 
+          background: 'white',
+          padding: '1.25rem',
+          borderRadius: '1rem',
+          border: '1px solid rgba(196, 183, 91, 0.15)',
+          boxShadow: '0 2px 8px rgba(0,0,0,0.02)',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '1rem'
+        }}>
+          <div style={{ 
+            width: '42px', 
+            height: '42px', 
+            borderRadius: '10px', 
+            background: 'rgba(11, 46, 43, 0.05)', 
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'center',
+            color: 'var(--imperial-emerald)'
+          }}>
+            <FileText size={20} />
           </div>
-          <div style={{ fontSize: '2rem', fontWeight: 'bold', color: 'var(--imperial-emerald)' }}>
-            {summary.totalInvoices}
-          </div>
-        </div>
-        <div className="card" style={{ padding: '1.5rem' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
-            <DollarSign size={24} color="var(--imperial-emerald)" />
-            <div style={{ color: 'var(--muted-jade)', fontSize: '0.875rem' }}>Total Amount</div>
-          </div>
-          <div style={{ fontSize: '2rem', fontWeight: 'bold', color: 'var(--imperial-emerald)' }}>
-            ${summary.totalAmount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-          </div>
-        </div>
-        <div className="card" style={{ padding: '1.5rem' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
-            <CheckCircle size={24} color="#10b981" />
-            <div style={{ color: 'var(--muted-jade)', fontSize: '0.875rem' }}>Paid Amount</div>
-          </div>
-          <div style={{ fontSize: '2rem', fontWeight: 'bold', color: '#10b981' }}>
-            ${summary.paidAmount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-          </div>
-        </div>
-        <div className="card" style={{ padding: '1.5rem' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
-            <DollarSign size={24} color="#f59e0b" />
-            <div style={{ color: 'var(--muted-jade)', fontSize: '0.875rem' }}>Outstanding</div>
-          </div>
-          <div style={{ fontSize: '2rem', fontWeight: 'bold', color: '#f59e0b' }}>
-            ${summary.outstandingAmount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+          <div>
+            <div style={{ color: 'var(--muted-jade)', fontSize: '0.75rem', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.25rem' }}>Total Invoices</div>
+            <div style={{ fontSize: '1.5rem', fontWeight: '800', color: 'var(--imperial-emerald)' }}>{summary.totalInvoices}</div>
           </div>
         </div>
-        <div className="card" style={{ padding: '1.5rem' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
-            <XCircle size={24} color="#ef4444" />
-            <div style={{ color: 'var(--muted-jade)', fontSize: '0.875rem' }}>Overdue</div>
+
+        <div style={{ 
+          background: 'white',
+          padding: '1.25rem',
+          borderRadius: '1rem',
+          border: '1px solid rgba(196, 183, 91, 0.15)',
+          boxShadow: '0 2px 8px rgba(0,0,0,0.02)',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '1rem'
+        }}>
+          <div style={{ 
+            width: '42px', 
+            height: '42px', 
+            borderRadius: '10px', 
+            background: 'rgba(11, 46, 43, 0.05)', 
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'center',
+            color: 'var(--imperial-emerald)'
+          }}>
+            <TrendingUp size={20} />
           </div>
-          <div style={{ fontSize: '2rem', fontWeight: 'bold', color: '#ef4444' }}>
-            {summary.overdueCount}
+          <div>
+            <div style={{ color: 'var(--muted-jade)', fontSize: '0.75rem', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.25rem' }}>Total Volume</div>
+            <div style={{ fontSize: '1.5rem', fontWeight: '800', color: 'var(--imperial-emerald)' }}>
+              ${summary.totalAmount.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+            </div>
+          </div>
+        </div>
+
+        <div style={{ 
+          background: 'white',
+          padding: '1.25rem',
+          borderRadius: '1rem',
+          border: '1px solid rgba(196, 183, 91, 0.15)',
+          boxShadow: '0 2px 8px rgba(0,0,0,0.02)',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '1rem'
+        }}>
+          <div style={{ 
+            width: '42px', 
+            height: '42px', 
+            borderRadius: '10px', 
+            background: 'rgba(16, 185, 129, 0.1)', 
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'center',
+            color: '#10b981'
+          }}>
+            <CheckCircle2 size={20} />
+          </div>
+          <div>
+            <div style={{ color: 'var(--muted-jade)', fontSize: '0.75rem', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.25rem' }}>Paid to Date</div>
+            <div style={{ fontSize: '1.5rem', fontWeight: '800', color: '#10b981' }}>
+              ${summary.paidAmount.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+            </div>
+          </div>
+        </div>
+
+        <div style={{ 
+          background: 'white',
+          padding: '1.25rem',
+          borderRadius: '1rem',
+          border: '1px solid rgba(196, 183, 91, 0.15)',
+          boxShadow: '0 2px 8px rgba(0,0,0,0.02)',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '1rem'
+        }}>
+          <div style={{ 
+            width: '42px', 
+            height: '42px', 
+            borderRadius: '10px', 
+            background: 'rgba(245, 158, 11, 0.1)', 
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'center',
+            color: '#f59e0b'
+          }}>
+            <Clock size={20} />
+          </div>
+          <div>
+            <div style={{ color: 'var(--muted-jade)', fontSize: '0.75rem', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.25rem' }}>Outstanding</div>
+            <div style={{ fontSize: '1.5rem', fontWeight: '800', color: '#f59e0b' }}>
+              ${summary.outstandingAmount.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+            </div>
+          </div>
+        </div>
+
+        <div style={{ 
+          background: 'white',
+          padding: '1.25rem',
+          borderRadius: '1rem',
+          border: '1px solid rgba(196, 183, 91, 0.15)',
+          boxShadow: '0 2px 8px rgba(0,0,0,0.02)',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '1rem'
+        }}>
+          <div style={{ 
+            width: '42px', 
+            height: '42px', 
+            borderRadius: '10px', 
+            background: 'rgba(239, 68, 68, 0.1)', 
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'center',
+            color: '#ef4444'
+          }}>
+            <AlertCircle size={20} />
+          </div>
+          <div>
+            <div style={{ color: 'var(--muted-jade)', fontSize: '0.75rem', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.25rem' }}>Overdue</div>
+            <div style={{ fontSize: '1.5rem', fontWeight: '800', color: '#ef4444' }}>{summary.overdueCount}</div>
           </div>
         </div>
       </div>
 
       {/* Filters */}
-      <div className="card" style={{ marginBottom: '1.5rem', padding: '1rem' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem' }}>
-          <Filter size={20} color="var(--imperial-emerald)" />
-          <h3 style={{ fontSize: '1rem', fontWeight: '600', color: 'var(--imperial-emerald)' }}>Filters</h3>
+      <div style={{ 
+        background: 'white', 
+        padding: '1.25rem', 
+        borderRadius: '1rem', 
+        border: '1px solid rgba(196, 183, 91, 0.15)',
+        boxShadow: '0 4px 12px rgba(11, 46, 43, 0.03)',
+        marginBottom: '1.5rem'
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1.25rem' }}>
+          <Filter size={18} color="var(--imperial-emerald)" />
+          <h3 style={{ fontSize: '0.9375rem', fontWeight: '750', color: 'var(--imperial-emerald)' }}>Advanced Filters</h3>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '0.75rem', marginBottom: '1rem' }}>
+        
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem', marginBottom: '1.25rem' }}>
           <div>
-            <label style={{ display: 'block', marginBottom: '0.25rem', fontSize: '0.75rem', fontWeight: '500', color: 'var(--imperial-emerald)' }}>
+            <label style={{ display: 'block', marginBottom: '0.375rem', fontSize: '0.75rem', fontWeight: '700', color: 'var(--imperial-emerald)', textTransform: 'uppercase' }}>
               Search
             </label>
             <div style={{ position: 'relative' }}>
-              <Search size={14} style={{ position: 'absolute', left: '0.5rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--muted-jade)' }} />
+              <Search size={14} style={{ position: 'absolute', left: '0.75rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--muted-jade)' }} />
               <input
                 type="text"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                placeholder="Invoice #, client..."
-                className="input"
-                style={{ paddingLeft: '2rem', width: '100%', fontSize: '0.75rem', padding: '0.4rem 0.5rem 0.4rem 2rem' }}
+                placeholder="Invoice # or client..."
+                style={{ 
+                  width: '100%', 
+                  padding: '0.625rem 0.75rem 0.625rem 2.25rem',
+                  borderRadius: '0.75rem',
+                  border: '1px solid rgba(11, 46, 43, 0.1)',
+                  fontSize: '0.8125rem',
+                  fontWeight: '500',
+                  background: 'rgba(11, 46, 43, 0.01)'
+                }}
               />
             </div>
           </div>
+          
           <div>
-            <label style={{ display: 'block', marginBottom: '0.25rem', fontSize: '0.75rem', fontWeight: '500', color: 'var(--imperial-emerald)' }}>
+            <label style={{ display: 'block', marginBottom: '0.375rem', fontSize: '0.75rem', fontWeight: '700', color: 'var(--imperial-emerald)', textTransform: 'uppercase' }}>
               Status
             </label>
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="input"
-              style={{ width: '100%', fontSize: '0.75rem', padding: '0.4rem 0.5rem' }}
+              style={{ 
+                width: '100%', 
+                padding: '0.625rem 0.75rem',
+                borderRadius: '0.75rem',
+                border: '1px solid rgba(11, 46, 43, 0.1)',
+                fontSize: '0.8125rem',
+                fontWeight: '600',
+                color: 'var(--imperial-emerald)',
+                background: 'white',
+                cursor: 'pointer'
+              }}
             >
-              <option value="">All</option>
+              <option value="">All Statuses</option>
               <option value="GENERATED">Generated</option>
               <option value="PAID">Paid</option>
               <option value="OVERDUE">Overdue</option>
             </select>
           </div>
+
           <div>
-            <label style={{ display: 'block', marginBottom: '0.25rem', fontSize: '0.75rem', fontWeight: '500', color: 'var(--imperial-emerald)' }}>
+            <label style={{ display: 'block', marginBottom: '0.375rem', fontSize: '0.75rem', fontWeight: '700', color: 'var(--imperial-emerald)', textTransform: 'uppercase' }}>
               Client
             </label>
             <select
               value={clientFilter}
               onChange={(e) => setClientFilter(e.target.value)}
-              className="input"
-              style={{ width: '100%', fontSize: '0.75rem', padding: '0.4rem 0.5rem' }}
+              style={{ 
+                width: '100%', 
+                padding: '0.625rem 0.75rem',
+                borderRadius: '0.75rem',
+                border: '1px solid rgba(11, 46, 43, 0.1)',
+                fontSize: '0.8125rem',
+                fontWeight: '600',
+                color: 'var(--imperial-emerald)',
+                background: 'white',
+                cursor: 'pointer'
+              }}
             >
-              <option value="">All</option>
+              <option value="">All Clients</option>
               {clients.map((client) => (
                 <option key={client._id} value={client._id}>
                   {client.businessName}
@@ -503,272 +695,329 @@ export default function InvoicesPage() {
               ))}
             </select>
           </div>
+
           <div>
-            <label style={{ display: 'block', marginBottom: '0.25rem', fontSize: '0.75rem', fontWeight: '500', color: 'var(--imperial-emerald)' }}>
-              From
+            <label style={{ display: 'block', marginBottom: '0.375rem', fontSize: '0.75rem', fontWeight: '700', color: 'var(--imperial-emerald)', textTransform: 'uppercase' }}>
+              Date Range
             </label>
-            <input
-              type="date"
-              value={dateFrom}
-              onChange={(e) => setDateFrom(e.target.value)}
-              className="input"
-              style={{ width: '100%', fontSize: '0.75rem', padding: '0.4rem 0.5rem' }}
-            />
+            <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+              <input
+                type="date"
+                value={dateFrom}
+                onChange={(e) => setDateFrom(e.target.value)}
+                style={{ 
+                  width: '100%', 
+                  padding: '0.625rem 0.75rem',
+                  borderRadius: '0.75rem',
+                  border: '1px solid rgba(11, 46, 43, 0.1)',
+                  fontSize: '0.75rem',
+                  fontWeight: '500'
+                }}
+              />
+              <span style={{ color: 'var(--muted-jade)', fontWeight: '700' }}>-</span>
+              <input
+                type="date"
+                value={dateTo}
+                onChange={(e) => setDateTo(e.target.value)}
+                style={{ 
+                  width: '100%', 
+                  padding: '0.625rem 0.75rem',
+                  borderRadius: '0.75rem',
+                  border: '1px solid rgba(11, 46, 43, 0.1)',
+                  fontSize: '0.75rem',
+                  fontWeight: '500'
+                }}
+              />
+            </div>
           </div>
+
           <div>
-            <label style={{ display: 'block', marginBottom: '0.25rem', fontSize: '0.75rem', fontWeight: '500', color: 'var(--imperial-emerald)' }}>
-              To
+            <label style={{ display: 'block', marginBottom: '0.375rem', fontSize: '0.75rem', fontWeight: '700', color: 'var(--imperial-emerald)', textTransform: 'uppercase' }}>
+              Amount Range
             </label>
-            <input
-              type="date"
-              value={dateTo}
-              onChange={(e) => setDateTo(e.target.value)}
-              className="input"
-              style={{ width: '100%', fontSize: '0.75rem', padding: '0.4rem 0.5rem' }}
-            />
-          </div>
-          <div>
-            <label style={{ display: 'block', marginBottom: '0.25rem', fontSize: '0.75rem', fontWeight: '500', color: 'var(--imperial-emerald)' }}>
-              Min $
-            </label>
-            <input
-              type="number"
-              value={amountMin}
-              onChange={(e) => setAmountMin(e.target.value)}
-              placeholder="0"
-              className="input"
-              style={{ width: '100%', fontSize: '0.75rem', padding: '0.4rem 0.5rem' }}
-              step="0.01"
-              min="0"
-            />
-          </div>
-          <div>
-            <label style={{ display: 'block', marginBottom: '0.25rem', fontSize: '0.75rem', fontWeight: '500', color: 'var(--imperial-emerald)' }}>
-              Max $
-            </label>
-            <input
-              type="number"
-              value={amountMax}
-              onChange={(e) => setAmountMax(e.target.value)}
-              placeholder="0"
-              className="input"
-              style={{ width: '100%', fontSize: '0.75rem', padding: '0.4rem 0.5rem' }}
-              step="0.01"
-              min="0"
-            />
+            <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+              <input
+                type="number"
+                value={amountMin}
+                onChange={(e) => setAmountMin(e.target.value)}
+                placeholder="Min"
+                style={{ 
+                  width: '100%', 
+                  padding: '0.625rem 0.75rem',
+                  borderRadius: '0.75rem',
+                  border: '1px solid rgba(11, 46, 43, 0.1)',
+                  fontSize: '0.8125rem',
+                  fontWeight: '500'
+                }}
+              />
+              <span style={{ color: 'var(--muted-jade)', fontWeight: '700' }}>-</span>
+              <input
+                type="number"
+                value={amountMax}
+                onChange={(e) => setAmountMax(e.target.value)}
+                placeholder="Max"
+                style={{ 
+                  width: '100%', 
+                  padding: '0.625rem 0.75rem',
+                  borderRadius: '0.75rem',
+                  border: '1px solid rgba(11, 46, 43, 0.1)',
+                  fontSize: '0.8125rem',
+                  fontWeight: '500'
+                }}
+              />
+            </div>
           </div>
         </div>
-        <button
-          onClick={clearFilters}
-          className="btn-secondary"
-          style={{ fontSize: '0.75rem', padding: '0.4rem 0.75rem', whiteSpace: 'nowrap' }}
-        >
-          Clear
-        </button>
+        
+        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <button
+            onClick={clearFilters}
+            style={{ 
+              fontSize: '0.8125rem', 
+              padding: '0.5rem 1.25rem', 
+              background: 'transparent',
+              border: '1px solid rgba(11, 46, 43, 0.1)',
+              borderRadius: '0.5rem',
+              color: 'var(--muted-jade)',
+              fontWeight: '700',
+              cursor: 'pointer',
+              transition: 'all 0.2s ease'
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(11, 46, 43, 0.03)'}
+            onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
+          >
+            Reset Filters
+          </button>
+        </div>
       </div>
 
       {/* Bulk Actions */}
       {selectedInvoices.size > 0 && (
-        <div className="card" style={{ marginBottom: '1.5rem', padding: '1rem', background: 'rgba(196, 183, 91, 0.1)', border: '2px solid var(--golden-opal)' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
-            <span style={{ fontWeight: '600', color: 'var(--imperial-emerald)' }}>
-              {selectedInvoices.size} invoice(s) selected
+        <div style={{ 
+          marginBottom: '1.5rem', 
+          padding: '1rem 1.5rem', 
+          background: 'var(--imperial-emerald)', 
+          borderRadius: '1rem',
+          boxShadow: '0 8px 24px rgba(11, 46, 43, 0.15)',
+          display: 'flex', 
+          alignItems: 'center', 
+          justifyContent: 'space-between'
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+            <div style={{ 
+              width: '32px', 
+              height: '32px', 
+              borderRadius: '50%', 
+              background: 'rgba(255,255,255,0.1)', 
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'center',
+              color: 'white',
+              fontSize: '0.875rem',
+              fontWeight: '800'
+            }}>
+              {selectedInvoices.size}
+            </div>
+            <span style={{ fontWeight: '700', color: 'white', fontSize: '0.9375rem' }}>
+              Selected for bulk action
             </span>
+          </div>
+          
+          <div style={{ display: 'flex', gap: '0.75rem' }}>
             <button
               onClick={handleBulkMarkPaid}
               disabled={bulkActionLoading}
-              className="btn-primary"
-              style={{ fontSize: '0.875rem', padding: '0.5rem 1rem' }}
+              style={{ 
+                fontSize: '0.8125rem', 
+                padding: '0.5rem 1rem',
+                borderRadius: '0.5rem',
+                background: '#10b981',
+                color: 'white',
+                border: 'none',
+                fontWeight: '700',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.375rem'
+              }}
             >
-              {bulkActionLoading ? 'Processing...' : 'Mark as Paid'}
+              <CheckCircle size={14} />
+              {bulkActionLoading ? 'Processing...' : 'Mark Paid'}
             </button>
             <button
               onClick={handleBulkDownload}
               disabled={bulkActionLoading}
-              className="btn-secondary"
-              style={{ fontSize: '0.875rem', padding: '0.5rem 1rem' }}
+              style={{ 
+                fontSize: '0.8125rem', 
+                padding: '0.5rem 1rem',
+                borderRadius: '0.5rem',
+                background: 'rgba(255,255,255,0.1)',
+                color: 'white',
+                border: '1px solid rgba(255,255,255,0.2)',
+                fontWeight: '700',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.375rem'
+              }}
             >
-              {bulkActionLoading ? 'Processing...' : 'Download Selected'}
+              <Download size={14} />
+              {bulkActionLoading ? 'Preparing...' : 'Download PDFs'}
             </button>
             <button
               onClick={() => setSelectedInvoices(new Set())}
-              className="btn-secondary"
-              style={{ fontSize: '0.875rem', padding: '0.5rem 1rem' }}
-            >
-              Clear Selection
-            </button>
-            <button
-              onClick={async () => {
-                try {
-                  setBulkActionLoading(true);
-                  // Build query params from current filters
-                  const params = new URLSearchParams();
-                  if (statusFilter) params.set('status', statusFilter);
-                  if (clientFilter) params.set('clientId', clientFilter);
-                  if (dateFrom) params.set('dateFrom', dateFrom);
-                  if (dateTo) params.set('dateTo', dateTo);
-
-                  const response = await fetch(`/api/admin/invoices/export/excel?${params.toString()}`);
-                  if (!response.ok) {
-                    const data = await response.json();
-                    throw new Error(data.error || 'Failed to export invoices');
-                  }
-
-                  const blob = await response.blob();
-                  const url = window.URL.createObjectURL(blob);
-                  const a = document.createElement('a');
-                  a.href = url;
-                  a.download = `invoices-export-${new Date().toISOString().split('T')[0]}.xlsx`;
-                  document.body.appendChild(a);
-                  a.click();
-                  window.URL.revokeObjectURL(url);
-                  document.body.removeChild(a);
-                  alert('Invoices exported to Excel successfully!');
-                } catch (err: any) {
-                  setError(err.message || 'Failed to export invoices to Excel');
-                } finally {
-                  setBulkActionLoading(false);
-                }
+              style={{ 
+                fontSize: '0.8125rem', 
+                padding: '0.5rem 1rem',
+                borderRadius: '0.5rem',
+                background: 'transparent',
+                color: 'rgba(255,255,255,0.7)',
+                border: 'none',
+                fontWeight: '600',
+                cursor: 'pointer'
               }}
-              disabled={bulkActionLoading}
-              className="btn-primary"
-              style={{ fontSize: '0.875rem', padding: '0.5rem 1rem' }}
             >
-              {bulkActionLoading ? 'Exporting...' : 'Download All as Excel'}
+              Cancel
             </button>
           </div>
         </div>
       )}
 
       {/* Invoice Table */}
-      <div className="card" style={{ padding: '0' }}>
-        <div style={{ 
-          padding: '1.5rem', 
-          borderBottom: '2px solid rgba(196, 183, 91, 0.3)',
-          background: 'linear-gradient(135deg, rgba(196, 183, 91, 0.1) 0%, rgba(196, 183, 91, 0.05) 100%)'
-        }}>
-          <h2 style={{ fontSize: '1.5rem', marginBottom: '0.25rem', color: 'var(--imperial-emerald)', fontWeight: '600' }}>
-            All Invoices
-          </h2>
-          <p style={{ color: 'var(--muted-jade)', fontSize: '0.875rem' }}>
-            {filteredInvoices.length} {filteredInvoices.length === 1 ? 'invoice' : 'invoices'} {statusFilter || clientFilter || searchTerm ? '(filtered)' : 'total'}
-          </p>
-        </div>
-        {filteredInvoices.length === 0 ? (
-          <div style={{ textAlign: 'center', padding: '3rem' }}>
-            <p style={{ color: 'var(--muted-jade)', fontSize: '1rem' }}>
-              {invoices.length === 0 ? 'No invoices found. Generate invoices from the Clients page.' : 'No invoices match the selected filters.'}
+      <div style={{ 
+        background: 'white', 
+        borderRadius: '1.25rem', 
+        border: '1px solid rgba(196, 183, 91, 0.15)',
+        boxShadow: '0 4px 24px rgba(11, 46, 43, 0.04)',
+        overflow: 'hidden',
+        marginBottom: '2rem'
+      }}>
+        <div
+          style={{
+            padding: '1.5rem',
+            borderBottom: '1px solid rgba(196, 183, 91, 0.1)',
+            background: 'linear-gradient(to right, rgba(196, 183, 91, 0.05), transparent)',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center'
+          }}
+        >
+          <div>
+            <h2 style={{ fontSize: '1.25rem', color: 'var(--imperial-emerald)', fontWeight: '750', letterSpacing: '-0.01em' }}>
+              Accounts Ledger
+            </h2>
+            <p style={{ color: 'var(--muted-jade)', fontSize: '0.8125rem', fontWeight: '500', marginTop: '0.25rem' }}>
+              {filteredInvoices.length} transactions match current criteria
             </p>
+          </div>
+          <button
+            onClick={async () => {
+              try {
+                setBulkActionLoading(true);
+                const params = new URLSearchParams();
+                if (statusFilter) params.set('status', statusFilter);
+                if (clientFilter) params.set('clientId', clientFilter);
+                if (dateFrom) params.set('dateFrom', dateFrom);
+                if (dateTo) params.set('dateTo', dateTo);
+
+                const response = await fetch(`/api/admin/invoices/export/excel?${params.toString()}`);
+                if (!response.ok) throw new Error('Export failed');
+
+                const blob = await response.blob();
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `ledger-export-${new Date().toISOString().split('T')[0]}.xlsx`;
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+                document.body.removeChild(a);
+              } catch (err: any) {
+                setError(err.message || 'Failed to export');
+              } finally {
+                setBulkActionLoading(false);
+              }
+            }}
+            disabled={bulkActionLoading || filteredInvoices.length === 0}
+            style={{
+              padding: '0.5rem 1rem',
+              borderRadius: '0.625rem',
+              border: '1px solid rgba(196, 183, 91, 0.3)',
+              background: 'white',
+              color: 'var(--imperial-emerald)',
+              fontSize: '0.8125rem',
+              fontWeight: '750',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+              transition: 'all 0.2s ease',
+              opacity: filteredInvoices.length === 0 ? 0.5 : 1
+            }}
+            onMouseEnter={(e) => { if (filteredInvoices.length > 0) e.currentTarget.style.background = 'rgba(196, 183, 91, 0.05)'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.background = 'white'; }}
+          >
+            <Download size={14} />
+            Export Ledger
+          </button>
+        </div>
+
+        {filteredInvoices.length === 0 ? (
+          <div style={{ textAlign: 'center', padding: '4rem 2rem' }}>
+            <div style={{ 
+              width: '64px', 
+              height: '64px', 
+              background: 'rgba(11, 46, 43, 0.03)', 
+              borderRadius: '50%', 
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'center',
+              margin: '0 auto 1.5rem',
+              color: 'var(--muted-jade)'
+            }}>
+              <FileText size={32} />
+            </div>
+            <p style={{ color: 'var(--muted-jade)', marginBottom: '1.5rem', fontSize: '1rem', fontWeight: '500' }}>
+              {invoices.length === 0 ? 'No invoices registered in the system yet.' : 'No invoices match your active filters.'}
+            </p>
+            {invoices.length > 0 && (
+              <button onClick={clearFilters} className="btn-primary">Clear all filters</button>
+            )}
           </div>
         ) : (
           <div style={{ overflowX: 'auto' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse' }}>
               <thead>
-                <tr style={{ 
-                  background: 'rgba(11, 46, 43, 0.05)',
-                  borderBottom: '2px solid rgba(196, 183, 91, 0.3)'
-                }}>
-                  <th style={{ padding: '1rem', textAlign: 'left', width: '40px' }}>
+                <tr style={{ background: 'rgba(11, 46, 43, 0.02)' }}>
+                  <th style={{ padding: '1.125rem 1.25rem', textAlign: 'left', width: '40px', borderBottom: '1px solid rgba(196, 183, 91, 0.15)' }}>
                     <input
                       type="checkbox"
                       checked={selectedInvoices.size === filteredInvoices.length && filteredInvoices.length > 0}
                       onChange={toggleSelectAll}
-                      style={{ cursor: 'pointer' }}
+                      style={{ cursor: 'pointer', width: '16px', height: '16px', accentColor: 'var(--imperial-emerald)' }}
                     />
                   </th>
-                  <th style={{ 
-                    padding: '1rem', 
-                    textAlign: 'left', 
-                    fontWeight: '600', 
-                    color: 'var(--imperial-emerald)',
-                    fontSize: '0.875rem',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.05em'
-                  }}>
-                    Invoice #
-                  </th>
-                  <th style={{ 
-                    padding: '1rem', 
-                    textAlign: 'left', 
-                    fontWeight: '600', 
-                    color: 'var(--imperial-emerald)',
-                    fontSize: '0.875rem',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.05em'
-                  }}>
-                    Client
-                  </th>
-                  <th style={{ 
-                    padding: '1rem', 
-                    textAlign: 'left', 
-                    fontWeight: '600', 
-                    color: 'var(--imperial-emerald)',
-                    fontSize: '0.875rem',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.05em'
-                  }}>
-                    Invoice Date
-                  </th>
-                  <th style={{ 
-                    padding: '1rem', 
-                    textAlign: 'left', 
-                    fontWeight: '600', 
-                    color: 'var(--imperial-emerald)',
-                    fontSize: '0.875rem',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.05em'
-                  }}>
-                    Due Date
-                  </th>
-                  <th style={{ 
-                    padding: '1rem', 
-                    textAlign: 'right', 
-                    fontWeight: '600', 
-                    color: 'var(--imperial-emerald)',
-                    fontSize: '0.875rem',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.05em'
-                  }}>
-                    Amount
-                  </th>
-                  <th style={{ 
-                    padding: '1rem', 
-                    textAlign: 'center', 
-                    fontWeight: '600', 
-                    color: 'var(--imperial-emerald)',
-                    fontSize: '0.875rem',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.05em'
-                  }}>
-                    Status
-                  </th>
-                  <th style={{ 
-                    padding: '1rem', 
-                    textAlign: 'left', 
-                    fontWeight: '600', 
-                    color: 'var(--imperial-emerald)',
-                    fontSize: '0.875rem',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.05em'
-                  }}>
-                    Payment Date
-                  </th>
-                  <th style={{ 
-                    padding: '1rem', 
-                    textAlign: 'center', 
-                    fontWeight: '600', 
-                    color: 'var(--imperial-emerald)',
-                    fontSize: '0.875rem',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.05em'
-                  }}>
-                    Actions
-                  </th>
+                  {['Invoice Details', 'Client', 'Billing Dates', 'Net Amount', 'Payment Status', 'Actions'].map((header) => (
+                    <th
+                      key={header}
+                      style={{
+                        padding: '1.125rem 1.25rem',
+                        textAlign: header === 'Net Amount' ? 'right' : header === 'Actions' ? 'center' : 'left',
+                        fontWeight: '700',
+                        color: 'var(--muted-jade)',
+                        fontSize: '0.75rem',
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.075em',
+                        borderBottom: '1px solid rgba(196, 183, 91, 0.15)'
+                      }}
+                    >
+                      {header}
+                    </th>
+                  ))}
                 </tr>
               </thead>
               <tbody>
                 {filteredInvoices.map((invoice) => {
-                  const clientId = typeof invoice.clientId === 'object' ? invoice.clientId._id : invoice.clientId;
                   const clientName = typeof invoice.clientId === 'object' ? invoice.clientId.businessName : 'Unknown';
                   const invoiceDate = invoice.invoiceDate ? new Date(invoice.invoiceDate) : new Date(invoice.createdAt);
                   const dueDate = new Date(invoice.dueDate);
@@ -779,141 +1028,125 @@ export default function InvoicesPage() {
                     <tr 
                       key={invoice._id}
                       style={{ 
-                        borderBottom: '1px solid rgba(196, 183, 91, 0.15)',
+                        borderBottom: '1px solid rgba(196, 183, 91, 0.08)',
                         transition: 'all 0.2s ease',
+                        cursor: 'pointer'
                       }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.background = 'rgba(196, 183, 91, 0.05)';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.background = '';
-                      }}
+                      onClick={() => toggleSelectInvoice(invoice._id)}
+                      onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(196, 183, 91, 0.03)'}
+                      onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
                     >
-                      <td style={{ padding: '1rem' }}>
+                      <td style={{ padding: '1.25rem' }} onClick={(e) => e.stopPropagation()}>
                         <input
                           type="checkbox"
                           checked={selectedInvoices.has(invoice._id)}
                           onChange={() => toggleSelectInvoice(invoice._id)}
-                          onClick={(e) => e.stopPropagation()}
-                          style={{ cursor: 'pointer' }}
+                          style={{ cursor: 'pointer', width: '16px', height: '16px', accentColor: 'var(--imperial-emerald)' }}
                         />
                       </td>
-                      <td style={{ padding: '1rem' }}>
-                        <div style={{ fontWeight: '600', color: 'var(--imperial-emerald)' }}>
+                      <td style={{ padding: '1.25rem' }}>
+                        <div style={{ fontWeight: '750', color: 'var(--imperial-emerald)', fontSize: '0.9375rem' }}>
                           {invoice.invoiceNumber || `INV-${invoice._id.substring(0, 8).toUpperCase()}`}
                         </div>
-                      </td>
-                      <td style={{ padding: '1rem' }}>
-                        <div style={{ color: 'var(--muted-jade)', fontSize: '0.875rem', fontWeight: '500' }}>
-                          {clientName}
-                        </div>
-                      </td>
-                      <td style={{ padding: '1rem' }}>
-                        <div style={{ color: 'var(--muted-jade)', fontSize: '0.875rem' }}>
-                          {invoiceDate.toLocaleDateString()}
-                        </div>
-                      </td>
-                      <td style={{ padding: '1rem' }}>
-                        <div style={{ 
-                          color: isOverdue ? '#ef4444' : 'var(--muted-jade)', 
-                          fontSize: '0.875rem',
-                          fontWeight: isOverdue ? '600' : 'normal'
-                        }}>
-                          {dueDate.toLocaleDateString()}
-                        </div>
-                      </td>
-                      <td style={{ padding: '1rem', textAlign: 'right' }}>
-                        <div style={{ fontWeight: '600', color: 'var(--imperial-emerald)' }}>
-                          {invoice.currency} {invoice.amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                        </div>
-                      </td>
-                      <td style={{ padding: '1rem', textAlign: 'center' }}>
-                        <span style={{ 
-                          display: 'inline-block',
-                          padding: '0.25rem 0.75rem',
-                          borderRadius: '0.375rem',
-                          background: invoice.status === 'PAID' 
-                            ? '#d1fae5' 
-                            : (isOverdue || invoice.status === 'OVERDUE')
-                            ? '#fee2e2'
-                            : '#fef3c7',
-                          color: invoice.status === 'PAID' 
-                            ? '#10b981' 
-                            : (isOverdue || invoice.status === 'OVERDUE')
-                            ? '#ef4444'
-                            : '#f59e0b',
-                          fontWeight: '600',
-                          fontSize: '0.75rem',
-                          textTransform: 'uppercase'
-                        }}>
-                          {isOverdue && invoice.status === 'GENERATED' ? 'OVERDUE' : invoice.status}
-                        </span>
-                      </td>
-                      <td style={{ padding: '1rem' }}>
-                        {paymentDate ? (
-                          <div style={{ color: 'var(--muted-jade)', fontSize: '0.875rem' }}>
-                            {paymentDate.toLocaleDateString()}
+                        {invoice.description && (
+                          <div style={{ fontSize: '0.75rem', color: 'var(--muted-jade)', marginTop: '0.125rem', maxWidth: '200px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                            {invoice.description}
                           </div>
-                        ) : (
-                          <span style={{ color: 'var(--muted-jade)', fontSize: '0.875rem', fontStyle: 'italic' }}>
-                            —
-                          </span>
                         )}
                       </td>
-                      <td style={{ padding: '1rem', textAlign: 'center' }}>
+                      <td style={{ padding: '1.25rem' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.625rem' }}>
+                          <div style={{ width: '28px', height: '28px', borderRadius: '8px', background: 'rgba(11, 46, 43, 0.05)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--imperial-emerald)' }}>
+                            <Building2 size={14} />
+                          </div>
+                          <span style={{ fontWeight: '600', color: 'var(--imperial-emerald)', fontSize: '0.875rem' }}>{clientName}</span>
+                        </div>
+                      </td>
+                      <td style={{ padding: '1.25rem' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.375rem', fontSize: '0.8125rem', color: 'var(--imperial-emerald)', fontWeight: '600' }}>
+                            <Calendar size={12} />
+                            {invoiceDate.toLocaleDateString([], { month: 'short', day: 'numeric', year: 'numeric' })}
+                          </div>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.375rem', fontSize: '0.75rem', color: isOverdue ? '#dc2626' : 'var(--muted-jade)', fontWeight: isOverdue ? '700' : '500' }}>
+                            <Clock size={12} />
+                            Due {dueDate.toLocaleDateString([], { month: 'short', day: 'numeric' })}
+                          </div>
+                        </div>
+                      </td>
+                      <td style={{ padding: '1.25rem', textAlign: 'right' }}>
+                        <div style={{ fontWeight: '800', color: 'var(--imperial-emerald)', fontSize: '1rem' }}>
+                          {invoice.currency} {invoice.amount.toLocaleString('en-US', { minimumFractionDigits: 2 })}
+                        </div>
+                      </td>
+                      <td style={{ padding: '1.25rem' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.375rem' }}>
+                          <span style={{ 
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '0.375rem',
+                            padding: '0.375rem 0.75rem',
+                            borderRadius: '2rem',
+                            background: invoice.status === 'PAID' ? '#d1fae5' : (isOverdue || invoice.status === 'OVERDUE') ? '#fee2e2' : '#fef3c7',
+                            color: invoice.status === 'PAID' ? '#059669' : (isOverdue || invoice.status === 'OVERDUE') ? '#dc2626' : '#d97706',
+                            fontWeight: '750',
+                            fontSize: '0.75rem',
+                            width: 'fit-content'
+                          }}>
+                            <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: 'currentColor' }} />
+                            {isOverdue && invoice.status === 'GENERATED' ? 'OVERDUE' : invoice.status}
+                          </span>
+                          {paymentDate && (
+                            <span style={{ fontSize: '0.6875rem', color: '#059669', fontWeight: '600', marginLeft: '0.5rem' }}>
+                              Paid {paymentDate.toLocaleDateString([], { month: 'short', day: 'numeric' })}
+                            </span>
+                          )}
+                        </div>
+                      </td>
+                      <td style={{ padding: '1.25rem', textAlign: 'center' }} onClick={(e) => e.stopPropagation()}>
                         <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'center' }}>
                           {invoice.fileId && (
                             <button
                               onClick={() => handleDownloadInvoice(invoice._id, invoice.fileId!)}
                               style={{
                                 padding: '0.5rem',
-                                border: 'none',
-                                background: 'rgba(196, 183, 91, 0.1)',
-                                borderRadius: '0.375rem',
+                                border: '1px solid rgba(196, 183, 91, 0.2)',
+                                background: 'white',
+                                borderRadius: '0.625rem',
                                 cursor: 'pointer',
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',
-                                transition: 'all 0.2s ease'
+                                transition: 'all 0.2s ease',
+                                color: 'var(--imperial-emerald)'
                               }}
-                              onMouseEnter={(e) => {
-                                e.currentTarget.style.background = 'rgba(196, 183, 91, 0.2)';
-                              }}
-                              onMouseLeave={(e) => {
-                                e.currentTarget.style.background = 'rgba(196, 183, 91, 0.1)';
-                              }}
-                              title="Download Invoice"
+                              onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(11, 46, 43, 0.03)'}
+                              onMouseLeave={(e) => e.currentTarget.style.background = 'white'}
+                              title="Download PDF"
                             >
-                              <Download size={16} color="var(--imperial-emerald)" />
+                              <Download size={16} />
                             </button>
                           )}
                           {invoice.status !== 'PAID' && (
                             <button
-                              onClick={() => {
-                                if (confirm('Mark this invoice as paid?')) {
-                                  handleMarkPaid(invoice._id);
-                                }
-                              }}
+                              onClick={() => { if (confirm('Mark this invoice as paid?')) handleMarkPaid(invoice._id); }}
                               style={{
                                 padding: '0.5rem',
-                                border: 'none',
-                                background: 'rgba(16, 185, 129, 0.1)',
-                                borderRadius: '0.375rem',
+                                border: '1px solid rgba(16, 185, 129, 0.2)',
+                                background: 'white',
+                                borderRadius: '0.625rem',
                                 cursor: 'pointer',
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',
-                                transition: 'all 0.2s ease'
+                                transition: 'all 0.2s ease',
+                                color: '#10b981'
                               }}
-                              onMouseEnter={(e) => {
-                                e.currentTarget.style.background = 'rgba(16, 185, 129, 0.2)';
-                              }}
-                              onMouseLeave={(e) => {
-                                e.currentTarget.style.background = 'rgba(16, 185, 129, 0.1)';
-                              }}
+                              onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(16, 185, 129, 0.05)'}
+                              onMouseLeave={(e) => e.currentTarget.style.background = 'white'}
                               title="Mark as Paid"
                             >
-                              <CheckCircle size={16} color="#10b981" />
+                              <CheckCircle2 size={16} />
                             </button>
                           )}
                         </div>
