@@ -608,7 +608,7 @@ export default function Home() {
                     },
                     {
                       metric: "Pricing",
-                      values: ["$150", "$350", "$1500"]
+                      values: ["$250", "$350", "$1500"]
                     },
                     {
                       metric: "Account Safety Guarantee",
