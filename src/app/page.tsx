@@ -455,7 +455,7 @@ export default function Home() {
               },
               {
                 name: "LinkedIn Outreach Excellence 20X",
-                price: "$250",
+                price: "$299",
                 unit: "/ license/month",
                 description: "Discounts available!",
                 features: [
