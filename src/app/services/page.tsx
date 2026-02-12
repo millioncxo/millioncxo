@@ -184,7 +184,7 @@ export default function Services() {
             <div className="bg-ivory-silk/90 border-2 border-golden-opal rounded-2xl shadow-xl flex flex-col items-center text-center p-8 relative h-full">
               <span className="absolute -top-4 left-1/2 -translate-x-1/2 bg-golden-opal text-onyx-black px-4 py-1 rounded-full text-xs font-bold shadow">Most Popular</span>
               <span className="text-golden-opal font-bold text-lg mb-2">LINKEDIN OUTREACH EXCELLENCE 20X</span>
-              <div className="text-3xl font-bold text-onyx-black mb-2">$250<span className="text-base font-medium text-muted-jade">/license</span></div>
+              <div className="text-3xl font-bold text-onyx-black mb-2">$299<span className="text-base font-medium text-muted-jade">/license</span></div>
               <div className="text-muted-jade mb-4 text-sm">License-based LinkedIn scaling</div>
               <ul className="mb-6 space-y-2 text-left w-full max-w-xs mx-auto flex-grow">
                 <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> 1,000 InMails per license per month</li>
@@ -208,7 +208,7 @@ export default function Services() {
             {/* SDR as a Service */}
             <div className="bg-ivory-silk/90 border border-golden-opal/20 rounded-2xl shadow-lg flex flex-col items-center text-center p-8 h-full">
               <span className="text-golden-opal font-bold text-lg mb-2">SDR AS A SERVICE</span>
-              <div className="text-3xl font-bold text-onyx-black mb-2">$2,000<span className="text-base font-medium text-muted-jade">/month</span></div>
+              <div className="text-3xl font-bold text-onyx-black mb-2">$3199<span className="text-base font-medium text-muted-jade">/month</span></div>
               <div className="text-muted-jade mb-4 text-sm">Full-time SDR, 4+ CXO meetings/month</div>
               <ul className="mb-6 space-y-2 text-left w-full max-w-xs mx-auto flex-grow">
                 <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> 200+ emails/day</li>
