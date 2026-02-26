@@ -9,7 +9,7 @@ export default function Footer() {
         <div className="grid md:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="space-y-4">
-            <h3 className="text-2xl font-bold text-golden-opal">MILLIONCXO OUTREACH PVT. LTD.</h3>
+            <h5 className="text-2xl font-bold text-golden-opal">MILLIONCXO OUTREACH PVT. LTD.</h5>
             <p className="text-muted-jade text-sm mb-2">
               Human‑led LinkedIn outreach that delivers real CXO conversations.
             </p>
