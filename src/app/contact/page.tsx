@@ -108,10 +108,6 @@ export default function Contact() {
             {/* Left Column - Content */}
             <div className="text-left">
               <div className="animate-fade-in">
-                <div className="inline-flex items-center bg-golden-opal/10 rounded-full px-4 py-2 mb-6">
-                  <span className="text-golden-opal font-semibold text-sm">Human‑Driven LinkedIn Outreach</span>
-                </div>
-                
                 <h1 className="text-5xl lg:text-7xl font-bold text-ivory-silk mb-8 leading-tight">
                   Let&apos;s <span className="text-golden-opal">Talk</span>
                 </h1>

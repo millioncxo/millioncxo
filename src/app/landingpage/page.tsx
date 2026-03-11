@@ -22,13 +22,6 @@ export default function LandingPage() {
             {/* Left Column - Hero Content */}
             <div className="space-y-6 lg:space-y-8">
               <div className="animate-fade-in">
-                <div className="inline-flex items-center bg-golden-opal/10 rounded-full px-4 py-2 mb-6">
-                  <svg className="w-4 h-4 text-golden-opal mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                  </svg>
-                  <span className="text-golden-opal font-semibold text-sm">LinkedIn Outreach Excellence - 16X</span>
-                </div>
-                
                 <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-onyx-black leading-tight">
                   Human‑Driven <FlippingText words={['LinkedIn Excellence', 'CXO Connections', 'Sales Growth', 'Pipeline Building']} className="text-golden-opal" />
                 </h1>
@@ -275,9 +268,6 @@ export default function LandingPage() {
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
           <div className="text-center mb-16">
-            <div className="inline-flex items-center bg-golden-opal/10 rounded-full px-4 py-2 mb-6">
-              <span className="text-golden-opal font-semibold text-sm">16× LinkedIn Efficiency</span>
-            </div>
             <h2 className="text-4xl lg:text-5xl font-bold text-ivory-silk mb-6">
               LinkedIn Outreach <span className="text-golden-opal">Excellence - 16X</span>
             </h2>
@@ -436,92 +426,88 @@ export default function LandingPage() {
           </div>
           
           <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto items-stretch">
-            {[
-              {
-                name: "LinkedIn Outreach Excellence 16X",
-                price: "$299",
-                unit: "/ license/month",
-                description: "No Lock In - Monthly Billing",
-                tagline: undefined as string | undefined,
-                promo: undefined as string | undefined,
-                footnote: undefined as string | undefined,
-                features: [
-                  { text: "800 InMails per license per month", icon: Mail },
-                  { text: "Research-based outreach using LinkedIn activity", icon: FileSearch },
-                  { text: "100% guaranteed money-back if your account gets blocked", icon: Shield },
-                  
-                  
-                  
-                ],
-                earlyBird: [
-                  "3–5 licenses @10% → $225 / month / license",
-                  "6–10 licenses @20% → $200 / month / license",
-                  "11–20 licenses @30% → $175 / month / license"
-                ],
-                popular: true
-              }
-            ].map((plan, index) => (
-              <ScrollAnimation key={index} delay={index * 100}>
-                <div className={`card-glass relative h-full flex flex-col ${plan.popular ? 'ring-2 ring-golden-opal' : ''}`}>
-                  {plan.popular && (
-                    <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                      <span className="bg-golden-opal text-onyx-black px-4 py-1 rounded-full text-sm font-semibold">
-                        Most Popular
-                      </span>
-                    </div>
-                  )}
-                  
-                  <div className="text-center mb-6">
-                    <h3 className="text-2xl font-bold text-onyx-black mb-2">{plan.name}</h3>
-                    <div className="mb-2">
-                      <span className="text-4xl font-bold text-golden-opal">{plan.price}</span>
-                      <span className="text-muted-jade ml-2">{plan.unit}</span>
-                    </div>
-                    {plan.promo && (
-                      <p className="text-golden-opal text-sm font-semibold mb-2">{plan.promo}</p>
-                    )}
-                    {plan.description && (
-                      <p className="text-golden-opal text-sm mb-2">{plan.description}</p>
-                    )}
-                    {plan.tagline && (
-                      <p className="text-golden-opal text-sm font-medium">{plan.tagline}</p>
-                    )}
-                  </div>
-                  
-                  <ul className="space-y-3 mb-8 flex-grow">
-                    {plan.features.map((feature, featureIndex) => {
-                      const IconComponent = feature.icon
-                      return (
-                        <li key={featureIndex} className="flex items-center text-onyx-black">
-                          <svg className="w-5 h-5 text-golden-opal mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                          </svg>
-                          <IconComponent className="w-4 h-4 text-golden-opal mr-2 flex-shrink-0" />
-                          {feature.text}
-                        </li>
-                      )
-                    })}
-                  </ul>
-                  {plan.footnote && (
-                    <p className="text-xs text-muted-jade text-center mb-4">{plan.footnote}</p>
-                  )}
-                  
-                  <div className="mt-auto">
-                    <Link href="https://calendly.com/millioncxo/loe-20x" target="_blank" rel="noopener noreferrer" className={plan.popular ? 'btn-primary w-full' : 'btn-outline w-full'}
-                      onClick={() => {
-                        if (typeof window !== 'undefined' && (window as any).gtag) {
-                          (window as any).gtag('event', 'conversion', {
-                            'send_to': 'AW-17718087441'
-                          });
-                        }
-                      }}
-                    >
-                      Book a Free Demo
-                    </Link>
-                  </div>
+            {/* LinkedIn Outreach Excellence 16X */}
+            <ScrollAnimation delay={0}>
+              <div className="card-glass relative h-full flex flex-col ring-2 ring-golden-opal">
+                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                  <span className="bg-golden-opal text-onyx-black px-4 py-1 rounded-full text-sm font-semibold">
+                    Most Popular
+                  </span>
                 </div>
-              </ScrollAnimation>
-            ))}
+                <div className="text-center mb-6 pt-2">
+                  <h3 className="text-2xl font-bold text-onyx-black mb-2">LinkedIn Outreach Excellence 16X</h3>
+                  <div className="mb-2">
+                    <span className="text-4xl font-bold text-golden-opal">$299</span>
+                    <span className="text-muted-jade ml-2">/ license/month</span>
+                  </div>
+                  <p className="text-muted-jade text-sm">800 InMails/month · No Lock In</p>
+                </div>
+                <ul className="space-y-3 mb-8 flex-grow px-1">
+                  <li className="flex items-center text-onyx-black text-sm">
+                    <Mail className="w-4 h-4 text-golden-opal mr-3 flex-shrink-0" />
+                    800 InMails per license per month
+                  </li>
+                  <li className="flex items-center text-onyx-black text-sm">
+                    <FileSearch className="w-4 h-4 text-golden-opal mr-3 flex-shrink-0" />
+                    Research-based outreach
+                  </li>
+                  <li className="flex items-center text-onyx-black text-sm">
+                    <Shield className="w-4 h-4 text-golden-opal mr-3 flex-shrink-0" />
+                    100% money-back if account blocked
+                  </li>
+                </ul>
+                <Link href="https://calendly.com/millioncxo/loe-20x" target="_blank" rel="noopener noreferrer" className="btn-primary w-full mt-auto"
+                  onClick={() => {
+                    if (typeof window !== 'undefined' && (window as any).gtag) {
+                      (window as any).gtag('event', 'conversion', { 'send_to': 'AW-17718087441' });
+                    }
+                  }}
+                >
+                  Book a Free Demo
+                </Link>
+              </div>
+            </ScrollAnimation>
+
+            {/* SDR as a Service */}
+            <ScrollAnimation delay={100}>
+              <div className="card-glass relative h-full flex flex-col">
+                <div className="text-center mb-6">
+                  <h3 className="text-2xl font-bold text-onyx-black mb-2">SDR as a Service</h3>
+                  <div className="mb-2">
+                    <span className="text-4xl font-bold text-golden-opal">$3,199</span>
+                    <span className="text-muted-jade ml-2">/ month</span>
+                  </div>
+                  <p className="text-muted-jade text-sm">Full-time SDR · 4+ CXO meetings/month</p>
+                </div>
+                <ul className="space-y-3 mb-8 flex-grow px-1">
+                  <li className="flex items-center text-onyx-black text-sm">
+                    <Mail className="w-4 h-4 text-golden-opal mr-3 flex-shrink-0" />
+                    200+ emails/day
+                  </li>
+                  <li className="flex items-center text-onyx-black text-sm">
+                    <Phone className="w-4 h-4 text-golden-opal mr-3 flex-shrink-0" />
+                    150+ cold calls/day
+                  </li>
+                  <li className="flex items-center text-onyx-black text-sm">
+                    <UserCheck className="w-4 h-4 text-golden-opal mr-3 flex-shrink-0" />
+                    80 ICP profiles researched/day
+                  </li>
+                  <li className="flex items-center text-onyx-black text-sm">
+                    <Target className="w-4 h-4 text-golden-opal mr-3 flex-shrink-0" />
+                    4+ qualified CXO meetings/month
+                  </li>
+                </ul>
+                <Link href="https://calendly.com/millioncxo/loe-20x" target="_blank" rel="noopener noreferrer" className="btn-outline w-full mt-auto"
+                  onClick={() => {
+                    if (typeof window !== 'undefined' && (window as any).gtag) {
+                      (window as any).gtag('event', 'conversion', { 'send_to': 'AW-17718087441' });
+                    }
+                  }}
+                >
+                  Book a Free Demo
+                </Link>
+              </div>
+            </ScrollAnimation>
           </div>
         </div>
       </section>

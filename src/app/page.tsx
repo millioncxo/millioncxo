@@ -22,13 +22,6 @@ export default function Home() {
             {/* Left Column - Hero Content */}
             <div className="space-y-6 lg:space-y-8">
               <div className="animate-fade-in">
-                <div className="inline-flex items-center bg-golden-opal/10 rounded-full px-4 py-2 mb-6">
-                  <svg className="w-4 h-4 text-golden-opal mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                  </svg>
-                  <span className="text-golden-opal font-semibold text-sm">LinkedIn Outreach Excellence - 16X</span>
-                </div>
-                
                 <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-onyx-black leading-tight">
                   Human‑Driven <FlippingText words={['LinkedIn Excellence', 'CXO Connections', 'Sales Growth', 'Pipeline Building']} className="text-golden-opal" />
                 </h1>
@@ -275,9 +268,6 @@ export default function Home() {
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
           <div className="text-center mb-16">
-            <div className="inline-flex items-center bg-golden-opal/10 rounded-full px-4 py-2 mb-6">
-              <span className="text-golden-opal font-semibold text-sm">16× LinkedIn Efficiency</span>
-            </div>
             <h2 className="text-4xl lg:text-5xl font-bold text-ivory-silk mb-6">
               LinkedIn Outreach <span className="text-golden-opal">Excellence - 16X</span>
             </h2>
@@ -434,91 +424,91 @@ export default function Home() {
             </p>
           </div>
           
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center max-w-5xl mx-auto">
-            {/* Left: What you get */}
-            <div className="space-y-6 order-2 lg:order-1">
-              <h3 className="text-xl font-bold text-onyx-black">What you get</h3>
-              <ul className="space-y-4">
-                {[
-                  { text: "800 InMails per license per month", icon: Mail },
-                  { text: "Research-based outreach using LinkedIn activity", icon: FileSearch },
-                  { text: "100% money-back if your account gets blocked", icon: Shield },
-                  { text: "Monthly billing", icon: Calendar },
-                  { text: "Zero additional tool costs", icon: BarChart3 },
-                ].map((item, i) => {
-                  const IconComponent = item.icon
-                  return (
-                  <li key={i} className="flex items-center gap-3 text-onyx-black">
-                    <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-golden-opal/15 flex items-center justify-center">
-                      <IconComponent className="w-4 h-4 text-golden-opal" />
-                    </div>
-                    <span>{item.text}</span>
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto items-stretch">
+            {/* LinkedIn Outreach Excellence 16X */}
+            <ScrollAnimation delay={0}>
+              <div className="bg-white rounded-2xl shadow-lg border-2 border-golden-opal/30 p-8 sm:p-10 h-full flex flex-col">
+                <span className="inline-block px-3 py-1 rounded-full bg-golden-opal/15 text-golden-opal text-sm font-semibold mb-6 w-fit">
+                  Most Popular
+                </span>
+                <h3 className="text-2xl font-bold text-onyx-black mb-1">LinkedIn Outreach Excellence 16X</h3>
+                <p className="text-muted-jade text-sm mb-6">800 InMails/month · No Lock In</p>
+                <div className="flex items-baseline gap-2 mb-8">
+                  <span className="text-4xl font-bold text-golden-opal">$299</span>
+                  <span className="text-muted-jade font-medium">/ license/month</span>
+                </div>
+                <ul className="space-y-3 mb-8 flex-grow">
+                  <li className="flex items-center gap-3 text-onyx-black text-sm">
+                    <Mail className="w-4 h-4 text-golden-opal flex-shrink-0" />
+                    800 InMails per license per month
                   </li>
-                )
-                })}
-              </ul>
-              <p className="text-muted-jade text-sm pt-2">
-                Trained SDRs deliver every message. No bots, no automation.
-              </p>
-            </div>
+                  <li className="flex items-center gap-3 text-onyx-black text-sm">
+                    <FileSearch className="w-4 h-4 text-golden-opal flex-shrink-0" />
+                    Research-based outreach
+                  </li>
+                  <li className="flex items-center gap-3 text-onyx-black text-sm">
+                    <Shield className="w-4 h-4 text-golden-opal flex-shrink-0" />
+                    100% money-back if account blocked
+                  </li>
+                </ul>
+                <Link
+                  href="https://calendly.com/millioncxo/loe-20x"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block w-full py-4 px-6 rounded-xl bg-golden-opal hover:bg-golden-opal/90 text-onyx-black font-semibold text-center transition-colors mt-auto"
+                  onClick={() => {
+                    if (typeof window !== 'undefined' && (window as any).gtag) {
+                      (window as any).gtag('event', 'conversion', { 'send_to': 'AW-17718087441' });
+                    }
+                  }}
+                >
+                  Book a Free Demo
+                </Link>
+              </div>
+            </ScrollAnimation>
 
-            {/* Right: Pricing card */}
-            <div className="order-1 lg:order-2">
-              {[
-                {
-                  name: "LinkedIn Outreach Excellence 16X",
-                  price: "$299",
-                  unit: "/ license/month",
-                  description: "No Lock In · Monthly Billing",
-                  features: [
-                    { text: "800 InMails per license per month", icon: Mail },
-                    { text: "Research-based outreach using LinkedIn activity", icon: FileSearch },
-                    { text: "100% money-back if your account gets blocked", icon: Shield },
-                  ],
-                  popular: true
-                }
-              ].map((plan, index) => (
-                <ScrollAnimation key={index} delay={index * 100}>
-                  <div className="bg-white rounded-2xl shadow-lg border border-golden-opal/20 p-8 sm:p-10">
-                    {plan.popular && (
-                      <span className="inline-block px-3 py-1 rounded-full bg-golden-opal/15 text-golden-opal text-sm font-semibold mb-6">
-                        Most Popular
-                      </span>
-                    )}
-                    <h3 className="text-2xl font-bold text-onyx-black mb-1">{plan.name}</h3>
-                    <p className="text-muted-jade text-sm mb-6">{plan.description}</p>
-                    <div className="flex items-baseline gap-2 mb-8">
-                      <span className="text-4xl font-bold text-golden-opal">{plan.price}</span>
-                      <span className="text-muted-jade font-medium">{plan.unit}</span>
-                    </div>
-                    <ul className="space-y-3 mb-8">
-                      {plan.features.map((feature, featureIndex) => {
-                        const IconComponent = feature.icon
-                        return (
-                          <li key={featureIndex} className="flex items-center gap-3 text-onyx-black text-sm">
-                            <IconComponent className="w-4 h-4 text-golden-opal flex-shrink-0" />
-                            {feature.text}
-                          </li>
-                        )
-                      })}
-                    </ul>
-                    <Link
-                      href="https://calendly.com/millioncxo/loe-20x"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="block w-full py-4 px-6 rounded-xl bg-golden-opal hover:bg-golden-opal/90 text-onyx-black font-semibold text-center transition-colors"
-                      onClick={() => {
-                        if (typeof window !== 'undefined' && (window as any).gtag) {
-                          (window as any).gtag('event', 'conversion', { 'send_to': 'AW-17718087441' });
-                        }
-                      }}
-                    >
-                      Book a Free Demo
-                    </Link>
-                  </div>
-                </ScrollAnimation>
-              ))}
-            </div>
+            {/* SDR as a Service */}
+            <ScrollAnimation delay={100}>
+              <div className="bg-white rounded-2xl shadow-lg border border-golden-opal/20 p-8 sm:p-10 h-full flex flex-col">
+                <h3 className="text-2xl font-bold text-onyx-black mb-1">SDR as a Service</h3>
+                <p className="text-muted-jade text-sm mb-6">Full-time SDR · 4+ CXO meetings/month</p>
+                <div className="flex items-baseline gap-2 mb-8">
+                  <span className="text-4xl font-bold text-golden-opal">$3,199</span>
+                  <span className="text-muted-jade font-medium">/ month</span>
+                </div>
+                <ul className="space-y-3 mb-8 flex-grow">
+                  <li className="flex items-center gap-3 text-onyx-black text-sm">
+                    <Mail className="w-4 h-4 text-golden-opal flex-shrink-0" />
+                    200+ emails/day
+                  </li>
+                  <li className="flex items-center gap-3 text-onyx-black text-sm">
+                    <Phone className="w-4 h-4 text-golden-opal flex-shrink-0" />
+                    150+ cold calls/day
+                  </li>
+                  <li className="flex items-center gap-3 text-onyx-black text-sm">
+                    <UserCheck className="w-4 h-4 text-golden-opal flex-shrink-0" />
+                    80 ICP profiles researched/day
+                  </li>
+                  <li className="flex items-center gap-3 text-onyx-black text-sm">
+                    <Target className="w-4 h-4 text-golden-opal flex-shrink-0" />
+                    4+ qualified CXO meetings/month
+                  </li>
+                </ul>
+                <Link
+                  href="https://calendly.com/millioncxo/loe-20x"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block w-full py-4 px-6 rounded-xl border-2 border-golden-opal hover:bg-golden-opal/10 text-onyx-black font-semibold text-center transition-colors mt-auto"
+                  onClick={() => {
+                    if (typeof window !== 'undefined' && (window as any).gtag) {
+                      (window as any).gtag('event', 'conversion', { 'send_to': 'AW-17718087441' });
+                    }
+                  }}
+                >
+                  Book a Free Demo
+                </Link>
+              </div>
+            </ScrollAnimation>
           </div>
         </div>
       </section>
