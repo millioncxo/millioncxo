@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { Target, FileSearch, TrendingUp, Wallet, Search, UserCheck, Filter, Mail, Calendar, MessageSquare, Phone, BarChart3, Shield, DollarSign, Check, Sparkles, Users } from 'lucide-react'
+import { Target, FileSearch, Wallet, Search, UserCheck, Filter, Mail, Calendar, MessageSquare, Phone, BarChart3, Shield, DollarSign, Check, Sparkles } from 'lucide-react'
 import CounterAnimation from '@/components/CounterAnimation'
 import FlippingText from '@/components/FlippingText'
 import ScrollAnimation from '@/components/ScrollAnimation'
@@ -26,7 +26,7 @@ export default function LandingPage() {
                   <svg className="w-4 h-4 text-golden-opal mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                   </svg>
-                  <span className="text-golden-opal font-semibold text-sm">LinkedIn Outreach Excellence - 20X</span>
+                  <span className="text-golden-opal font-semibold text-sm">LinkedIn Outreach Excellence - 16X</span>
                 </div>
                 
                 <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-onyx-black leading-tight">
@@ -43,7 +43,7 @@ export default function LandingPage() {
                     <svg className="w-4 h-4 text-golden-opal mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
-                    1000+ InMails  per license 
+                    800 InMails per license 
                   </span>
                   <span className="inline-flex items-center text-sm text-muted-jade">
                     <svg className="w-4 h-4 text-golden-opal mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -76,8 +76,8 @@ export default function LandingPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </Link>
-                <Link href="/landingpage#linkedin-20x" className="btn-secondary">
-                  See how 20X works
+                <Link href="/landingpage#linkedin-16x" className="btn-secondary">
+                  See how 16X works
                 </Link>
               </div>
               
@@ -270,16 +270,16 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* LinkedIn Outreach Excellence 20X Section */}
-      <section id="linkedin-20x" className="py-20 bg-petrol-smoke">
+      {/* LinkedIn Outreach Excellence 16X Section */}
+      <section id="linkedin-16x" className="py-20 bg-petrol-smoke">
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
           <div className="text-center mb-16">
             <div className="inline-flex items-center bg-golden-opal/10 rounded-full px-4 py-2 mb-6">
-              <span className="text-golden-opal font-semibold text-sm">20× LinkedIn Efficiency</span>
+              <span className="text-golden-opal font-semibold text-sm">16× LinkedIn Efficiency</span>
             </div>
             <h2 className="text-4xl lg:text-5xl font-bold text-ivory-silk mb-6">
-              LinkedIn Outreach <span className="text-golden-opal">Excellence - 20X</span>
+              LinkedIn Outreach <span className="text-golden-opal">Excellence - 16X</span>
             </h2>
             <p className="text-xl text-muted-jade max-w-3xl mx-auto">
               Research-driven. Conversation-focused. Human-led, not automated.
@@ -290,7 +290,7 @@ export default function LandingPage() {
           <div className="grid md:grid-cols-3 gap-8 mb-16">
             {[
               { 
-                value: "1,000", 
+                value: "800", 
                 label: "InMails / License / Month", 
                 desc: "Delivered by trained SDRs - every message researched.",
                 icon: (
@@ -342,8 +342,8 @@ export default function LandingPage() {
               <div className="grid md:grid-cols-2 gap-6">
                 {[
                   {
-                    title: "1000 InMails per license per month",
-                    text: "We deliver 1,000 InMails per license per month.",
+                    title: "800 InMails per license per month",
+                    text: "We deliver 800 InMails per license per month.",
                     icon: Mail
                   },
                   {
@@ -438,28 +438,15 @@ export default function LandingPage() {
           <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto items-stretch">
             {[
               {
-                name: "LinkedIn Followers Boost",
-                price: "$499",
-                unit: "Starting from",
-                
-                tagline: "Build brand authority, one follower at a time.",
-                features: [
-                  { text: "10,000+ targeted followers per month", icon: Users },
-                  { text: "Organic growth strategy", icon: TrendingUp },
-                  { text: "Content optimization for your brand", icon: FileSearch },
-                  { text: "Engagement boost", icon: Target }
-                ],
-                promo: undefined,
-                footnote: undefined,
-                popular: false
-              },
-              {
-                name: "LinkedIn Outreach Excellence 20X",
-                price: "$250",
+                name: "LinkedIn Outreach Excellence 16X",
+                price: "$299",
                 unit: "/ license/month",
-                description: "Discounts available!",
+                description: "No Lock In - Monthly Billing",
+                tagline: undefined as string | undefined,
+                promo: undefined as string | undefined,
+                footnote: undefined as string | undefined,
                 features: [
-                  { text: "1,000 InMails per license per month ", icon: Mail },
+                  { text: "800 InMails per license per month", icon: Mail },
                   { text: "Research-based outreach using LinkedIn activity", icon: FileSearch },
                   { text: "100% guaranteed money-back if your account gets blocked", icon: Shield },
                   
@@ -487,17 +474,8 @@ export default function LandingPage() {
                   <div className="text-center mb-6">
                     <h3 className="text-2xl font-bold text-onyx-black mb-2">{plan.name}</h3>
                     <div className="mb-2">
-                      {plan.name === "LinkedIn Followers Boost" ? (
-                        <>
-                          <span className="text-muted-jade text-sm mr-2">{plan.unit}</span>
-                          <span className="text-4xl font-bold text-golden-opal">{plan.price}</span>
-                        </>
-                      ) : (
-                        <>
-                          <span className="text-4xl font-bold text-golden-opal">{plan.price}</span>
-                          <span className="text-muted-jade ml-2">{plan.unit}</span>
-                        </>
-                      )}
+                      <span className="text-4xl font-bold text-golden-opal">{plan.price}</span>
+                      <span className="text-muted-jade ml-2">{plan.unit}</span>
                     </div>
                     {plan.promo && (
                       <p className="text-golden-opal text-sm font-semibold mb-2">{plan.promo}</p>
@@ -505,7 +483,7 @@ export default function LandingPage() {
                     {plan.description && (
                       <p className="text-golden-opal text-sm mb-2">{plan.description}</p>
                     )}
-                    {'tagline' in plan && plan.tagline && (
+                    {plan.tagline && (
                       <p className="text-golden-opal text-sm font-medium">{plan.tagline}</p>
                     )}
                   </div>
@@ -586,11 +564,11 @@ export default function LandingPage() {
                     },
                     {
                       metric: "LinkedIn InMails per license/month",
-                      values: ["1,000", "< 800", "< 50"]
+                      values: ["800", "< 50", "< 50"]
                     },
                     {
                       metric: "Pricing",
-                      values: ["$150", "$350", "$1500"]
+                      values: ["$299", "$350", "$1500"]
                     },
                     {
                       metric: "Account Safety Guarantee",
@@ -652,7 +630,7 @@ export default function LandingPage() {
               {
                 step: "04",
                 title: "InMail Outreach",
-                description: "1,000+ InMails per license per month, hand‑written.",
+                description: "800 InMails per license per month, hand‑written.",
                 icon: Mail
               },
               {
@@ -744,8 +722,8 @@ export default function LandingPage() {
               >
                 Book a Free Demo
               </Link>
-              <Link href="/landingpage#linkedin-20x" className="btn-outline text-lg px-10 py-4">
-                Learn More About 20X
+              <Link href="/landingpage#linkedin-16x" className="btn-outline text-lg px-10 py-4">
+                Learn More About 16X
               </Link>
             </div>
             

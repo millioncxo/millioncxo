@@ -10,10 +10,10 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Maximize LinkedIn Outreach by 20X | MillionCXO - 1,000 InMails per License',
-  description: 'Maximize your LinkedIn outreach efficiency by 20X with MillionCXO. Get 1,000 InMails per license per month , /* 4 guaranteed interested customers, */ research-based outreach, and 100% account safety guarantee. Starting at $250/month per license.',
+  title: 'Maximize LinkedIn Outreach by 16X | MillionCXO - 800 InMails per License',
+  description: 'Maximize your LinkedIn outreach efficiency by 16X with MillionCXO. Get 800 InMails per license per month, research-based outreach, and 100% account safety guarantee. Starts at $299 - No Lock In, Monthly Billing.',
   keywords: [
-    'LinkedIn outreach 20X',
+    'LinkedIn outreach 16X',
     'maximize LinkedIn outreach',
     'LinkedIn InMail outreach',
     'B2B lead generation',
@@ -27,8 +27,8 @@ export const metadata: Metadata = {
     'LinkedIn lead generation service'
   ],
   openGraph: {
-    title: 'Maximize LinkedIn Outreach by 20X | MillionCXO',
-    description: 'Get 1,000 InMails per license per month, /* 4 guaranteed interested customers, */ and research-based human-driven outreach. Starting at $250/month.',
+    title: 'Maximize LinkedIn Outreach by 16X | MillionCXO',
+    description: 'Get 800 InMails per license per month and research-based human-driven outreach. Starts at $299 - No Lock In, Monthly Billing.',
     url: 'https://millioncxo.com',
     siteName: 'MillionCXO',
     type: 'website',
@@ -37,14 +37,14 @@ export const metadata: Metadata = {
         url: 'https://millioncxo.com/logo.svg',
         width: 1200,
         height: 630,
-        alt: 'MillionCXO Logo - LinkedIn Outreach Excellence 20X',
+        alt: 'MillionCXO Logo - LinkedIn Outreach Excellence 16X',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Maximize LinkedIn Outreach by 20X | MillionCXO',
-    description: '1,000 InMails per license per month, /* 4 guaranteed customers, */ research-based outreach. Human-driven LinkedIn excellence.',
+    title: 'Maximize LinkedIn Outreach by 16X | MillionCXO',
+    description: '800 InMails per license per month, research-based outreach. Human-driven LinkedIn excellence. Starts at $299 - No Lock In.',
     images: ['https://millioncxo.com/logo.svg'],
   },
   alternates: {

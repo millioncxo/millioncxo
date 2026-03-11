@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { Target, FileSearch, TrendingUp, Wallet, Search, UserCheck, Filter, Mail, Calendar, MessageSquare, Phone, BarChart3, Shield, DollarSign, Check, Sparkles, Users } from 'lucide-react'
+import { Target, FileSearch, Wallet, Search, UserCheck, Filter, Mail, Calendar, MessageSquare, Phone, BarChart3, Shield, DollarSign, Check, Sparkles } from 'lucide-react'
 import CounterAnimation from '@/components/CounterAnimation'
 import FlippingText from '@/components/FlippingText'
 import ScrollAnimation from '@/components/ScrollAnimation'
@@ -26,7 +26,7 @@ export default function Home() {
                   <svg className="w-4 h-4 text-golden-opal mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                   </svg>
-                  <span className="text-golden-opal font-semibold text-sm">LinkedIn Outreach Excellence - 20X</span>
+                  <span className="text-golden-opal font-semibold text-sm">LinkedIn Outreach Excellence - 16X</span>
                 </div>
                 
                 <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-onyx-black leading-tight">
@@ -43,7 +43,7 @@ export default function Home() {
                     <svg className="w-4 h-4 text-golden-opal mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
-                    1000+ InMails  per license 
+                    800 InMails per license 
                   </span>
                   <span className="inline-flex items-center text-sm text-muted-jade">
                     <svg className="w-4 h-4 text-golden-opal mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -76,8 +76,8 @@ export default function Home() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </Link>
-                <Link href="/#linkedin-20x" className="btn-secondary">
-                  See how 20X works
+                <Link href="/#linkedin-16x" className="btn-secondary">
+                  See how 16X works
                 </Link>
               </div>
               
@@ -270,16 +270,16 @@ export default function Home() {
         </div>
       </section>
 
-      {/* LinkedIn Outreach Excellence 20X Section */}
-      <section id="linkedin-20x" className="py-20 bg-petrol-smoke">
+      {/* LinkedIn Outreach Excellence 16X Section */}
+      <section id="linkedin-16x" className="py-20 bg-petrol-smoke">
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
           <div className="text-center mb-16">
             <div className="inline-flex items-center bg-golden-opal/10 rounded-full px-4 py-2 mb-6">
-              <span className="text-golden-opal font-semibold text-sm">20× LinkedIn Efficiency</span>
+              <span className="text-golden-opal font-semibold text-sm">16× LinkedIn Efficiency</span>
             </div>
             <h2 className="text-4xl lg:text-5xl font-bold text-ivory-silk mb-6">
-              LinkedIn Outreach <span className="text-golden-opal">Excellence - 20X</span>
+              LinkedIn Outreach <span className="text-golden-opal">Excellence - 16X</span>
             </h2>
             <p className="text-xl text-muted-jade max-w-3xl mx-auto">
               Research-driven. Conversation-focused. Human-led, not automated.
@@ -290,7 +290,7 @@ export default function Home() {
           <div className="grid md:grid-cols-3 gap-8 mb-16">
             {[
               { 
-                value: "1,000", 
+                value: "800", 
                 label: "InMails / License / Month", 
                 desc: "Delivered by trained SDRs - every message researched.",
                 icon: (
@@ -342,8 +342,8 @@ export default function Home() {
               <div className="grid md:grid-cols-2 gap-6">
                 {[
                   {
-                    title: "1000 InMails per license per month",
-                    text: "We deliver 1,000 InMails per license per month.",
+                    title: "800 InMails per license per month",
+                    text: "We deliver 800 InMails per license per month.",
                     icon: Mail
                   },
                   {
@@ -423,145 +423,102 @@ export default function Home() {
       </section>
 
       {/* Pricing Section */}
-      <section id="pricing" className="py-20 bg-ivory-silk">
+      <section id="pricing" className="py-24 bg-ivory-silk">
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-onyx-black mb-6">
+          <div className="text-center mb-14">
+            <h2 className="text-4xl lg:text-5xl font-bold text-onyx-black mb-4">
               Simple, Transparent <span className="text-gradient">Pricing</span>
             </h2>
-            <p className="text-xl text-muted-jade max-w-3xl mx-auto mb-8">
+            <p className="text-xl text-muted-jade max-w-2xl mx-auto">
               No hidden fees. No long-term contracts. Just results.
             </p>
-            
           </div>
           
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto items-stretch">
-            {[
-              {
-                name: "LinkedIn Followers Boost",
-                price: "$499",
-                unit: "Starting from",
-                
-                tagline: "Build brand authority, one follower at a time.",
-                features: [
-                  { text: "10,000+ targeted followers per month", icon: Users },
-                  { text: "Organic growth strategy", icon: TrendingUp },
-                  { text: "Content optimization for your brand", icon: FileSearch },
-                  { text: "Engagement boost", icon: Target }
-                ],
-                promo: undefined,
-                footnote: undefined,
-                popular: false
-              },
-              {
-                name: "LinkedIn Outreach Excellence 20X",
-                price: "$299",
-                unit: "/ license/month",
-                description: "Discounts available!",
-                features: [
-                  { text: "1,000 InMails per license per month ", icon: Mail },
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center max-w-5xl mx-auto">
+            {/* Left: What you get */}
+            <div className="space-y-6 order-2 lg:order-1">
+              <h3 className="text-xl font-bold text-onyx-black">What you get</h3>
+              <ul className="space-y-4">
+                {[
+                  { text: "800 InMails per license per month", icon: Mail },
                   { text: "Research-based outreach using LinkedIn activity", icon: FileSearch },
-                  { text: "100% guaranteed money-back if your account gets blocked", icon: Shield },
-                  
-                  
-                  
-                ],
-                earlyBird: [
-                  "3–5 licenses @10% → $225 / month / license",
-                  "6–10 licenses @20% → $200 / month / license",
-                  "11–20 licenses @30% → $175 / month / license"
-                ],
-                popular: true
-              }
-            ].map((plan, index) => (
-              <ScrollAnimation key={index} delay={index * 100}>
-                <div className={`card-glass relative h-full flex flex-col ${plan.popular ? 'ring-2 ring-golden-opal' : ''}`}>
-                  {plan.popular && (
-                    <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                      <span className="bg-golden-opal text-onyx-black px-4 py-1 rounded-full text-sm font-semibold">
+                  { text: "100% money-back if your account gets blocked", icon: Shield },
+                  { text: "Monthly billing", icon: Calendar },
+                  { text: "Zero additional tool costs", icon: BarChart3 },
+                ].map((item, i) => {
+                  const IconComponent = item.icon
+                  return (
+                  <li key={i} className="flex items-center gap-3 text-onyx-black">
+                    <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-golden-opal/15 flex items-center justify-center">
+                      <IconComponent className="w-4 h-4 text-golden-opal" />
+                    </div>
+                    <span>{item.text}</span>
+                  </li>
+                )
+                })}
+              </ul>
+              <p className="text-muted-jade text-sm pt-2">
+                Trained SDRs deliver every message. No bots, no automation.
+              </p>
+            </div>
+
+            {/* Right: Pricing card */}
+            <div className="order-1 lg:order-2">
+              {[
+                {
+                  name: "LinkedIn Outreach Excellence 16X",
+                  price: "$299",
+                  unit: "/ license/month",
+                  description: "No Lock In · Monthly Billing",
+                  features: [
+                    { text: "800 InMails per license per month", icon: Mail },
+                    { text: "Research-based outreach using LinkedIn activity", icon: FileSearch },
+                    { text: "100% money-back if your account gets blocked", icon: Shield },
+                  ],
+                  popular: true
+                }
+              ].map((plan, index) => (
+                <ScrollAnimation key={index} delay={index * 100}>
+                  <div className="bg-white rounded-2xl shadow-lg border border-golden-opal/20 p-8 sm:p-10">
+                    {plan.popular && (
+                      <span className="inline-block px-3 py-1 rounded-full bg-golden-opal/15 text-golden-opal text-sm font-semibold mb-6">
                         Most Popular
                       </span>
+                    )}
+                    <h3 className="text-2xl font-bold text-onyx-black mb-1">{plan.name}</h3>
+                    <p className="text-muted-jade text-sm mb-6">{plan.description}</p>
+                    <div className="flex items-baseline gap-2 mb-8">
+                      <span className="text-4xl font-bold text-golden-opal">{plan.price}</span>
+                      <span className="text-muted-jade font-medium">{plan.unit}</span>
                     </div>
-                  )}
-                  
-                  <div className="text-center mb-6">
-                    <h3 className="text-2xl font-bold text-onyx-black mb-2">{plan.name}</h3>
-                    <div className="mb-2">
-                      {plan.name === "LinkedIn Followers Boost" ? (
-                        <>
-                          <span className="text-muted-jade text-sm mr-2">{plan.unit}</span>
-                          <span className="text-4xl font-bold text-golden-opal">{plan.price}</span>
-                        </>
-                      ) : (
-                        <>
-                          <span className="text-4xl font-bold text-golden-opal">{plan.price}</span>
-                          <span className="text-muted-jade ml-2">{plan.unit}</span>
-                        </>
-                      )}
-                    </div>
-                    {plan.promo && (
-                      <p className="text-golden-opal text-sm font-semibold mb-2">{plan.promo}</p>
-                    )}
-                    {plan.description && (
-                      <p className="text-golden-opal text-sm mb-2">{plan.description}</p>
-                    )}
-                    {'tagline' in plan && plan.tagline && (
-                      <p className="text-golden-opal text-sm font-medium">{plan.tagline}</p>
-                    )}
-                  </div>
-                  
-                  <ul className="space-y-3 mb-8 flex-grow">
-                    {plan.features.map((feature, featureIndex) => {
-                      const IconComponent = feature.icon
-                      return (
-                        <li key={featureIndex} className="flex items-center text-onyx-black">
-                          <svg className="w-5 h-5 text-golden-opal mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                          </svg>
-                          <IconComponent className="w-4 h-4 text-golden-opal mr-2 flex-shrink-0" />
-                          {feature.text}
-                        </li>
-                      )
-                    })}
-                    {/* {plan.earlyBird && (
-                      <li className="mt-6 pt-6 border-t-2 border-golden-opal/30">
-                        <div className="early-bird-shimmer bg-golden-opal/10 rounded-lg p-4 border border-golden-opal/30 relative overflow-hidden">
-                          <div className="flex items-center gap-2 mb-3 relative z-10">
-                            <Sparkles className="w-5 h-5 text-golden-opal animate-pulse" />
-                            <p className="text-golden-opal font-bold text-base">Early Bird Pricing</p>
-                          </div>
-                          <ul className="space-y-2 relative z-10">
-                            {plan.earlyBird.map((eb, ebIndex) => (
-                              <li key={ebIndex} className="flex items-start">
-                                <span className="text-golden-opal mr-2 font-semibold">•</span>
-                                <span className="text-ivory-silk text-sm font-medium">{eb}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      </li>
-                    )} */}
-                  </ul>
-                  {plan.footnote && (
-                    <p className="text-xs text-muted-jade text-center mb-4">{plan.footnote}</p>
-                  )}
-                  
-                  <div className="mt-auto">
-                    <Link href="https://calendly.com/millioncxo/loe-20x" target="_blank" rel="noopener noreferrer" className={plan.popular ? 'btn-primary w-full' : 'btn-outline w-full'}
+                    <ul className="space-y-3 mb-8">
+                      {plan.features.map((feature, featureIndex) => {
+                        const IconComponent = feature.icon
+                        return (
+                          <li key={featureIndex} className="flex items-center gap-3 text-onyx-black text-sm">
+                            <IconComponent className="w-4 h-4 text-golden-opal flex-shrink-0" />
+                            {feature.text}
+                          </li>
+                        )
+                      })}
+                    </ul>
+                    <Link
+                      href="https://calendly.com/millioncxo/loe-20x"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block w-full py-4 px-6 rounded-xl bg-golden-opal hover:bg-golden-opal/90 text-onyx-black font-semibold text-center transition-colors"
                       onClick={() => {
                         if (typeof window !== 'undefined' && (window as any).gtag) {
-                          (window as any).gtag('event', 'conversion', {
-                            'send_to': 'AW-17718087441'
-                          });
+                          (window as any).gtag('event', 'conversion', { 'send_to': 'AW-17718087441' });
                         }
                       }}
                     >
                       Book a Free Demo
                     </Link>
                   </div>
-                </div>
-              </ScrollAnimation>
-            ))}
+                </ScrollAnimation>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -604,11 +561,11 @@ export default function Home() {
                     },
                     {
                       metric: "LinkedIn InMails per license/month",
-                      values: ["1,000", "< 800", "< 50"]
+                      values: ["800", "< 50", "< 50"]
                     },
                     {
                       metric: "Pricing",
-                      values: ["$250", "$350", "$1500"]
+                      values: ["$299", "$350", "$1500"]
                     },
                     {
                       metric: "Account Safety Guarantee",
@@ -670,7 +627,7 @@ export default function Home() {
               {
                 step: "04",
                 title: "InMail Outreach",
-                description: "1,000+ InMails per license per month, hand‑written.",
+                description: "800 InMails per license per month, hand‑written.",
                 icon: Mail
               },
               {
@@ -762,8 +719,8 @@ export default function Home() {
               >
                 Book a Free Demo
               </Link>
-              <Link href="/#linkedin-20x" className="btn-outline text-lg px-10 py-4">
-                Learn More About 20X
+              <Link href="/#linkedin-16x" className="btn-outline text-lg px-10 py-4">
+                Learn More About 16X
               </Link>
             </div>
             

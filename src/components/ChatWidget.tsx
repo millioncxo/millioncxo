@@ -9,37 +9,21 @@ const STEPS = {
   welcome: {
     text: "Hi! 👋 I'm your millionCXO Assistant. What are you looking for today?",
     options: [
-      "LinkedIn Outreach Excellence 20X",
-      "LinkedIn Followers Boost",
+      "LinkedIn Outreach Excellence 16X",
       "SDR as a Service",
       "Just have questions"
     ]
   },
   linkedin_20x: {
-    text: `Our **LinkedIn Outreach Excellence 20X** delivers 1,000 InMails per license per month with research-based outreach.\n- $250/month per license (discounts available)\n- /* 4 Guaranteed interested customers per license per month */\n- 100% money-back guarantee if your account gets blocked\n- Zero additional tool costs\n\nWould you like to learn more or book a Free Demo?`,
+    text: `Our **LinkedIn Outreach Excellence 16X** delivers 800 InMails per license per month with research-based outreach.\n- Starts at $299/month per license\n- No Lock In - Monthly Billing\n- 100% money-back guarantee if your account gets blocked\n- Zero additional tool costs\n\nWould you like to learn more or book a Free Demo?`,
     options: [
-      "Tell me more about 20X",
+      "Tell me more about 16X",
       "Book a Free Demo",
       "Back to main menu"
     ]
   },
   linkedin_20x_more: {
-    text: `**LinkedIn Outreach Excellence 20X Details:**\n- 1,000 InMails per license per month (vs LinkedIn's 50)\n- Research-based outreach using prospect's LinkedIn activity\n- /* 4 Guaranteed interested customers per license per month */\n- Account safety guarantee: 100% refund if account gets blocked\n- Industry's lowest price starting at $250/month per license\n- All tools included, no hidden costs\n\nReady to book a Free Demo?`,
-    options: [
-      "Book a Free Demo",
-      "Back to main menu"
-    ]
-  },
-  followers_boost: {
-    text: `Our **LinkedIn Followers Boost** helps you build brand authority with 10,000+ targeted followers per month.\n- Starting from $499\n- Organic growth strategy\n- Content optimization for your brand\n- Engagement boost\n\nBuild brand authority, one follower at a time. Want to book a Free Demo?`,
-    options: [
-      "Book a Free Demo",
-      "Tell me more",
-      "Back to main menu"
-    ]
-  },
-  followers_more: {
-    text: `**LinkedIn Followers Boost Details:**\n- 10,000+ targeted followers per month\n- Organic growth strategy (no bots, no automation)\n- Content optimization tailored to your brand\n- Engagement boost to increase visibility\n- Human-driven approach to keep your account secure\n\nReady to grow your LinkedIn presence? Book a Free Demo!`,
+    text: `**LinkedIn Outreach Excellence 16X Details:**\n- 800 InMails per license per month (vs LinkedIn's 50)\n- Research-based outreach using prospect's LinkedIn activity\n- No Lock In - Monthly Billing\n- Account safety guarantee: 100% refund if account gets blocked\n- Starts at $299/month per license\n- All tools included, no hidden costs\n\nReady to book a Free Demo?`,
     options: [
       "Book a Free Demo",
       "Back to main menu"
@@ -61,7 +45,7 @@ const STEPS = {
     ]
   },
   questions: {
-    text: "Ask me anything about our LinkedIn Outreach Excellence 20X, LinkedIn Followers Boost, or SDR as a Service - or type your question below. For most questions, I'll suggest a Free Demo to make things easier.",
+    text: "Ask me anything about our LinkedIn Outreach Excellence 16X or SDR as a Service - or type your question below. For most questions, I'll suggest a Free Demo to make things easier.",
     options: [
       "What's included in each service?",
       "How do you ensure account safety?",
@@ -71,7 +55,7 @@ const STEPS = {
     ]
   },
   included_services: {
-    text: `Each service is customized to your GTM goals:\n\n**LinkedIn Outreach Excellence 20X:** 1,000 InMails/license/month /* , 4 guaranteed customers/license/month */\n\n**LinkedIn Followers Boost:** 10,000+ targeted followers/month, organic growth\n\n**SDR as a Service:** Full-time dedicated SDR, 4+ CXO meetings/month\n\nFor full details and a custom proposal, would you like to book a Free Demo?`,
+    text: `Each service is customized to your GTM goals:\n\n**LinkedIn Outreach Excellence 16X:** 800 InMails/license/month, starts at $299, No Lock In\n\n**SDR as a Service:** Full-time dedicated SDR, 4+ CXO meetings/month\n\nFor full details and a custom proposal, would you like to book a Free Demo?`,
     options: [
       "Book a Free Demo",
       "Back to main menu"
@@ -145,16 +129,14 @@ export default function ChatWidget() {
 
       // Top-level routing
       if (currentStep === "welcome") {
-        if (userInput.toLowerCase().includes("20x") || userInput.toLowerCase().includes("linkedin outreach") || userInput.toLowerCase().includes("excellence")) nextStep = "linkedin_20x"
-        else if (userInput.toLowerCase().includes("followers") || userInput.toLowerCase().includes("boost")) nextStep = "followers_boost"
+        if (userInput.toLowerCase().includes("16x") || userInput.toLowerCase().includes("20x") || userInput.toLowerCase().includes("linkedin outreach") || userInput.toLowerCase().includes("excellence")) nextStep = "linkedin_20x"
         else if (userInput.toLowerCase().includes("sdr")) nextStep = "sdr_service"
         else if (userInput.toLowerCase().includes("question") || userInput.toLowerCase().includes("help") || userInput.toLowerCase().includes("info")) nextStep = "questions"
         else nextStep = "welcome"
       }
       else if (currentStep === "linkedin_20x" && (userInput.toLowerCase().includes("tell") || userInput.toLowerCase().includes("more"))) nextStep = "linkedin_20x_more"
-      else if (currentStep === "followers_boost" && (userInput.toLowerCase().includes("tell") || userInput.toLowerCase().includes("more"))) nextStep = "followers_more"
       else if (currentStep === "sdr_service" && (userInput.toLowerCase().includes("tell") || userInput.toLowerCase().includes("more"))) nextStep = "sdr_more"
-      else if ((currentStep === "linkedin_20x" || currentStep === "linkedin_20x_more" || currentStep === "followers_boost" || currentStep === "followers_more" || currentStep === "sdr_service" || currentStep === "sdr_more" || currentStep === "included_services" || currentStep === "account_safety" || currentStep === "customize" || currentStep === "questions") && userInput.toLowerCase().includes("book")) nextStep = "book_call"
+      else if ((currentStep === "linkedin_20x" || currentStep === "linkedin_20x_more" || currentStep === "sdr_service" || currentStep === "sdr_more" || currentStep === "included_services" || currentStep === "account_safety" || currentStep === "customize" || currentStep === "questions") && userInput.toLowerCase().includes("book")) nextStep = "book_call"
       else if (currentStep === "questions" && userInput.toLowerCase().includes("included")) nextStep = "included_services"
       else if (currentStep === "questions" && (userInput.toLowerCase().includes("safety") || userInput.toLowerCase().includes("account"))) nextStep = "account_safety"
       else if (currentStep === "questions" && userInput.toLowerCase().includes("customize")) nextStep = "customize"

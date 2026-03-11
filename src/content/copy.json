@@ -7,7 +7,7 @@
   "nav": {
     "links": [
       {"label": "Home", "href": "/"},
-      {"label": "LinkedIn Outreach 20X", "href": "/#linkedin-20x"},
+      {"label": "LinkedIn Outreach 16X", "href": "/#linkedin-16x"},
       {"label": "SDR as a Service", "href": "/#sdr-service"},
       {"label": "Process", "href": "/#process"},
       {"label": "Pricing", "href": "/#pricing"},
@@ -19,9 +19,9 @@
   "hero": {
     "title": "Human‑Led LinkedIn Outreach. Real CXO conversations.",
     "subtitle": "Human‑driven personalised outreach. Every message is researched and written by trained SDRs. On LinkedIn we study each prospect's posts.",
-    "supportNote": "LinkedIn Outreach Excellence - 20X",
+    "supportNote": "LinkedIn Outreach Excellence - 16X",
     "primaryCta": {"label": "Book a discovery call", "href": "https://calendly.com/millioncxo/loe-20x"},
-    "secondaryCta": {"label": "See how 20X works", "href": "/#linkedin-20x"},
+    "secondaryCta": {"label": "See how 16X works", "href": "/#linkedin-16x"},
     "proof": [
       "CXO‑focused outreach",
       "Research‑based, not random spam",
@@ -37,11 +37,11 @@
     ]
   },
   "linkedin20x": {
-    "id": "linkedin-20x",
-    "title": "LinkedIn Outreach Excellence - 20X",
+    "id": "linkedin-16x",
+    "title": "LinkedIn Outreach Excellence - 16X",
     "sub": "Maximise LinkedIn with human research and scale‑safe systems.",
     "highlights": [
-      "LinkedIn provides 50 inmail messages per month per license whereas MillionCXO sends 1,000 inmail messages per license per month for you",
+      "LinkedIn provides 50 inmail messages per month per license whereas MillionCXO sends 800 inmail messages per license per month for you",
       "We provide a guarantee of 4 interested customers per license per month",
       "We provide research‑based outreach using customer's LinkedIn activity",
       "We provide a money back guarantee on your LinkedIn account safety that not even a single account of yours will be blocked or else, we will refund your entire amount back into your account",
@@ -49,9 +49,9 @@
       "Zero extra tool cost for you"
     ],
     "tiles": [
-      {"title": "Goal", "desc": "Maximizing LinkedIn outreach efficiency (20X)"},
+      {"title": "Goal", "desc": "Maximizing LinkedIn outreach efficiency (16X)"},
       {"title": "ICP Discovery + Messaging", "desc": "Define segments, talk tracks, and value hooks."},
-      {"title": "1,000 InMails/month", "desc": "Per license, delivered by trained SDRs."},
+      {"title": "800 InMails/month", "desc": "Per license, delivered by trained SDRs."},
       {/* {"title": "Guaranteed replies", "desc": "≥4 positive replies/license/month or pro‑rated refund."} */}
     ]
   },
@@ -70,7 +70,7 @@
         }, */
         {
           "label": "LinkedIn InMails per license/month",
-          "values": ["1000+", "< 50", "< 50"]
+          "values": ["800+", "< 50", "< 50"]
         },
         {
           "label": "CXO‑focused outreach",
@@ -90,7 +90,7 @@
       {"title": "Data Mining", "desc": "Sales Navigator and public signals to build clean lists."},
       {"title": "Profiling", "desc": "Industry, role, geo, tech stack, revenue fit."},
       {"title": "Cleaning", "desc": "Activity‑based filters from posts, comments, and likes."},
-      {"title": "InMail Outreach", "desc": "1,000+ InMails per license per month, hand‑written."},
+      {"title": "InMail Outreach", "desc": "800+ InMails per license per month, hand‑written."},
       {"title": "Positive Response → Booking", "desc": "Our team confirms, your team gets calendar holds."},
       {"title": "Meeting Conducted", "desc": "Real conversations. Real pipeline."}
     ]
@@ -112,11 +112,11 @@
         "footnote": "Minimum SDRs to be hired."
       },
       {
-        "id": "excellence-20x",
-        "name": "LinkedIn Outreach Excellence 20X (License)",
-        "price": "Custom - license-based",
+        "id": "excellence-16x",
+        "name": "LinkedIn Outreach Excellence 16X (License)",
+        "price": "Starts at $299 - No Lock In",
         "includes": [
-          "1,000+ InMails per license/month",
+          "800 InMails per license/month",
           /* "Guaranteed ≥4 positive replies/license/month", */
           "Zero extra tool cost",
           "Research‑based, human‑written messages"

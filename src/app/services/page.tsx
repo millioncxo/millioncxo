@@ -157,41 +157,19 @@ export default function Services() {
               Simple, transparent pricing for every growth stage
             </p>
           </div>
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {/* LinkedIn Followers Boost */}
-            <div className="bg-ivory-silk/90 border border-golden-opal/20 rounded-2xl shadow-lg flex flex-col items-center text-center p-8 h-full">
-              <span className="text-golden-opal font-bold text-lg mb-2">LINKEDIN FOLLOWERS BOOST</span>
-              <div className="text-3xl font-bold text-onyx-black mb-2"><span className="text-sm font-medium text-muted-jade mr-2">Starting from</span>$499</div>
-              <div className="text-muted-jade mb-4 text-sm">Build brand authority, one follower at a time</div>
-              <ul className="mb-6 space-y-2 text-left w-full max-w-xs mx-auto flex-grow">
-                <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> 10,000+ targeted followers per month</li>
-                <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> Organic growth strategy</li>
-                <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> Content optimization for your brand</li>
-                <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> Engagement boost</li>
-              </ul>
-              <Link href="https://calendly.com/millioncxo/loe-20x" target="_blank" rel="noopener noreferrer" className="btn-outline w-full"
-                onClick={() => {
-                  if (typeof window !== 'undefined' && (window as any).gtag) {
-                    (window as any).gtag('event', 'conversion', {
-                      'send_to': 'AW-17718087441'
-                    });
-                  }
-                }}
-              >Book a Demo call!</Link>
-            </div>
-            
-            {/* LinkedIn Outreach Excellence 20X - CENTER */}
-            <div className="bg-ivory-silk/90 border-2 border-golden-opal rounded-2xl shadow-xl flex flex-col items-center text-center p-8 relative h-full">
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            {/* LinkedIn Outreach Excellence 16X */}
+            <div id="linkedin-16x" className="bg-ivory-silk/90 border-2 border-golden-opal rounded-2xl shadow-xl flex flex-col items-center text-center p-8 relative h-full">
               <span className="absolute -top-4 left-1/2 -translate-x-1/2 bg-golden-opal text-onyx-black px-4 py-1 rounded-full text-xs font-bold shadow">Most Popular</span>
-              <span className="text-golden-opal font-bold text-lg mb-2">LINKEDIN OUTREACH EXCELLENCE 20X</span>
+              <span className="text-golden-opal font-bold text-lg mb-2">LINKEDIN OUTREACH EXCELLENCE 16X</span>
               <div className="text-3xl font-bold text-onyx-black mb-2">$299<span className="text-base font-medium text-muted-jade">/license</span></div>
-              <div className="text-muted-jade mb-4 text-sm">License-based LinkedIn scaling</div>
+              <div className="text-muted-jade mb-4 text-sm">800 InMails/month • No Lock In - Monthly Billing</div>
               <ul className="mb-6 space-y-2 text-left w-full max-w-xs mx-auto flex-grow">
-                <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> 1,000 InMails per license per month</li>
+                <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> 800 InMails per license per month</li>
                 {/* <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> 4 guaranteed prospects per license per month</li> */}
                 <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> Research-based outreach using LinkedIn activity </li>
+                <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> No Lock In - Monthly Billing</li>
                 <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> 100% money-back guaranteed if your account gets blocked</li>
-                
                 <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> Zero additional tool costs</li>
               </ul>
               <Link href="https://calendly.com/millioncxo/loe-20x" target="_blank" rel="noopener noreferrer" className="btn-primary w-full"
