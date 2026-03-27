@@ -11,7 +11,7 @@ export default function Footer() {
           <div className="space-y-4">
             <h5 className="text-2xl font-bold text-golden-opal">MILLIONCXO OUTREACH PVT. LTD.</h5>
             <p className="text-muted-jade text-sm mb-2">
-              Human‑led LinkedIn outreach that delivers real CXO conversations.
+              235,Binnamangala,2ndFloor, 13th Cross Rd,2nd stage, Indiranagar (Bangalore), Bangalore North, Bangalore- 560038, Karnataka
             </p>
             <p className="text-golden-opal text-xs font-semibold">
               Human‑Driven Personalised Outreach
