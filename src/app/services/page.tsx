@@ -1,11 +1,13 @@
 'use client'
 
+import { useState } from 'react'
 import Link from 'next/link'
 import CounterAnimation from '@/components/CounterAnimation'
 import ScrollAnimation from '@/components/ScrollAnimation'
 import { Mail, Phone, BarChart3, Calendar, Target, FileSearch, Shield, DollarSign, Check, Users, TrendingUp } from 'lucide-react'
 
 export default function Services() {
+  const [sdrPlan, setSdrPlan] = useState<'3' | '5'>('5')
   return (
     <div className="bg-ivory-silk">
       {/* Hero Section */}
@@ -180,17 +182,77 @@ export default function Services() {
             </div>
             
             {/* SDR as a Service */}
-            <div className="bg-ivory-silk/90 border border-golden-opal/20 rounded-2xl shadow-lg flex flex-col items-center text-center p-8 h-full">
-              <span className="text-golden-opal font-bold text-lg mb-2">SDR AS A SERVICE</span>
-              <div className="text-3xl font-bold text-onyx-black mb-2">$3199<span className="text-base font-medium text-muted-jade">/month</span></div>
-              <div className="text-muted-jade mb-4 text-sm">Full-time SDR, 4+ CXO meetings/month</div>
+            <div id="sdr-service" className="relative bg-ivory-silk/90 border-2 border-imperial-emerald/50 rounded-2xl shadow-xl flex flex-col p-8 h-full">
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-imperial-emerald text-ivory-silk px-6 py-1.5 rounded-full text-xs font-bold shadow-lg whitespace-nowrap tracking-wide">
+                RECOMMENDED
+              </div>
+              <span className="text-imperial-emerald font-bold text-lg mb-1 mt-2 text-center">SDR AS A SERVICE</span>
+              <p className="text-muted-jade text-sm mb-5 text-center">Dedicated SDR team · Billed Quarterly</p>
+
+              {/* Plan Toggle */}
+              <div className="flex items-center gap-1 mb-5 bg-white rounded-xl p-1 border border-golden-opal/20">
+                <button
+                  onClick={() => setSdrPlan('3')}
+                  className={`flex-1 py-2 px-3 rounded-lg text-sm font-semibold transition-all ${
+                    sdrPlan === '3'
+                      ? 'bg-ivory-silk shadow text-onyx-black'
+                      : 'text-muted-jade hover:text-onyx-black'
+                  }`}
+                >
+                  <span className="block font-semibold">3 SDRs</span>
+                  <span className="block text-[11px] font-normal text-imperial-emerald">+1 Bench SDR Free</span>
+                </button>
+                <button
+                  onClick={() => setSdrPlan('5')}
+                  className={`flex-1 py-2 px-3 rounded-lg text-sm font-semibold transition-all relative ${
+                    sdrPlan === '5'
+                      ? 'bg-ivory-silk shadow text-onyx-black'
+                      : 'text-muted-jade hover:text-onyx-black'
+                  }`}
+                >
+                  <span className="block font-semibold">5 SDRs</span>
+                  <span className="block text-[11px] font-normal text-imperial-emerald">+2 Bench SDRs Free</span>
+                  <span className="absolute -top-2.5 -right-1 bg-golden-opal text-onyx-black text-[9px] font-bold px-1.5 py-0.5 rounded-full">
+                    SAVE 6%
+                  </span>
+                </button>
+              </div>
+
+              {/* Pricing */}
+              <div className="text-center mb-1">
+                <span className="text-3xl font-bold text-onyx-black">
+                  {sdrPlan === '3' ? '$3,199' : '$2,999'}
+                </span>
+                <span className="text-base font-medium text-muted-jade"> / SDR/month</span>
+              </div>
+              {sdrPlan === '5' && (
+                <p className="text-golden-opal text-xs font-semibold text-center mb-1">6% savings vs Starter</p>
+              )}
+              <p className="text-muted-jade text-xs text-center mb-5">Billed Quarterly</p>
+
+              {/* Features */}
               <ul className="mb-6 space-y-2 text-left w-full max-w-xs mx-auto flex-grow">
-                <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> 200+ emails/day</li>
-                <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> 150+ cold calls/day</li>
-                <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> 80 ICP profiles researched/day</li>
-                <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> Target: 4 qualified CXO meetings/month</li>
+                {sdrPlan === '3' ? (
+                  <>
+                    <li className="flex items-start text-muted-jade text-sm"><Check className="mt-0.5 mr-2 w-4 h-4 text-imperial-emerald flex-shrink-0" /> 3 dedicated SDRs</li>
+                    <li className="flex items-start text-muted-jade text-sm"><Check className="mt-0.5 mr-2 w-4 h-4 text-imperial-emerald flex-shrink-0" /> 30-day setup (FREE)</li>
+                    <li className="flex items-start text-muted-jade text-sm"><Check className="mt-0.5 mr-2 w-4 h-4 text-imperial-emerald flex-shrink-0" /> Qualified CXO meetings per month</li>
+                    <li className="flex items-start text-muted-jade text-sm"><Check className="mt-0.5 mr-2 w-4 h-4 text-imperial-emerald flex-shrink-0" /> Tech stack included</li>
+                    <li className="flex items-start text-muted-jade text-sm"><Check className="mt-0.5 mr-2 w-4 h-4 text-imperial-emerald flex-shrink-0" /> Weekly performance reviews</li>
+                  </>
+                ) : (
+                  <>
+                    <li className="flex items-start text-muted-jade text-sm"><Check className="mt-0.5 mr-2 w-4 h-4 text-imperial-emerald flex-shrink-0" /> 5 dedicated SDRs</li>
+                    <li className="flex items-start text-muted-jade text-sm"><Check className="mt-0.5 mr-2 w-4 h-4 text-imperial-emerald flex-shrink-0" /> Specialist team with AEs & researchers</li>
+                    <li className="flex items-start text-muted-jade text-sm"><Check className="mt-0.5 mr-2 w-4 h-4 text-imperial-emerald flex-shrink-0" /> Full tech stack included</li>
+                    <li className="flex items-start text-muted-jade text-sm"><Check className="mt-0.5 mr-2 w-4 h-4 text-imperial-emerald flex-shrink-0" /> Priority support</li>
+                    <li className="flex items-start text-muted-jade text-sm"><Check className="mt-0.5 mr-2 w-4 h-4 text-imperial-emerald flex-shrink-0" /> Bi-weekly strategy calls</li>
+                  </>
+                )}
               </ul>
-              <Link href="https://calendly.com/millioncxo/loe-20x" target="_blank" rel="noopener noreferrer" className="btn-outline w-full"
+
+              <Link href="https://calendly.com/millioncxo/loe-20x" target="_blank" rel="noopener noreferrer"
+                className="block w-full py-3 px-6 rounded-xl bg-imperial-emerald hover:bg-imperial-emerald/90 text-ivory-silk font-semibold text-center transition-colors mt-auto"
                 onClick={() => {
                   if (typeof window !== 'undefined' && (window as any).gtag) {
                     (window as any).gtag('event', 'conversion', {
