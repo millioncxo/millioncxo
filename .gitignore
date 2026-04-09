@@ -69,4 +69,6 @@ pids
 .eslintcache
 
 # Cursor IDE
-.cursor/ 
+.cursor/ .env
+.env.local
+.env*.local
