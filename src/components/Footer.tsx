@@ -75,21 +75,26 @@ export default function Footer() {
             </nav>
           </div>
 
-          {/* Services */}
+          {/* Legal */}
           <div className="space-y-4">
-            <h4 className="text-lg font-semibold">Services</h4>
-            <div className="space-y-2 text-sm">
-              <div className="text-muted-jade">Lead Generation</div>
-              <div className="text-muted-jade">Outbound Strategy</div>
-              <div className="text-muted-jade">Sales Consulting</div>
-              <div className="text-muted-jade">CRM Management</div>
-            </div>
+            <h4 className="text-lg font-semibold">Legal</h4>
+            <nav className="space-y-2 text-sm">
+              <Link href="/privacy-policy" className="block text-muted-jade hover:text-golden-opal transition-colors">
+                Privacy Policy
+              </Link>
+              <Link href="/terms-of-service" className="block text-muted-jade hover:text-golden-opal transition-colors">
+                Terms of Service
+              </Link>
+              <Link href="/refund-cancellation-policy" className="block text-muted-jade hover:text-golden-opal transition-colors">
+                Refund &amp; Cancellation
+              </Link>
+            </nav>
           </div>
         </div>
 
         <div className="mt-8 pt-8 border-t border-muted-jade/20 text-center">
           <p className="text-muted-jade text-sm">
-            © 2024 millionCXO. All rights reserved. | Connecting businesses with decision-makers worldwide.
+            © 2025 MillionCXO Outreach Private Limited. All rights reserved. | Connecting businesses with decision-makers worldwide.
           </p>
         </div>
       </div>
