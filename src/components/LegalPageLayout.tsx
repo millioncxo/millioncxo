@@ -3,372 +3,175 @@
 import { useEffect } from 'react'
 import Link from 'next/link'
 
-const LEGAL_CSS = `
-  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap');
+// Minimal CSS only for the dangerouslySetInnerHTML content sections
+// Uses the site's actual color palette
+const CONTENT_CSS = `
+  .legal-content { font-size: 15px; line-height: 1.8; color: #0b0f0e; }
 
-  .ld-page {
-    font-family: 'Source Serif 4', Georgia, serif;
-    background: #fafaf7;
-    color: #2a3d3d;
-    font-size: 15.5px;
-    line-height: 1.85;
-  }
-  .ld-doc-header {
-    background: #003339;
-    padding: 64px 0 52px;
-    text-align: center;
-    border-bottom: 4px solid #E8F975;
-  }
-  .ld-doc-type {
-    display: inline-block;
-    border: 1px solid #E8F975;
-    color: #E8F975;
-    font-size: 0.7rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    padding: 5px 18px;
-    border-radius: 2px;
-    margin-bottom: 22px;
-    font-weight: 300;
-  }
-  .ld-doc-header h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 3rem;
-    font-weight: 700;
-    color: #ffffff;
-    margin-bottom: 20px;
-  }
-  .ld-doc-meta {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 28px;
-    color: rgba(255,255,255,0.5);
-    font-size: 0.82rem;
-    flex-wrap: wrap;
-  }
-  .ld-dot {
-    width: 3px;
-    height: 3px;
-    background: #E8F975;
-    border-radius: 50%;
-    display: inline-block;
-  }
-  .ld-page-layout {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 56px 24px 80px;
-    display: grid;
-    grid-template-columns: 230px 1fr;
-    gap: 52px;
-    align-items: start;
-  }
-  .ld-toc {
-    position: sticky;
-    top: 78px;
-  }
-  .ld-toc-label {
-    font-size: 0.68rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: #5a7070;
-    font-weight: 600;
-    margin-bottom: 16px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #d0dada;
-  }
-  .ld-toc ol {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  .ld-toc ol li a {
-    display: block;
-    padding: 5px 0 5px 12px;
-    color: #5a7070;
-    text-decoration: none;
-    font-size: 0.82rem;
-    line-height: 1.4;
-    border-left: 2px solid transparent;
-    transition: all 0.18s;
-    margin-bottom: 2px;
-  }
-  .ld-toc ol li a:hover {
-    color: #003339;
-    border-left-color: #c8d955;
-  }
-  .ld-toc ol li a.active {
-    color: #003339;
-    border-left-color: #008E9F;
-    font-weight: 600;
-  }
-  .ld-toc-footer {
-    margin-top: 28px;
-    padding-top: 20px;
-    border-top: 1px solid #d0dada;
-  }
-  .ld-toc-footer a {
-    display: block;
-    font-size: 0.78rem;
-    color: #008E9F;
-    text-decoration: none;
-    margin-bottom: 6px;
-  }
-  .ld-toc-footer a:hover {
-    color: #003339;
-  }
-  .preamble {
-    background: #ffffff;
-    border: 1px solid #d0dada;
-    border-left: 4px solid #003339;
+  .legal-content .preamble {
+    background: #f0f4f2;
+    border-left: 3px solid #c4b75b;
     border-radius: 0 8px 8px 0;
-    padding: 24px 28px;
-    margin-bottom: 40px;
-  }
-  .preamble p {
-    font-size: 0.92rem;
-    color: #5a7070;
-    line-height: 1.7;
+    padding: 20px 24px;
+    margin-bottom: 36px;
+    font-size: 0.93rem;
+    color: #668b77;
     font-style: italic;
   }
-  .preamble p strong {
-    color: #003339;
-    font-style: normal;
-  }
-  .doc-section {
-    margin-bottom: 44px;
-    scroll-margin-top: 88px;
-  }
-  .section-header {
+  .legal-content .preamble strong { color: #0b2e2b; font-style: normal; }
+
+  .legal-content .doc-section { margin-bottom: 40px; scroll-margin-top: 80px; }
+
+  .legal-content .section-header {
     display: flex;
-    align-items: baseline;
-    gap: 14px;
-    margin-bottom: 18px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid #d0dada;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e5e0d8;
   }
-  .section-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 0.78rem;
+  .legal-content .section-header h2 {
+    font-size: 1.15rem;
     font-weight: 700;
-    color: #008E9F;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    white-space: nowrap;
+    color: #0b2e2b;
   }
-  .section-header h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.3rem;
+  .legal-content .section-num { display: none; }
+
+  .legal-content .subsection { margin: 18px 0; }
+  .legal-content .subsection h3 {
+    font-size: 0.82rem;
     font-weight: 700;
-    color: #003339;
-  }
-  .subsection {
-    margin-top: 22px;
-    margin-bottom: 18px;
-  }
-  .subsection h3 {
-    font-size: 0.88rem;
-    font-weight: 600;
-    color: #005a65;
-    letter-spacing: 0.04em;
+    color: #c4b75b;
     text-transform: uppercase;
+    letter-spacing: 0.06em;
     margin-bottom: 8px;
   }
-  p.legal {
-    color: #2a3d3d;
-    margin-bottom: 14px;
-    text-align: justify;
-    hyphens: auto;
-  }
-  ol.legal-list, ul.legal-list {
-    list-style: none;
-    padding-left: 0;
-    margin-bottom: 16px;
-  }
-  ol.legal-list {
-    counter-reset: lc;
-  }
-  ol.legal-list li {
-    counter-increment: lc;
-    display: flex;
-    gap: 14px;
-    margin-bottom: 10px;
-    font-size: 0.94rem;
-    line-height: 1.75;
-  }
-  ol.legal-list li::before {
-    content: "(" counter(lc, lower-alpha) ")";
-    color: #008E9F;
-    font-weight: 600;
-    white-space: nowrap;
-    min-width: 26px;
-    font-size: 0.85rem;
-    padding-top: 2px;
-  }
-  ul.legal-list li {
-    display: flex;
-    gap: 12px;
-    margin-bottom: 10px;
-    font-size: 0.94rem;
-    line-height: 1.75;
-  }
-  ul.legal-list li::before {
-    content: "—";
-    color: #008E9F;
-    font-weight: 600;
-    white-space: nowrap;
-  }
-  .definition-block {
-    background: #ffffff;
-    border: 1px solid #d0dada;
-    border-radius: 6px;
-    padding: 20px 24px;
-    margin: 16px 0 20px;
-  }
-  .definition-block dt {
-    font-weight: 600;
-    color: #003339;
-    font-size: 0.9rem;
-    margin-bottom: 4px;
-    margin-top: 14px;
-  }
-  .definition-block dt:first-child {
-    margin-top: 0;
-  }
-  .definition-block dd {
-    margin-left: 0;
-    color: #2a3d3d;
-    font-size: 0.92rem;
-    line-height: 1.7;
-    padding-left: 16px;
-    border-left: 2px solid #d0dada;
-  }
-  .notice-box {
-    background: #edf7f8;
-    border: 1px solid #b0d8dc;
-    border-radius: 6px;
-    padding: 18px 22px;
-    margin: 20px 0;
-  }
-  .notice-box p {
-    font-size: 0.88rem;
-    color: #005a65;
-    margin: 0;
-    line-height: 1.65;
-  }
-  .notice-box p strong {
-    color: #003339;
-  }
-  .warning-box {
-    background: #fff8e8;
-    border: 1px solid #e8d4a0;
-    border-radius: 6px;
-    padding: 18px 22px;
-    margin: 20px 0;
-  }
-  .warning-box p {
-    font-size: 0.88rem;
-    color: #6b4f00;
-    margin: 0 0 8px;
-    line-height: 1.65;
-  }
-  .warning-box p:last-child {
-    margin-bottom: 0;
-  }
-  .warning-box p strong {
-    color: #4a3600;
-  }
-  .refund-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0 24px;
-    font-size: 0.88rem;
-  }
-  .refund-table thead tr {
-    background: #003339;
-    color: #ffffff;
-  }
-  .refund-table thead th {
-    padding: 12px 16px;
-    text-align: left;
-    font-weight: 500;
-    font-family: 'Source Serif 4', serif;
-    letter-spacing: 0.02em;
-  }
-  .refund-table tbody tr:nth-child(even) {
-    background: #edf7f8;
-  }
-  .refund-table tbody tr:nth-child(odd) {
-    background: #ffffff;
-  }
-  .refund-table tbody td {
-    padding: 11px 16px;
-    border-bottom: 1px solid #d0dada;
-    line-height: 1.5;
-    vertical-align: top;
-  }
-  .refund-table tbody td:first-child {
-    font-weight: 500;
-    color: #003339;
-  }
-  .eligible {
-    color: #1a6b3c;
-    font-weight: 600;
-  }
-  .not-eligible {
-    color: #8b2020;
-    font-weight: 600;
-  }
-  .sig-block {
-    margin-top: 52px;
-    padding-top: 32px;
-    border-top: 2px solid #003339;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 32px;
-  }
-  .sig-col h4 {
-    font-family: 'Playfair Display', serif;
-    font-size: 0.85rem;
-    color: #003339;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
+
+  .legal-content p.legal {
+    color: #3a4a3f;
     margin-bottom: 12px;
   }
-  .sig-col p {
+
+  .legal-content ul.legal-list,
+  .legal-content ol.legal-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 14px;
+  }
+  .legal-content ol.legal-list { counter-reset: lc; }
+  .legal-content ol.legal-list li { counter-increment: lc; }
+  .legal-content ol.legal-list li::before {
+    content: counter(lc, lower-alpha) ".";
+    color: #c4b75b;
+    font-weight: 700;
+    min-width: 22px;
+    font-size: 0.82rem;
+  }
+  .legal-content ul.legal-list li::before {
+    content: "–";
+    color: #c4b75b;
+    font-weight: 700;
+  }
+  .legal-content ol.legal-list li,
+  .legal-content ul.legal-list li {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 8px;
+    font-size: 0.93rem;
+    color: #3a4a3f;
+    line-height: 1.75;
+  }
+
+  .legal-content .definition-block {
+    background: #f7f5f2;
+    border: 1px solid #e5e0d8;
+    border-radius: 8px;
+    padding: 18px 22px;
+    margin: 14px 0 18px;
+  }
+  .legal-content .definition-block dt {
+    font-weight: 700;
+    color: #0b2e2b;
     font-size: 0.88rem;
-    color: #5a7070;
+    margin-top: 14px;
+    margin-bottom: 3px;
+  }
+  .legal-content .definition-block dt:first-child { margin-top: 0; }
+  .legal-content .definition-block dd {
+    margin-left: 0;
+    padding-left: 14px;
+    border-left: 2px solid #c4b75b;
+    font-size: 0.9rem;
+    color: #668b77;
+    line-height: 1.65;
+  }
+
+  .legal-content .notice-box {
+    background: #f0f4f2;
+    border: 1px solid #668b77;
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 16px 0;
+  }
+  .legal-content .notice-box p {
+    font-size: 0.87rem;
+    color: #0b2e2b;
+    margin: 0;
     line-height: 1.6;
   }
-  .sig-line {
-    height: 1px;
-    background: #5a7070;
-    margin: 28px 0 6px;
-    opacity: 0.35;
+  .legal-content .notice-box p strong { color: #0b0f0e; }
+
+  .legal-content .warning-box {
+    background: #fdf8ec;
+    border: 1px solid #c4b75b;
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 16px 0;
   }
-  @media (max-width: 780px) {
-    .ld-page-layout {
-      grid-template-columns: 1fr;
-    }
-    .ld-toc {
-      display: none;
-    }
-    .ld-doc-header h1 {
-      font-size: 2.1rem;
-    }
-    .sig-block {
-      grid-template-columns: 1fr;
-    }
-    .refund-table {
-      font-size: 0.8rem;
-    }
+  .legal-content .warning-box p {
+    font-size: 0.87rem;
+    color: #5a4200;
+    margin: 0 0 6px;
+    line-height: 1.6;
+  }
+  .legal-content .warning-box p:last-child { margin-bottom: 0; }
+  .legal-content .warning-box p strong { color: #3a2b00; }
+
+  .legal-content .refund-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0 20px;
+    font-size: 0.87rem;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .legal-content .refund-table thead tr { background: #0b2e2b; color: #f7f5f2; }
+  .legal-content .refund-table thead th { padding: 11px 14px; text-align: left; font-weight: 600; }
+  .legal-content .refund-table tbody tr:nth-child(even) { background: #f7f5f2; }
+  .legal-content .refund-table tbody tr:nth-child(odd) { background: #ffffff; }
+  .legal-content .refund-table tbody td {
+    padding: 10px 14px;
+    border-bottom: 1px solid #e5e0d8;
+    line-height: 1.5;
+    vertical-align: top;
+    color: #3a4a3f;
+  }
+  .legal-content .refund-table tbody td:first-child { color: #0b2e2b; font-weight: 500; }
+  .legal-content .eligible { color: #1a6b3c; font-weight: 700; }
+  .legal-content .not-eligible { color: #8b2020; font-weight: 700; }
+
+  .legal-content .sig-block { display: none; }
+
+  @media (max-width: 640px) {
+    .legal-content .refund-table { font-size: 0.78rem; }
+    .legal-content .refund-table thead th,
+    .legal-content .refund-table tbody td { padding: 8px 10px; }
   }
 `
 
-interface TocItem {
+interface TocLink {
   href: string
   label: string
-  external?: boolean
 }
 
 interface LegalPageLayoutProps {
@@ -376,86 +179,86 @@ interface LegalPageLayoutProps {
   effectiveDate: string
   lastRevised: string
   version: string
-  tocItems: TocItem[]
-  tocFooterLinks: TocItem[]
+  tocItems: TocLink[]
+  tocFooterLinks: TocLink[]
   contentHtml: string
 }
 
 export default function LegalPageLayout({
   title,
   effectiveDate,
-  lastRevised,
-  version,
-  tocItems,
   tocFooterLinks,
   contentHtml,
 }: LegalPageLayoutProps) {
   useEffect(() => {
-    const sections = document.querySelectorAll('.doc-section')
-    const tocLinks = document.querySelectorAll('.ld-toc a[href^="#"]')
-    if (!sections.length || !tocLinks.length) return
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            tocLinks.forEach((l) => l.classList.remove('active'))
-            const active = document.querySelector(`.ld-toc a[href="#${entry.target.id}"]`)
-            if (active) active.classList.add('active')
-          }
-        })
-      },
-      { rootMargin: '-20% 0px -70% 0px' }
-    )
-    sections.forEach((s) => observer.observe(s))
-    return () => observer.disconnect()
+    // Smooth scroll for anchor links
+    const links = document.querySelectorAll('.legal-content a[href^="#"]')
+    links.forEach(link => {
+      link.addEventListener('click', (e) => {
+        const href = (link as HTMLAnchorElement).getAttribute('href')
+        if (!href) return
+        const target = document.querySelector(href)
+        if (target) {
+          e.preventDefault()
+          target.scrollIntoView({ behavior: 'smooth' })
+        }
+      })
+    })
   }, [])
 
   return (
-    <div className="ld-page">
-      <style dangerouslySetInnerHTML={{ __html: LEGAL_CSS }} />
+    <div className="bg-ivory-silk min-h-screen">
+      <style dangerouslySetInnerHTML={{ __html: CONTENT_CSS }} />
 
-      <header className="ld-doc-header">
-        <div className="ld-doc-type">Legal Document</div>
-        <h1>{title}</h1>
-        <div className="ld-doc-meta">
-          <span>Effective Date: {effectiveDate}</span>
-          <span className="ld-dot" />
-          <span>Last Revised: {lastRevised}</span>
-          <span className="ld-dot" />
-          <span>{version}</span>
+      {/* Header — matches site's emerald gradient style */}
+      <section className="bg-gradient-to-br from-imperial-emerald to-petrol-smoke py-16 px-4 text-center">
+        <div className="max-w-3xl mx-auto">
+          <h1 className="text-4xl sm:text-5xl font-bold text-ivory-silk mb-4">{title}</h1>
+          <p className="text-muted-jade text-sm">
+            Effective: {effectiveDate}
+          </p>
         </div>
-      </header>
+      </section>
 
-      <div className="ld-page-layout">
-        <aside className="ld-toc">
-          <div className="ld-toc-label">Contents</div>
-          <ol>
-            {tocItems.map((item) => (
-              <li key={item.href}>
-                <a href={item.href}>{item.label}</a>
-              </li>
-            ))}
-          </ol>
-          <div className="ld-toc-footer">
-            {tocFooterLinks.map((link) =>
-              link.external ? (
-                <a key={link.href} href={link.href} target="_blank" rel="noopener noreferrer">
-                  {link.label}
-                </a>
-              ) : (
-                <Link key={link.href} href={link.href}>
-                  {link.label}
-                </Link>
-              )
-            )}
-          </div>
-        </aside>
+      {/* Content */}
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 py-12 pb-20">
 
-        <main
-          className="doc-body"
+        {/* Cross-links */}
+        <div className="flex flex-wrap gap-3 mb-10">
+          {tocFooterLinks.filter(l => l.href !== '/').map(link => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="text-xs font-semibold text-muted-jade border border-muted-jade/30 hover:border-golden-opal hover:text-golden-opal px-4 py-1.5 rounded-full transition-colors"
+            >
+              {link.label.replace('→ ', '')}
+            </Link>
+          ))}
+        </div>
+
+        {/* Legal content */}
+        <div
+          className="legal-content"
           dangerouslySetInnerHTML={{ __html: contentHtml }}
         />
+
+        {/* Bottom nav */}
+        <div className="mt-14 pt-8 border-t border-golden-opal/20 flex flex-wrap justify-between items-center gap-4">
+          <Link href="/" className="text-sm text-muted-jade hover:text-golden-opal transition-colors">
+            ← Back to Website
+          </Link>
+          <div className="flex gap-4">
+            {tocFooterLinks.filter(l => l.href !== '/').map(link => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="text-sm text-muted-jade hover:text-golden-opal transition-colors"
+              >
+                {link.label.replace('→ ', '')}
+              </Link>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   )
