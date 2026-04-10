@@ -195,7 +195,7 @@ export default function Home() {
           {/* Team Roles */}
           <ScrollAnimation>
             <div className="bg-gradient-to-br from-ivory-silk/15 to-ivory-silk/10 backdrop-blur-sm rounded-2xl p-8 lg:p-12 border border-golden-opal/30 shadow-xl">
-              <h3 className="text-2xl font-bold text-ivory-silk mb-8 text-center">What's Included in Your Team</h3>
+              <h3 className="text-2xl font-bold text-ivory-silk mb-8 text-center">What&apos;s Included in Your Team</h3>
               <div className="grid md:grid-cols-2 gap-6">
                 {[
                   { title: 'Main Account Executive',       text: 'Sales leadership, presentations, and pitch delivery.',                           icon: Users },
