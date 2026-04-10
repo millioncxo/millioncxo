@@ -72,15 +72,15 @@ export default function Navigation() {
           {
             title: "Outreach Services",
             items: [
-              { href: '/services#linkedin-16x', label: 'LinkedIn Outreach Excellence 16X', desc: 'Starts at $299 - 800 InMails/month, No Lock In' },
-              { href: '/services#sdr', label: 'SDR as a Service', desc: '$2,000/month - Dedicated full-time SDR' }
+              { href: '/', label: 'SDR as a Service', desc: 'End-to-end sales team deployed in 30 days — pro-rated refund guarantee' },
+              { href: '/linkedin-outreach', label: 'LinkedIn Outreach Excellence 16X', desc: 'Starts at $299 — 800 InMails/month, No Lock In' }
             ]
           },
           {
             title: "What You Get",
             items: [
-              { href: '/services#features', label: 'Key Features', desc: 'Research-based outreach, account safety guarantee' },
-              { href: '/services#process', label: 'Our Process', desc: 'Human-driven methodology' }
+              { href: '/#sdr-section', label: 'How It Works', desc: 'Specialist team, revenue targets & guarantee' },
+              { href: '/#process', label: 'Our Process', desc: 'From kickoff to booked meetings' }
             ]
           }
         ]

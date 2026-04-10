@@ -3,66 +3,67 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Target, FileSearch, Wallet, Search, UserCheck, Filter, Mail, Calendar, MessageSquare, Phone, BarChart3, Shield, DollarSign, Check, Sparkles } from 'lucide-react'
+import { Target, Mail, BarChart3, Shield, DollarSign, Check, Users, TrendingUp, Zap, Calendar, Search, Phone } from 'lucide-react'
 import CounterAnimation from '@/components/CounterAnimation'
 import FlippingText from '@/components/FlippingText'
 import ScrollAnimation from '@/components/ScrollAnimation'
-import ProcessStepper from '@/components/ProcessStepper'
 import WorldMapImage from '@/components/World Map.png'
 
 export default function Home() {
   const [sdrPlan, setSdrPlan] = useState<'3' | '5'>('5')
+
   return (
     <div className="bg-ivory-silk">
-      
-      {/* Hero Section - Modern & Conversion Focused */}
+
+      {/* ── HERO ─────────────────────────────────────────────────────── */}
       <section className="relative bg-gradient-to-br from-ivory-silk to-muted-jade/10 overflow-hidden">
         <div className="absolute inset-0 bg-luxury-pattern opacity-30"></div>
-        
+
         <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 sm:py-4 md:py-8 flex items-center">
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
-            {/* Left Column - Hero Content */}
+
+            {/* Left — Hero Content */}
             <div className="space-y-6 lg:space-y-8">
               <div className="animate-fade-in">
                 <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-onyx-black leading-tight">
-                  Human‑Driven <FlippingText words={['LinkedIn Excellence', 'CXO Connections', 'Sales Growth', 'Pipeline Building']} className="text-golden-opal" />
+                  Your End-to-End{' '}
+                  <FlippingText
+                    words={['Sales Team', 'Revenue Engine', 'Growth Partner', 'Pipeline Machine']}
+                    className="text-golden-opal"
+                  />
                 </h1>
               </div>
-              
+
               <div className="animate-fade-in-delay">
                 <p className="text-xl text-muted-jade leading-relaxed max-w-2xl mb-4">
-                  Human‑driven personalised outreach. Every message is researched and written by trained SDRs. On LinkedIn we study each prospect&apos;s posts.
+                  Revenue-driven sales teams deployed in 30 days. We take quarterly revenue targets — not just meeting quotas.
                 </p>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  <span className="inline-flex items-center text-sm text-muted-jade">
-                    <svg className="w-4 h-4 text-golden-opal mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                    800 InMails per license 
-                  </span>
-                  <span className="inline-flex items-center text-sm text-muted-jade">
-                    <svg className="w-4 h-4 text-golden-opal mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                    Research‑based, not random spam
-                  </span>
-                  <span className="inline-flex items-center text-sm text-muted-jade">
-                    <svg className="w-4 h-4 text-golden-opal mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                    Guaranteed responses per license
-                  </span>
+                <div className="flex flex-col gap-2 mb-4">
+                  {[
+                    '30-day setup, FREE',
+                    'Pro-rated refund on missed targets',
+                    '7-person specialist team included',
+                  ].map((item) => (
+                    <span key={item} className="inline-flex items-center text-sm text-muted-jade">
+                      <svg className="w-4 h-4 text-golden-opal mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      {item}
+                    </span>
+                  ))}
                 </div>
               </div>
-              
-              {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-delay">
-                <Link href="https://calendly.com/millioncxo/loe-20x" target="_blank" rel="noopener noreferrer" className="btn-primary inline-flex items-center justify-center"
+
+              {/* Single CTA */}
+              <div className="animate-fade-in-delay">
+                <Link
+                  href="https://calendly.com/millioncxo/loe-20x"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-primary inline-flex items-center justify-center"
                   onClick={() => {
                     if (typeof window !== 'undefined' && (window as any).gtag) {
-                      (window as any).gtag('event', 'conversion', {
-                        'send_to': 'AW-17718087441'
-                      });
+                      (window as any).gtag('event', 'conversion', { send_to: 'AW-17718087441' })
                     }
                   }}
                 >
@@ -71,30 +72,21 @@ export default function Home() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </Link>
-                <Link href="/#linkedin-16x" className="btn-secondary">
-                  See how 16X works
-                </Link>
               </div>
-              
+
               {/* Social Proof */}
-              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-8 pt-8 animate-fade-in-delay">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-8 pt-4 animate-fade-in-delay">
                 <div className="flex items-center">
                   <div className="flex -space-x-2">
                     {[
-                      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face&auto=format&q=80",
-                      "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=150&h=150&fit=crop&crop=face&auto=format&q=80",
-                      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face&auto=format&q=80",
-                      "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop&crop=face&auto=format&q=80",
-                      "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&crop=face&auto=format&q=80"
+                      'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face&auto=format&q=80',
+                      'https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=150&h=150&fit=crop&crop=face&auto=format&q=80',
+                      'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face&auto=format&q=80',
+                      'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop&crop=face&auto=format&q=80',
+                      'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&crop=face&auto=format&q=80',
                     ].map((avatar, i) => (
-                      <div key={i} className="w-10 h-10 rounded-full border-2 border-ivory-silk overflow-hidden shadow-lg hover:scale-110 transition-transform duration-300 relative">
-                        <Image 
-                          src={avatar} 
-                          alt={`Client ${i + 1}`}
-                          fill
-                          className="object-cover"
-                          unoptimized
-                        />
+                      <div key={i} className="w-10 h-10 rounded-full border-2 border-ivory-silk overflow-hidden shadow-lg relative">
+                        <Image src={avatar} alt={`Client ${i + 1}`} fill className="object-cover" unoptimized />
                       </div>
                     ))}
                   </div>
@@ -106,55 +98,25 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            
-            {/* Right Column - World Map Image */}
+
+            {/* Right — World Map */}
             <div className="relative">
               <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-6 shadow-2xl border border-golden-opal/20">
                 <div className="relative w-full h-[350px] lg:h-[400px] rounded-2xl overflow-hidden bg-gradient-to-br from-ivory-silk to-muted-jade/20">
-                  <Image
-                    src={WorldMapImage}
-                    alt="Global reach - Active in 50+ countries"
-                    fill
-                    className="object-cover object-center"
-                    priority
-                  />
-                  
-                  {/* Gradient overlay for better text readability */}
+                  <Image src={WorldMapImage} alt="Global reach" fill className="object-cover object-center" priority />
                   <div className="absolute inset-0 bg-gradient-to-t from-onyx-black/20 via-transparent to-transparent"></div>
-                  
-                  {/* Floating stats cards */}
+
                   <div className="absolute top-4 left-4 bg-ivory-silk/95 backdrop-blur-sm rounded-xl p-3 shadow-lg border border-golden-opal/20">
-                    <div className="text-onyx-black font-bold text-lg">
-                      <CounterAnimation end={13} suffix="+" />
-                    </div>
+                    <div className="text-onyx-black font-bold text-lg"><CounterAnimation end={13} suffix="+" /></div>
                     <div className="text-muted-jade text-sm font-medium">Countries</div>
                   </div>
-                  
+
                   <div className="absolute top-4 right-4 bg-ivory-silk/95 backdrop-blur-sm rounded-xl p-3 shadow-lg border border-golden-opal/20">
-                    <div className="text-onyx-black font-bold text-lg">
-                      <CounterAnimation end={28} suffix="+" />
-                    </div>
+                    <div className="text-onyx-black font-bold text-lg"><CounterAnimation end={28} suffix="+" /></div>
                     <div className="text-muted-jade text-sm font-medium">Clients</div>
-                  </div>
-                  
-                  <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-golden-opal/95 backdrop-blur-sm rounded-xl px-4 py-2 shadow-lg">
-                    <div className="text-onyx-black font-semibold text-sm text-center">
-                      Global Presence
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="mt-6 text-center">
-                  <p className="text-muted-jade font-medium">Connecting businesses worldwide</p>
-                  <div className="flex items-center justify-center gap-2 mt-2">
-                    <div className="w-2 h-2 bg-golden-opal rounded-full animate-pulse"></div>
-                    <span className="text-golden-opal text-sm font-semibold">Live worldwide operations</span>
-                    <div className="w-2 h-2 bg-golden-opal rounded-full animate-pulse"></div>
                   </div>
                 </div>
               </div>
-              
-              {/* Floating decorative elements */}
               <div className="absolute -top-4 -right-4 w-20 h-20 bg-golden-opal/20 rounded-full blur-xl"></div>
               <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-muted-jade/20 rounded-full blur-xl"></div>
             </div>
@@ -162,164 +124,67 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-20 bg-imperial-emerald">
+      {/* ── STATS BAR ────────────────────────────────────────────────── */}
+      <section className="py-16 bg-imperial-emerald">
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-            <div className="text-center">
-              <div className="mb-3">
-                
-              </div>
-              <div className="text-4xl lg:text-5xl font-bold text-golden-opal mb-2">
-                <CounterAnimation end={93} suffix="%" />
-              </div>
-              <div className="text-ivory-silk font-medium">Success Rate</div>
-            </div>
-            <div className="text-center">
-              <div className="mb-3">
-                
-              </div>
-              <div className="text-4xl lg:text-5xl font-bold text-golden-opal mb-2">
-                <CounterAnimation end={28} suffix="+" />
-              </div>
-              <div className="text-ivory-silk font-medium">Clients</div>
-            </div>
-            <div className="text-center">
-              <div className="mb-3">
-                
-              </div>
-              <div className="text-4xl lg:text-5xl font-bold text-golden-opal mb-2">
-                <CounterAnimation end={12} suffix="+" />
-              </div>
-              <div className="text-ivory-silk font-medium">Years Experience</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Why Human-Driven Section */}
-      <section className="py-20 bg-ivory-silk">
-        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-onyx-black mb-6">
-              We at MillionCXO are <span className="text-gradient">Human‑Driven</span>
-            </h2>
-            <p className="text-xl text-muted-jade max-w-3xl mx-auto">
-               Human‑driven personalised outreach.
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-3 gap-6 lg:gap-8">
             {[
-              {
-                title: "Activity‑based research",
-                description: "We study each prospect's posts, comments, and intent before writing.",
-                step: "01",
-                icon: (
-                  <svg className="w-8 h-8 text-golden-opal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                  </svg>
-                )
-              },
-              {
-                title: "CXO‑first messaging",
-                description: "Conversation starters tailored to decision‑makers, not generic scripts.",
-                step: "02",
-                icon: (
-                  <svg className="w-8 h-8 text-golden-opal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                  </svg>
-                )
-              },
-              {
-                title: "Account Security",
-                description: "Automated outreach risks LinkedIn restrictions. Our human-led methodology preserves account integrity.",
-                step: "03",
-                icon: (
-                  <svg className="w-8 h-8 text-golden-opal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                  </svg>
-                )
-              }
-            ].map((service, index) => (
-              <ScrollAnimation key={index} delay={index * 100}>
-                <div className="card-modern group relative overflow-hidden h-full flex flex-col">
-                  <div className="absolute top-4 right-4 text-golden-opal/20 font-bold text-2xl">
-                    {service.step}
-                  </div>
-                  
-                  <div className="mb-4 p-3 bg-golden-opal/10 rounded-full w-fit group-hover:bg-golden-opal/20 transition-colors">
-                    {service.icon}
-                  </div>
-                  
-                  <h3 className="text-xl font-bold text-onyx-black mb-3 group-hover:text-golden-opal transition-colors">
-                    {service.title}
-                  </h3>
-                  <p className="text-muted-jade leading-relaxed flex-grow">
-                    {service.description}
-                  </p>
+              { end: 200, suffix: '+', label: 'Qualified Meetings Generated' },
+              { end: 28,  suffix: '+', label: 'Clients' },
+              { end: 30,  suffix: '',  label: 'Days to First Meeting' },
+            ].map(({ end, suffix, label }) => (
+              <div key={label} className="text-center">
+                <div className="text-4xl lg:text-5xl font-bold text-golden-opal mb-2">
+                  <CounterAnimation end={end} suffix={suffix} />
                 </div>
-              </ScrollAnimation>
+                <div className="text-ivory-silk font-medium text-sm lg:text-base">{label}</div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* LinkedIn Outreach Excellence 16X Section */}
-      <section id="linkedin-16x" className="py-20 bg-petrol-smoke">
+      {/* ── SDR AS A SERVICE ─────────────────────────────────────────── */}
+      <section id="sdr-section" className="py-20 bg-petrol-smoke">
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Header */}
-          <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-ivory-silk mb-6">
-              LinkedIn Outreach <span className="text-golden-opal">Excellence - 16X</span>
+
+          <div className="text-center mb-12">
+            <h2 className="text-4xl lg:text-5xl font-bold text-ivory-silk mb-4">
+              SDR as a <span className="text-golden-opal">Service</span>
             </h2>
-            <p className="text-xl text-muted-jade max-w-3xl mx-auto">
-              Research-driven. Conversation-focused. Human-led, not automated.
+            <p className="text-lg text-muted-jade italic max-w-2xl mx-auto">
+              We have the best sales engine — our pro-rated refund commitment proves it.
             </p>
           </div>
 
-          {/* Key Metrics Grid */}
+          {/* 3 Key Metrics */}
           <div className="grid md:grid-cols-3 gap-8 mb-16">
             {[
-              { 
-                value: "800", 
-                label: "InMails / License / Month", 
-                desc: "Delivered by trained SDRs - every message researched.",
-                icon: (
-                  <svg className="w-8 h-8 text-golden-opal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                  </svg>
-                )
+              {
+                value: '$150K',
+                label: 'Revenue Target per SDR/Quarter',
+                desc: 'We commit to quarterly revenue goals, not just activity numbers.',
+                icon: <DollarSign className="w-8 h-8 text-golden-opal" />,
               },
-              { 
-                value: "10×", 
-                label: "Cost Efficiency", 
-                desc: "Compared to in-house SDR teams. No additional tool costs. No hidden charges.",
-                icon: (
-                  <svg className="w-8 h-8 text-golden-opal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                  </svg>
-                )
+              {
+                value: 'Pro-Rated',
+                label: 'Refund on Missed Targets',
+                desc: 'Tiered guarantee: from 1 free month to 50% cash refund if we miss targets.',
+                icon: <Shield className="w-8 h-8 text-golden-opal" />,
               },
-              { 
-                value: "100%", 
-                label: "Account Safety Guarantee", 
-                desc: "Money-back guarantee if your LinkedIn account gets blocked. We protect your accounts.",
-                icon: (
-                  <svg className="w-8 h-8 text-golden-opal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                  </svg>
-                )
-              }
+              {
+                value: '7-Person',
+                label: 'Dedicated Specialist Team',
+                desc: 'AE, Junior AE, Data Researcher, LinkedIn Specialist, 3 Cold Callers — all included.',
+                icon: <Users className="w-8 h-8 text-golden-opal" />,
+              },
             ].map((item, idx) => (
               <ScrollAnimation key={idx} delay={idx * 100}>
                 <div className="card-glass text-center group">
                   <div className="w-16 h-16 bg-golden-opal/20 rounded-xl flex items-center justify-center mx-auto mb-6 group-hover:bg-golden-opal/30 transition-colors">
                     {item.icon}
                   </div>
-                  <h3 className="text-5xl font-bold text-golden-opal mb-3 group-hover:scale-105 transition-transform duration-300">
-                    {item.value}
-                  </h3>
+                  <h3 className="text-4xl font-bold text-golden-opal mb-3">{item.value}</h3>
                   <p className="text-ivory-silk text-lg font-semibold mb-2">{item.label}</p>
                   <p className="text-muted-jade text-sm leading-relaxed">{item.desc}</p>
                 </div>
@@ -327,51 +192,28 @@ export default function Home() {
             ))}
           </div>
 
-          {/* Features List */}
+          {/* Team Roles */}
           <ScrollAnimation>
-            <div className="bg-gradient-to-br from-ivory-silk/15 to-ivory-silk/10 backdrop-blur-sm rounded-2xl p-8 lg:p-12 border border-golden-opal/30 shadow-xl mb-12">
-              <h3 className="text-2xl font-bold text-ivory-silk mb-8 text-center">What You Get</h3>
+            <div className="bg-gradient-to-br from-ivory-silk/15 to-ivory-silk/10 backdrop-blur-sm rounded-2xl p-8 lg:p-12 border border-golden-opal/30 shadow-xl">
+              <h3 className="text-2xl font-bold text-ivory-silk mb-8 text-center">What's Included in Your Team</h3>
               <div className="grid md:grid-cols-2 gap-6">
                 {[
-                  {
-                    title: "800 InMails per license per month",
-                    text: "We deliver 800 InMails per license per month.",
-                    icon: Mail
-                  },
-                  {
-                    title: "Research-Based Outreach",
-                    text: "We analyze each prospect's LinkedIn activity before crafting personalized messages.",
-                    icon: FileSearch
-                  },
-                  {
-                    title: "Account Safety Guarantee",
-                    text: "100% money-back guarantee if any LinkedIn account gets blocked. We protect your accounts.",
-                    icon: Target
-                  },
-                  {
-                    title: "Industry's Lowest Price",
-                    text: "Starting at $150/month per license. ",
-                    icon: Wallet
-                  },
-                  {
-                    title: "Zero Tool Costs",
-                    text: "All tools included. No additional software or platform fees.",
-                    icon: Wallet
-                  }
-                ].map((feature, i) => {
-                  const IconComponent = feature.icon
+                  { title: 'Main Account Executive',       text: 'Sales leadership, presentations, and pitch delivery.',                           icon: Users },
+                  { title: 'Data Researcher',              text: 'Precise targeting, ICP profiling, and data quality management.',                  icon: Search },
+                  { title: 'LinkedIn Lead Gen Specialist', text: '800 InMails per Sales Navigator account per month.',                              icon: Mail },
+                  { title: 'Cold Callers (×3)',            text: 'Phone qualification, follow-up, and pipeline nurturing.',                         icon: Phone },
+                  { title: 'Full Tech Stack Included',     text: 'LinkedIn Navigator, dialer, email warm-up, CRM, analytics — zero extra cost.',    icon: Zap },
+                  { title: 'Performance Guarantee',        text: 'Tiered refund if Q1 targets are missed. Your risk is protected.',                 icon: Shield },
+                ].map((f, i) => {
+                  const Icon = f.icon
                   return (
                     <div key={i} className="flex items-start gap-4 group">
                       <div className="w-12 h-12 bg-golden-opal/20 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-golden-opal/30 transition-colors">
-                        <IconComponent className="w-6 h-6 text-golden-opal" />
+                        <Icon className="w-6 h-6 text-golden-opal" />
                       </div>
                       <div className="flex-1">
-                        <h4 className="text-ivory-silk font-bold text-lg mb-1 group-hover:text-golden-opal transition-colors">
-                          {feature.title}
-                        </h4>
-                        <p className="text-muted-jade text-sm leading-relaxed">
-                          {feature.text}
-                        </p>
+                        <h4 className="text-ivory-silk font-bold text-lg mb-1 group-hover:text-golden-opal transition-colors">{f.title}</h4>
+                        <p className="text-muted-jade text-sm leading-relaxed">{f.text}</p>
                       </div>
                     </div>
                   )
@@ -379,42 +221,10 @@ export default function Home() {
               </div>
             </div>
           </ScrollAnimation>
-
-          {/* CTA */}
-          <ScrollAnimation>
-            <div className="text-center">
-              <div className="bg-gradient-to-r from-golden-opal/10 via-golden-opal/5 to-golden-opal/10 border border-golden-opal/30 rounded-2xl p-10 backdrop-blur-sm">
-                <h3 className="text-3xl lg:text-4xl font-bold text-ivory-silk mb-4">
-                  Let&apos;s build conversations, not automation.
-                </h3>
-                <p className="text-muted-jade text-lg mb-8 max-w-2xl mx-auto">
-                  Every message crafted, every connection verified - human to human.
-                </p>
-                <Link
-                  href="https://calendly.com/millioncxo/loe-20x"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-primary text-lg px-10 py-4 inline-flex items-center"
-                  onClick={() => {
-                    if (typeof window !== 'undefined' && (window as any).gtag) {
-                      (window as any).gtag('event', 'conversion', {
-                        'send_to': 'AW-17718087441'
-                      });
-                    }
-                  }}
-                >
-                  Book a Free Demo
-                  <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </Link>
-              </div>
-            </div>
-          </ScrollAnimation>
         </div>
       </section>
 
-      {/* Pricing Section */}
+      {/* ── PRICING ──────────────────────────────────────────────────── */}
       <section id="pricing" className="py-24 bg-ivory-silk">
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
@@ -422,70 +232,23 @@ export default function Home() {
               Simple, Transparent <span className="text-gradient">Pricing</span>
             </h2>
             <p className="text-xl text-muted-jade max-w-2xl mx-auto">
-              No hidden fees. No long-term contracts. Just results.
+              30-day setup is FREE. No hidden fees. Billed quarterly.
             </p>
           </div>
-          
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto items-stretch">
-            {/* LinkedIn Outreach Excellence 16X */}
-            <ScrollAnimation delay={0}>
-              <div className="bg-white rounded-2xl shadow-lg border-2 border-golden-opal/30 p-8 sm:p-10 h-full flex flex-col">
-                <span className="inline-block px-3 py-1 rounded-full bg-golden-opal/15 text-golden-opal text-sm font-semibold mb-6 w-fit">
-                  Most Popular
-                </span>
-                <h3 className="text-2xl font-bold text-onyx-black mb-1">LinkedIn Outreach Excellence 16X</h3>
-                <p className="text-muted-jade text-sm mb-6">800 InMails/month · No Lock In</p>
-                <div className="flex items-baseline gap-2 mb-8">
-                  <span className="text-4xl font-bold text-golden-opal">$299</span>
-                  <span className="text-muted-jade font-medium">/ license/month</span>
-                </div>
-                <ul className="space-y-3 mb-8 flex-grow">
-                  <li className="flex items-center gap-3 text-onyx-black text-sm">
-                    <Mail className="w-4 h-4 text-golden-opal flex-shrink-0" />
-                    800 InMails per license per month
-                  </li>
-                  <li className="flex items-center gap-3 text-onyx-black text-sm">
-                    <FileSearch className="w-4 h-4 text-golden-opal flex-shrink-0" />
-                    Research-based outreach
-                  </li>
-                  <li className="flex items-center gap-3 text-onyx-black text-sm">
-                    <Shield className="w-4 h-4 text-golden-opal flex-shrink-0" />
-                    100% money-back if account blocked
-                  </li>
-                </ul>
-                <Link
-                  href="https://calendly.com/millioncxo/loe-20x"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block w-full py-4 px-6 rounded-xl bg-golden-opal hover:bg-golden-opal/90 text-onyx-black font-semibold text-center transition-colors mt-auto"
-                  onClick={() => {
-                    if (typeof window !== 'undefined' && (window as any).gtag) {
-                      (window as any).gtag('event', 'conversion', { 'send_to': 'AW-17718087441' });
-                    }
-                  }}
-                >
-                  Book a Free Demo
-                </Link>
-              </div>
-            </ScrollAnimation>
 
-            {/* SDR as a Service */}
-            <ScrollAnimation delay={100}>
-              <div className="relative bg-white rounded-2xl shadow-xl border-2 border-imperial-emerald/50 p-8 sm:p-10 h-full flex flex-col">
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-imperial-emerald text-ivory-silk px-6 py-1.5 rounded-full text-xs font-bold shadow-lg whitespace-nowrap tracking-wide">
-                  RECOMMENDED
-                </div>
-                <h3 className="text-2xl font-bold text-onyx-black mb-1 mt-2">SDR as a Service</h3>
-                <p className="text-muted-jade text-sm mb-5">Dedicated SDR team · Billed Quarterly</p>
+          <div className="max-w-2xl mx-auto">
+            <ScrollAnimation>
+              <div className="bg-white rounded-2xl shadow-luxury border border-golden-opal/20 p-8 sm:p-10 flex flex-col">
 
-                {/* Plan Toggle */}
-                <div className="flex items-center gap-1 mb-5 bg-ivory-silk rounded-xl p-1 border border-golden-opal/20">
+                <h3 className="text-2xl font-bold text-onyx-black mb-1">Choose Your Team Size</h3>
+                <p className="text-muted-jade text-sm mb-6">Dedicated SDR team · Billed Quarterly · 30-day setup FREE</p>
+
+                {/* Toggle */}
+                <div className="flex items-center gap-1 mb-6 bg-ivory-silk rounded-xl p-1 border border-golden-opal/20">
                   <button
                     onClick={() => setSdrPlan('3')}
-                    className={`flex-1 py-2 px-3 rounded-lg text-sm font-semibold transition-all ${
-                      sdrPlan === '3'
-                        ? 'bg-white shadow text-onyx-black'
-                        : 'text-muted-jade hover:text-onyx-black'
+                    className={`flex-1 py-2.5 px-3 rounded-lg text-sm font-semibold transition-all ${
+                      sdrPlan === '3' ? 'bg-white shadow text-onyx-black' : 'text-muted-jade hover:text-onyx-black'
                     }`}
                   >
                     <span className="block font-semibold">3 SDRs</span>
@@ -493,10 +256,8 @@ export default function Home() {
                   </button>
                   <button
                     onClick={() => setSdrPlan('5')}
-                    className={`flex-1 py-2 px-3 rounded-lg text-sm font-semibold transition-all relative ${
-                      sdrPlan === '5'
-                        ? 'bg-white shadow text-onyx-black'
-                        : 'text-muted-jade hover:text-onyx-black'
+                    className={`flex-1 py-2.5 px-3 rounded-lg text-sm font-semibold transition-all relative ${
+                      sdrPlan === '5' ? 'bg-white shadow text-onyx-black' : 'text-muted-jade hover:text-onyx-black'
                     }`}
                   >
                     <span className="block font-semibold">5 SDRs</span>
@@ -507,65 +268,38 @@ export default function Home() {
                   </button>
                 </div>
 
-                {/* Pricing */}
+                {/* Price */}
                 <div className="flex items-baseline gap-2 mb-1">
-                  <span className="text-4xl font-bold text-golden-opal">
+                  <span className="text-5xl font-bold text-golden-opal">
                     {sdrPlan === '3' ? '$3,199' : '$2,999'}
                   </span>
-                  <span className="text-muted-jade font-medium">/ SDR/month</span>
+                  <span className="text-muted-jade font-medium">/ SDR / month</span>
                 </div>
-                {sdrPlan === '5' && (
-                  <span className="text-golden-opal text-xs font-semibold mb-1">6% savings vs Starter</span>
-                )}
-                <p className="text-muted-jade text-xs mb-6">Billed Quarterly</p>
+                <p className="text-muted-jade text-xs mb-6">
+                  {sdrPlan === '3'
+                    ? '$9,597 / quarter total · 36 meetings/quarter · Billing starts Day 31'
+                    : '$14,995 / quarter total · 60 meetings/quarter · Billing starts Day 31'}
+                </p>
 
                 {/* Features */}
-                <ul className="space-y-3 mb-8 flex-grow">
+                <ul className="space-y-3 mb-8">
                   {sdrPlan === '3' ? (
                     <>
-                      <li className="flex items-center gap-3 text-onyx-black text-sm">
-                        <Check className="w-4 h-4 text-imperial-emerald flex-shrink-0" />
-                        3 dedicated SDRs
-                      </li>
-                      <li className="flex items-center gap-3 text-onyx-black text-sm">
-                        <Check className="w-4 h-4 text-imperial-emerald flex-shrink-0" />
-                        30-day setup (FREE)
-                      </li>
-                      <li className="flex items-center gap-3 text-onyx-black text-sm">
-                        <Check className="w-4 h-4 text-imperial-emerald flex-shrink-0" />
-                        Qualified CXO meetings per month
-                      </li>
-                      <li className="flex items-center gap-3 text-onyx-black text-sm">
-                        <Check className="w-4 h-4 text-imperial-emerald flex-shrink-0" />
-                        Tech stack included
-                      </li>
-                      <li className="flex items-center gap-3 text-onyx-black text-sm">
-                        <Check className="w-4 h-4 text-imperial-emerald flex-shrink-0" />
-                        Weekly performance reviews
-                      </li>
+                      <li className="flex items-center gap-3 text-onyx-black text-sm"><Check className="w-4 h-4 text-imperial-emerald flex-shrink-0" />3 dedicated SDRs + 1 Bench SDR</li>
+                      <li className="flex items-center gap-3 text-onyx-black text-sm"><Check className="w-4 h-4 text-imperial-emerald flex-shrink-0" />30-day setup FREE — billing starts Day 31</li>
+                      <li className="flex items-center gap-3 text-onyx-black text-sm"><Check className="w-4 h-4 text-imperial-emerald flex-shrink-0" />12 qualified meetings per SDR in Q1</li>
+                      <li className="flex items-center gap-3 text-onyx-black text-sm"><Check className="w-4 h-4 text-imperial-emerald flex-shrink-0" />Basic tech stack included</li>
+                      <li className="flex items-center gap-3 text-onyx-black text-sm"><Check className="w-4 h-4 text-imperial-emerald flex-shrink-0" />Weekly performance reviews</li>
+                      <li className="flex items-center gap-3 text-onyx-black text-sm"><Check className="w-4 h-4 text-imperial-emerald flex-shrink-0" />Pro-rated refund guarantee</li>
                     </>
                   ) : (
                     <>
-                      <li className="flex items-center gap-3 text-onyx-black text-sm">
-                        <Check className="w-4 h-4 text-imperial-emerald flex-shrink-0" />
-                        5 dedicated SDRs
-                      </li>
-                      <li className="flex items-center gap-3 text-onyx-black text-sm">
-                        <Check className="w-4 h-4 text-imperial-emerald flex-shrink-0" />
-                        Specialist team with AEs & researchers
-                      </li>
-                      <li className="flex items-center gap-3 text-onyx-black text-sm">
-                        <Check className="w-4 h-4 text-imperial-emerald flex-shrink-0" />
-                        Full tech stack included
-                      </li>
-                      <li className="flex items-center gap-3 text-onyx-black text-sm">
-                        <Check className="w-4 h-4 text-imperial-emerald flex-shrink-0" />
-                        Priority support
-                      </li>
-                      <li className="flex items-center gap-3 text-onyx-black text-sm">
-                        <Check className="w-4 h-4 text-imperial-emerald flex-shrink-0" />
-                        Bi-weekly strategy calls
-                      </li>
+                      <li className="flex items-center gap-3 text-onyx-black text-sm"><Check className="w-4 h-4 text-imperial-emerald flex-shrink-0" />5 dedicated SDRs + 2 Bench SDRs</li>
+                      <li className="flex items-center gap-3 text-onyx-black text-sm"><Check className="w-4 h-4 text-imperial-emerald flex-shrink-0" />Full 7-person specialist team (AE, AE Jr, Researcher, LinkedIn, 3 Callers)</li>
+                      <li className="flex items-center gap-3 text-onyx-black text-sm"><Check className="w-4 h-4 text-imperial-emerald flex-shrink-0" />Full tech stack included</li>
+                      <li className="flex items-center gap-3 text-onyx-black text-sm"><Check className="w-4 h-4 text-imperial-emerald flex-shrink-0" />Priority support & bi-weekly strategy calls</li>
+                      <li className="flex items-center gap-3 text-onyx-black text-sm"><Check className="w-4 h-4 text-imperial-emerald flex-shrink-0" />60 meetings/quarter target</li>
+                      <li className="flex items-center gap-3 text-onyx-black text-sm"><Check className="w-4 h-4 text-imperial-emerald flex-shrink-0" />Pro-rated refund + revenue incentive structure</li>
                     </>
                   )}
                 </ul>
@@ -574,187 +308,98 @@ export default function Home() {
                   href="https://calendly.com/millioncxo/loe-20x"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block w-full py-4 px-6 rounded-xl bg-imperial-emerald hover:bg-imperial-emerald/90 text-ivory-silk font-semibold text-center transition-colors mt-auto"
+                  className="block w-full py-4 px-6 rounded-xl bg-imperial-emerald hover:bg-imperial-emerald/90 text-ivory-silk font-semibold text-center transition-colors"
                   onClick={() => {
                     if (typeof window !== 'undefined' && (window as any).gtag) {
-                      (window as any).gtag('event', 'conversion', { 'send_to': 'AW-17718087441' });
+                      (window as any).gtag('event', 'conversion', { send_to: 'AW-17718087441' })
                     }
                   }}
                 >
                   Book a Free Demo
                 </Link>
+
+                <p className="text-center text-xs text-muted-jade mt-4">
+                  Looking for LinkedIn-only outreach?{' '}
+                  <Link href="/linkedin-outreach" className="text-golden-opal hover:underline font-medium">
+                    See LinkedIn Outreach Excellence →
+                  </Link>
+                </p>
               </div>
             </ScrollAnimation>
           </div>
         </div>
       </section>
 
-      {/* Measurable Outcomes - Comparison Table */}
-      <section className="py-20 bg-gradient-to-br from-ivory-silk via-ivory-silk/95 to-muted-jade/5 relative overflow-hidden">
-        {/* Decorative background elements */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute top-20 right-20 w-64 h-64 bg-golden-opal rounded-full blur-3xl"></div>
-          <div className="absolute bottom-20 left-20 w-48 h-48 bg-imperial-emerald rounded-full blur-3xl"></div>
-        </div>
-        
-        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-12 sm:mb-16">
-            
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-onyx-black mb-4 sm:mb-6">
+      {/* ── COMPARISON TABLE ─────────────────────────────────────────── */}
+      <section className="py-20 bg-ivory-silk">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-onyx-black mb-4">
               Measurable <span className="text-gradient">Outcomes</span>
             </h2>
-            <p className="text-lg sm:text-xl text-muted-jade max-w-3xl mx-auto px-4">
+            <p className="text-lg text-muted-jade max-w-2xl mx-auto">
               Real results that speak for themselves
             </p>
           </div>
-          
-          <div className="overflow-x-auto -mx-4 sm:mx-0">
-            <div className="bg-ivory-silk/80 backdrop-blur-sm rounded-2xl sm:rounded-3xl shadow-2xl border-2 border-golden-opal/30 p-1 min-w-full sm:min-w-0">
-              <table className="w-full rounded-xl sm:rounded-2xl overflow-hidden">
+
+          <div className="overflow-x-auto">
+            <div className="bg-white rounded-2xl shadow-luxury border border-golden-opal/20 overflow-hidden">
+              <table className="w-full">
                 <thead>
                   <tr className="bg-gradient-to-r from-imperial-emerald via-petrol-smoke to-imperial-emerald">
-                    <th className="px-2 py-3 sm:px-4 sm:py-4 lg:px-6 lg:py-5 text-left text-ivory-silk font-bold text-xs sm:text-sm lg:text-base">Metric</th>
-                    <th className="px-2 py-3 sm:px-4 sm:py-4 lg:px-6 lg:py-5 text-center text-golden-opal font-bold text-xs sm:text-sm lg:text-base">MillionCXO</th>
-                    <th className="px-2 py-3 sm:px-4 sm:py-4 lg:px-6 lg:py-5 text-center text-muted-jade/80 font-semibold text-xs sm:text-sm lg:text-base">Generic Agency</th>
-                    <th className="px-2 py-3 sm:px-4 sm:py-4 lg:px-6 lg:py-5 text-center text-muted-jade/80 font-semibold text-xs sm:text-sm lg:text-base">In‑House Sales Team</th>
+                    <th className="px-6 py-5 text-left text-ivory-silk font-bold text-sm">Metric</th>
+                    <th className="px-6 py-5 text-center text-golden-opal font-bold text-sm">MillionCXO</th>
+                    <th className="px-6 py-5 text-center text-muted-jade/80 font-semibold text-sm">Generic Agency</th>
+                    <th className="px-6 py-5 text-center text-muted-jade/80 font-semibold text-sm">In-House Team</th>
                   </tr>
                 </thead>
-                <tbody className="bg-ivory-silk divide-y divide-golden-opal/20">
+                <tbody className="divide-y divide-golden-opal/10">
                   {[
-                    {
-                      metric: "Cost to generate 1 appointment",
-                      values: ["< $70", "> $500", "> $800"]
-                    },
-                    {
-                      metric: "LinkedIn InMails per license/month",
-                      values: ["800", "< 50", "< 50"]
-                    },
-                    {
-                      metric: "Pricing",
-                      values: ["$299", "$350", "$1500"]
-                    },
-                    {
-                      metric: "Account Safety Guarantee",
-                      values: ["Yes", "No", "No"]
-                    }
+                    { metric: 'Setup Time',                     values: ['30 Days',       '60–90 Days',   '3–6 Months'] },
+                    { metric: 'Cost per SDR / month',           values: ['$2,999',         '$4,000+',      '$8,000–10,000'] },
+                    { metric: 'Revenue Target Accountability',  values: ['Yes',            'No',           'No'] },
+                    { metric: 'Refund Guarantee',               values: ['Yes (tiered)',   'No',           'No'] },
+                    { metric: 'Specialist Team Included',       values: ['Yes (7 roles)',  'No',           'Separate hires'] },
                   ].map((row, index) => (
-                    <tr key={index} className="hover:bg-golden-opal/10 transition-all duration-300 group">
-                      <td className="px-2 py-3 sm:px-4 sm:py-4 lg:px-6 lg:py-5 text-onyx-black font-semibold text-xs sm:text-sm lg:text-base group-hover:text-golden-opal transition-colors">{row.metric}</td>
-                      <td className="px-2 py-3 sm:px-4 sm:py-4 lg:px-6 lg:py-5 text-center">
-                        <span className="inline-flex items-center px-2 py-1 sm:px-3 sm:py-1.5 lg:px-4 lg:py-2 bg-gradient-to-r from-golden-opal/20 to-golden-opal/30 text-golden-opal rounded-full font-bold text-xs sm:text-sm shadow-md border border-golden-opal/40">
-                          {row.values[0]}
-                        </span>
+                    <tr key={index} className="hover:bg-golden-opal/5 transition-colors">
+                      <td className="px-6 py-4 text-onyx-black font-semibold text-sm">{row.metric}</td>
+                      <td className="px-6 py-4 text-center">
+                        <span className="font-bold text-golden-opal text-sm">{row.values[0]}</span>
                       </td>
-                      <td className="px-2 py-3 sm:px-4 sm:py-4 lg:px-6 lg:py-5 text-center text-muted-jade font-medium text-xs sm:text-sm lg:text-base">{row.values[1]}</td>
-                      <td className="px-2 py-3 sm:px-4 sm:py-4 lg:px-6 lg:py-5 text-center text-muted-jade font-medium text-xs sm:text-sm lg:text-base">{row.values[2]}</td>
+                      <td className="px-6 py-4 text-center text-muted-jade text-sm">{row.values[1]}</td>
+                      <td className="px-6 py-4 text-center text-muted-jade text-sm">{row.values[2]}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
           </div>
-          
         </div>
       </section>
 
-      {/* Process Section - Outbound the Human Way */}
-      <section id="process" className="py-24 bg-gradient-to-br from-petrol-smoke via-imperial-emerald to-petrol-smoke relative overflow-hidden">
-        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-12 sm:mb-16">
-            
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-ivory-silk mb-4 sm:mb-6">
-              Outbound, the <span className="text-golden-opal">Human Way</span>
-            </h2>
-            <p className="text-lg sm:text-xl text-muted-jade max-w-3xl mx-auto px-4">
-              A systematic approach that consistently delivers results
-            </p>
-          </div>
-
-          <ProcessStepper
-            steps={[
-              {
-                step: "01",
-                title: "Data Mining",
-                description: "Sales Navigator and public signals to build clean lists.",
-                icon: Search
-              },
-              {
-                step: "02",
-                title: "Profiling",
-                description: "Industry, role, geo, tech stack, revenue fit.",
-                icon: UserCheck
-              },
-              {
-                step: "03",
-                title: "Cleaning",
-                description: "Activity‑based filters from posts, comments, and likes.",
-                icon: Filter
-              },
-              {
-                step: "04",
-                title: "InMail Outreach",
-                description: "800 InMails per license per month, hand‑written.",
-                icon: Mail
-              },
-              {
-                step: "05",
-                title: "Response → Booking",
-                description: "Our team confirms, your team gets calendar holds.",
-                icon: Calendar
-              },
-              {
-                step: "06",
-                title: "Meeting Conducted",
-                description: "Real conversations. Real pipeline.",
-                icon: MessageSquare
-              }
-            ]}
-            autoCycleInterval={2500}
-          />
-        </div>
-      </section>
-
-      {/* Testimonials Section */}
-      <section className="py-20 bg-ivory-silk">
+      {/* ── TESTIMONIALS ─────────────────────────────────────────────── */}
+      <section className="py-20 bg-imperial-emerald">
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-onyx-black mb-6">
-              What Our <span className="text-gradient">Clients Say</span>
+          <div className="text-center mb-14">
+            <h2 className="text-4xl lg:text-5xl font-bold text-ivory-silk mb-4">
+              What Our <span className="text-golden-opal">Clients Say</span>
             </h2>
           </div>
-          
+
           <div className="grid md:grid-cols-3 gap-8">
             {[
-              {
-                quote: "MillionCXO booked 23 qualified meetings in our first month. The quality was incredible.",
-                author: "Sarah Chen",
-                role: "VP of Sales"
-              },
-              {
-                quote: "Finally, a service that delivers on its promises. 10x ROI in 90 days.",
-                author: "Michael Rodriguez",
-                role: "Founder"
-              },
-              {
-                quote: "The best investment we made for our sales pipeline. Highly recommend!",
-                author: "Jennifer Park",
-                role: "Chief Revenue Officer"
-              }
-            ].map((testimonial, index) => (
-              <ScrollAnimation key={index} delay={index * 100}>
-                <div className="card-modern text-center">
-                  <div className="mb-4">
-                    <svg className="w-12 h-12 text-golden-opal mx-auto" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
-                    </svg>
-                  </div>
-                  <p className="text-muted-jade italic mb-6 text-lg">
-                    {testimonial.quote}
-                  </p>
-                  <div>
-                    <div className="font-semibold text-onyx-black">{testimonial.author}</div>
-                    <div className="text-muted-jade">{testimonial.role}</div>
-                  </div>
+              { quote: 'MillionCXO deployed a full SDR team in under 30 days. We hit 18 qualified meetings in Q1 — exceeded every target.', author: 'Sarah Chen', role: 'VP of Sales' },
+              { quote: 'Finally, accountability that matches ours. The pro-rated refund guarantee gave us confidence to commit. 10x ROI in 90 days.', author: 'Michael Rodriguez', role: 'Founder' },
+              { quote: '200+ qualified meetings in 12 months. $2M+ pipeline attributed. The specialist team model is unlike anything we\'ve seen.', author: 'Jennifer Park', role: 'Chief Revenue Officer' },
+            ].map((t, i) => (
+              <ScrollAnimation key={i} delay={i * 100}>
+                <div className="bg-ivory-silk/10 border border-ivory-silk/20 rounded-2xl p-8 text-center">
+                  <svg className="w-8 h-8 text-golden-opal mx-auto mb-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                  </svg>
+                  <p className="text-ivory-silk/90 italic mb-6 leading-relaxed">{t.quote}</p>
+                  <div className="font-semibold text-golden-opal">{t.author}</div>
+                  <div className="text-muted-jade text-sm mt-1">{t.role}</div>
                 </div>
               </ScrollAnimation>
             ))}
@@ -762,38 +407,31 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-imperial-emerald to-petrol-smoke">
-        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-4xl lg:text-5xl font-bold text-ivory-silk mb-6">
-              Ready to turn LinkedIn into real pipeline?
-            </h2>
-            <p className="text-xl text-muted-jade mb-8 max-w-2xl mx-auto">
-              Speak with a strategist. We&apos;ll map your ICP and messaging in the first call.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="https://calendly.com/millioncxo/loe-20x" target="_blank" rel="noopener noreferrer" className="btn-primary text-lg px-10 py-4"
-                onClick={() => {
-                  if (typeof window !== 'undefined' && (window as any).gtag) {
-                    (window as any).gtag('event', 'conversion', {
-                      'send_to': 'AW-17718087441'
-                    });
-                  }
-                }}
-              >
-                Book a Free Demo
-              </Link>
-              <Link href="/#linkedin-16x" className="btn-outline text-lg px-10 py-4">
-                Learn More About 16X
-              </Link>
-            </div>
-            
-           
-          </div>
+      {/* ── FINAL CTA ────────────────────────────────────────────────── */}
+      <section className="py-20 bg-gradient-to-br from-ivory-silk to-muted-jade/10">
+        <div className="w-full max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-4xl lg:text-5xl font-bold text-onyx-black mb-4">
+            Ready to Build Your <span className="text-gradient">Revenue Engine?</span>
+          </h2>
+          <p className="text-xl text-muted-jade mb-10 max-w-xl mx-auto">
+            Deploy 3 or 5 dedicated SDRs in 30 days. Zero hiring risk. Pro-rated refund if we miss targets.
+          </p>
+          <Link
+            href="https://calendly.com/millioncxo/loe-20x"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-primary text-lg px-10 py-4 inline-flex items-center"
+            onClick={() => {
+              if (typeof window !== 'undefined' && (window as any).gtag) {
+                (window as any).gtag('event', 'conversion', { send_to: 'AW-17718087441' })
+              }
+            }}
+          >
+            Book a Free Demo
+          </Link>
         </div>
       </section>
+
     </div>
   )
-} 
+}
