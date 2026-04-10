@@ -18,10 +18,9 @@ const tocItems = [
   { href: '#s9', label: '9. Cookies and Tracking' },
   { href: '#s10', label: '10. Data Security' },
   { href: '#s11', label: '11. Your Rights' },
-  { href: '#s12', label: "12. Children's Privacy" },
-  { href: '#s13', label: '13. Amendments' },
-  { href: '#s14', label: '14. Governing Law' },
-  { href: '#s15', label: '15. Contact and Grievances' },
+  { href: '#s13', label: '12. Amendments' },
+  { href: '#s14', label: '13. Governing Law' },
+  { href: '#s15', label: '14. Contact and Grievances' },
 ]
 
 const tocFooterLinks = [
@@ -190,11 +189,6 @@ const contentHtml = `
   <p class="legal">To exercise any of the above rights, please submit a written request to the Company's Grievance Officer (see Section 15). The Company will respond within thirty (30) days of receipt of a valid request, subject to verification of identity.</p>
 </section>
 
-<section class="doc-section" id="s12">
-  <div class="section-header"><span class="section-num">§ 12</span><h2>Children's Privacy</h2></div>
-  <p class="legal">The Company's website and Services are directed exclusively at business entities and individual professionals. The Company does not knowingly collect, process, or store Personal Data from individuals under the age of eighteen (18). If the Company becomes aware that it has inadvertently collected Personal Data from a minor, such data will be promptly deleted. If you believe that a minor's data has been submitted to the Company, please contact the Grievance Officer immediately.</p>
-</section>
-
 <section class="doc-section" id="s13">
   <div class="section-header"><span class="section-num">§ 13</span><h2>Amendments to This Policy</h2></div>
   <p class="legal">The Company reserves the right to amend or update this Policy at any time to reflect changes in applicable law, regulatory guidance, or the Company's data practices. Material amendments will be notified to registered Clients via electronic communication to the email address on record, at least fourteen (14) days prior to the effective date of such amendments.</p>
@@ -213,18 +207,6 @@ const contentHtml = `
     <dt>Grievance Officer</dt>
     <dd>Abhinav Kumar, Managing Director<br/>MillionCXO Outreach Private Limited<br/>235, Binnamangala, 2nd Floor, 13th Cross Road, 2nd Stage, Indiranagar, Bengaluru – 560038, Karnataka, India<br/>Email: info@millioncxo.com<br/>Response time: Within 30 days of receipt</dd>
   </dl>
-  <div class="sig-block">
-    <div class="sig-col">
-      <h4>Issued By</h4>
-      <p>MillionCXO Outreach Private Limited<br/>Bengaluru, Karnataka, India</p>
-      <div class="sig-line"></div>
-      <p style="font-size:0.8rem;">Authorised Signatory</p>
-    </div>
-    <div class="sig-col">
-      <h4>Document Reference</h4>
-      <p>Document: MCXO-PP-2025-01<br/>Version: 1.0<br/>Effective: 1 March 2025<br/>Review Due: 1 March 2026</p>
-    </div>
-  </div>
 </section>
 `
 

@@ -225,18 +225,6 @@ const contentHtml = `
     <dt>MillionCXO Outreach Private Limited</dt>
     <dd>235, Binnamangala, 2nd Floor, 13th Cross Road, 2nd Stage, Indiranagar, Bengaluru – 560038, Karnataka, India<br/>Email: info@millioncxo.com (Subject: Refund Request / Cancellation Notice)<br/>Response time: Within 2 business days of receipt</dd>
   </dl>
-  <div class="sig-block">
-    <div class="sig-col">
-      <h4>Issued By</h4>
-      <p>MillionCXO Outreach Private Limited<br/>Bengaluru, Karnataka, India</p>
-      <div class="sig-line"></div>
-      <p style="font-size:0.8rem;">Authorised Signatory</p>
-    </div>
-    <div class="sig-col">
-      <h4>Document Reference</h4>
-      <p>Document: MCXO-RCP-2025-01<br/>Version: 1.0<br/>Effective: 1 March 2025<br/>Review Due: 1 March 2026</p>
-    </div>
-  </div>
 </section>
 `
 
