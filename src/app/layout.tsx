@@ -10,42 +10,43 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Maximize LinkedIn Outreach by 16X | MillionCXO - 800 InMails per License',
-  description: 'Maximize your LinkedIn outreach efficiency by 16X with MillionCXO. Get 800 InMails per license per month, research-based outreach, and 100% account safety guarantee. Starts at $299 - No Lock In, Monthly Billing.',
+  title: 'SDR as a Service | MillionCXO Revenue-Driven Sales Teams',
+  description: 'MillionCXO deploys lead generation specialists and account executives who turn ICP research into qualified meetings and closed revenue, with revenue targets and performance guarantees.',
   keywords: [
-    'LinkedIn outreach 16X',
-    'maximize LinkedIn outreach',
-    'LinkedIn InMail outreach',
+    'SDR as a Service',
+    'outsourced SDR team',
+    'outsourced sales team',
+    'revenue-driven sales team',
+    'account executive service',
     'B2B lead generation',
-    'LinkedIn appointment setting',
-    'CXO outreach',
-    'LinkedIn outreach excellence',
-    'human-driven LinkedIn outreach',
+    'B2B appointment setting',
+    'sales development representatives',
+    'qualified meetings',
+    'BANT qualification',
+    'revenue accountability',
     'research-based outreach',
-    'LinkedIn account safety',
-    'B2B sales pipeline',
-    'LinkedIn lead generation service'
+    'B2B sales pipeline'
   ],
   openGraph: {
-    title: 'Maximize LinkedIn Outreach by 16X | MillionCXO',
-    description: 'Get 800 InMails per license per month and research-based human-driven outreach. Starts at $299 - No Lock In, Monthly Billing.',
+    title: 'SDR as a Service | MillionCXO',
+    description: 'Deploy a revenue-driven sales team for lead generation, account executive coverage, reporting, and performance-backed growth.',
     url: 'https://millioncxo.com',
     siteName: 'MillionCXO',
     type: 'website',
     images: [
       {
-        url: 'https://millioncxo.com/logo.svg',
+        url: 'https://millioncxo.com/opengraph-image',
         width: 1200,
         height: 630,
-        alt: 'MillionCXO Logo - LinkedIn Outreach Excellence 16X',
+        alt: 'MillionCXO SDR as a Service preview',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Maximize LinkedIn Outreach by 16X | MillionCXO',
-    description: '800 InMails per license per month, research-based outreach. Human-driven LinkedIn excellence. Starts at $299 - No Lock In.',
-    images: ['https://millioncxo.com/logo.svg'],
+    title: 'SDR as a Service | MillionCXO',
+    description: 'Revenue-driven lead generation and account executive teams with target accountability.',
+    images: ['https://millioncxo.com/opengraph-image'],
   },
   alternates: {
     canonical: 'https://millioncxo.com',
