@@ -7,76 +7,57 @@ import ChatToggle from './ChatToggle'
 
 const STEPS = {
   welcome: {
-    text: "Hi! 👋 I'm your millionCXO Assistant. What are you looking for today?",
+    text: "Hi, I can help you map the right MillionCXO sales team. Where are you stuck right now?",
     options: [
-      "LinkedIn Outreach Excellence 16X",
-      "SDR as a Service",
-      "Just have questions"
+      "Need more meetings",
+      "Need to convert meetings",
+      "LinkedIn Outreach 16X",
+      "Plan team size"
     ]
   },
-  linkedin_20x: {
-    text: `Our **LinkedIn Outreach Excellence 16X** delivers 800 InMails per license per month with research-based outreach.\n- Starts at $299/month per license\n- No Lock In - Monthly Billing\n- 100% money-back guarantee if your account gets blocked\n- Zero additional tool costs\n\nWould you like to learn more or book a Free Demo?`,
+  linkedin_16x: {
+    text: `**LinkedIn Outreach Excellence 16X** is for managed LinkedIn outreach:\n- 800 InMails per Sales Navigator license/month\n- Research-based personalised outreach\n- Human-led execution, not automation\n- Account safety guarantee\n- $299/license/month\n- No lock-in, monthly billing`,
     options: [
-      "Tell me more about 16X",
-      "Book a Free Demo",
+      "Book a strategy call",
+      "Need full SDR service",
       "Back to main menu"
     ]
   },
-  linkedin_20x_more: {
-    text: `**LinkedIn Outreach Excellence 16X Details:**\n- 800 InMails per license per month (vs LinkedIn's 50)\n- Research-based outreach using prospect's LinkedIn activity\n- No Lock In - Monthly Billing\n- Account safety guarantee: 100% refund if account gets blocked\n- Starts at $299/month per license\n- All tools included, no hidden costs\n\nReady to book a Free Demo?`,
+  lead_generation: {
+    text: `For meeting generation, the **All-Rounder Lead Gen Executive** package includes:\n- Up to 10 Sales Navigator licences\n- Up to 5,000+ InMails/month\n- 30+ personalised emails/day\n- Target: 16+ conducted meetings/month\n- $1,200/month quarterly or $1,500/month monthly\n\nNeed cold calling too? A Cold Caller can be added for $300/month.`,
     options: [
-      "Book a Free Demo",
+      "Need to convert meetings",
+      "Book a strategy call",
       "Back to main menu"
     ]
   },
-  sdr_service: {
-    text: `Our **SDR as a Service** provides a dedicated full-time SDR for your outreach campaigns.\n- $2,000/month\n- 200+ emails/day\n- 150+ cold calls/day\n- 80 ICP profiles researched/day\n- Target: 4+ qualified CXO meetings/month\n\nWant to discuss your specific needs or book a Free Demo?`,
+  conversion: {
+    text: `For conversion, the **Account Executive** package supports:\n- Client calls, meetings and presentations\n- Pitching and demo delivery\n- BANT qualification\n- End-to-end deal closure\n- Revenue target: about $200K/year per AE\n- $2,800/month quarterly or $3,200/month monthly`,
     options: [
-      "Book a Free Demo",
-      "Tell me more",
+      "Plan team size",
+      "Book a strategy call",
       "Back to main menu"
     ]
   },
-  sdr_more: {
-    text: `**SDR as a Service Details:**\n- Dedicated full-time SDR on your campaigns\n- Daily reporting and CRM integration\n- Trained in your value proposition before outreach\n- Human-driven, no automation\n- Guaranteed qualified meetings (your ICP, your criteria)\n\nWant to see how this works? Book a Free Demo!`,
+  team_size: {
+    text: `The standard planning math is simple:\n- Each AE carries about $200K/year target\n- 1 Lead Gen Executive supports up to 2 AEs\n- Example: $600K/year target means 3 AEs + 2 Lead Gen Executives\n\nFor exact team sizing, it is best to discuss your revenue goal.`,
     options: [
-      "Book a Free Demo",
+      "Book a strategy call",
       "Back to main menu"
     ]
   },
   questions: {
-    text: "Ask me anything about our LinkedIn Outreach Excellence 16X or SDR as a Service - or type your question below. For most questions, I'll suggest a Free Demo to make things easier.",
+    text: "You can ask about lead generation, Account Executives, team sizing, reporting cadence, or the performance guarantee.",
     options: [
-      "What's included in each service?",
-      "How do you ensure account safety?",
-      "Can you customize for my industry?",
-      "Book a Free Demo",
-      "Back to main menu"
-    ]
-  },
-  included_services: {
-    text: `Each service is customized to your GTM goals:\n\n**LinkedIn Outreach Excellence 16X:** 800 InMails/license/month, starts at $299, No Lock In\n\n**SDR as a Service:** Full-time dedicated SDR, 4+ CXO meetings/month\n\nFor full details and a custom proposal, would you like to book a Free Demo?`,
-    options: [
-      "Book a Free Demo",
-      "Back to main menu"
-    ]
-  },
-  account_safety: {
-    text: `We guarantee **100% account safety** with our human-driven approach:\n- Zero automation, no bots\n- Research-based outreach using LinkedIn activity\n- Human-led methodology preserves account integrity\n- 100% money-back guarantee if any LinkedIn account gets blocked\n\nWant to learn more? Book a Free Demo!`,
-    options: [
-      "Book a Free Demo",
-      "Back to main menu"
-    ]
-  },
-  customize: {
-    text: `Absolutely! Every engagement is tailored - startup, SaaS, consulting, services. We customize our approach to your industry, ICP, and goals. Book a Free Demo for a custom roadmap?`,
-    options: [
-      "Book a Free Demo",
+      "Need more meetings",
+      "Need to convert meetings",
+      "Plan team size",
+      "Book a strategy call",
       "Back to main menu"
     ]
   },
   book_call: {
-    text: `Great! Opening our booking calendar in a new tab. See you soon!`,
+    text: `Opening the booking calendar in a new tab.`,
     options: []
   }
 }
@@ -95,16 +76,12 @@ export default function ChatWidget() {
   const [currentStep, setCurrentStep] = useState<StepKey>('welcome')
   const [isTyping, setIsTyping] = useState(false)
 
-  // Auto-open chat on page visit
-  // 20 seconds delay for landing page, 1 second for other pages
+  // Keep chat closed by default on the redesigned pages so it does not interrupt the story.
   useEffect(() => {
-    const isLandingPage = pathname === '/landingpage'
-    const delay = isLandingPage ? 20000 : 1000 // 20 seconds for landing page, 1 second for others
-    
-    const timer = setTimeout(() => {
-      setIsOpen(true)
-    }, delay)
-    return () => clearTimeout(timer)
+    if (pathname === '/landingpage') {
+      const timer = setTimeout(() => setIsOpen(true), 20000)
+      return () => clearTimeout(timer)
+    }
   }, [pathname])
 
   const handleToggle = () => setIsOpen(!isOpen)
@@ -129,17 +106,19 @@ export default function ChatWidget() {
 
       // Top-level routing
       if (currentStep === "welcome") {
-        if (userInput.toLowerCase().includes("16x") || userInput.toLowerCase().includes("20x") || userInput.toLowerCase().includes("linkedin outreach") || userInput.toLowerCase().includes("excellence")) nextStep = "linkedin_20x"
-        else if (userInput.toLowerCase().includes("sdr")) nextStep = "sdr_service"
+        if (userInput.toLowerCase().includes("linkedin") || userInput.toLowerCase().includes("16x") || userInput.toLowerCase().includes("inmail")) nextStep = "linkedin_16x"
+        else if (userInput.toLowerCase().includes("meeting") || userInput.toLowerCase().includes("lead")) nextStep = "lead_generation"
+        else if (userInput.toLowerCase().includes("convert") || userInput.toLowerCase().includes("revenue") || userInput.toLowerCase().includes("ae")) nextStep = "conversion"
+        else if (userInput.toLowerCase().includes("team") || userInput.toLowerCase().includes("size") || userInput.toLowerCase().includes("plan")) nextStep = "team_size"
         else if (userInput.toLowerCase().includes("question") || userInput.toLowerCase().includes("help") || userInput.toLowerCase().includes("info")) nextStep = "questions"
         else nextStep = "welcome"
       }
-      else if (currentStep === "linkedin_20x" && (userInput.toLowerCase().includes("tell") || userInput.toLowerCase().includes("more"))) nextStep = "linkedin_20x_more"
-      else if (currentStep === "sdr_service" && (userInput.toLowerCase().includes("tell") || userInput.toLowerCase().includes("more"))) nextStep = "sdr_more"
-      else if ((currentStep === "linkedin_20x" || currentStep === "linkedin_20x_more" || currentStep === "sdr_service" || currentStep === "sdr_more" || currentStep === "included_services" || currentStep === "account_safety" || currentStep === "customize" || currentStep === "questions") && userInput.toLowerCase().includes("book")) nextStep = "book_call"
-      else if (currentStep === "questions" && userInput.toLowerCase().includes("included")) nextStep = "included_services"
-      else if (currentStep === "questions" && (userInput.toLowerCase().includes("safety") || userInput.toLowerCase().includes("account"))) nextStep = "account_safety"
-      else if (currentStep === "questions" && userInput.toLowerCase().includes("customize")) nextStep = "customize"
+      else if (userInput.toLowerCase().includes("linkedin") || userInput.toLowerCase().includes("16x") || userInput.toLowerCase().includes("inmail")) nextStep = "linkedin_16x"
+      else if (userInput.toLowerCase().includes("full sdr") || userInput.toLowerCase().includes("sdr service")) nextStep = "lead_generation"
+      else if (userInput.toLowerCase().includes("meeting") || userInput.toLowerCase().includes("lead")) nextStep = "lead_generation"
+      else if (userInput.toLowerCase().includes("convert") || userInput.toLowerCase().includes("revenue") || userInput.toLowerCase().includes("ae")) nextStep = "conversion"
+      else if (userInput.toLowerCase().includes("team") || userInput.toLowerCase().includes("size") || userInput.toLowerCase().includes("plan")) nextStep = "team_size"
+      else if ((currentStep === "linkedin_16x" || currentStep === "lead_generation" || currentStep === "conversion" || currentStep === "team_size" || currentStep === "questions") && userInput.toLowerCase().includes("book")) nextStep = "book_call"
       else if (userInput.toLowerCase().includes("back")) nextStep = "welcome"
 
       // Booking link step
@@ -177,21 +156,21 @@ export default function ChatWidget() {
     <>
       <div className={`fixed bottom-5 right-5 z-50 transition-all duration-300 ${isOpen ? 'w-[calc(100%-40px)] max-w-md' : 'w-auto h-auto'}`}>
         {isOpen ? (
-          <div className="bg-ivory-silk/95 backdrop-blur-lg rounded-2xl shadow-2xl border border-golden-opal/20 overflow-hidden w-full h-full flex flex-col">
+          <div className="chat-widget-container overflow-hidden rounded-[1.5rem] w-full h-full flex flex-col">
             {/* Header */}
-            <div className="flex items-center justify-between p-4 border-b border-golden-opal/20 bg-gradient-to-r from-imperial-emerald to-petrol-smoke">
+            <div className="chat-header flex items-center justify-between p-4">
               <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 rounded-full bg-golden-opal flex items-center justify-center">
-                  <svg className="w-6 h-6 text-onyx-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-10 h-10 rounded-full bg-[#1f2a1d] flex items-center justify-center">
+                  <svg className="w-5 h-5 text-ivory-silk" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
                   </svg>
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-ivory-silk">millionCXO Assistant</h3>
-                  <p className="text-xs text-muted-jade">Typically replies instantly</p>
+                  <h3 className="text-base font-semibold text-[#1f2a1d]">millionCXO Assistant</h3>
+                  <p className="text-xs text-[#4b5b47]">Sales team planner</p>
                 </div>
               </div>
-              <button onClick={handleToggle} className="p-2 rounded-full text-ivory-silk hover:bg-golden-opal/20 transition-colors">
+              <button onClick={handleToggle} className="p-2 rounded-full text-[#1f2a1d] hover:bg-[#1f2a1d]/5 transition-colors">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7"></path>
                 </svg>
@@ -199,7 +178,7 @@ export default function ChatWidget() {
             </div>
 
             {/* Chat Body */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4 min-h-[400px] max-h-[60vh]">
+            <div className="flex-1 overflow-y-auto p-4 space-y-4 min-h-[360px] max-h-[58vh]">
               {messages.map(msg => (
                 <ChatMessage 
                   key={msg.id} 
@@ -228,7 +207,7 @@ export default function ChatWidget() {
                   className="chat-input flex-1"
                 />
                 <button onClick={handleSendMessage} className="chat-send-button">
-                  <svg className="w-5 h-5 text-golden-opal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5 text-ivory-silk" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
                   </svg>
                 </button>

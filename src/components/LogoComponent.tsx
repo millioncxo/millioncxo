@@ -5,9 +5,22 @@ interface LogoComponentProps {
   width?: number
   height?: number
   hoverGradient?: boolean
+  variant?: 'onLight' | 'onDark'
 }
 
-export default function LogoComponent({ className = "", width = 100, height = 55, hoverGradient = false }: LogoComponentProps) {
+export default function LogoComponent({
+  className = "",
+  width = 100,
+  height = 55,
+  hoverGradient = false,
+  variant = 'onLight',
+}: LogoComponentProps) {
+  const colors = {
+    bg: variant === 'onDark' ? '#f7f5f2' : '#0b2e2b',
+    accent: '#c4b75b',
+    light: variant === 'onDark' ? '#0b2e2b' : '#f7f5f2',
+  }
+
   return (
     <div className={`inline-flex items-center transition-all duration-300 ${hoverGradient ? 'hover:scale-105' : ''} ${className}`}>
       <svg 
@@ -20,15 +33,15 @@ export default function LogoComponent({ className = "", width = 100, height = 55
           <style>
             {`
               .logo-bg {
-                fill: #0b2e2b;
+                fill: ${colors.bg};
                 transition: all 0.3s ease;
               }
               .logo-accent {
-                fill: #c4b75b;
+                fill: ${colors.accent};
                 transition: all 0.3s ease;
               }
               .logo-light {
-                fill: #f7f5f2;
+                fill: ${colors.light};
                 transition: all 0.3s ease;
               }
               ${hoverGradient ? `
