@@ -28,15 +28,15 @@ function renderMarkdown(text: string) {
 export default function ChatMessage({ message, onOptionSelect }: ChatMessageProps) {
   return (
     <div className={`flex ${message.isBot ? 'justify-start' : 'justify-end'} message-slide-in`}>
-      <div className={`max-w-xs px-5 py-3 rounded-2xl shadow-sm ${
+      <div className={`max-w-xs px-4 py-3 rounded-2xl ${
         message.isBot 
-          ? 'chat-message-bot text-onyx-black bg-ivory-silk/90' 
-          : 'chat-message-user text-onyx-black bg-golden-opal/90'
+          ? 'chat-message-bot text-[#1f2a1d]' 
+          : 'chat-message-user text-ivory-silk'
       }`}>
         {message.isBot ? (
-          <div className="text-base font-medium leading-relaxed" dangerouslySetInnerHTML={{ __html: renderMarkdown(message.text) }} />
+          <div className="text-sm font-medium leading-relaxed" dangerouslySetInnerHTML={{ __html: renderMarkdown(message.text) }} />
         ) : (
-          <p className="text-base font-semibold">{message.text}</p>
+          <p className="text-sm font-semibold">{message.text}</p>
         )}
         {message.options && message.options.length > 0 && (
           <div className="mt-4 space-y-2">
@@ -44,7 +44,7 @@ export default function ChatMessage({ message, onOptionSelect }: ChatMessageProp
               <button
                 key={index}
                 onClick={() => onOptionSelect(option)}
-                className="chat-option-button w-full text-left px-3 py-2 text-sm rounded-lg font-semibold bg-golden-opal/20 hover:bg-golden-opal/40 transition-colors"
+                className="chat-option-button w-full text-left px-3 py-2 text-sm rounded-xl font-semibold transition-colors"
               >
                 {option}
               </button>
