@@ -12,6 +12,13 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'SDR as a Service | MillionCXO Revenue-Driven Sales Teams',
   description: 'MillionCXO deploys lead generation specialists and account executives who turn ICP research into qualified meetings and closed revenue, with revenue targets and performance guarantees.',
+  icons: {
+    icon: [
+      { url: '/logo.svg', type: 'image/svg+xml' },
+    ],
+    shortcut: '/logo.svg',
+    apple: '/logo.svg',
+  },
   keywords: [
     'SDR as a Service',
     'outsourced SDR team',
@@ -35,10 +42,10 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: 'https://millioncxo.com/logo.svg',
+        url: 'https://millioncxo.com/opengraph-image',
         width: 1200,
         height: 630,
-        alt: 'MillionCXO Logo - SDR as a Service',
+        alt: 'MillionCXO SDR as a Service preview',
       },
     ],
   },
@@ -46,7 +53,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'SDR as a Service | MillionCXO',
     description: 'Revenue-driven lead generation and account executive teams with target accountability.',
-    images: ['https://millioncxo.com/logo.svg'],
+    images: ['https://millioncxo.com/opengraph-image'],
   },
   alternates: {
     canonical: 'https://millioncxo.com',
