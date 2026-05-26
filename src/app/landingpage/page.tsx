@@ -55,7 +55,7 @@ export default function LandingPage() {
               
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-delay">
-                <Link href="https://calendly.com/millioncxo/loe-20x" target="_blank" rel="noopener noreferrer" className="btn-primary inline-flex items-center justify-center"
+                <Link href="https://calendly.com/millioncxooutreach/30min" target="_blank" rel="noopener noreferrer" className="btn-primary inline-flex items-center justify-center"
                   onClick={() => {
                     if (typeof window !== 'undefined' && (window as any).gtag) {
                       (window as any).gtag('event', 'conversion', {
@@ -389,7 +389,7 @@ export default function LandingPage() {
                   Every message crafted, every connection verified - human to human.
                 </p>
                 <Link
-                  href="https://calendly.com/millioncxo/loe-20x"
+                  href="https://calendly.com/millioncxooutreach/30min"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-primary text-lg px-10 py-4 inline-flex items-center"
@@ -456,7 +456,7 @@ export default function LandingPage() {
                     100% money-back if account blocked
                   </li>
                 </ul>
-                <Link href="https://calendly.com/millioncxo/loe-20x" target="_blank" rel="noopener noreferrer" className="btn-primary w-full mt-auto"
+                <Link href="https://calendly.com/millioncxooutreach/30min" target="_blank" rel="noopener noreferrer" className="btn-primary w-full mt-auto"
                   onClick={() => {
                     if (typeof window !== 'undefined' && (window as any).gtag) {
                       (window as any).gtag('event', 'conversion', { 'send_to': 'AW-17718087441' });
@@ -497,7 +497,7 @@ export default function LandingPage() {
                     4+ qualified CXO meetings/month
                   </li>
                 </ul>
-                <Link href="https://calendly.com/millioncxo/loe-20x" target="_blank" rel="noopener noreferrer" className="btn-outline w-full mt-auto"
+                <Link href="https://calendly.com/millioncxooutreach/30min" target="_blank" rel="noopener noreferrer" className="btn-outline w-full mt-auto"
                   onClick={() => {
                     if (typeof window !== 'undefined' && (window as any).gtag) {
                       (window as any).gtag('event', 'conversion', { 'send_to': 'AW-17718087441' });
@@ -697,7 +697,7 @@ export default function LandingPage() {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="https://calendly.com/millioncxo/loe-20x" target="_blank" rel="noopener noreferrer" className="btn-primary text-lg px-10 py-4"
+              <Link href="https://calendly.com/millioncxooutreach/30min" target="_blank" rel="noopener noreferrer" className="btn-primary text-lg px-10 py-4"
                 onClick={() => {
                   if (typeof window !== 'undefined' && (window as any).gtag) {
                     (window as any).gtag('event', 'conversion', {

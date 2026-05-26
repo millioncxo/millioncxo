@@ -13,7 +13,7 @@ import {
   Target,
 } from 'lucide-react'
 
-const calendlyUrl = 'https://calendly.com/millioncxo/loe-20x'
+const calendlyUrl = 'https://calendly.com/millioncxooutreach/30min'
 
 const trackCalendly = () => {
   if (typeof window !== 'undefined' && (window as any).gtag) {
@@ -28,7 +28,7 @@ const bottlenecks = {
     copy:
       'The All-Rounder Lead Gen Executive focuses on ICP research, LinkedIn, InMails, personalised email and meeting generation.',
     price: '$1,200/mo',
-    billing: 'quarterly · $1,500/mo monthly',
+    billing: ['Billed quarterly', 'Monthly option: $1,500/mo'],
     target: '16+ conducted meetings/month',
     items: [
       'Up to 10 Sales Navigator licences',
@@ -44,7 +44,7 @@ const bottlenecks = {
     copy:
       'The AE layer qualifies, pitches, presents, follows up and drives deal closure against a revenue target.',
     price: '$2,800/mo',
-    billing: 'quarterly · $3,200/mo monthly',
+    billing: ['Billed quarterly', 'Monthly option: $3,200/mo'],
     target: '$200K/year revenue target per AE',
     items: [
       '$200K/year revenue target per Account Executive',
@@ -266,7 +266,11 @@ export default function Home() {
                     <div className="text-4xl font-semibold tracking-[-0.04em] text-[#214132]">
                       {active.price}
                     </div>
-                    <div className="mt-1 text-sm text-[#4b5b47]">{active.billing}</div>
+                    <div className="mt-3 grid gap-2 text-sm text-[#4b5b47]">
+                      {active.billing.map((line) => (
+                        <div key={line}>{line}</div>
+                      ))}
+                    </div>
                     <div className="mt-4 rounded-2xl bg-[#eef1e9] p-4 text-sm font-semibold text-[#214132]">
                       Target: {active.target}
                     </div>

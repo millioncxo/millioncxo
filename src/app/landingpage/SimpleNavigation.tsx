@@ -13,7 +13,7 @@ export default function SimpleNavigation() {
             <LogoComponent width={32} height={20} hoverGradient={true} className="sm:w-[40px] sm:h-[24px] md:w-[48px] md:h-[32px]" />
             <div className="flex flex-col justify-center">
               <span className="text-xs sm:text-sm md:text-lg font-bold text-ivory-silk group-hover:text-golden-opal transition-all duration-300">
-                millionCXO
+                MillionCXO
               </span>
               <span className="text-[8px] sm:text-[10px] text-muted-jade group-hover:text-golden-opal/80 transition-all duration-300 -mt-0.5 hidden sm:block">
                 B2B Outreach Excellence
@@ -24,7 +24,7 @@ export default function SimpleNavigation() {
           {/* Book a Demo Button */}
           <div>
             <Link 
-              href="https://calendly.com/millioncxo/loe-20x" 
+              href="https://calendly.com/millioncxooutreach/30min" 
               target="_blank" 
               rel="noopener noreferrer" 
               className="btn-primary !px-4 !py-1.5 text-sm"
@@ -44,4 +44,3 @@ export default function SimpleNavigation() {
     </nav>
   )
 }
-

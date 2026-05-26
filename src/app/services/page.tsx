@@ -170,7 +170,7 @@ export default function Services() {
                 <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> 100% money-back guaranteed if your account gets blocked</li>
                 <li className="flex items-start text-muted-jade text-sm"><span className="mt-1 mr-2 text-golden-opal">•</span> Zero additional tool costs</li>
               </ul>
-              <Link href="https://calendly.com/millioncxo/loe-20x" target="_blank" rel="noopener noreferrer" className="btn-primary w-full"
+              <Link href="https://calendly.com/millioncxooutreach/30min" target="_blank" rel="noopener noreferrer" className="btn-primary w-full"
                 onClick={() => {
                   if (typeof window !== 'undefined' && (window as any).gtag) {
                     (window as any).gtag('event', 'conversion', {
@@ -251,7 +251,7 @@ export default function Services() {
                 )}
               </ul>
 
-              <Link href="https://calendly.com/millioncxo/loe-20x" target="_blank" rel="noopener noreferrer"
+              <Link href="https://calendly.com/millioncxooutreach/30min" target="_blank" rel="noopener noreferrer"
                 className="block w-full py-3 px-6 rounded-xl bg-imperial-emerald hover:bg-imperial-emerald/90 text-ivory-silk font-semibold text-center transition-colors mt-auto"
                 onClick={() => {
                   if (typeof window !== 'undefined' && (window as any).gtag) {

@@ -79,7 +79,7 @@ export default function Contact() {
 
       // Redirect to booking link after a short delay
       setTimeout(() => {
-        window.location.href = 'https://calendly.com/millioncxo/loe-20x'
+        window.location.href = 'https://calendly.com/millioncxooutreach/30min'
       }, 2000)
 
     } catch (error: any) {
@@ -387,7 +387,7 @@ export default function Contact() {
                   <div className="mt-4 text-center">
                     <p className="text-muted-jade text-sm mb-3">Having trouble? You can also book directly:</p>
                     <a 
-                      href="https://calendly.com/millioncxo/loe-20x"
+                      href="https://calendly.com/millioncxooutreach/30min"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="btn-outline text-sm px-6 py-2 inline-block"
