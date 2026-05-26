@@ -10,6 +10,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://www.millioncxo.com'),
   title: 'SDR as a Service | MillionCXO Revenue-Driven Sales Teams',
   description: 'MillionCXO deploys lead generation specialists and account executives who turn ICP research into qualified meetings and closed revenue, with revenue targets and performance guarantees.',
   icons: {

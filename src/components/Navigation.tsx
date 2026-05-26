@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react'
 import { Menu, X } from 'lucide-react'
 import LogoComponent from './LogoComponent'
 
-const calendlyUrl = 'https://calendly.com/millioncxo/loe-20x'
+const calendlyUrl = 'https://calendly.com/millioncxooutreach/30min'
 
 const trackCalendly = () => {
   if (typeof window !== 'undefined' && (window as any).gtag) {
@@ -17,11 +17,11 @@ const trackCalendly = () => {
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const pathname = usePathname()
-  const isLinkedInPage = pathname === '/linkedin-outreach'
+  const isLeadGenPage = pathname === '/lead-gen-executive'
   const navLinks = [
-    { href: isLinkedInPage ? '/linkedin-outreach#how-it-works' : '/#model', label: 'How it works' },
-    { href: '/linkedin-outreach', label: 'LinkedIn Outreach Excellence' },
-    { href: isLinkedInPage ? '/linkedin-outreach#pricing' : '/#pricing', label: 'Pricing' },
+    { href: isLeadGenPage ? '/lead-gen-executive#how-it-works' : '/#model', label: 'How it works' },
+    { href: '/lead-gen-executive', label: 'Lead Gen Executive' },
+    { href: isLeadGenPage ? '/lead-gen-executive#pricing' : '/#pricing', label: 'Pricing' },
   ]
 
   useEffect(() => {
@@ -39,7 +39,7 @@ export default function Navigation() {
             <LogoComponent width={42} height={26} hoverGradient={false} variant="onLight" />
           </span>
           <div className="flex flex-col justify-center leading-none">
-            <div className="text-xs font-bold text-[#1f2a1d] sm:text-sm md:text-lg">millionCXO</div>
+            <div className="text-xs font-bold text-[#1f2a1d] sm:text-sm md:text-lg">MillionCXO</div>
             <div className="mt-1 hidden text-[8px] font-medium text-muted-jade sm:block sm:text-[10px]">
               B2B Outreach Excellence
             </div>

@@ -11,12 +11,12 @@ const STEPS = {
     options: [
       "Need more meetings",
       "Need to convert meetings",
-      "LinkedIn Outreach 16X",
+      "All-Rounder Lead Gen Executive",
       "Plan team size"
     ]
   },
-  linkedin_16x: {
-    text: `**LinkedIn Outreach Excellence 16X** is for managed LinkedIn outreach:\n- 800 InMails per Sales Navigator license/month\n- Research-based personalised outreach\n- Human-led execution, not automation\n- Account safety guarantee\n- $299/license/month\n- No lock-in, monthly billing`,
+  lead_gen_executive: {
+    text: `The **All-Rounder Lead Gen Executive** is your first trained sales hire, done by MillionCXO:\n- 5,000 InMails/month with up to 10 Sales Navigator licences\n- 30 researched personalised emails/day\n- Daily activity reports\n- Minimum 8 conducted meetings/month guaranteed\n- Typical flow around 20 meetings/month with the full setup\n- $1,200/month billed quarterly or $1,499/month billed monthly\n- First month setup is free`,
     options: [
       "Book a strategy call",
       "Need full SDR service",
@@ -24,7 +24,7 @@ const STEPS = {
     ]
   },
   lead_generation: {
-    text: `For meeting generation, the **All-Rounder Lead Gen Executive** package includes:\n- Up to 10 Sales Navigator licences\n- Up to 5,000+ InMails/month\n- 30+ personalised emails/day\n- Target: 16+ conducted meetings/month\n- $1,200/month quarterly or $1,500/month monthly\n\nNeed cold calling too? A Cold Caller can be added for $300/month.`,
+    text: `For meeting generation, the **All-Rounder Lead Gen Executive** package includes:\n- Up to 10 Sales Navigator licences\n- 5,000 InMails/month\n- 30 personalised emails/day\n- Minimum 8 conducted meetings/month guaranteed\n- $1,200/month billed quarterly or $1,499/month billed monthly\n\nNeed cold calling too? A Cold Caller can be added for $300/month.`,
     options: [
       "Need to convert meetings",
       "Book a strategy call",
@@ -62,7 +62,7 @@ const STEPS = {
   }
 }
 
-const BOOKING_LINK = "https://calendly.com/millioncxo/loe-20x"
+const BOOKING_LINK = "https://calendly.com/millioncxooutreach/30min"
 
 type StepKey = keyof typeof STEPS;
 
@@ -106,19 +106,19 @@ export default function ChatWidget() {
 
       // Top-level routing
       if (currentStep === "welcome") {
-        if (userInput.toLowerCase().includes("linkedin") || userInput.toLowerCase().includes("16x") || userInput.toLowerCase().includes("inmail")) nextStep = "linkedin_16x"
+        if (userInput.toLowerCase().includes("all-rounder") || userInput.toLowerCase().includes("executive") || userInput.toLowerCase().includes("inmail")) nextStep = "lead_gen_executive"
         else if (userInput.toLowerCase().includes("meeting") || userInput.toLowerCase().includes("lead")) nextStep = "lead_generation"
         else if (userInput.toLowerCase().includes("convert") || userInput.toLowerCase().includes("revenue") || userInput.toLowerCase().includes("ae")) nextStep = "conversion"
         else if (userInput.toLowerCase().includes("team") || userInput.toLowerCase().includes("size") || userInput.toLowerCase().includes("plan")) nextStep = "team_size"
         else if (userInput.toLowerCase().includes("question") || userInput.toLowerCase().includes("help") || userInput.toLowerCase().includes("info")) nextStep = "questions"
         else nextStep = "welcome"
       }
-      else if (userInput.toLowerCase().includes("linkedin") || userInput.toLowerCase().includes("16x") || userInput.toLowerCase().includes("inmail")) nextStep = "linkedin_16x"
+      else if (userInput.toLowerCase().includes("all-rounder") || userInput.toLowerCase().includes("executive") || userInput.toLowerCase().includes("inmail")) nextStep = "lead_gen_executive"
       else if (userInput.toLowerCase().includes("full sdr") || userInput.toLowerCase().includes("sdr service")) nextStep = "lead_generation"
       else if (userInput.toLowerCase().includes("meeting") || userInput.toLowerCase().includes("lead")) nextStep = "lead_generation"
       else if (userInput.toLowerCase().includes("convert") || userInput.toLowerCase().includes("revenue") || userInput.toLowerCase().includes("ae")) nextStep = "conversion"
       else if (userInput.toLowerCase().includes("team") || userInput.toLowerCase().includes("size") || userInput.toLowerCase().includes("plan")) nextStep = "team_size"
-      else if ((currentStep === "linkedin_16x" || currentStep === "lead_generation" || currentStep === "conversion" || currentStep === "team_size" || currentStep === "questions") && userInput.toLowerCase().includes("book")) nextStep = "book_call"
+      else if ((currentStep === "lead_gen_executive" || currentStep === "lead_generation" || currentStep === "conversion" || currentStep === "team_size" || currentStep === "questions") && userInput.toLowerCase().includes("book")) nextStep = "book_call"
       else if (userInput.toLowerCase().includes("back")) nextStep = "welcome"
 
       // Booking link step
@@ -166,7 +166,7 @@ export default function ChatWidget() {
                   </svg>
                 </div>
                 <div>
-                  <h3 className="text-base font-semibold text-[#1f2a1d]">millionCXO Assistant</h3>
+                  <h3 className="text-base font-semibold text-[#1f2a1d]">MillionCXO Assistant</h3>
                   <p className="text-xs text-[#4b5b47]">Sales team planner</p>
                 </div>
               </div>
