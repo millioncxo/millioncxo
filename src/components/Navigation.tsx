@@ -16,8 +16,29 @@ const trackCalendly = () => {
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [hasScrolled, setHasScrolled] = useState(false)
   const pathname = usePathname()
   const isLeadGenPage = pathname === '/lead-gen-executive'
+  const usesDarkHeader = pathname === '/'
+  const navTheme = usesDarkHeader && !hasScrolled
+    ? {
+        shell: 'border-ivory-silk/10 bg-imperial-emerald/96',
+        brand: 'text-ivory-silk hover:opacity-90',
+        title: 'text-ivory-silk',
+        subtitle: 'text-white/65',
+        link: 'text-white/80 hover:text-golden-opal',
+        cta: 'border-golden-opal/45 text-golden-opal hover:bg-golden-opal hover:text-[#1f2a1d]',
+        menuButton: 'border-ivory-silk/20 text-ivory-silk hover:border-golden-opal/60',
+      }
+    : {
+        shell: 'border-[#1f2a1d]/10 bg-ivory-silk/96',
+        brand: 'text-[#1f2a1d] hover:opacity-85',
+        title: 'text-[#1f2a1d]',
+        subtitle: 'text-muted-jade',
+        link: 'text-[#2d3a2a]/72 hover:text-[#1f2a1d]',
+        cta: 'border-[#1f2a1d]/20 text-[#1f2a1d] hover:bg-[#1f2a1d] hover:text-ivory-silk',
+        menuButton: 'border-[#1f2a1d]/15 text-[#1f2a1d] hover:border-[#1f2a1d]/40',
+      }
   const navLinks = [
     { href: isLeadGenPage ? '/lead-gen-executive#how-it-works' : '/#model', label: 'How it works' },
     { href: '/lead-gen-executive', label: 'Lead Gen Executive' },
@@ -31,16 +52,23 @@ export default function Navigation() {
     }
   }, [isMenuOpen])
 
+  useEffect(() => {
+    const updateScrollState = () => setHasScrolled(window.scrollY > 32)
+    updateScrollState()
+    window.addEventListener('scroll', updateScrollState, { passive: true })
+    return () => window.removeEventListener('scroll', updateScrollState)
+  }, [pathname])
+
   return (
-    <nav className="fixed left-0 right-0 top-0 z-50 border-b border-[#1f2a1d]/10 bg-ivory-silk/96 backdrop-blur-xl">
+    <nav className={`fixed left-0 right-0 top-0 z-50 border-b backdrop-blur-xl ${navTheme.shell}`}>
       <div className="mx-auto flex h-12 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link href="/" className="flex items-center gap-3 text-[#1f2a1d] transition-opacity hover:opacity-85">
+        <Link href="/" className={`flex items-center gap-3 transition-opacity ${navTheme.brand}`}>
           <span className="flex h-8 w-14 items-center justify-center rounded-full bg-ivory-silk shadow-sm ring-1 ring-golden-opal/20">
             <LogoComponent width={42} height={26} hoverGradient={false} variant="onLight" />
           </span>
           <div className="flex flex-col justify-center leading-none">
-            <div className="text-xs font-bold text-[#1f2a1d] sm:text-sm md:text-lg">MillionCXO</div>
-            <div className="mt-1 hidden text-[8px] font-medium text-muted-jade sm:block sm:text-[10px]">
+            <div className={`text-xs font-bold sm:text-sm md:text-lg ${navTheme.title}`}>MillionCXO</div>
+            <div className={`mt-1 hidden text-[8px] font-medium sm:block sm:text-[10px] ${navTheme.subtitle}`}>
               B2B Outreach Excellence
             </div>
           </div>
@@ -51,7 +79,7 @@ export default function Navigation() {
             <Link
               key={link.href}
               href={link.href}
-              className="text-[12px] font-medium text-[#2d3a2a]/72 transition-colors hover:text-[#1f2a1d] lg:text-[13px]"
+              className={`text-[12px] font-medium transition-colors lg:text-[13px] ${navTheme.link}`}
             >
               {link.label}
             </Link>
@@ -64,7 +92,7 @@ export default function Navigation() {
             target="_blank"
             rel="noopener noreferrer"
             onClick={trackCalendly}
-            className="rounded-full border border-[#1f2a1d]/20 px-4 py-2 text-[13px] font-semibold text-[#1f2a1d] transition-colors hover:bg-[#1f2a1d] hover:text-ivory-silk lg:text-sm"
+            className={`rounded-full border px-4 py-2 text-[13px] font-semibold transition-colors lg:text-sm ${navTheme.cta}`}
           >
             Book a strategy call
           </Link>
@@ -75,7 +103,7 @@ export default function Navigation() {
           onClick={() => setIsMenuOpen((value) => !value)}
           aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
           aria-expanded={isMenuOpen}
-          className="relative flex h-10 w-10 items-center justify-center rounded-full border border-[#1f2a1d]/15 text-[#1f2a1d] transition-colors hover:border-[#1f2a1d]/40 md:hidden"
+          className={`relative flex h-10 w-10 items-center justify-center rounded-full border transition-colors md:hidden ${navTheme.menuButton}`}
         >
           <Menu
             className={`absolute h-5 w-5 transition-all duration-300 ${

@@ -16,7 +16,7 @@ export default function Image() {
         metrics={[
           ['5,000', 'InMails/month'],
           ['30', 'emails/day'],
-          ['8', 'meetings/month guarantee'],
+          ['16', 'meetings/month guarantee'],
         ]}
       />
     ),

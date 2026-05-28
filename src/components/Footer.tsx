@@ -61,13 +61,13 @@ export default function Footer() {
             <h4 className="text-lg font-semibold">Quick Links</h4>
             <nav className="space-y-2 text-sm">
               <Link href="/" className="block text-muted-jade hover:text-golden-opal transition-colors">
-                Home
+                SDR as a Service
               </Link>
-              <Link href="/about" className="block text-muted-jade hover:text-golden-opal transition-colors">
-                About
+              <Link href="/lead-gen-executive" className="block text-muted-jade hover:text-golden-opal transition-colors">
+                Lead Gen Executive
               </Link>
-              <Link href="/services" className="block text-muted-jade hover:text-golden-opal transition-colors">
-                Services
+              <Link href="/lead-gen-executive#pricing" className="block text-muted-jade hover:text-golden-opal transition-colors">
+                Pricing
               </Link>
               <Link href="/contact" className="block text-muted-jade hover:text-golden-opal transition-colors">
                 Contact

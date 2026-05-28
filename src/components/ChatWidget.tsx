@@ -16,7 +16,7 @@ const STEPS = {
     ]
   },
   lead_gen_executive: {
-    text: `The **All-Rounder Lead Gen Executive** is your first trained sales hire, done by MillionCXO:\n- 5,000 InMails/month with up to 10 Sales Navigator licences\n- 30 researched personalised emails/day\n- Daily activity reports\n- Minimum 8 conducted meetings/month guaranteed\n- Typical flow around 20 meetings/month with the full setup\n- $1,200/month billed quarterly or $1,499/month billed monthly\n- First month setup is free`,
+    text: `The **All-Rounder Lead Gen Executive** is your first trained sales hire, done by MillionCXO:\n- 5,000 InMails/month with up to 10 Sales Navigator licences\n- 30 researched personalised emails/day\n- Daily activity reports\n- Minimum 16 conducted meetings/month guaranteed\n- Typical flow around 20 meetings/month with the full setup\n- $1,200/month billed quarterly or $1,499/month billed monthly\n- First month setup is free`,
     options: [
       "Book a strategy call",
       "Need full SDR service",
@@ -24,7 +24,7 @@ const STEPS = {
     ]
   },
   lead_generation: {
-    text: `For meeting generation, the **All-Rounder Lead Gen Executive** package includes:\n- Up to 10 Sales Navigator licences\n- 5,000 InMails/month\n- 30 personalised emails/day\n- Minimum 8 conducted meetings/month guaranteed\n- $1,200/month billed quarterly or $1,499/month billed monthly\n\nNeed cold calling too? A Cold Caller can be added for $300/month.`,
+    text: `For meeting generation, the **All-Rounder Lead Gen Executive** package includes:\n- Up to 10 Sales Navigator licences\n- 5,000 InMails/month\n- 30 personalised emails/day\n- Minimum 16 conducted meetings/month guaranteed\n- $1,200/month billed quarterly or $1,499/month billed monthly\n\nNeed cold calling too? A Cold Caller can be added for $300/month.`,
     options: [
       "Need to convert meetings",
       "Book a strategy call",

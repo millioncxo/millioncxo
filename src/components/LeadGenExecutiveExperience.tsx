@@ -78,7 +78,7 @@ const setup = [
 const kpis = [
   ['5,000', 'InMails/month target'],
   ['30', 'personalised emails/day'],
-  ['8', 'meetings/month minimum guarantee'],
+  ['16', 'meetings/month minimum guarantee'],
   ['~20', 'typical meetings/month with infrastructure'],
 ]
 
@@ -161,7 +161,7 @@ export default function LeadGenExecutiveExperience() {
                     ['One executive', 'Pre-trained on ICP research and outreach'],
                     ['Two channels', 'LinkedIn Sales Navigator + email'],
                     ['Daily reporting', 'Activity summary sent by end of day'],
-                    ['Guaranteed floor', 'Minimum 8 meetings/month'],
+                    ['Guaranteed floor', 'Minimum 16 meetings/month'],
                   ].map(([title, detail], index) => (
                     <div key={title} className="sales-flow-row" style={{ animationDelay: `${index * 350}ms` }}>
                       <div className="h-2 w-2 rounded-full bg-golden-opal" />
@@ -279,7 +279,7 @@ export default function LeadGenExecutiveExperience() {
               The minimum meeting floor is guaranteed.
             </h2>
             <p className="mt-6 text-lg leading-8 text-ivory-silk/72">
-              If MillionCXO falls short of 8 conducted meetings in a month, a pro-rata refund is
+              If MillionCXO falls short of 16 conducted meetings in a month, a pro-rata refund is
               applied with 10 Sales Navigator licences.
             </p>
           </div>
@@ -348,7 +348,7 @@ export default function LeadGenExecutiveExperience() {
                   '5,000 LinkedIn InMails/month with 10 Sales Nav licences',
                   '30 personalised, research-backed emails every day',
                   'Daily activity reports direct to your inbox',
-                  'Minimum 8 meetings/month guaranteed',
+                  'Minimum 16 meetings/month guaranteed',
                   'Free sales engine consulting for ICP, messaging and sequences',
                   'No lock-in - scale up or upgrade when ready',
                 ].map((item) => (

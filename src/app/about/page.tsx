@@ -46,7 +46,7 @@ export default function About() {
                 </div>
                 
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <Link href="/services" className="btn-primary text-lg px-8 py-4">
+                  <Link href="/#how-it-works" className="btn-primary text-lg px-8 py-4">
                     See How We Work
                   </Link>
                   <Link href="/contact" className="btn-outline text-lg px-8 py-4">
@@ -377,8 +377,8 @@ export default function About() {
               <Link href="/contact" className="btn-primary text-lg px-10 py-4">
                 Start Your Journey
               </Link>
-              <Link href="/services" className="btn-outline text-lg px-10 py-4">
-                View Our Services
+              <Link href="/lead-gen-executive" className="btn-outline text-lg px-10 py-4">
+                Lead Gen Executive
               </Link>
             </div>
           </div>
