@@ -22,7 +22,7 @@ export default function Navigation() {
   const usesDarkHeader = pathname === '/'
   const navTheme = usesDarkHeader && !hasScrolled
     ? {
-        shell: 'border-ivory-silk/10 bg-imperial-emerald/96',
+        shell: 'border-ivory-silk/10 bg-[rgba(11,46,43,0.96)]',
         brand: 'text-ivory-silk hover:opacity-90',
         title: 'text-ivory-silk',
         subtitle: 'text-white/65',
@@ -31,7 +31,7 @@ export default function Navigation() {
         menuButton: 'border-ivory-silk/20 text-ivory-silk hover:border-golden-opal/60',
       }
     : {
-        shell: 'border-[#1f2a1d]/10 bg-ivory-silk/96',
+        shell: 'border-[#1f2a1d]/10 bg-[rgba(247,245,242,0.96)]',
         brand: 'text-[#1f2a1d] hover:opacity-85',
         title: 'text-[#1f2a1d]',
         subtitle: 'text-muted-jade',
@@ -60,7 +60,7 @@ export default function Navigation() {
   }, [pathname])
 
   return (
-    <nav className={`fixed left-0 right-0 top-0 z-50 border-b backdrop-blur-xl ${navTheme.shell}`}>
+    <nav className={`fixed left-0 right-0 top-0 z-50 border-b backdrop-blur-xl transition-colors duration-300 ${navTheme.shell}`}>
       <div className="mx-auto flex h-12 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link href="/" className={`flex items-center gap-3 transition-opacity ${navTheme.brand}`}>
           <span className="flex h-8 w-14 items-center justify-center rounded-full bg-ivory-silk shadow-sm ring-1 ring-golden-opal/20">
