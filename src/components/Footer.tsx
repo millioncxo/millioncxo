@@ -13,6 +13,9 @@ export default function Footer() {
             <p className="text-muted-jade text-sm mb-2">
               235,Binnamangala,2ndFloor, 13th Cross Rd,2nd stage, Indiranagar (Bangalore), Bangalore North, Bangalore- 560038, Karnataka
             </p>
+            <p className="text-muted-jade text-sm">
+              GST: 29AAUCM2248K1ZR
+            </p>
             <p className="text-golden-opal text-xs font-semibold">
               Human‑Driven Personalised Outreach
             </p>
@@ -60,9 +63,6 @@ export default function Footer() {
           <div className="space-y-4">
             <h4 className="text-lg font-semibold">Quick Links</h4>
             <nav className="space-y-2 text-sm">
-              <Link href="/" className="block text-muted-jade hover:text-golden-opal transition-colors">
-                SDR as a Service
-              </Link>
               <Link href="/lead-gen-executive" className="block text-muted-jade hover:text-golden-opal transition-colors">
                 Lead Gen Executive
               </Link>

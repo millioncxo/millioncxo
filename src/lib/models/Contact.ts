@@ -44,7 +44,7 @@ const ContactSchema = new mongoose.Schema<IContact>({
   service: {
     type: String,
     required: [true, 'Service selection is required'],
-    enum: ['pilot', 'sdr', 'consultation', 'free-consultation']
+    enum: ['lead-gen-executive', 'outreach-strategy', 'discovery-call', 'not-sure']
   },
   budget: {
     type: String,
@@ -83,4 +83,4 @@ const ContactSchema = new mongoose.Schema<IContact>({
 ContactSchema.index({ email: 1, submittedAt: -1 })
 ContactSchema.index({ processed: 1 })
 
-export default mongoose.models.Contact || mongoose.model<IContact>('Contact', ContactSchema) 
+export default mongoose.models.Contact || mongoose.model<IContact>('Contact', ContactSchema)

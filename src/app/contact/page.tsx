@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import Link from 'next/link'
 import ScrollAnimation from '@/components/ScrollAnimation'
 
 export default function Contact() {
@@ -115,7 +114,7 @@ export default function Contact() {
               
               <div className="animate-fade-in-delay">
                 <p className="text-xl text-muted-jade mb-8 leading-relaxed">
-                  Tell us about your LinkedIn goals - our team replies personally within 24 hours (no bots ever).
+                  Tell us what you want to build with outbound growth. Our team replies personally within 24 hours.
                 </p>
                 
                 <div className="space-y-4 text-muted-jade">
@@ -125,7 +124,7 @@ export default function Contact() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
                     </div>
-                    <span>Free strategy consultation</span>
+                    <span>Lead Gen Executive fit check</span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <div className="w-8 h-8 bg-golden-opal/20 rounded-full flex items-center justify-center">
@@ -133,7 +132,7 @@ export default function Contact() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
                     </div>
-                    <span>Custom package recommendations</span>
+                    <span>LinkedIn and email outreach review</span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <div className="w-8 h-8 bg-golden-opal/20 rounded-full flex items-center justify-center">
@@ -141,7 +140,7 @@ export default function Contact() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
                     </div>
-                    <span>Quick response within 24 hours</span>
+                    <span>Clear next steps within 24 hours</span>
                   </div>
                 </div>
               </div>
@@ -188,8 +187,8 @@ export default function Contact() {
                         </svg>
                       </div>
                       <div>
-                        <div className="text-ivory-silk font-semibold">Global Reach</div>
-                        <div className="text-muted-jade">13+ countries served</div>
+                        <div className="text-ivory-silk font-semibold">Primary Offering</div>
+                        <div className="text-muted-jade">All-Rounder Lead Gen Executive</div>
                       </div>
                     </div>
                   </div>
@@ -209,7 +208,7 @@ export default function Contact() {
                 Start Your <span className="text-gradient">Growth Journey</span>
               </h2>
               <p className="text-xl text-muted-jade">
-                Tell us about your LinkedIn goals and we&apos;ll create a custom strategy to connect you with decision-makers through human‑driven outreach
+                Share your outbound goals and we&apos;ll map the right next step for your team.
               </p>
             </div>
 
@@ -306,7 +305,7 @@ export default function Contact() {
                 <div className="grid md:grid-cols-2 gap-6 mb-6">
                   <div>
                     <label className="block text-onyx-black font-semibold mb-2">
-                      Service Interest *
+                      Conversation Topic *
                     </label>
                     <select
                       name="service"
@@ -315,55 +314,37 @@ export default function Contact() {
                       required
                       className="input-modern"
                     >
-                      <option value="">Select a service</option>
-                      <option value="pilot">Pilot Program ($99/meeting)</option>
-                      <option value="sdr">SDR as a Service ($1,999/month)</option>
-                      <option value="consultation">Consultation & Infrastructure Setup</option>
-                      <option value="free-consultation">Free Consultation</option>
+                      <option value="">Select a topic</option>
+                      <option value="lead-gen-executive">All-Rounder Lead Gen Executive</option>
+                      <option value="outreach-strategy">LinkedIn and Email Outreach Strategy</option>
+                      <option value="discovery-call">Discovery Call</option>
+                      <option value="not-sure">Not Sure Yet</option>
                     </select>
                   </div>
                   
                   <div>
                     <label className="block text-onyx-black font-semibold mb-2">
-                      Budget Range
+                      Timeline
                     </label>
                     <select
-                      name="budget"
-                      value={formData.budget}
+                      name="timeline"
+                      value={formData.timeline}
                       onChange={handleInputChange}
                       className="input-modern"
                     >
-                      <option value="">Select budget range</option>
-                      <option value="under-5k">Under $5,000/month</option>
-                      <option value="5k-15k">$5,000 - $15,000/month</option>
-                      <option value="15k-30k">$15,000 - $30,000/month</option>
-                      <option value="30k-plus">$30,000+/month</option>
+                      <option value="">When do you want to start?</option>
+                      <option value="immediate">Immediately</option>
+                      <option value="1-month">Within 1 month</option>
+                      <option value="3-months">Within 3 months</option>
+                      <option value="6-months">Within 6 months</option>
+                      <option value="exploring">Just exploring</option>
                     </select>
                   </div>
                 </div>
 
-                <div className="mb-6">
-                  <label className="block text-onyx-black font-semibold mb-2">
-                    Timeline
-                  </label>
-                  <select
-                    name="timeline"
-                    value={formData.timeline}
-                    onChange={handleInputChange}
-                    className="input-modern"
-                  >
-                    <option value="">When do you want to start?</option>
-                    <option value="immediate">Immediately</option>
-                    <option value="1-month">Within 1 month</option>
-                    <option value="3-months">Within 3 months</option>
-                    <option value="6-months">Within 6 months</option>
-                    <option value="exploring">Just exploring</option>
-                  </select>
-                </div>
-
                 <div className="mb-8">
                   <label className="block text-onyx-black font-semibold mb-2">
-                    Tell us about your goals
+                    Tell us about your outbound goals
                   </label>
                   <textarea
                     name="message"
@@ -371,7 +352,7 @@ export default function Contact() {
                     onChange={handleInputChange}
                     rows={4}
                     className="input-modern"
-                    placeholder="What are your main challenges with lead generation? What results are you hoping to achieve?"
+                    placeholder="Which markets are you targeting? What outreach volume, channels, or meeting goals matter most right now?"
                   />
                 </div>
 
@@ -410,4 +391,4 @@ export default function Contact() {
       </section>
     </div>
   )
-} 
+}

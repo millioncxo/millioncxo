@@ -202,10 +202,10 @@ const contentHtml = `
 
 <section class="doc-section" id="s15">
   <div class="section-header"><span class="section-num">§ 15</span><h2>Contact and Grievance Redressal</h2></div>
-  <p class="legal">In accordance with the Information Technology Act, 2000, and applicable rules, the name and contact details of the Grievance Officer are provided below. Any complaints, queries, or concerns regarding the processing of Personal Data may be directed to:</p>
+  <p class="legal">In accordance with the Information Technology Act, 2000, and applicable rules, the contact details for grievance redressal are provided below. Any complaints, queries, or concerns regarding the processing of Personal Data may be directed to:</p>
   <dl class="definition-block">
     <dt>Grievance Officer</dt>
-    <dd>Abhinav Kumar, Managing Director<br/>MillionCXO Outreach Private Limited<br/>235, Binnamangala, 2nd Floor, 13th Cross Road, 2nd Stage, Indiranagar, Bengaluru – 560038, Karnataka, India<br/>Email: info@millioncxo.com<br/>Response time: Within 30 days of receipt</dd>
+    <dd>MillionCXO Outreach Private Limited<br/>235, Binnamangala, 2nd Floor, 13th Cross Road, 2nd Stage, Indiranagar, Bengaluru – 560038, Karnataka, India<br/>Email: info@millioncxo.com<br/>Response time: Within 30 days of receipt</dd>
   </dl>
 </section>
 `
